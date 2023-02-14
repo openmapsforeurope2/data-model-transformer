@@ -1,0 +1,55 @@
+{
+    "db_source":{
+        "host":"SMWPERMEGMFT1",
+        "port":"5432",
+        "db_name":"be_national",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema": "trans"
+    },
+    "source_geometry": "shape",
+    "source_srid": "4326",
+    "country_code": "be",
+    "target_geometry": "geometry",
+    "tables":{
+        "ro_roadsegment": {
+            "mock": false,
+            "where": "",
+            "mapping": {
+                "inspireid": { "eval": "test" },
+                "country": { "eval": "be" },
+                "form_of_way": { "eval": "test" },
+                "functionnal_road_class": { "eval": "test" },
+                "fictitious": "fictitious",
+                "number_of_lanes": {
+                    "file": "be_number_of_lanes.py"
+                },
+                "vertical_position": {
+                    "function": "import sys\nw=int(data['width'])\nsum=w+4\nreturn sum"
+                },
+                "trans_european_transport_network": { "eval": "test" },
+                "geographical_name": { "eval": "test" },
+                "road_surface_category": { "eval": "test" },
+                "traffic_flow_direction": { "eval": "test" },
+                "acces_restriction": { "eval": "test" },
+                "condition_of_facility": { "eval": "test" }
+            },
+            "fetched_fields":[
+                "fid",
+                "tgid",
+                "modifdate",
+                "width",
+                "surftype",
+                "opstate",
+                "roadstatus",
+                "particpass",
+                "sepcarrway",
+                "natroadnb",
+                "euroadnb",
+                "lanesnb"
+            ]
+        },
+        "ro_dirtroadsegment":{
+        }
+    }
+}

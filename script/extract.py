@@ -1,0 +1,154 @@
+import json
+import sys
+from subprocess import call
+
+def getConf(confFile):
+    with open(confFile) as f:
+        conf = json.load(f)
+        return conf
+
+def getCommandBase(conf):
+    return 'PGPASSWORD="'+conf['db_source']['pwd']+'" psql -U "'+conf['db_source']['user']+'" -h "'+conf['db_source']['host']+'" -p "'+conf['db_source']['port']+'" -d "'+conf['db_source']['db_name']
+
+
+def getTableName(table_name, conf, table_conf):
+    source_schema = conf['db_source']['schema'] if conf['db_source']['schema'] else ""
+
+    #si un schema particulier est specifie pour la table
+    schema_prefix=source_schema
+    if 'schema' in table_conf and table_conf['schema']:
+        schema_prefix = table_conf['schema']
+
+    schema_prefix =  schema_prefix+"." if schema_prefix else ""
+
+    return schema_prefix + table_name
+
+
+def appendFieldToSelect(selectString, field):
+    fieldName = ""
+    if isinstance(field, dict) :
+        fieldName = next(iter(field))
+        mappedField = field[fieldName]
+
+        if isinstance(mappedField, dict) :
+            return selectString
+    else:
+        mappedField = field
+
+    selectPart = mappedField
+
+    if fieldName : selectPart += " AS " + fieldName
+
+    return selectString + ("," if selectString else "") + selectPart
+
+
+def appendGeometryFieldToSelect(selectString, geometryfield, tableConf):
+    fieldName = ""
+    rawFieldsuffix = "raw"
+    if isinstance(geometryfield, dict) :
+        fieldName = next(iter(geometryfield))
+        mappedField = geometryfield[fieldName]
+    else:
+        mappedField = geometryfield
+
+    geometryField = mappedField
+    geometryField = transformGeometryToWGS84(tableConf["source_srid"], geometryField)
+
+    selectPart = geometryField
+
+    #patch au cas ou la geometrie n'est pas renvoyée en WKB
+    selectPart = "ST_AsEWKB("+selectPart+")"
+
+    if fieldName : selectPart += " AS " + fieldName
+        
+    return selectString + ("," if selectString else "") + selectPart
+
+
+def transformGeometryToWGS84(
+    source_srid, geometry_field
+):
+    if source_srid != "4326":
+        return "ST_Transform("+setSRID(source_srid)+", 4326)"
+    return geometry_field
+
+
+def setSRID( geometry_field ):
+    if territory_field != "":
+        return "ST_SetSRID("+geometry_field+", "+source_srid+")"
+    return geometry_field
+
+
+def getWhereStatement( tableConf ):
+    where_statement = ""
+    if 'where' in tableConf and tableConf['where']:
+        where_statement = " WHERE " + tableConf['where']
+    return where_statement
+
+
+def start(conf):
+    print("START EXTRACT", flush=True)
+
+
+def end(conf):
+    print("END EXTRACT", flush=True)
+
+
+def extract(
+    conf, pathOut
+):
+    print("EXTRACTING...", flush=True)
+
+    command_base = getCommandBase(conf)
+
+    for table_name, table_conf in conf['tables'].items():
+        # classe simulée
+        if 'mock' in table_conf and table_conf['mock'] : continue
+        table_conf['source_srid'] = conf['source_srid']
+        table_conf['source_geometry'] = conf['source_geometry']
+
+        full_table_name = getTableName(table_name, conf, table_conf)
+        select = ""
+
+        if 'mapping' in table_conf and table_conf['mapping']:
+            for field, mappedField in table_conf['mapping'].items():
+                select = appendFieldToSelect( select, {field: mappedField} )
+        
+        if 'fetched_fields' in table_conf and table_conf['fetched_fields']:
+            for computational_field in table_conf['fetched_fields']:
+                select = appendFieldToSelect( select, computational_field )
+
+        if 'source_geometry' in conf and conf['source_geometry']:
+            select = appendGeometryFieldToSelect( select, {conf['target_geometry']: conf['source_geometry']}, table_conf )
+
+        where_statement = getWhereStatement(table_conf)
+
+        select = "SELECT " + select + " FROM " + full_table_name + where_statement
+        query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
+        query = "\COPY ("+ query +") TO '"+ pathOut + "/" + conf['country_code'] + "_" + table_name + ".json'"
+
+        command = command_base +'" -c "'+ query +'"'
+
+        print(u'command: {}'.format(command), flush=True)
+        print('table: {}'.format(full_table_name), flush=True)
+
+        call( command, shell=True )
+
+
+if __name__ == "__main__":
+    comment = '''
+    Usage : extract <conf.json> <output path> <verbose>
+    '''
+
+    try:
+        confFile = sys.argv[1]
+        pathOut = sys.argv[2]
+        verbose = True if sys.argv[3] == 'true' else False
+    except:
+        print (comment)
+        sys.exit()
+
+    conf = getConf(confFile)
+
+    start(conf)
+    extract(conf, pathOut)
+    end(conf)
