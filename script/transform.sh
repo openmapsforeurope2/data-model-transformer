@@ -1,10 +1,13 @@
 #!/bin/sh
+
+# set -x
+
 currentDir=$(dirname "$0")
 confFile=""
-output=$currentDir"/data"
-tempDir="/tmp/data-model-transformer"
+workspace=$currentDir"/../"
+output=$currentDir"/../data"
+tempDir=$output"/tmp"
 verbose=false
-
 
 while test $# -gt 0; do
   case "$1" in
@@ -26,7 +29,7 @@ while test $# -gt 0; do
       shift
       if test $# -gt 0; then
         confFile=$1
-        if [ ! -f "$confFile" ]; then
+        if [ ! -f "$workspace/conf/$confFile" ]; then
             echo "Le fichier de configuration $confFile n'existe pas"
             exit 1
         fi
@@ -39,7 +42,7 @@ while test $# -gt 0; do
     --conf*)
       if test $# -gt 0; then
         confFile=`echo $1 | sed -e 's/^[^=]*=//g'`
-        if [ ! -f "$confFile" ]; then
+        if [ ! -f "$workspace/conf/$confFile" ]; then
             echo "Le fichier de configuration $confFile n'existe pas"
             exit 1
         fi
@@ -81,7 +84,8 @@ if [ $? != 0 ]; then
   exit 1
 fi
 
-confFile=$(realpath $confFile)
+workspace=$(realpath $workspace)
+tempDir=$(realpath $tempDir)
 
 output=$(realpath $output)
 if [ ! -d $output ]; then
@@ -95,9 +99,9 @@ mkdir -p $tempDir;
 
 echo "[START TRANSFORM]" $(date +"%m-%d-%Y %H:%M:%S")
 
-python3 $currentDir"/extract.py" $confFile $tempDir $verbose
-python3 $currentDir"/dump.py" $confFile $tempDir $output $verbose
-python3 $currentDir"/restore.py" $confFile $output $verbose
+python3 $currentDir"/extract.py" $workspace $confFile $tempDir $verbose
+python3 $currentDir"/dump.py" $workspace $confFile $tempDir $output $verbose
+python3 $currentDir"/restore.py" $workspace $confFile $output $verbose
 rm -r $tempDir
 
 echo "[END TRANSFORM]" $(date +"%m-%d-%Y %H:%M:%S")

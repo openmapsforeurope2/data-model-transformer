@@ -2,17 +2,18 @@ import json
 import sys
 from subprocess import call
 
+
 def getConf(confFile):
     with open(confFile) as f:
         conf = json.load(f)
         return conf
 
 def getCommandBase(conf):
-    return 'PGPASSWORD="'+conf['db_source']['pwd']+'" psql -U "'+conf['db_source']['user']+'" -h "'+conf['db_source']['host']+'" -p "'+conf['db_source']['port']+'" -d "'+conf['db_source']['db_name']
+    return 'PGPASSWORD="'+conf['source_db']['pwd']+'" psql -U "'+conf['source_db']['user']+'" -h "'+conf['source_db']['host']+'" -p "'+conf['source_db']['port']+'" -d "'+conf['source_db']['name']
 
 
 def getTableName(table_name, conf, table_conf):
-    source_schema = conf['db_source']['schema'] if conf['db_source']['schema'] else ""
+    source_schema = conf['source_db']['schema'] if conf['source_db']['schema'] else ""
 
     #si un schema particulier est specifie pour la table
     schema_prefix=source_schema
@@ -44,7 +45,6 @@ def appendFieldToSelect(selectString, field):
 
 def appendGeometryFieldToSelect(selectString, geometryfield, tableConf):
     fieldName = ""
-    rawFieldsuffix = "raw"
     if isinstance(geometryfield, dict) :
         fieldName = next(iter(geometryfield))
         mappedField = geometryfield[fieldName]
@@ -100,7 +100,7 @@ def extract(
 
     command_base = getCommandBase(conf)
 
-    for table_name, table_conf in conf['tables'].items():
+    for table_name, table_conf in conf['source_tables'].items():
         # classe simulée
         if 'mock' in table_conf and table_conf['mock'] : continue
         table_conf['source_srid'] = conf['source_srid']
@@ -122,7 +122,7 @@ def extract(
 
         where_statement = getWhereStatement(table_conf)
 
-        select = "SELECT " + select + " FROM " + full_table_name + where_statement
+        select = "SELECT " + select + " FROM " + full_table_name + where_statement + " LIMIT 10"
         query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
         query = "\COPY ("+ query +") TO '"+ pathOut + "/" + conf['country_code'] + "_" + table_name + ".json'"
 
@@ -140,9 +140,10 @@ if __name__ == "__main__":
     '''
 
     try:
-        confFile = sys.argv[1]
-        pathOut = sys.argv[2]
-        verbose = True if sys.argv[3] == 'true' else False
+        workspace = sys.argv[1]
+        confFile = workspace+"/conf/"+sys.argv[2]
+        pathOut = sys.argv[3]
+        verbose = True if sys.argv[4] == 'true' else False
     except:
         print (comment)
         sys.exit()
