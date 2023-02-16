@@ -26,15 +26,19 @@
             "where": "",
             "mapping": {
                 "country": { "eval": "'be'" },
-                "form_of_way": { "eval": "'dual_carriage_way'" },
-                "functional_road_class": { "eval": "'first_class'" },
-                "number_of_lanes": {
-                    "function": "be_number_of_lanes"
+                "form_of_way": {
+                    "function": "be_form_of_way"
                 },
-                "vertical_position": { "eval": "'suspended_or_elevated'" },
-                "trans_european_transport_network": { "eval": "'comprehensive_ten_t_network'" },
-                "geographical_name": { "eval": "'test'" },
-                "road_surface_category": { "eval": "'unpaved'" },
+                "functional_road_class": {
+                    "function": "be_functional_road_class"
+                },
+                "number_of_lanes": "lanesnb",
+                "vertical_position": { "eval": "'on_ground_surface'" },
+                "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
+                "geographical_name": { "eval": "'default_geographical_name'" },
+                "road_surface_category": {
+                    "function": "be_road_surface_category"
+                },
                 "traffic_flow_direction": { "eval": "'both_directions'" },
                 "access_restriction": { "eval": "'public_access'" },
                 "condition_of_facility": { "eval": "'functional'" }
