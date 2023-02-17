@@ -14,14 +14,17 @@ def run(
 
         commandBase = 'PGPASSWORD="'+conf['target_db']['pwd']+'" psql -U "'+conf['target_db']['user']+'" -h "'+conf['target_db']['host']+'" -p "'+str(conf['target_db']['port'])+'" -d "'+conf['target_db']['name']+'"'
 
-        for table_name, table_conf in conf['source_tables'].items():
-            if 'mock' in table_conf and table_conf['mock'] : continue
-            
-            dumpFile = '{}/{}_{}.sql'.format(pathIn, prefix, table_name)
+        for target_table, target_table_conf in conf['target_tables'].items():
+            if 'mock' in target_table_conf and target_table_conf['mock'] : continue
 
-            restoreCommand = commandBase + " -q -f "+dumpFile
-            print(restoreCommand)
-            call( restoreCommand, shell=True )
+            for table_name, table_conf in target_table_conf['source_tables'].items():
+                if 'mock' in table_conf and table_conf['mock'] : continue
+                
+                dumpFile = '{}/{}_{}.sql'.format(pathIn, prefix, table_name)
+
+                restoreCommand = commandBase + " -q -f "+dumpFile
+                print(restoreCommand)
+                call( restoreCommand, shell=True )
 
 
 if __name__ == "__main__":

@@ -1,3 +1,3 @@
 # data-model-transformer
 
-./script/transform.sh -c conf/be-trans.json -o data/
+./script/transform.sh -c be-trans.json -o data/

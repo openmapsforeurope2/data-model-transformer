@@ -18,30 +18,33 @@ def dump(
     with open(confFile) as f:
         conf = json.load(f)
         prefix = conf['country_code']
-        target_table = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + conf['target_table']
 
-        for table_name, table_conf in conf['source_tables'].items():
-            importPath = '{}/{}_{}.json'.format(pathIn, prefix, table_name)
-            exportPath = '{}/{}_{}.sql'.format(pathOut, prefix, table_name)
-            table_conf['target_geometry'] = conf['target_geometry']
-            table_conf['target_table'] = target_table
+        for target_table, target_table_conf in conf['target_tables'].items():
+            if 'mock' in target_table_conf and target_table_conf['mock'] : continue
 
-            # classe simulée
-            if 'mock' in table_conf and table_conf['mock'] : continue
+            target_table = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
+            
+            for table_name, table_conf in target_table_conf['source_tables'].items():
+                if 'mock' in table_conf and table_conf['mock'] : continue
 
-            with open(exportPath, 'w') as outFile:
-                count = 0
-                with open(importPath, 'r') as inFile:
-                    for ligne in inFile:
-                        count += 1
+                importPath = '{}/{}_{}.json'.format(pathIn, prefix, table_name)
+                exportPath = '{}/{}_{}.sql'.format(pathOut, prefix, table_name)
+                table_conf['target_geometry'] = conf['target_geometry']
+                table_conf['target_table'] = target_table
 
-                        ligne = ligne.replace("\\\\","\\")
-                        data = json.loads(ligne)
+                with open(exportPath, 'w') as outFile:
+                    count = 0
+                    with open(importPath, 'r') as inFile:
+                        for ligne in inFile:
+                            count += 1
 
-                        insertStatement = getInsertStatement( data, table_conf, count, importPath, functions )
-                        outFile.write(insertStatement.encode('utf8').decode()+"\n")
-                        
-                    print('{} {}'.format(count, table_name), flush=True)
+                            ligne = ligne.replace("\\\\","\\")
+                            data = json.loads(ligne)
+
+                            insertStatement = getInsertStatement( data, table_conf, count, importPath, functions )
+                            outFile.write(insertStatement.encode('utf8').decode()+"\n")
+                            
+                        print('{} {}'.format(count, table_name), flush=True)
 
 
 def getInsertStatement(data, tableConf, line, file, functions ):
@@ -53,30 +56,20 @@ def getInsertStatement(data, tableConf, line, file, functions ):
             value = None
             
             if isinstance(mappedField, dict):
-                if 'eval' in mappedField:
-                    try:
+                try:
+                    if 'eval' in mappedField:
                         value = eval(mappedField['eval'], {'data': data, 'json': json})
-                    except Exception as e:
-                        print("file: "+file)
-                        print("line: "+str(line))
-                        print("field: "+field)
-                        print("data:")
-                        print(json.dumps(data))
-                        print("error:")
-                        print(traceback.format_exc())
-                        raise
-                elif 'function' in mappedField:
-                    try:
+                    elif 'function' in mappedField:
                         value = functions[mappedField['function']]({'data': data, 'json': json})
-                    except Exception as e:
-                        print("file: "+file)
-                        print("line: "+str(line))
-                        print("field: "+field)
-                        print("data:")
-                        print(json.dumps(data))
-                        print("error:")
-                        print(traceback.format_exc())
-                        raise
+                except Exception as e:
+                    print("file: "+file)
+                    print("line: "+str(line))
+                    print("field: "+field)
+                    print("data:")
+                    print(json.dumps(data))
+                    print("error:")
+                    print(traceback.format_exc())
+                    raise
             else:
                 value = data[field]
             

@@ -1,14 +1,14 @@
 {
-    "country_code": "be",
+    "country_code": "fr",
     "source_db":{
-        "host":"SMWPERMEGMFT1",
+        "host":"patafix3.ign.fr",
         "port":"5432",
-        "name":"be_national",
-        "user":"postgres",
-        "pwd":"postgres",
-        "schema": "trans"
+        "name":"bduni_france",
+        "user":"invite",
+        "pwd":"28de#",
+        "schema": "public"
     },
-    "source_geometry": "shape",
+    "source_geometry": "the_geom",
     "source_srid": "4326",
     "target_db":{
         "host":"SMWPERMEGMFT1",

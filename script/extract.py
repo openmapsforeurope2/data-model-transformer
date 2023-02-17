@@ -85,14 +85,6 @@ def getWhereStatement( tableConf ):
     return where_statement
 
 
-def start(conf):
-    print("START EXTRACT", flush=True)
-
-
-def end(conf):
-    print("END EXTRACT", flush=True)
-
-
 def extract(
     conf, pathOut
 ):
@@ -100,38 +92,41 @@ def extract(
 
     command_base = getCommandBase(conf)
 
-    for table_name, table_conf in conf['source_tables'].items():
-        # classe simulée
-        if 'mock' in table_conf and table_conf['mock'] : continue
-        table_conf['source_srid'] = conf['source_srid']
-        table_conf['source_geometry'] = conf['source_geometry']
+    for target_table, target_table_conf in conf['target_tables'].items():
+        if 'mock' in target_table_conf and target_table_conf['mock'] : continue
 
-        full_table_name = getTableName(table_name, conf, table_conf)
-        select = ""
+        for table_name, table_conf in target_table_conf['source_tables'].items():
+            if 'mock' in table_conf and table_conf['mock'] : continue
 
-        if 'mapping' in table_conf and table_conf['mapping']:
-            for field, mappedField in table_conf['mapping'].items():
-                select = appendFieldToSelect( select, {field: mappedField} )
-        
-        if 'fetched_fields' in table_conf and table_conf['fetched_fields']:
-            for computational_field in table_conf['fetched_fields']:
-                select = appendFieldToSelect( select, computational_field )
+            table_conf['source_srid'] = conf['source_srid']
+            table_conf['source_geometry'] = conf['source_geometry']
 
-        if 'source_geometry' in conf and conf['source_geometry']:
-            select = appendGeometryFieldToSelect( select, {conf['target_geometry']: conf['source_geometry']}, table_conf )
+            full_table_name = getTableName(table_name, conf, table_conf)
+            select = ""
 
-        where_statement = getWhereStatement(table_conf)
+            if 'mapping' in table_conf and table_conf['mapping']:
+                for field, mappedField in table_conf['mapping'].items():
+                    select = appendFieldToSelect( select, {field: mappedField} )
+            
+            if 'fetched_fields' in table_conf and table_conf['fetched_fields']:
+                for computational_field in table_conf['fetched_fields']:
+                    select = appendFieldToSelect( select, computational_field )
 
-        select = "SELECT " + select + " FROM " + full_table_name + where_statement + " LIMIT 10"
-        query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
-        query = "\COPY ("+ query +") TO '"+ pathOut + "/" + conf['country_code'] + "_" + table_name + ".json'"
+            if 'source_geometry' in conf and conf['source_geometry']:
+                select = appendGeometryFieldToSelect( select, {conf['target_geometry']: conf['source_geometry']}, table_conf )
 
-        command = command_base +'" -c "'+ query +'"'
+            where_statement = getWhereStatement(table_conf)
 
-        print(u'command: {}'.format(command), flush=True)
-        print('table: {}'.format(full_table_name), flush=True)
+            select = "SELECT " + select + " FROM " + full_table_name + where_statement
+            query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
+            query = "\COPY ("+ query +") TO '"+ pathOut + "/" + conf['country_code'] + "_" + table_name + ".json'"
 
-        call( command, shell=True )
+            command = command_base +'" -c "'+ query +'"'
+
+            print(u'command: {}'.format(command), flush=True)
+            print('table: {}'.format(full_table_name), flush=True)
+
+            call( command, shell=True )
 
 
 if __name__ == "__main__":
@@ -150,6 +145,4 @@ if __name__ == "__main__":
 
     conf = getConf(confFile)
 
-    start(conf)
     extract(conf, pathOut)
-    end(conf)
