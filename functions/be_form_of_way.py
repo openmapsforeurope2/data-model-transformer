@@ -18,6 +18,7 @@
         return "slip_road"
     if sepcarrway:
         return "dual_carriage_way"
+        
     return "single_carriage_way"
 
     # différence 'freeway', 'motorway', ?

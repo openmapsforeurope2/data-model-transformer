@@ -6,6 +6,7 @@ import os
 from os import listdir
 from os.path import isfile, join
 from types import FunctionType
+import utils
 
 
 def dump(
@@ -15,8 +16,8 @@ def dump(
 
     functions = getFunctions(workspace)
 
-    with open(confFile) as f:
-        conf = json.load(f)
+    conf = utils.getConf(confFile)
+    if conf is not None:
         prefix = conf['country_code']
 
         for target_table, target_table_conf in conf['target_tables'].items():

@@ -15,3 +15,5 @@
 
     if roadstatus == "Route secondaire":
         return "second_class"
+    
+    return "third_class"

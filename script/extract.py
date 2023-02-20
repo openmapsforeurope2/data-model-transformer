@@ -1,12 +1,7 @@
-import json
 import sys
 from subprocess import call
-
-
-def getConf(confFile):
-    with open(confFile) as f:
-        conf = json.load(f)
-        return conf
+import re
+import utils
 
 def getCommandBase(conf):
     return 'PGPASSWORD="'+conf['source_db']['pwd']+'" psql -U "'+conf['source_db']['user']+'" -h "'+conf['source_db']['host']+'" -p "'+conf['source_db']['port']+'" -d "'+conf['source_db']['name']
@@ -68,13 +63,7 @@ def transformGeometryToWGS84(
     source_srid, geometry_field
 ):
     if source_srid != "4326":
-        return "ST_Transform("+setSRID(source_srid)+", 4326)"
-    return geometry_field
-
-
-def setSRID( geometry_field ):
-    if territory_field != "":
-        return "ST_SetSRID("+geometry_field+", "+source_srid+")"
+        return "ST_Transform(ST_SetSRID("+geometry_field+", "+source_srid+"), 4326)"
     return geometry_field
 
 
@@ -117,7 +106,7 @@ def extract(
 
             where_statement = getWhereStatement(table_conf)
 
-            select = "SELECT " + select + " FROM " + full_table_name + where_statement
+            select = "SELECT " + select + " FROM " + full_table_name + where_statement + " LIMIT 10"
             query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
             query = "\COPY ("+ query +") TO '"+ pathOut + "/" + conf['country_code'] + "_" + table_name + ".json'"
 
@@ -143,6 +132,7 @@ if __name__ == "__main__":
         print (comment)
         sys.exit()
 
-    conf = getConf(confFile)
+    conf = utils.getConf(confFile)
 
-    extract(conf, pathOut)
+    if conf is not None:
+        extract(conf, pathOut)

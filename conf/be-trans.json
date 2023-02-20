@@ -27,7 +27,7 @@
                     "mock": false,
                     "where": "",
                     "mapping": {
-                        "country": { "eval": "'be'" },
+                        "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "be_form_of_way" },
                         "functional_road_class": { "function": "be_functional_road_class" },
                         "number_of_lanes": "lanesnb",

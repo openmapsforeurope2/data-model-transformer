@@ -101,7 +101,7 @@ echo "[START TRANSFORM]" $(date +"%m-%d-%Y %H:%M:%S")
 
 python3 $currentDir"/extract.py" $workspace $confFile $tempDir $verbose
 python3 $currentDir"/dump.py" $workspace $confFile $tempDir $output $verbose
-python3 $currentDir"/restore.py" $workspace $confFile $output $verbose
-rm -r $tempDir
+# python3 $currentDir"/restore.py" $workspace $confFile $output $verbose
+# rm -r $tempDir
 
 echo "[END TRANSFORM]" $(date +"%m-%d-%Y %H:%M:%S")

@@ -7,5 +7,6 @@
 
     if surftype == "Route empierrée":
         return "paved"
+        
     return "unpaved"
     

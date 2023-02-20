@@ -2,13 +2,14 @@ import json
 import sys
 import os
 from subprocess import call
+import utils
 
 
 def run(
     confFile, pathIn, verbose
 ):
-    with open(confFile, 'r') as f:
-        conf = json.load(f)
+    conf = utils.getConf(confFile)
+    if conf is not None:
 
         prefix = conf['country_code']
 
