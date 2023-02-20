@@ -1,6 +1,5 @@
 import sys
 from subprocess import call
-import re
 import utils
 
 def getCommandBase(conf):
