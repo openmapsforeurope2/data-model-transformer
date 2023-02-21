@@ -1,12 +1,16 @@
+#!/usr/bin/env python3
+
 import sys
 import os
 from subprocess import call
 import utils
 
 
-def run(
+def restore(
     confFile, pathIn, verbose
 ):
+    print("RESTORE...", flush=True)
+
     conf = utils.getConf(confFile)
     if conf is not None:
 
@@ -41,4 +45,4 @@ if __name__ == "__main__":
         print (comment)
         sys.exit()
 
-    run(confFile, pathIn, verbose)
+    restore(confFile, pathIn, verbose)

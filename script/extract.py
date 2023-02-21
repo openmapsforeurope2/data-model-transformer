@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 from subprocess import call
 import utils
@@ -105,7 +107,7 @@ def extract(
 
             where_statement = getWhereStatement(table_conf)
 
-            select = "SELECT " + select + " FROM " + full_table_name + where_statement + " LIMIT 10"
+            select = "SELECT " + select + " FROM " + full_table_name + where_statement
             query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
             query = "\COPY ("+ query +") TO '"+ pathOut + "/" + conf['country_code'] + "_" + table_name + ".json'"
 
