@@ -5,7 +5,7 @@
         "port":"5433",
         "name":"bduni_diffusion",
         "user":"invite",
-        "pwd":"28de#",
+        "pwd":"",
         "schema": "public"
     },
     "source_geometry": "geometrie_ge",
