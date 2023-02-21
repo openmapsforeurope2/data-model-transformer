@@ -1,0 +1,42 @@
+{
+    "country_code": "fr",
+    "source_db":{
+        "host":"babylone3.ign.fr",
+        "port":"5433",
+        "name":"bduni_diffusion",
+        "user":"invite",
+        "pwd":"28de#",
+        "schema": "public"
+    },
+    "source_geometry": "geometrie_ge",
+    "source_srid": "2154",
+    "target_db":{
+        "host":"SMWPERMEGMFT1",
+        "port":"5432",
+        "name":"ome2_v0",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema": "ome2_au"
+    },
+    "target_geometry": "geom",
+    "target_tables": {
+        "administrative_unit":{
+            "mock": false,
+            "source_tables":{
+                "commune": {
+                    "mock": false,
+                    "where": "geometrie_ge is not null and gcms_territoire = 'FXX'",
+                    "mapping": {
+                        "country": { "eval": "'fr'" },
+                        "national_code": "code_insee",
+                        "national_level": { "eval": "'5th_order'" }                       
+                    },
+                    "fetched_fields":[
+                        "code_insee",
+                        "gcms_territoire"
+                    ]
+                }
+            }
+        }
+    }
+}

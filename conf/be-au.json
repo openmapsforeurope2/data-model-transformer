@@ -1,0 +1,41 @@
+{
+    "country_code": "be",
+    "source_db":{
+        "host":"SMWPERMEGMFT1",
+        "port":"5432",
+        "name":"be_national",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema": "bnd"
+    },
+    "source_geometry": "shape",
+    "source_srid": "4326",
+    "target_db":{
+        "host":"SMWPERMEGMFT1",
+        "port":"5432",
+        "name":"ome2_v0",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema": "ome2_au"
+    },
+    "target_geometry": "geom",
+    "target_tables": {
+        "administrative_unit":{
+            "mock": false,
+            "source_tables":{
+                "municipality": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'be'" },
+                        "national_code": "niscode",
+                        "national_level": { "eval": "'5th_order'" }                       
+                    },
+                    "fetched_fields":[
+                        "niscode"
+                    ]
+                }
+            }
+        }
+    }
+}
