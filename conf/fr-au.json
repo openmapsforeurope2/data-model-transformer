@@ -5,11 +5,11 @@
         "port":"5433",
         "name":"bduni_diffusion",
         "user":"invite",
-        "pwd":"28de#",
+        "pwd":"",
         "schema": "public"
     },
     "source_geometry": "geometrie_ge",
-    "source_srid": "2154",
+    "source_srid": "CASE gcms_territoire WHEN 'FXX' THEN 2154 WHEN 'GLP' THEN 4559 WHEN 'GUF' THEN 2972 WHEN 'H_T' THEN 4326 WHEN 'MTQ' THEN 4559 WHEN 'MYT' THEN 4471 WHEN 'REU' THEN 2975 WHEN 'SPM' THEN 4467 END",
     "target_db":{
         "host":"SMWPERMEGMFT1",
         "port":"5432",
@@ -25,9 +25,9 @@
             "source_tables":{
                 "commune": {
                     "mock": false,
-                    "where": "geometrie_ge is not null and gcms_territoire = 'FXX'",
+                    "where": "geometrie_ge is not null and NOT gcms_detruit",
                     "mapping": {
-                        "country": { "eval": "'fr'" },
+                        "country": { "function": "fr_country_code" },
                         "national_code": "code_insee",
                         "national_level": { "eval": "'5th_order'" }                       
                     },
