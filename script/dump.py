@@ -25,18 +25,18 @@ def dump(
         for target_table, target_table_conf in conf['target_tables'].items():
             if 'mock' in target_table_conf and target_table_conf['mock'] : continue
 
-            target_table = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
+            exportPath = '{}/{}_{}.sql'.format(pathOut, prefix, target_table)
+
+            with open(exportPath, 'w') as outFile:
+                count = 0
             
-            for table_name, table_conf in target_table_conf['source_tables'].items():
-                if 'mock' in table_conf and table_conf['mock'] : continue
+                for table_name, table_conf in target_table_conf['source_tables'].items():
+                    if 'mock' in table_conf and table_conf['mock'] : continue
 
-                importPath = '{}/{}_{}.json'.format(pathIn, prefix, table_name)
-                exportPath = '{}/{}_{}.sql'.format(pathOut, prefix, table_name)
-                table_conf['target_geometry'] = conf['target_geometry']
-                table_conf['target_table'] = target_table
+                    importPath = pathIn+'/'+utils.getTempFileNameConf(prefix, target_table, table_name)+'.json'
+                    table_conf['target_table'] = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
 
-                with open(exportPath, 'w') as outFile:
-                    count = 0
+                    
                     with open(importPath, 'r') as inFile:
                         for ligne in inFile:
                             count += 1
@@ -47,7 +47,7 @@ def dump(
                             insertStatement = getInsertStatement( data, table_conf, count, importPath, functions )
                             outFile.write(insertStatement.encode('utf8').decode()+"\n")
                             
-                        print('{} {}'.format(count, table_name), flush=True)
+                print('{} {}'.format(count, target_table), flush=True)
 
 
 def getInsertStatement(data, tableConf, line, file, functions ):
@@ -88,13 +88,15 @@ def getInsertStatement(data, tableConf, line, file, functions ):
 
             values.append(value)
     
-    if data[tableConf['target_geometry']] is None:
-        data[tableConf['target_geometry']] = '\\N'
-    else:
-        data[tableConf['target_geometry']] = "\'"+data[tableConf['target_geometry']].replace("\\x","")+"\'"
+    if 'geomapping' in tableConf and tableConf['geomapping']:
+        for field, mappedField in tableConf['geomapping'].items():
+            if data[field] is None:
+                data[field] = 'NULL'
+            else:
+                data[field] = "\'"+data[field].replace("\\x","")+"\'"
 
-    fields.append(tableConf['target_geometry'])
-    values.append(data[tableConf['target_geometry']])
+            fields.append(field)
+            values.append(data[field])
 
     try:
         insertStatement = "INSERT INTO " + tableConf["target_table"] + " (" + u",".join(fields) + ") VALUES (" + u",".join(values) + ");"

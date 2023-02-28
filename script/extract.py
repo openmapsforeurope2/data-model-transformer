@@ -39,16 +39,27 @@ def appendFieldToSelect(selectString, field):
     return selectString + ("," if selectString else "") + selectPart
 
 
-def appendGeometryFieldToSelect(selectString, geometryfield, tableConf):
+def appendGeometryFieldToSelect(selectString, geometryfield, sourceSRID):
     fieldName = ""
+    transform = None
     if isinstance(geometryfield, dict) :
         fieldName = next(iter(geometryfield))
         mappedField = geometryfield[fieldName]
+
+        if isinstance(mappedField, dict):
+            sourceName = next(iter(mappedField))
+            if 'transform' in mappedField[sourceName] and mappedField[sourceName]['transform']:
+                transform = mappedField[sourceName]['transform']
+            mappedField = sourceName
+            
     else:
         mappedField = geometryfield
 
     geometryField = mappedField
-    geometryField = transformGeometryToWGS84(tableConf["source_srid"], geometryField)
+    geometryField = transformGeometryToWGS84(sourceSRID, geometryField)
+
+    if transform is not None:
+        geometryField = transform.replace('${}', geometryField)
 
     selectPart = geometryField
 
@@ -89,7 +100,6 @@ def extract(
             if 'mock' in table_conf and table_conf['mock'] : continue
 
             table_conf['source_srid'] = conf['source_srid']
-            table_conf['source_geometry'] = conf['source_geometry']
 
             full_table_name = getTableName(table_name, conf, table_conf)
             select = ""
@@ -97,19 +107,20 @@ def extract(
             if 'mapping' in table_conf and table_conf['mapping']:
                 for field, mappedField in table_conf['mapping'].items():
                     select = appendFieldToSelect( select, {field: mappedField} )
+
+            if 'geomapping' in table_conf and table_conf['geomapping']:
+                for field, mappedField in table_conf['geomapping'].items():
+                    select = appendGeometryFieldToSelect( select, {field: mappedField}, table_conf["source_srid"] )
             
             if 'fetched_fields' in table_conf and table_conf['fetched_fields']:
                 for computational_field in table_conf['fetched_fields']:
                     select = appendFieldToSelect( select, computational_field )
-
-            if 'source_geometry' in conf and conf['source_geometry']:
-                select = appendGeometryFieldToSelect( select, {conf['target_geometry']: conf['source_geometry']}, table_conf )
-
+            
             where_statement = getWhereStatement(table_conf)
 
-            select = "SELECT " + select + " FROM " + full_table_name + where_statement
+            select = "SELECT " + select + " FROM " + full_table_name + where_statement + " LIMIT 10"
             query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
-            query = "\COPY ("+ query +") TO '"+ pathOut + "/" + conf['country_code'] + "_" + table_name + ".json'"
+            query = "\COPY ("+ query +") TO '"+ pathOut + "/" + utils.getTempFileNameConf(conf['country_code'], target_table, table_name) + ".json'"
 
             command = command_base +'" -c "'+ query +'"'
 

@@ -21,3 +21,6 @@ def getConf(confFile):
 
         return json.loads(confString)
     return None
+
+def getTempFileNameConf(prefix, targetTableName, sourceTableName):
+    return prefix + "_" + targetTableName + "_" + sourceTableName

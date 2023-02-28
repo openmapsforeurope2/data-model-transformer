@@ -48,8 +48,7 @@
                         "particpass",
                         "sepcarrway",
                         "natroadnb",
-                        "euroadnb",
-                        "lanesnb"
+                        "euroadnb"
                     ]
                 },
                 "ro_dirtroadsegment":{
