@@ -8,7 +8,6 @@
         "pwd":"postgres",
         "schema": "bnd"
     },
-    "source_geometry": "shape",
     "source_srid": "4326",
     "target_db":{
         "host":"SMWPERMEGMFT1",
@@ -18,7 +17,6 @@
         "pwd":"postgres",
         "schema": "ome2_au"
     },
-    "target_geometry": "geom",
     "target_tables": {
         "administrative_unit":{
             "mock": false,
@@ -27,12 +25,14 @@
                     "mock": false,
                     "where": "",
                     "mapping": {
-                        "country": { "eval": "'be'" },
+                        "country": { "eval": "'${country_code}'" },
                         "national_code": "niscode",
                         "national_level": { "eval": "'5th_order'" }                       
                     },
+                    "geomapping":{
+                        "geom": "shape"
+                    },
                     "fetched_fields":[
-                        "niscode"
                     ]
                 }
             }

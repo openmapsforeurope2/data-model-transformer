@@ -37,9 +37,11 @@
                         "access_restriction": { "function": "fr_access_restriction" },
                         "condition_of_facility": { "function": "fr_condition_of_facility" }
                     },
-                    "geom": {
-                        "geometrie": {
-                            "transform": "ST_Force2D(${})"
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force2D(${})"
+                            }
                         }
                     },
                     "fetched_fields":[
@@ -68,14 +70,14 @@
                         "code": "identifiant_de_pr",
                         "distance": "abscisse"
                     },
-                    "geom": {
-                        "geometrie": {
-                            "transform": "ST_Force2D(${})"
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force2D(${})"
+                            }
                         }
                     },
                     "fetched_fields":[
-                        "abscisse",
-                        "identifiant_de_pr",
                         "gcms_territoire"
                     ]
                 }

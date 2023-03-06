@@ -13,12 +13,13 @@ def transform(argv):
 
     arg_conf = ""
     arg_output = currentDir+"/../data"
-    arg_verbose = False
+    arg_reset = "false"
+    arg_verbose = "false"
     arg_help = "{0} -c <conf> -o <output> -v".format(argv[0])
     
     try:
-        opts, args = getopt.getopt(argv[1:], "hc:o:v", ["help", "conf=", 
-        "output=", "verbose"])
+        opts, args = getopt.getopt(argv[1:], "hc:o:vr", ["help", "conf=", 
+        "output=", "verbose", "reset"])
     except:
         print(arg_help)
         sys.exit(2)
@@ -31,11 +32,14 @@ def transform(argv):
             arg_conf = arg
         elif opt in ("-o", "--output"):
             arg_output = arg
+        elif opt in ("-r", "--reset"):
+            arg_reset = "true"
         elif opt in ("-v", "--verbose"):
-            arg_verbose = True
+            arg_verbose = "true"
 
     print('conf:', arg_conf)
     print('output:', arg_output)
+    print('reset:', arg_reset)
     print('verbose:', arg_verbose)
 
     workspace=currentDir+"/../"
@@ -56,7 +60,7 @@ def transform(argv):
 
     os.system(workspace+"script/extract.py {0} {1} {2} {3}".format(workspace, arg_conf, tempDir, arg_verbose))
     os.system(workspace+"script/dump.py {0} {1} {2} {3} {4}".format(workspace, arg_conf, tempDir, arg_output, arg_verbose))
-    os.system(workspace+"script/restore.py {0} {1} {2} {3}".format(workspace, arg_conf, arg_output, arg_verbose))
+    os.system(workspace+"script/restore.py {0} {1} {2} {3} {4}".format(workspace, arg_conf, arg_output, arg_reset, arg_verbose))
     shutil.rmtree(tempDir)
 
     print("[END TRANSFORM] "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))

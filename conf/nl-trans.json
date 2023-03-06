@@ -1,0 +1,51 @@
+{
+    "country_code": "nl",
+    "source_db":{
+        "host":"SMWPERMEGMFT1",
+        "port":"5432",
+        "name":"nl_national",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema": "trans"
+    },
+    "source_srid": "4326",
+    "target_db":{
+        "host":"SMWPERMEGMFT1",
+        "port":"5432",
+        "name":"ome2_v0",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema": "ome2_tn"
+    },
+    "target_tables": {
+        "road_link":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_wegdeel_hartlijn": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "form_of_way": { "function": "nl_form_of_way" },
+                        "functional_road_class": { "function": "nl_functional_road_class" },
+                        "number_of_lanes": "aantalrijstroken",
+                        "vertical_position": { "eval": "'underground' if data['Hoogteniveau'] < 0 else 'suspended_or_elevated' if data['Hoogteniveau'] > 0 else 'on_ground_surface'" },
+                        "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
+                        "geographical_name": { "eval": "'default_geographical_name'" },
+                        "road_surface_category": { "eval": "'unpaved' if data['verhardingstype'] == 'Onverhard' else 'paved'" },
+                        "traffic_flow_direction": { "eval": "'both_directions'" },
+                        "access_restriction": { "eval": "'public_access'" },
+                        "condition_of_facility": { "function": "nl_condition_of_facility" }
+                    },
+                    "fetched_fields":[
+                        "typeweg",
+                        "Hoofdverkeersgebruik",
+                        "gescheidenrijbaan",
+                        "Hoogteniveau",
+                        "verhardingstype"
+                    ]
+                }
+            }
+        }
+    }
+}

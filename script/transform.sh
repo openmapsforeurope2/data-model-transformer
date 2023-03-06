@@ -8,6 +8,7 @@ workspace=$currentDir"/../"
 output=$currentDir"/../data"
 tempDir=$output"/tmp"
 verbose=false
+reset=false
 
 while test $# -gt 0; do
   case "$1" in
@@ -17,6 +18,7 @@ while test $# -gt 0; do
       echo "options:"
       echo "-h, --help                Afficher l'aide"
       echo "-v                        Mode verbeux"
+      echo "-r                        Previously delete all rows before restoring"
       echo "-c, --conf=FILE           Chemin vers le fichier JSON de configuration"
       echo "-o, --output-dir=DIR      Spécifier le dossier de sortie"
       exit 0
@@ -24,6 +26,10 @@ while test $# -gt 0; do
     -v)
       shift
       verbose=true
+      ;;
+    -r)
+      shift
+      reset=true
       ;;
     -c)
       shift
@@ -101,7 +107,7 @@ echo "[START TRANSFORM]" $(date +"%m-%d-%Y %H:%M:%S")
 
 python3 $currentDir"/extract.py" $workspace $confFile $tempDir $verbose
 python3 $currentDir"/dump.py" $workspace $confFile $tempDir $output $verbose
-python3 $currentDir"/restore.py" $workspace $confFile $output $verbose
+python3 $currentDir"/restore.py" $workspace $confFile $output $reset $verbose
 rm -r $tempDir
 
 echo "[END TRANSFORM]" $(date +"%m-%d-%Y %H:%M:%S")

@@ -8,7 +8,6 @@
         "pwd":"postgres",
         "schema": "trans"
     },
-    "source_geometry": "shape",
     "source_srid": "4326",
     "target_db":{
         "host":"SMWPERMEGMFT1",
@@ -18,7 +17,6 @@
         "pwd":"postgres",
         "schema": "ome2_tn"
     },
-    "target_geometry": "geom",
     "target_tables": {
         "road_link":{
             "mock": false,
@@ -38,6 +36,9 @@
                         "traffic_flow_direction": { "eval": "'both_directions'" },
                         "access_restriction": { "eval": "'public_access'" },
                         "condition_of_facility": { "eval": "'functional'" }
+                    },
+                    "geomapping":{
+                        "geom": "shape"
                     },
                     "fetched_fields":[
                         "modifdate",

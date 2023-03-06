@@ -8,7 +8,7 @@
     if access == "En construction":
         return "under_construction"
 
-    if access == "En projet ":
+    if access == "En projet":
         return "projected"
 
     return "functional"
