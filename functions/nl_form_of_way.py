@@ -15,7 +15,7 @@
     # Air traffic (vliegverkeer), Bikes/Mopeds (Fietsers/bromfietsers), Pedestrian (Voetgangers), 
     # Rider (Ruiter), Parking (parkeren), Parking: P+R (Parkeren P+R), Parking: Carpool (Carpoolplaats),
     # Other (Overig), Unkown (Onbekend)
-    Hoofdverkeersgebruik = context['data']['Hoofdverkeersgebruik']
+    Hoofdverkeersgebruik = context['data']['hoofdverkeersgebruik']
 
     # Separate lancourt
     # Yes, No

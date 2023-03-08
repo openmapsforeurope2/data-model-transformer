@@ -18,7 +18,7 @@ while test $# -gt 0; do
       echo "options:"
       echo "-h, --help                Afficher l'aide"
       echo "-v                        Mode verbeux"
-      echo "-r                        Previously delete all rows before restoring"
+      echo "-r                        Suppression des données existentes dans les tables avant restauration"
       echo "-c, --conf=FILE           Chemin vers le fichier JSON de configuration"
       echo "-o, --output-dir=DIR      Spécifier le dossier de sortie"
       exit 0

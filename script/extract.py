@@ -1,11 +1,6 @@
-#!/usr/bin/env python3
-
 import sys
 from subprocess import call
 import utils
-
-def getCommandBase(conf):
-    return 'PGPASSWORD="'+conf['source_db']['pwd']+'" psql -U "'+conf['source_db']['user']+'" -h "'+conf['source_db']['host']+'" -p "'+conf['source_db']['port']+'" -d "'+conf['source_db']['name']
 
 
 def getTableName(table_name, conf, table_conf):
@@ -91,7 +86,7 @@ def extract(
 ):
     print("EXTRACTING...", flush=True)
 
-    command_base = getCommandBase(conf)
+    commandBase = utils.getCommandBase(conf['source_db'])
 
     for target_table, target_table_conf in conf['target_tables'].items():
         if 'mock' in target_table_conf and target_table_conf['mock'] : continue
@@ -118,11 +113,11 @@ def extract(
             
             where_statement = getWhereStatement(table_conf)
 
-            select = "SELECT " + select + " FROM " + full_table_name + where_statement
+            select = "SELECT " + select + " FROM " + full_table_name + where_statement +" LIMIT 10"
             query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
             query = "\COPY ("+ query +") TO '"+ pathOut + "/" + utils.getTempFileNameConf(conf['country_code'], target_table, table_name) + ".json'"
 
-            command = command_base +'" -c "'+ query +'"'
+            command = commandBase +' -c "'+ query +'"'
 
             print(u'command: {}'.format(command), flush=True)
             print('table: {}'.format(full_table_name), flush=True)
@@ -134,7 +129,6 @@ if __name__ == "__main__":
     comment = '''
     Usage : extract <conf.json> <output path> <verbose>
     '''
-
     try:
         workspace = sys.argv[1]
         confFile = workspace+"/conf/"+sys.argv[2]

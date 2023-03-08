@@ -5,7 +5,7 @@
         "port":"5433",
         "name":"bduni_diffusion",
         "user":"invite",
-        "pwd":"",
+        "pwd":"28de#",
         "schema": "public"
     },
     "source_srid": "CASE gcms_territoire WHEN 'FXX' THEN 2154 WHEN 'GLP' THEN 4559 WHEN 'GUF' THEN 2972 WHEN 'H_T' THEN 4326 WHEN 'MTQ' THEN 4559 WHEN 'MYT' THEN 4471 WHEN 'REU' THEN 2975 WHEN 'SPM' THEN 4467 END",

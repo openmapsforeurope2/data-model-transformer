@@ -23,13 +23,13 @@
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
-                    "where": "NOT gcms_detruit",
+                    "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "nl_form_of_way" },
                         "functional_road_class": { "function": "nl_functional_road_class" },
                         "number_of_lanes": "aantalrijstroken",
-                        "vertical_position": { "eval": "'underground' if data['Hoogteniveau'] < 0 else 'suspended_or_elevated' if data['Hoogteniveau'] > 0 else 'on_ground_surface'" },
+                        "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface'" },
                         "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
                         "geographical_name": { "eval": "'default_geographical_name'" },
                         "road_surface_category": { "eval": "'unpaved' if data['verhardingstype'] == 'Onverhard' else 'paved'" },
@@ -39,10 +39,11 @@
                     },
                     "fetched_fields":[
                         "typeweg",
-                        "Hoofdverkeersgebruik",
+                        "hoofdverkeersgebruik",
                         "gescheidenrijbaan",
-                        "Hoogteniveau",
-                        "verhardingstype"
+                        "hoogteniveau",
+                        "verhardingstype",
+                        "status"
                     ]
                 }
             }

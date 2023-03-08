@@ -1,5 +1,6 @@
 import json
 import re
+import sys
 
 def getConf(confFile):
     with open(confFile) as f:
@@ -24,3 +25,18 @@ def getConf(confFile):
 
 def getTempFileNameConf(prefix, targetTableName, sourceTableName):
     return prefix + "_" + targetTableName + "_" + sourceTableName
+
+def onWindows():
+    return sys.platform.startswith("win")
+
+def getCommandBase(conf):
+    if onWindows():
+        return 'psql -U "'+conf['user']+'" -h "'+conf['host']+'" -p "'+conf['port']+'" -d "'+conf['name']+'"'
+    else:
+        return 'PGPASSWORD="'+conf['pwd']+'" psql -U "'+conf['user']+'" -h "'+conf['host']+'" -p "'+conf['port']+'" -d "'+conf['name']+'"'
+
+def getPythonBinName():
+    if onWindows():
+        return 'python.exe'
+    else:
+        return 'python3'

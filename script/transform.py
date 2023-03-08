@@ -1,18 +1,16 @@
-#!/usr/bin/env python3
-
 import os
 import sys
 import getopt
 from datetime import datetime
 import shutil
-
+import utils
 
 def transform(argv):
 
     currentDir = os.path.dirname(os.path.abspath(__file__))
 
     arg_conf = ""
-    arg_output = currentDir+"/../data"
+    arg_output = os.path.dirname(currentDir)+"/data"
     arg_reset = "false"
     arg_verbose = "false"
     arg_help = "{0} -c <conf> -o <output> -v".format(argv[0])
@@ -42,8 +40,8 @@ def transform(argv):
     print('reset:', arg_reset)
     print('verbose:', arg_verbose)
 
-    workspace=currentDir+"/../"
-    tempDir=arg_output+"/tmp"
+    workspace = os.path.dirname(currentDir)+"/"
+    tempDir = arg_output + "/tmp"
 
     if not os.path.isfile(workspace+"conf/"+arg_conf):
         print("le fichier de configuration "+ arg_conf + " n'existe pas.")
@@ -58,9 +56,9 @@ def transform(argv):
 
     print("[START TRANSFORM] "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
-    os.system(workspace+"script/extract.py {0} {1} {2} {3}".format(workspace, arg_conf, tempDir, arg_verbose))
-    os.system(workspace+"script/dump.py {0} {1} {2} {3} {4}".format(workspace, arg_conf, tempDir, arg_output, arg_verbose))
-    os.system(workspace+"script/restore.py {0} {1} {2} {3} {4}".format(workspace, arg_conf, arg_output, arg_reset, arg_verbose))
+    os.system(utils.getPythonBinName()+" "+workspace+"script/extract.py {0} {1} {2} {3}".format(workspace, arg_conf, tempDir, arg_verbose))
+    os.system(utils.getPythonBinName()+" "+workspace+"script/dump.py {0} {1} {2} {3} {4}".format(workspace, arg_conf, tempDir, arg_output, arg_verbose))
+    os.system(utils.getPythonBinName()+" "+workspace+"script/restore.py {0} {1} {2} {3} {4}".format(workspace, arg_conf, arg_output, arg_reset, arg_verbose))
     shutil.rmtree(tempDir)
 
     print("[END TRANSFORM] "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import sys
 import os
 from subprocess import call
@@ -16,7 +14,7 @@ def restore(
 
         prefix = conf['country_code']
 
-        commandBase = 'PGPASSWORD="'+conf['target_db']['pwd']+'" psql -U "'+conf['target_db']['user']+'" -h "'+conf['target_db']['host']+'" -p "'+str(conf['target_db']['port'])+'" -d "'+conf['target_db']['name']+'"'
+        commandBase = utils.getCommandBase(conf['target_db'])
 
         for target_table, target_table_conf in conf['target_tables'].items():
             if 'mock' in target_table_conf and target_table_conf['mock'] : continue
