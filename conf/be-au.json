@@ -27,7 +27,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "national_code": "niscode",
-                        "national_level": { "eval": "'5th_order'" }                       
+                        "national_level": { "eval": "'5th_order'" }
                     },
                     "geomapping":{
                         "geom": "shape"

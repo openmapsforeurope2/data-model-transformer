@@ -27,7 +27,7 @@
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_insee",
-                        "national_level": { "eval": "'5th_order'" }                       
+                        "national_level": { "eval": "'5th_order'" }
                     },
                     "geomapping":{
                         "geom": {

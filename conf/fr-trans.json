@@ -67,11 +67,7 @@
                         "distance": "abscisse"
                     },
                     "geomapping":{
-                        "geom": {
-                            "geometrie": {
-                                "transform": "ST_Force2D(${})"
-                            }
-                        }
+                        "geom": "geometrie"
                     },
                     "fetched_fields":[
                         "gcms_territoire"
@@ -91,7 +87,11 @@
                         "geographical_name": "toponyme"
                     },
                     "geomapping":{
-                        "geom": "v1_geometrie",
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_PointOnSurface(${})"
+                            }
+                        },
                         "geom_area": "geometrie"
                     },
                     "fetched_fields":[
@@ -139,7 +139,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geom_area": {
+                            "geometrie": {
                                 "transform": "ST_PointOnSurface(${})"
                             }
                         },
