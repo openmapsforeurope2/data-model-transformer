@@ -38,11 +38,7 @@
                         "condition_of_facility": { "eval": "'functional'" }
                     },
                     "geomapping":{
-                        "geom": {
-                            "shape":{
-                                "transform": "ST_Force3D(${},-1000)"
-                            }
-                        }
+                        "geom": "geom"
                     },
                     "fetched_fields":[
                         "modifdate",

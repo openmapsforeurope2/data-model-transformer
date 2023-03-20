@@ -8,7 +8,7 @@
         "pwd":"postgres",
         "schema": "trans"
     },
-    "source_srid": "4326",
+    "source_srid": "28992",
     "target_db":{
         "host":"SMWPERMEGMFT1",
         "port":"5432",
@@ -36,6 +36,13 @@
                         "traffic_flow_direction": { "eval": "'both_directions'" },
                         "access_restriction": { "eval": "'public_access'" },
                         "condition_of_facility": { "function": "nl_condition_of_facility" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
                     },
                     "fetched_fields":[
                         "typeweg",

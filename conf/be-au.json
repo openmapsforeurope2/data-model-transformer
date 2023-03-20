@@ -30,7 +30,7 @@
                         "national_level": { "eval": "'5th_order'" }
                     },
                     "geomapping":{
-                        "geom": "shape"
+                        "geom": "geom"
                     },
                     "fetched_fields":[
                     ]
