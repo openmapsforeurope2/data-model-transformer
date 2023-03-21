@@ -35,7 +35,10 @@
                         "road_surface_category": { "function": "be_road_surface_category" },
                         "traffic_flow_direction": { "eval": "'both_directions'" },
                         "access_restriction": { "eval": "'public_access'" },
-                        "condition_of_facility": { "eval": "'functional'" }
+                        "condition_of_facility": { "eval": "'functional'" },
+                        "national_road_code": "natroadnb",
+                        "european_route_number": "euroadnb",
+                        "w_national_identifier": "tgid"
                     },
                     "geomapping":{
                         "geom": "geom"
@@ -49,7 +52,8 @@
                         "particpass",
                         "sepcarrway",
                         "natroadnb",
-                        "euroadnb"
+                        "euroadnb",
+                        "tgid"
                     ]
                 },
                 "ro_dirtroadsegment":{
