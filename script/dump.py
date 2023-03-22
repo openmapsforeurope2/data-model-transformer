@@ -1,22 +1,14 @@
 import json
 import sys
 import traceback
-from subprocess import call
-import os
-from os import listdir
-from os.path import isfile, join
-from types import FunctionType
 import utils
 
 
-def dump(
-    workspace, confFile, pathIn, pathOut
+def run(
+    functions, conf, pathIn, pathOut
 ):
     print("DUMP...", flush=True)
 
-    functions = getFunctions(workspace)
-
-    conf = utils.getConf(confFile)
     if conf is not None:
         prefix = conf['country_code']
 
@@ -129,22 +121,7 @@ def toSqlArray( ls, separator = ",") :
         newList = ""
     newList = "{" + newList + "}"
     return newList
-
-
-def getFunctions(workspace):
-    functions = {}
-    functionsDir=workspace+"/functions"
-    files = [f for f in listdir(functionsDir) if isfile(join(functionsDir, f))]
-    for f in files:
-        key = os.path.splitext(os.path.basename(f))[0]
-
-        fopen = open(join(functionsDir, f), "r")
-        f_code = compile("def "+key+"(context):\n"+fopen.read(), "<string>", "exec")
-        functions[key] = FunctionType(f_code.co_consts[0], globals(), key)
-
-    return functions
         
-
 
 if __name__ == "__main__":
     comment = '''
@@ -161,4 +138,7 @@ if __name__ == "__main__":
         print (comment)
         sys.exit()
 
-    dump(workspace, confFile, pathIn, pathOut)
+    conf = utils.getConf(confFile)
+    functions = utils.getFunctions(workspace+"/functions")
+
+    run(functions, conf, pathIn, pathOut)

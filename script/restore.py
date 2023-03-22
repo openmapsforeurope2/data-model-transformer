@@ -4,12 +4,11 @@ from subprocess import call
 import utils
 
 
-def restore(
-    confFile, pathIn, reset, verbose
+def run(
+    conf, pathIn, reset, verbose
 ):
     print("RESTORE...", flush=True)
 
-    conf = utils.getConf(confFile)
     if conf is not None:
 
         prefix = conf['country_code']
@@ -21,7 +20,7 @@ def restore(
 
             if reset:
                 targetTableCompleteName = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
-                resetCommand = commandBase + ' -q -c "DELETE FROM '+targetTableCompleteName+'"'
+                resetCommand = commandBase + ' -q -c "DELETE FROM '+targetTableCompleteName+' WHERE '+conf['target_country_field']+'=\''+conf['country_code']+'\'"'
                 print(resetCommand)
                 call( resetCommand, shell=True )
                 
@@ -47,4 +46,5 @@ if __name__ == "__main__":
         print (comment)
         sys.exit()
 
-    restore(confFile, pathIn, reset, verbose)
+    conf = utils.getConf(confFile)
+    run(conf, pathIn, reset, verbose)

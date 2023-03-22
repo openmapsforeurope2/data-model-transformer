@@ -4,6 +4,9 @@ import getopt
 from datetime import datetime
 import shutil
 import utils
+import extract
+import dump
+import restore
 
 def transform(argv):
 
@@ -11,8 +14,8 @@ def transform(argv):
 
     arg_conf = ""
     arg_output = os.path.dirname(currentDir)+"/data"
-    arg_reset = "false"
-    arg_verbose = "false"
+    arg_reset = False
+    arg_verbose = False
     arg_help = "{0} -c <conf> -o <output> -v".format(argv[0])
     
     try:
@@ -31,9 +34,9 @@ def transform(argv):
         elif opt in ("-o", "--output"):
             arg_output = arg
         elif opt in ("-r", "--reset"):
-            arg_reset = "true"
+            arg_reset = True
         elif opt in ("-v", "--verbose"):
-            arg_verbose = "true"
+            arg_verbose = True
 
     print('conf:', arg_conf)
     print('output:', arg_output)
@@ -46,6 +49,7 @@ def transform(argv):
     if not os.path.isfile(workspace+"conf/"+arg_conf):
         print("le fichier de configuration "+ arg_conf + " n'existe pas.")
         sys.exit(2)
+    arg_conf = workspace+"conf/"+arg_conf
 
     if not os.path.exists(arg_output):
         os.makedirs(arg_output)
@@ -56,9 +60,13 @@ def transform(argv):
 
     print("[START TRANSFORM] "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
-    os.system(utils.getPythonBinName()+" "+workspace+"script/extract.py {0} {1} {2} {3}".format(workspace, arg_conf, tempDir, arg_verbose))
-    os.system(utils.getPythonBinName()+" "+workspace+"script/dump.py {0} {1} {2} {3} {4}".format(workspace, arg_conf, tempDir, arg_output, arg_verbose))
-    os.system(utils.getPythonBinName()+" "+workspace+"script/restore.py {0} {1} {2} {3} {4}".format(workspace, arg_conf, arg_output, arg_reset, arg_verbose))
+    conf = utils.getConf(arg_conf)
+    functions = utils.getFunctions(workspace+"/functions")
+
+    extract.run(conf, tempDir)
+    dump.run(functions, conf, tempDir, arg_output)
+    restore.run(conf, arg_output, arg_reset, arg_verbose)
+
     shutil.rmtree(tempDir)
 
     print("[END TRANSFORM] "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))

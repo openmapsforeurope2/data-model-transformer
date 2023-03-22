@@ -17,6 +17,7 @@
         "pwd":"postgres",
         "schema": "ome2_tn"
     },
+    "target_country_field": "country",
     "target_tables": {
         "road_link":{
             "mock": false,
@@ -55,7 +56,7 @@
             }
         },
         "marker_post":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "point_de_repere":{
                     "mock": false,
@@ -76,7 +77,7 @@
             }
         },
         "road_service":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -102,7 +103,7 @@
             }
         },
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_de_voie_ferree":{
                     "mock": false,
@@ -127,7 +128,7 @@
             }
         },
         "railway_station":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,

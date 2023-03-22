@@ -1,6 +1,10 @@
 import json
 import re
 import sys
+import os
+from os import listdir
+from os.path import isfile, join
+from types import FunctionType
 
 def getConf(confFile):
     with open(confFile) as f:
@@ -40,3 +44,15 @@ def getPythonBinName():
         return 'python.exe'
     else:
         return 'python3'
+
+def getFunctions(functionsDir):
+    functions = {}
+    files = [f for f in listdir(functionsDir) if isfile(join(functionsDir, f))]
+    for f in files:
+        key = os.path.splitext(os.path.basename(f))[0]
+
+        fopen = open(join(functionsDir, f), "r")
+        f_code = compile("def "+key+"(context):\n"+fopen.read(), "<string>", "exec")
+        functions[key] = FunctionType(f_code.co_consts[0], globals(), key)
+
+    return functions

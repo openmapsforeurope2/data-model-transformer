@@ -81,7 +81,7 @@ def getWhereStatement( tableConf ):
     return where_statement
 
 
-def extract(
+def run(
     conf, pathOut
 ):
     print("EXTRACTING...", flush=True)
@@ -113,7 +113,7 @@ def extract(
             
             where_statement = getWhereStatement(table_conf)
 
-            select = "SELECT " + select + " FROM " + full_table_name + where_statement +" LIMIT 10"
+            select = "SELECT " + select + " FROM " + full_table_name + where_statement
             query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
             query = "\COPY ("+ query +") TO '"+ pathOut + "/" + utils.getTempFileNameConf(conf['country_code'], target_table, table_name) + ".json'"
 
@@ -141,4 +141,4 @@ if __name__ == "__main__":
     conf = utils.getConf(confFile)
 
     if conf is not None:
-        extract(conf, pathOut)
+        run(conf, pathOut)
