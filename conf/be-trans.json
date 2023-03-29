@@ -24,7 +24,7 @@
             "source_tables":{
                 "ro_roadsegment": {
                     "mock": false,
-                    "where": "ST_intersects(geom,ST_GeomFromText('POLYGON((3.38928 50.36368,3.38928 50.71280,3.88366 50.71280,3.88366 50.36368,3.38928 50.36368))'))",
+                    "where": "ST_intersects(geom,ST_SetSRID(ST_GeomFromText('POLYGON((3.38928 50.36368,3.38928 50.71280,3.88366 50.71280,3.88366 50.36368,3.38928 50.36368))',4326)))",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "be_form_of_way" },
