@@ -12,8 +12,5 @@ Les options de ce script sont:
 
 Exemples:
 ~~~
-./script/transform.sh -c be-trans.json -o data
-~~~
-~~~
-python3 script/transform.py -c be-trans.json -o data
+python3 script/transform.py -c be-trans.json -o data -r
 ~~~

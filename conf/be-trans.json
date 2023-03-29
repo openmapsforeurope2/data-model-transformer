@@ -17,13 +17,14 @@
         "pwd":"postgres",
         "schema": "ome2_tn"
     },
+    "target_country_field": "country",
     "target_tables": {
         "road_link":{
             "mock": false,
             "source_tables":{
                 "ro_roadsegment": {
                     "mock": false,
-                    "where": "",
+                    "where": "ST_intersects(geom,ST_GeomFromText('POLYGON((3.38928 50.36368,3.38928 50.71280,3.88366 50.71280,3.88366 50.36368,3.38928 50.36368))'))",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "be_form_of_way" },
