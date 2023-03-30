@@ -1,7 +1,7 @@
 {
     "country_code": "be",
     "source_db":{
-        "host":"SMWPERMEGMFT1",
+        "host":"10.128.35.45",
         "port":"5432",
         "name":"be_national",
         "user":"postgres",
@@ -10,7 +10,7 @@
     },
     "source_srid": "4326",
     "target_db":{
-        "host":"SMWPERMEGMFT1",
+        "host":"10.128.35.45",
         "port":"5432",
         "name":"ome2_v0",
         "user":"postgres",
@@ -24,7 +24,7 @@
             "source_tables":{
                 "ro_roadsegment": {
                     "mock": false,
-                    "where": "ST_intersects(geom,ST_SetSRID(ST_GeomFromText('POLYGON((3.38928 50.36368,3.38928 50.71280,3.88366 50.71280,3.88366 50.36368,3.38928 50.36368))',4326)))",
+                    "where": "ST_intersects(geom,ST_SetSRID(ST_GeomFromText('POLYGON((3.38928 50.36368,3.38928 50.71280,3.88366 50.71280,3.88366 50.36368,3.38928 50.36368))'),4326))",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "be_form_of_way" },

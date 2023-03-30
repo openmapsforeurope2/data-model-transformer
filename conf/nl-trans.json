@@ -1,7 +1,7 @@
 {
     "country_code": "nl",
     "source_db":{
-        "host":"SMWPERMEGMFT1",
+        "host":"10.128.35.45",
         "port":"5432",
         "name":"nl_national",
         "user":"postgres",
@@ -10,7 +10,7 @@
     },
     "source_srid": "28992",
     "target_db":{
-        "host":"SMWPERMEGMFT1",
+        "host":"10.128.35.45",
         "port":"5432",
         "name":"ome2_v0",
         "user":"postgres",
