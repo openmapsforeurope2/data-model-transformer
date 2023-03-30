@@ -69,8 +69,8 @@ def appendGeometryFieldToSelect(selectString, geometryfield, sourceSRID):
 def transformGeometryToWGS84(
     source_srid, geometry_field
 ):
-    if source_srid != "4326":
-        return "ST_Transform(ST_SetSRID("+geometry_field+", "+source_srid+"), 4326)"
+    if source_srid != "3035":
+        return "ST_Transform(ST_SetSRID("+geometry_field+", "+source_srid+"), 3035)"
     return geometry_field
 
 
