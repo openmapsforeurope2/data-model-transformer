@@ -15,7 +15,7 @@
         "name":"ome2_v0",
         "user":"ome2_user",
         "pwd":"ome2_user",
-        "schema": "ome2_tn"
+        "schema": "tn"
     },
     "target_country_field": "country",
     "target_tables": {
