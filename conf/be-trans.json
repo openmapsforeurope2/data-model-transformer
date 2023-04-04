@@ -1,20 +1,20 @@
 {
     "country_code": "be",
     "source_db":{
-        "host":"10.128.35.45",
+        "host":"10.128.35.60",
         "port":"5432",
         "name":"be_national",
-        "user":"postgres",
-        "pwd":"postgres",
+        "user":"ome2_user",
+        "pwd":"ome2_user",
         "schema": "trans"
     },
     "source_srid": "4326",
     "target_db":{
-        "host":"10.128.35.45",
+        "host":"10.128.35.60",
         "port":"5432",
         "name":"ome2_v0",
-        "user":"postgres",
-        "pwd":"postgres",
+        "user":"ome2_user",
+        "pwd":"ome2_user",
         "schema": "ome2_tn"
     },
     "target_country_field": "country",
