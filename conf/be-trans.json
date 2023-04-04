@@ -6,7 +6,7 @@
         "name":"be_national",
         "user":"ome2_user",
         "pwd":"ome2_user",
-        "schema": "trans"
+        "schema": "tn"
     },
     "source_srid": "4326",
     "target_db":{
