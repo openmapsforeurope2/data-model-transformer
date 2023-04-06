@@ -7,20 +7,28 @@
 
     # Bac ou liaison maritime | Bretelle | Chemin | Escalier | Rond-point | Route à 1 chaussée |
     # Route à 2 chaussées | Route empierrée | Sentier | Type autoroutier
+
     nature = context['data']['nature']
+
+    if nature.startswith("Route") and nature.find("2 chauss") != -1: # nature == "Route à 2 chaussées":
+        return "dual_carriage_way"
 
     if nature == "Type autoroutier":
         return "motorway"
-    if nature == "Bretelle":
-        return "slip_road"
-    if nature == "Route à 2 chaussées":
-        return "dual_carriage_way"
-    if nature == "Route à 1 chaussée":
-        return "single_carriage_way"
-    if nature in ["Chemin","Sentier","Escalier"]:
-        return "walkway"
-    
-    return "single_carriage_way"
-    
 
-    # différence 'tractor' ?
+    if nature == "Rond-point":
+        return "roundabout"
+
+    if nature == "Bretelle":
+        return "slip_road"  
+ 
+    if nature.startswith("Route") and (nature.find("1 chauss") != -1 or nature.find("empierr") != -1): # nature in ["Route à 1 chaussée, "Route empierrée"]
+        return "single_carriage_way"
+
+    if nature in ["Sentier","Escalier"]:
+        return "walkway"
+
+    if nature == "Chemin":
+        return "tractor"
+    
+    return ""

@@ -24,7 +24,7 @@
             "source_tables":{
                 "troncon_de_route": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND ST_intersects(geometrie,ST_GeomFromText('POLYGON((727735.9992572087 7029622.543797126,727544.2403708269 7068519.050552713,762523.9776143468 7068801.007743988,762959.2602054827 7029906.463932242,727735.9992572087 7029622.543797126))'))",
+                    "where": "NOT gcms_detruit AND nature != 'Bac ou liaison maritime' AND ST_intersects(geometrie,ST_GeomFromText('POLYGON((727735.9992572087 7029622.543797126,727544.2403708269 7068519.050552713,762523.9776143468 7068801.007743988,762959.2602054827 7029906.463932242,727735.9992572087 7029622.543797126))'))",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "form_of_way": { "function": "fr_form_of_way" },
@@ -32,17 +32,22 @@
                         "number_of_lanes": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] != 'Sans objet' else '0'" },
                         "vertical_position": { "function": "fr_vertical_position" },
                         "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
-                        "geographical_name": { "eval": "'default_geographical_name'" },
-                        "road_surface_category": { "eval": "'paved' if data['nature'] == 'Route empierrée' else 'unpaved'" },
+                        "geographical_name": { "function": "fr_geographical_name" },
+                        "road_surface_category": { "function": "fr_road_surface_category" },
                         "traffic_flow_direction": { "function": "fr_traffic_flow_direction" },
                         "access_restriction": { "function": "fr_access_restriction" },
-                        "condition_of_facility": { "function": "fr_condition_of_facility" }
+                        "condition_of_facility": { "function": "fr_condition_of_facility" },
+                        "valid_from": "date_d_apparition",
+                        "w_national_identifier": "cleabs",
+                        "national_road_code": "cpx_numero",
+                        "european_route_number":"cpx_numero_route_europeenne"    
                     },
                     "geomapping":{
                         "geom": "geometrie"
                     },
                     "fetched_fields":[
                         "nature",
+                        "importance",
                         "sens_de_circulation",
                         "position_par_rapport_au_sol",
                         "nature_de_la_restriction",
@@ -50,7 +55,13 @@
                         "periode_de_fermeture",
                         "etat_de_l_objet",
                         "gcms_territoire",
-                        "nombre_de_voies"
+                        "nombre_de_voies",
+                        "nom_1_gauche",
+                        "nom_1_droite",
+                        "date_d_apparition",
+                        "cleabs",
+                        "cpx_numero",
+                        "cpx_numero_route_europeenne"
                     ]
                 }
             }

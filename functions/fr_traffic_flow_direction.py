@@ -14,4 +14,4 @@
     if direction == "Sens inverse":
         return "opposite_direction"
 
-    return "both_directions"
+    return ""

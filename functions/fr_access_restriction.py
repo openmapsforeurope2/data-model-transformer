@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # def function_name(context):
     # Les valeurs possibles pour access_restriction sont:
     # 'forbidden_legally', 'physically_impossible', 'private', 'public_access', 'seasonal', 'toll'
@@ -6,7 +7,7 @@
     access = context['data']['acces_vehicule_leger']
 
     # Json
-    periode = context['data']['periode_de_fermeture']
+    period = context['data']['periode_de_fermeture']
 
     if access == "Physiquement impossible":
         return "physically_impossible"
@@ -18,7 +19,7 @@
         return "private"
 
     # priorité par rapport aux autres infos ?
-    if periode is not None:
+    if period is not None:
         return "seasonal"
 
     return "public_access"

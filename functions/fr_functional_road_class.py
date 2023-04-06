@@ -5,12 +5,17 @@
 
     # Bac ou liaison maritime | Bretelle | Chemin | Escalier | Rond-point | Route à 1 chaussée |
     # Route à 2 chaussées | Route empierrée | Sentier | Type autoroutier
-    nature = context['data']['nature']
+    importance = context['data']['importance']
 
-    if nature == "Type autoroutier":
+    if importance == "1":
         return "main_road"
-    
-    if nature in ["Route à 2 chaussées","Route à 1 chaussée"]:
+    if importance == "2":
         return "first_class"
+    if importance == "3":
+        return "second_class"
+    if importance == "4":
+        return "third_class"
+    if importance == "5":
+        return "fourth_class"
 
-    return "second_class"
+    return ""
