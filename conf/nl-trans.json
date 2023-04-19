@@ -15,15 +15,16 @@
         "name":"ome2_v0",
         "user":"postgres",
         "pwd":"postgres",
-        "schema": "tn"
+        "schema": "ome2_tn"
     },
+    "target_country_field": "country",
     "target_tables": {
         "road_link":{
             "mock": false,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
-                    "where": "",
+                    "where": "ST_intersects(geom,ST_SetSRID(ST_GeomFromText('POLYGON((113631 358089,113631 404856,183782 404856,113631 404856,113631 358089))'),28992))",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "nl_form_of_way" },

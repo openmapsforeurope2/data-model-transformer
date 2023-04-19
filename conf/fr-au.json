@@ -12,22 +12,49 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_v0",
-        "user":"postgres",
-        "pwd":"postgres",
+        "name":"ome2_hvlsp_v1",
+        "user":"ome2_user",
+        "pwd":"ome2_user",
         "schema": "au"
     },
+    "target_country_field": "country",
     "target_tables": {
-        "administrative_unit":{
+        "administrative_unit_area":{
             "mock": false,
             "source_tables":{
                 "commune": {
                     "mock": false,
-                    "where": "NOT gcms_detruit",
+                    "where": "NOT gcms_detruit AND code_insee NOT IN [75056, 13055, 69123]",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_insee",
-                        "national_level": { "eval": "'5th_order'" }
+                        "national_level": { "eval": "'5th_order'" },
+                        "national_level_code": { "function": "fr_shn_code" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force2D(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gcms_territoire"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_1":{
+            "mock": false,
+            "source_tables":{
+                "commune": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND code_insee NOT IN [75056, 13055, 69123]",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },
+                        "national_code": "code_insee",
+                        "national_level": { "eval": "'5th_order'" },
+                        "national_level_code": { "function": "fr_shn_code" }
                     },
                     "geomapping":{
                         "geom": {
@@ -42,5 +69,6 @@
                 }
             }
         }
+       
     }
 }

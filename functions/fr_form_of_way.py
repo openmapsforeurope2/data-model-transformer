@@ -22,7 +22,7 @@
     if nature == "Bretelle":
         return "slip_road"  
  
-    if nature.startswith("Route") and (nature.find("1 chauss") != -1 or nature.find("empierr") != -1): # nature in ["Route à 1 chaussée, "Route empierrée"]
+    if nature.startswith("Route") and (nature.find("1 chauss") != -1 or nature.find("empierr") != -1): # nature in ["Route à 1 chaussée", "Route empierrée"]
         return "single_carriage_way"
 
     if nature in ["Sentier","Escalier"]:
