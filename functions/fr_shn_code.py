@@ -4,15 +4,15 @@
 
     code_arrondissement = context['data']['code_insee_de_l_arrondissement']
     if code_arrondissement == "":
-        code_arrondissement = 0
+        code_arrondissement = "0"
 
     code_departement = context['data']['code_insee_du_departement']
     if code_departement == "":
-        code_departement = 0
+        code_departement = "0"
 
     code_region = context['data']['code_insee_de_la_region']  
     if code_region == "":
-        code_region = 0
+        code_region = "0"
 
     gcms_territoire = context['data']['gcms_territoire']  
 
