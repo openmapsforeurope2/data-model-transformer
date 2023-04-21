@@ -32,7 +32,7 @@
                         "number_of_lanes": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] != 'Sans objet' else '0'" },
                         "vertical_position": { "function": "fr_vertical_position" },
                         "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
-                        "geographical_name": { "function": "fr_geographical_name" },
+                        "geographical_name": { "function": "fr_road_link_name" },
                         "road_surface_category": { "function": "fr_road_surface_category" },
                         "traffic_flow_direction": { "function": "fr_traffic_flow_direction" },
                         "access_restriction": { "function": "fr_access_restriction" },
