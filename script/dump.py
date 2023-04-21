@@ -65,8 +65,6 @@ def getInsertStatement(data, tableConf, line, file, functions ):
                     raise
             else:
                 value = data[field]
-            
-            print (value)
 
             if value is None:
                 value = 'NULL'
@@ -136,7 +134,7 @@ def toJsonArray( ls ) :
         else:
             l = convertEncodedCharacters(json.dumps(l))
             newList.append(l)
-            
+
     if len(newList) == 0 : 
         return None
 

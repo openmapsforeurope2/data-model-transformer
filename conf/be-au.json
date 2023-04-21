@@ -17,8 +17,9 @@
         "pwd":"ome2_user",
         "schema": "au"
     },
+    "target_country_field": "country",
     "target_tables": {
-        "administrative_unit":{
+        "administrative_unit_area":{
             "mock": false,
             "source_tables":{
                 "municipality": {
@@ -27,12 +28,16 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "national_code": "niscode",
-                        "national_level": { "eval": "'5th_order'" }
+                        "national_level": { "eval": "'5th_order'" },
+                        "name": { "function": "be_au_name"}
                     },
                     "geomapping":{
                         "geom": "geom"
                     },
                     "fetched_fields":[
+                        "nameger",
+                        "namefre",
+                        "namedut"
                     ]
                 }
             }
