@@ -24,12 +24,14 @@
             "source_tables":{
                 "commune": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND code_insee NOT IN ('75056', '13055', '69123')",
+                    "where": "NOT gcms_detruit AND code_insee NOT IN ('75056', '13055', '69123') LIMIT 10",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_insee",
                         "national_level": { "eval": "'5th_order'" },
+                        "name": { "function": "fr_name"},
                         "shn_code": { "function": "fr_shn_code" }
+
                     },
                     "geomapping":{
                         "geom": "geometrie_ge"
@@ -39,13 +41,14 @@
                         "code_insee",
                         "code_insee_de_l_arrondissement",
                         "code_insee_du_departement",
-                        "code_insee_de_la_region"
+                        "code_insee_de_la_region",
+                        "nom_officiel"
                     ]
                 }
             }
         },
         "administrative_unit_5":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "commune": {
                     "mock": false,

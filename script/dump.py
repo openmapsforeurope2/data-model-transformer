@@ -66,10 +66,16 @@ def getInsertStatement(data, tableConf, line, file, functions ):
             else:
                 value = data[field]
             
+            print (value)
+
             if value is None:
                 value = 'NULL'
             elif isinstance(value, list) :
-                value = toSqlArray(value)
+                    # Cas des champs jsonb
+                    if isinstance(value[0], dict):
+                        value = toJsonArray(value)
+                    else:
+                        value = toSqlArray(value)
             elif isinstance(value, (int, float)):
                 value = str(value)
             else:
@@ -120,6 +126,24 @@ def toSqlArray( ls, separator = ",") :
     if newList is None :
         newList = ""
     newList = "{" + newList + "}"
+    return newList
+
+def toJsonArray( ls ) :
+    newList = []
+    for l in ls:
+        if l is None or not l :
+            continue
+        else:
+            l = json.dumps(l)
+            print(l)
+            newList.append(l)
+    if len(newList) == 0 : return None
+    print(newList)
+    newList = str(newList)
+    newList = newList.replace("\'{", "{")
+    newList = newList.replace("}\'", "}")
+    newList = "\'" + newList + "\'"
+    print(newList)
     return newList
         
 
