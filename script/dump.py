@@ -134,18 +134,47 @@ def toJsonArray( ls ) :
         if l is None or not l :
             continue
         else:
-            l = json.dumps(l)
-            print(l)
+            l = convertEncodedCharacters(json.dumps(l))
             newList.append(l)
-    if len(newList) == 0 : return None
-    print(newList)
+            
+    if len(newList) == 0 : 
+        return None
+
     newList = str(newList)
     newList = newList.replace("\'{", "{")
     newList = newList.replace("}\'", "}")
+    newList = newList.replace("\\'", "\'\'")
     newList = "\'" + newList + "\'"
-    print(newList)
+
     return newList
-        
+
+
+def convertEncodedCharacters(substring):
+    # Equivalences entre les caractères spéciaux de l'API et les chaines Python
+    charConversion = {
+        "\\u00e0": 'à',
+        "\\u00e2": 'â',
+        "\\u00e4": 'ä',
+        "\\u00e7": 'ç',
+        "\\u00e8": 'è',
+        "\\u00e9": 'é',
+        "\\u00ea": 'ê',
+        "\\u00eb": 'ë',
+        "\\u00ee": 'î',
+        "\\u00ef": 'ï',
+        "\\u00f4": 'ô',
+        "\\u00f6": 'ö',
+        "\\u00f9": 'ù',
+        "\\u00fb": 'û',
+        "\\u00fc": 'ü',
+    }
+
+    newString = substring
+    for c, v in charConversion.items():
+        newString = newString.replace(c, v)
+    return newString
+
+
 
 if __name__ == "__main__":
     comment = '''
