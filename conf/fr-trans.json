@@ -24,7 +24,7 @@
             "source_tables":{
                 "troncon_de_route": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND nature != 'Bac ou liaison maritime' AND ST_intersects(geometrie,ST_GeomFromText('POLYGON((727735.9992572087 7029622.543797126,727544.2403708269 7068519.050552713,762523.9776143468 7068801.007743988,762959.2602054827 7029906.463932242,727735.9992572087 7029622.543797126))'))",
+                    "where": "NOT gcms_detruit AND nature != 'Bac ou liaison maritime'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "form_of_way": { "function": "fr_form_of_way" },
