@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_v0",
+        "name":"ome2_hvlsp_v1",
         "user":"postgres",
         "pwd":"postgres",
         "schema": "tn"
@@ -24,18 +24,24 @@
             "source_tables":{
                 "troncon_de_route": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND nature != 'Bac ou liaison maritime' AND ST_intersects(geometrie,ST_GeomFromText('POLYGON((727735.9992572087 7029622.543797126,727544.2403708269 7068519.050552713,762523.9776143468 7068801.007743988,762959.2602054827 7029906.463932242,727735.9992572087 7029622.543797126))'))",
+                    "where": "NOT gcms_detruit AND nature != 'Bac ou liaison maritime'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "form_of_way": { "function": "fr_form_of_way" },
                         "functional_road_class": { "function": "fr_functional_road_class" },
                         "number_of_lanes": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] != 'Sans objet' else '0'" },
                         "vertical_position": { "function": "fr_vertical_position" },
+                        "vertical_level": { "eval": "data['position_par_rapport_au_sol'] if data['position_par_rapport_au_sol'] != 'Gué ou radier' else '0'" },
                         "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
                         "geographical_name": { "function": "fr_road_link_name" },
                         "road_surface_category": { "function": "fr_road_surface_category" },
                         "traffic_flow_direction": { "function": "fr_traffic_flow_direction" },
                         "access_restriction": { "function": "fr_access_restriction" },
+                        "maximum_height": "restriction_de_hauteur",
+                        "maximum_length": "restriction_de_longueur",
+                        "maximum_width": "restriction_de_largeur",
+                        "maximum_total_weight": "restriction_de_poids_total",
+                        "maximum_single_axle_weight": "restriction_de_poids_par_essieu",
                         "condition_of_facility": { "function": "fr_condition_of_facility" },
                         "valid_from": "date_d_apparition",
                         "w_national_identifier": "cleabs",
