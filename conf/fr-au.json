@@ -24,17 +24,22 @@
             "source_tables":{
                 "commune": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND code_insee NOT IN ('75056', '13055', '69123')",
+                    "where": "gcms_territoire != 'H_T' AND NOT gcms_detruit AND code_insee NOT IN ('75056', '13055', '69123')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_insee",
                         "national_level": { "eval": "'5th_order'" },
                         "name": { "function": "fr_au_name"},
-                        "shn_code": { "function": "fr_shn_code" }
+                        "shn_code": { "function": "fr_shn_code" },
+                        "w_national_identifier": "cleabs"
 
                     },
                     "geomapping":{
-                        "geom": "geometrie_ge"
+                        "geom": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force2D(${})"
+                            }
+                        }
                     },
                     "fetched_fields":[
                         "gcms_territoire",

@@ -1,0 +1,80 @@
+{
+    "country_code": "fr",
+    "source_db":{
+        "host":"patafix3.ign.fr",
+        "port":"5432",
+        "name":"bduni_france",
+        "user":"invite",
+        "pwd":"28de#",
+        "schema": "public"
+    },
+    "source_srid": "3035",
+    "target_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"fr_national",
+        "user":"ome2_user",
+        "pwd":"ome2_user",
+        "schema": "au"
+    },
+    "target_country_field": "",
+    "target_tables": {
+        "arrondissement_municipal":{
+            "mock": false,
+            "source_tables":{
+                "arrondissement_municipal": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "cleabs": "cleabs",
+                        "code_insee": "code_insee",
+                        "code_insee_de_la_commune_de_rattach": "code_insee_de_la_commune_de_rattach",
+                        "nom_officiel": "nom_officiel",
+                        "date_d_apparition": "date_d_apparition",
+                        "lien_vers_chef_lieu": "lien_vers_chef_lieu",
+                        "liens_vers_autorite_administrative": "liens_vers_autorite_administrative",
+                        "gcms_territoire": "gcms_territoire"
+                    },
+                    "geomapping":{
+                        "geometrie_ge": "geometrie_ge"
+                    },
+                    "fetched_fields":[
+                    ]
+                }               
+            }
+        },
+        "commune":{
+            "mock": false,
+            "source_tables":{
+                "commune": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "cleabs": "cleabs",
+                        "code_insee": "code_insee",
+                        "code_insee_de_l_arrondissement": "code_insee_de_l_arrondissement",
+                        "code_insee_du_departement": "code_insee_du_departement",
+                        "code_insee_de_la_region": "code_insee_de_la_region",
+                        "nom_officiel": "nom_officiel",                        
+                        "gcms_territoire": "gcms_territoire"
+                    },
+                    "geomapping":{
+                        "geometrie_ge": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force2D(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gcms_territoire",
+                        "code_insee",
+                        "code_insee_de_l_arrondissement",
+                        "code_insee_du_departement",
+                        "code_insee_de_la_region"
+                    ]
+                }
+            }
+        }
+       
+    }
+}
