@@ -5,8 +5,11 @@
     # Route revêtue en dur / Route empierrée / Pas applicable
     surftype = context['data']['surftype']
 
-    if surftype == "Route empierrée":
+    if surftype == 1:
         return "paved"
-        
-    return "unpaved"
+
+    if surftype == 2: 
+        return "unpaved"
+
+    return ""
     
