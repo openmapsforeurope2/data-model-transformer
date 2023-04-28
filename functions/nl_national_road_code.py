@@ -4,15 +4,14 @@
 
     # Planned (In ontwerp), Under construction (In uitvoering), In use (In gebruik),
     # Out of use(Niet meer in gebruik), Unknown (Onbekend)
-    status = context['data']['status']
+    awegnummer = context['data']['awegnummer']
+    nwegnummer = context['data']['nwegnummer']
 
-    if status == "in uitvoering":
-        return "under_construction"
 
-    if status == "in gebruik":
-        return "functional"
+    if awegnummer != "":
+        return awegnummer
 
-    if status == "buiten gebruik":
-        return "disused"
+    if nwegnummer != "":
+        return nwegnummer
 
     return ""

@@ -8,16 +8,19 @@
     # Street (Straat), Runway (Start/landingsbaan), PlatformOther road (Overige weg), Unknown (Onbekend)
     typeweg = context['data']['typeweg']
 
-    if typeweg in ["Autosnelweg", "Hoofdweg"]:
+    if typeweg == "autosnelweg":
         return "main_road"
     
-    if typeweg == "Regionale weg":
+    if typeweg == "hoofdweg":
         return "first_class"
 
-    if typeweg == "Lokale weg":
+    if typeweg == "regionale weg":
         return "second_class"
 
-    if typeweg == "Straat":
+    if typeweg == "lokale weg":
         return "third_class"
 
-    return "fourth_class"
+    if typeweg == "Straat":
+        return "fourth_class"
+
+    return ""

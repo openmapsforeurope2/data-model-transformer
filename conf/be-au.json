@@ -20,7 +20,7 @@
     "target_country_field": "country",
     "target_tables": {
         "administrative_unit_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "municipality": {
                     "mock": false,
@@ -33,6 +33,30 @@
                     },
                     "geomapping":{
                         "geom": "geom"
+                    },
+                    "fetched_fields":[
+                        "nameger",
+                        "namefre",
+                        "namedut"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_1":{
+            "mock": false,
+            "source_tables":{
+                "belgianterritory": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": "niscode",
+                        "name": { "function": "be_au_name"}                        
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": "geom"
+                        }
                     },
                     "fetched_fields":[
                         "nameger",

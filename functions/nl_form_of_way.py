@@ -9,25 +9,39 @@
     # Highway (Autosnelweg), Main road (Hoofdweg), Regional road (Regionale weg), Local road (Lokale weg), 
     # Street (Straat), Runway (Start/landingsbaan), PlatformOther road (Overige weg), Unknown (Onbekend)
     typeweg = context['data']['typeweg']
+    if typeweg == "Autosnelweg":
+        return "motorway"
+
 
     # Main traffic use:
     # Fast traffic  (Snelverkeer), Mixed traffic (Gemengd verkeer), Bus traffic (Busverkeer), 
     # Air traffic (vliegverkeer), Bikes/Mopeds (Fietsers/bromfietsers), Pedestrian (Voetgangers), 
     # Rider (Ruiter), Parking (parkeren), Parking: P+R (Parkeren P+R), Parking: Carpool (Carpoolplaats),
     # Other (Overig), Unkown (Onbekend)
-    Hoofdverkeersgebruik = context['data']['hoofdverkeersgebruik']
+    hoofdverkeersgebruik = context['data']['hoofdverkeersgebruik']
+
+    if hoofdverkeersgebruik == "fietsers, bromfietsers":
+        return "bicycle_road"
+    if hoofdverkeersgebruik == "voetgangers":
+        return "walkway" 
+
+
+    # Roundabouts and slip roads
+    fysiekvoorkomen = context['data']['fysiekvoorkomen']
+
+    if fysiekvoorkomen == "op rotonde":
+        return "roundabout"
+    if fysiekvoorkomen == "op oprit / afrit":
+        return "slip_road"
+
 
     # Separate lancourt
     # Yes, No
     gescheidenrijbaan = context['data']['gescheidenrijbaan']
-
-    if typeweg == "Autosnelweg":
-        return "motorway"
-    if gescheidenrijbaan == "Yes":
+    if gescheidenrijbaan == "ja":
         return "dual_carriage_way"
-    if gescheidenrijbaan == "No":
+    if gescheidenrijbaan == "nee":
         return "single_carriage_way"
-    if Hoofdverkeersgebruik == "Voetgangers":
-        return "walkway" 
+
     
-    return "single_carriage_way"
+    return ""
