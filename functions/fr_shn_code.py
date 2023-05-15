@@ -1,5 +1,7 @@
 # def function_name(context):
 
+    gcms_territoire = context['data']['gcms_territoire']      
+
     code_insee = context['data']['code_insee']
     if code_insee == "" or code_insee == None :
         code_insee = "0"
@@ -23,7 +25,6 @@
     if code_region == "" or code_region == None:
         code_region = "00"
 
-    gcms_territoire = context['data']['gcms_territoire']  
 
     shn_code = ""
     code_commune = "00"
