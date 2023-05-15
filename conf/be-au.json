@@ -4,15 +4,15 @@
         "host":"10.128.35.60",
         "port":"5432",
         "name":"be_national",
-        "user":"postgres",
-        "pwd":"postgres",
+        "user":"ome2_user",
+        "pwd":"ome2_user",
         "schema": "au"
     },
     "source_srid": "4326",
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_v1",
+        "name":"ome2_hvlsp_release",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "au"
