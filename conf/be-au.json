@@ -20,7 +20,7 @@
     "target_country_field": "country",
     "target_tables": {
         "administrative_unit_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "municipality": {
                     "mock": false,
