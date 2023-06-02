@@ -94,7 +94,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "niscode",
-                        "shn_code": { "eval": "'BE' + niscode[1:2] + '00000'" },
+                        "shn_code": { "eval": "'BE' + data['niscode'][1:2] + '00000'" },
                         "name": { "function": "be_au_name"},
                         "national_level_code": { "eval": "'4203' if data['niscode'] = '04000' else '4202'" },
                         "land_cover_type": { "eval": "'land_area'" },
@@ -122,7 +122,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "niscode",
-                        "shn_code": { "eval": "'BE' + niscode_region[1:2] + niscode[0:1] + '0000' if data['niscode'] != 'NA' else 'BE' + niscode_region[1:2] + '00000'" },
+                        "shn_code": { "eval": "'BE' + data['niscode_region'][1:2] + data['niscode'][0:1] + '0000' if data['niscode'] != 'NA' else 'BE' + data['niscode_region'][1:2] + '00000'" },
                         "name": { "function": "be_au_name"},
                         "national_level_code": { "eval": "4204" },
                         "land_cover_type": { "eval": "'land_area'" },
@@ -150,7 +150,35 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "niscode",
-                        "shn_code": { "eval": "'BE' + niscode_region[1:2] + niscode" },
+                        "shn_code": { "eval": "'BE' + data['niscode_region'][1:2] + data['niscode']" },
+                        "name": { "function": "be_au_name"},
+                        "national_level_code": { "eval": "4206" },
+                        "land_cover_type": { "eval": "'land_area'" },
+                        "w_national_identifier": "tgid"                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": "geom"
+                        }
+                    },
+                    "fetched_fields":[
+                        "nameger",
+                        "namefre",
+                        "namedut"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_5":{
+            "mock": false,
+            "source_tables":{
+                "municipality_ome2": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": "niscode",
+                        "shn_code": { "eval": "'BE' + data['niscode_region'][1:2] + data['niscode']" },
                         "name": { "function": "be_au_name"},
                         "national_level_code": { "eval": "4207" },
                         "land_cover_type": { "eval": "'land_area'" },
