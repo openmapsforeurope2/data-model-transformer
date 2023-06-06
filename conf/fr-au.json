@@ -55,7 +55,7 @@
             }
         },
         "administrative_unit_1":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "etat_ome2_multi": {
                     "mock": false,
@@ -108,7 +108,7 @@
             }
         },
         "administrative_unit_2":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "region": {
                     "mock": false,
@@ -188,7 +188,7 @@
             }
         },
         "administrative_unit_3":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "departement": {
                     "mock": false,
@@ -268,7 +268,7 @@
             }
         },
         "administrative_unit_4":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "arrondissement": {
                     "mock": false,
@@ -304,7 +304,7 @@
             "source_tables":{
                 "epci": {
                     "mock": false,
-                    "where": "gcms_territoire IN ('FXX', 'GLP', 'GUF', 'MTQ', 'MYT', 'REU') and nature IN ('Métropole', 'Communauté urbaine', 'Communauté d'agglomération', 'Communauté de communes')",
+                    "where": "gcms_territoire IN ('FXX', 'GLP', 'GUF', 'MTQ', 'MYT', 'REU') and nature IN ('Métropole', 'Communauté urbaine', 'Communauté d''agglomération', 'Communauté de communes')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_epci_ebm",
@@ -333,7 +333,7 @@
             }
         },
         "administrative_unit_6":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "commune": {
                     "mock": false,
