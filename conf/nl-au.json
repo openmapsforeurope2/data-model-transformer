@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_release",
+        "name":"ome2_hvlsp_v1",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "au"
@@ -20,7 +20,7 @@
     "target_country_field": "country",
     "target_tables": {
         "administrative_unit_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "nl_gemeente_all": {
                     "mock": false,
@@ -84,7 +84,11 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "nummer",
-                        "name": { "function": "nl_au_name"}                        
+                        "shn_code": { "eval": "'NL000000'" },
+                        "name": { "function": "nl_au_name"},
+                        "national_level_code": { "eval": "2101" },
+                        "land_cover_type": { "eval": "'land_area'" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }                       
                     },
                     "geomapping":{
                         "geom": {
@@ -94,7 +98,95 @@
                     "fetched_fields":[
                         "naamofficieel",
                         "naamnl",
-                        "naamfries"
+                        "naamfries",
+                        "namespace",
+                        "lokaalid"
+                    ]
+                },
+                "top10nl_registratief_gebied_vlak": {
+                    "mock": false,
+                    "where": "typeregistratiefgebied = 'territoriale zee'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "national_code": "nummer",          
+                        "shn_code": { "eval": "'NL000000'" },
+                        "name": { "function": "nl_au_name"},
+                        "national_level_code": { "eval": "2101" },
+                        "land_cover_type": "'coastal_water'",
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "naamofficieel",
+                        "naamnl",
+                        "naamfries",
+                        "namespace",
+                        "lokaalid"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_2":{
+            "mock": false,
+            "source_tables":{
+                "nl_provincie_all": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "national_code": "nummer",
+                        "shn_code": { "eval": "'NL' + data['nummer'] + '0000'" },
+                        "name": { "function": "nl_au_name"},
+                        "national_level_code": { "eval": "'2102'" },
+                        "land_cover_type": "'land_area'",
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                    },
+                    "geomapping":{
+                        "geom": "geom"
+                    },
+                    "fetched_fields":[
+                        "naamofficieel",
+                        "naamnl",
+                        "naamfries",
+                        "nummer",
+                        "namespace",
+                        "lokaalid"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_3":{
+            "mock": false,
+            "source_tables":{
+                "nl_gemeente_all": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "national_code": "nummer",
+                        "shn_code": { "eval": "'NL' + data['provincie_nummer'] + data['nummer']" },                       
+                        "name": { "function": "nl_au_name"},
+                        "national_level_code": { "eval": "'2103'" },
+                        "land_cover_type": "'land_area'",
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                    },
+                    "geomapping":{
+                        "geom": "geom"
+                    },
+                    "fetched_fields":[
+                        "naamofficieel",
+                        "naamnl",
+                        "naamfries",
+                        "provincie_nummer",
+                        "nummer",
+                        "namespace",
+                        "lokaalid"
                     ]
                 }
             }

@@ -18,33 +18,9 @@
         "schema": "au"
     },
     "target_country_field": "",
-    "target_tables": {
-        "arrondissement_municipal":{
-            "mock": true,
-            "source_tables":{
-                "arrondissement_municipal": {
-                    "mock": false,
-                    "where": "NOT gcms_detruit",
-                    "mapping": {
-                        "cleabs": "cleabs",
-                        "code_insee": "code_insee",
-                        "code_insee_de_la_commune_de_rattach": "code_insee_de_la_commune_de_rattach",
-                        "nom_officiel": "nom_officiel",
-                        "date_d_apparition": "date_d_apparition",
-                        "lien_vers_chef_lieu": "lien_vers_chef_lieu",
-                        "liens_vers_autorite_administrative": "liens_vers_autorite_administrative",
-                        "gcms_territoire": "gcms_territoire"
-                    },
-                    "geomapping":{
-                        "geometrie_ge": "geometrie_ge"
-                    },
-                    "fetched_fields":[
-                    ]
-                }               
-            }
-        },
+    "target_tables": {      
         "commune":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "commune": {
                     "mock": false,
@@ -70,7 +46,129 @@
                     ]
                 }
             }
-        }
-       
+        },
+        "etat":{
+            "mock": false,
+            "source_tables":{
+                "etat": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "cleabs": "cleabs",
+                        "code_insee": "code_insee",                       
+                        "nom_officiel": "nom_officiel"
+                    },
+                    "geomapping":{
+                        "geometrie_ge": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force2D(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                    ]
+                }
+            }
+        },    
+        "region":{
+            "mock": true,
+            "source_tables":{
+                "region": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "cleabs": "cleabs",
+                        "gcms_territoire": "gcms_territoire",
+                        "code_insee": "code_insee",                       
+                        "nom_officiel": "nom_officiel"
+                    },
+                    "geomapping":{
+                        "geometrie_ge": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force2D(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                    ]
+                }
+            }
+        },       
+        "departement":{
+            "mock": true,
+            "source_tables":{
+                "departement": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "cleabs": "cleabs",
+                        "gcms_territoire": "gcms_territoire",
+                        "code_insee": "code_insee",   
+                        "code_insee_de_la_region": "code_insee_de_la_region",             
+                        "nom_officiel": "nom_officiel"
+                    },
+                    "geomapping":{
+                        "geometrie_ge": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force2D(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                    ]
+                }
+            }
+        },     
+        "arrondissement":{
+            "mock": true,
+            "source_tables":{
+                "arrondissement": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "cleabs": "cleabs",
+                        "gcms_territoire": "gcms_territoire",
+                        "code_insee_de_l_arrondissement": "code_insee_de_l_arrondissement",   
+                        "code_insee_du_departement": "code_insee_du_departement",
+                        "code_insee_de_la_region": "code_insee_de_la_region",             
+                        "nom_officiel": "nom_officiel"
+                    },
+                    "geomapping":{
+                        "geometrie_ge": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force2D(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                    ]
+                }
+            }
+        },  
+        "epci":{
+            "mock": true,
+            "source_tables":{
+                "epci": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "cleabs": "cleabs",
+                        "gcms_territoire": "gcms_territoire",
+                        "code_siren": "code_siren",   
+                        "nature": "nature",            
+                        "nom_officiel": "nom_officiel"
+                    },
+                    "geomapping":{
+                        "geometrie_ge": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force2D(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                    ]
+                }
+            }
+        }                   
     }
 }

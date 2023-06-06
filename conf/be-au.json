@@ -79,7 +79,9 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geom": "geom"
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force2D(${}))"
+                            }
                         }
                     }
                 }
@@ -96,7 +98,7 @@
                         "national_code": "niscode",
                         "shn_code": { "eval": "'BE' + data['niscode'][1:2] + '00000'" },
                         "name": { "function": "be_au_name"},
-                        "national_level_code": { "eval": "'4203' if data['niscode'] = '04000' else '4202'" },
+                        "national_level_code": { "function": "be_national_level_code_region" },
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid"                 
                     },
@@ -108,7 +110,8 @@
                     "fetched_fields":[
                         "nameger",
                         "namefre",
-                        "namedut"
+                        "namedut",
+                        "niscode"
                     ]
                 }
             }
@@ -136,7 +139,9 @@
                     "fetched_fields":[
                         "nameger",
                         "namefre",
-                        "namedut"
+                        "namedut",
+                        "niscode",
+                        "niscode_region"
                     ]
                 }
             }
@@ -144,7 +149,7 @@
         "administrative_unit_4":{
             "mock": false,
             "source_tables":{
-                "municipality_ome2": {
+                "arrondissement_ome2": {
                     "mock": false,
                     "where": "",
                     "mapping": {
@@ -164,7 +169,9 @@
                     "fetched_fields":[
                         "nameger",
                         "namefre",
-                        "namedut"
+                        "namedut",
+                        "niscode",
+                        "niscode_region"
                     ]
                 }
             }
@@ -192,7 +199,9 @@
                     "fetched_fields":[
                         "nameger",
                         "namefre",
-                        "namedut"
+                        "namedut",
+                        "niscode",
+                        "niscode_region"
                     ]
                 }
             }
