@@ -1,5 +1,6 @@
 {
     "country_code": "fr",
+    "country_code_list": ["fr","gf","gu","gp","mq","re","yt","bl","mf","pm"],
     "source_db":{
         "host":"10.128.35.60",
         "port":"5432",
@@ -55,7 +56,7 @@
             }
         },
         "administrative_unit_1":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "etat_ome2_multi": {
                     "mock": false,
@@ -188,7 +189,7 @@
             }
         },
         "administrative_unit_3":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "departement": {
                     "mock": false,
@@ -268,7 +269,7 @@
             }
         },
         "administrative_unit_4":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "arrondissement": {
                     "mock": false,
@@ -300,7 +301,7 @@
             }
         },
         "administrative_unit_5":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "epci": {
                     "mock": false,
@@ -331,7 +332,7 @@
             }
         },
         "administrative_unit_6":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "commune": {
                     "mock": false,

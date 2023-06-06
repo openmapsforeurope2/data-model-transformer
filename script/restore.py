@@ -20,6 +20,24 @@ def run(
 
             if reset:
                 targetTableCompleteName = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
+                resetCommand = commandBase + ' -q -c "DELETE FROM '+targetTableCompleteName+' WHERE '
+                whereClause = ""
+
+                #Multiple country codes
+                if not 'country_code_list' in conf or conf['country_code_list'] is None:
+                    whereClause = conf['target_country_field']+'=\''+conf['country_code']+'\'"'
+
+                else:
+                    whereClause = conf['target_country_field'] + ' IN ('
+                    for code in conf['country_code_list']:
+                        whereClause += '\'' + code + '\','
+                    whereClause = whereClause[0:len(whereClause)-2] + ')'
+
+                resetCommand += whereClause
+                print("resetCommand = " + resetCommand)
+
+                sys.exit(0)
+
                 resetCommand = commandBase + ' -q -c "DELETE FROM '+targetTableCompleteName+' WHERE '+conf['target_country_field']+'=\''+conf['country_code']+'\'"'
                 print(resetCommand)
                 call( resetCommand, shell=True )

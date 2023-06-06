@@ -20,10 +20,10 @@
         shn_code = "GP{0}{1}000000".format(code_region, code_departement)
         
     elif gcms_territoire == 'GUF':
-        shn_code = "GF{0}{1}{0}{1}000000".format(code_region, code_departement)
+        shn_code = "GF{0}{1}000000".format(code_region, code_departement)
         
     elif gcms_territoire == 'MTQ':
-        shn_code = "MQ{0}{1}{0}{1}000000".format(code_region, code_departement)
+        shn_code = "MQ{0}{1}000000".format(code_region, code_departement)
         
     elif gcms_territoire == 'MYT':
         shn_code = "YT{0}{1}000000".format(code_region, code_departement)
