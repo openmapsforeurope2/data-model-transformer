@@ -324,6 +324,7 @@
                     "fetched_fields":[
                         "gcms_territoire",
                         "code_epci_ebm",
+                        "nature",
                         "nom_officiel"
                     ]
                 }
