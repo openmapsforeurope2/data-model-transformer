@@ -7,22 +7,6 @@
     code_epci = context['data']['code_epci_ebm']
     if code_epci == "" or code_epci == None:
         code_epci = "000"
-    
-    code_departement = context['data']['code_insee_du_departement']
-    if code_departement == "" or code_departement == None:
-        if gcms_territoire == "FXX":
-            code_departement = "00"
-        else:
-            code_departement = "000"
-
-    code_arrondissement = context['data']['code_insee_de_l_arrondissement']
-    if code_arrondissement == "" or code_arrondissement == None :
-        code_arrondissement = "0"
-
-    code_region = context['data']['code_insee_de_la_region']  
-    if code_region == "" or code_region == None:
-        code_region = "00"
-
 
     if gcms_territoire == 'GLP':
         shn_code = "GP000000{0}00".format(code_epci)
@@ -36,7 +20,7 @@
     elif gcms_territoire == 'MTQ':
         shn_code = "MQ000000{0}00".format(code_epci)
         
-    elif gcms_territoire == 'MYT': # Cas particulier : pas d'arrondissements
+    elif gcms_territoire == 'MYT':
         shn_code = "YT000000{0}00".format(code_epci)
 
     elif gcms_territoire == 'REU':
