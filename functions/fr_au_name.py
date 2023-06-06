@@ -4,6 +4,7 @@
     name_list = []
     
     if nom_officiel != "" :
+        nom_officiel = nom_officiel.replace('"', '\"')
         name_list.append({
             "spelling": nom_officiel,
             "language": "fre",
