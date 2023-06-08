@@ -56,9 +56,9 @@
             }
         },
         "administrative_unit_1":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
-                "etat_ome2_multi": {
+                "etat_ome2_multi_v3": {
                     "mock": false,
                     "where": "code_insee = 'XXXXX'",
                     "mapping": {
@@ -141,7 +141,7 @@
                     "where": "gcms_territoire = 'GLP' AND (nom_officiel = 'Saint-Barthélemy' OR nom_officiel = 'Saint-Martin') OR gcms_territoire = 'SPM'",
                     "mapping": {
                         "country": { "eval": "'pm' if data['gcms_territoire'] == 'SPM' else 'mf' if data['nom_officiel'] == 'Saint-Martin' else 'bl'" },
-                        "national_code": "code_insee",
+                        "national_code": { "eval": "data[code_insee][0:4] + '0'"},
                         "shn_code": { "eval": "'PM97500' if data['gcms_territoire'] == 'SPM' else 'MF97800' if data['nom_officiel'] == 'Saint-Martin' else 'BL97700'" },
                         "name": { "function": "fr_au_name"},
                         "national_level_code": { "eval": "'1010'"},
@@ -189,7 +189,7 @@
             }
         },
         "administrative_unit_3":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "departement": {
                     "mock": false,
@@ -269,7 +269,7 @@
             }
         },
         "administrative_unit_4":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "arrondissement": {
                     "mock": false,
@@ -301,7 +301,7 @@
             }
         },
         "administrative_unit_5":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "epci": {
                     "mock": false,
@@ -332,7 +332,7 @@
             }
         },
         "administrative_unit_6":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "commune": {
                     "mock": false,

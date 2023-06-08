@@ -31,14 +31,10 @@ def run(
                     whereClause = conf['target_country_field'] + ' IN ('
                     for code in conf['country_code_list']:
                         whereClause += '\'' + code + '\','
-                    whereClause = whereClause[0:len(whereClause)-2] + ')'
+                    whereClause = whereClause[0:len(whereClause)-1] + ')'
 
-                resetCommand += whereClause
-                print("resetCommand = " + resetCommand)
+                resetCommand += whereClause + '"'
 
-                sys.exit(0)
-
-                resetCommand = commandBase + ' -q -c "DELETE FROM '+targetTableCompleteName+' WHERE '+conf['target_country_field']+'=\''+conf['country_code']+'\'"'
                 print(resetCommand)
                 call( resetCommand, shell=True )
                 

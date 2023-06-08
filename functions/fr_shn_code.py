@@ -31,12 +31,12 @@
 
     if gcms_territoire == 'GLP':
         if len(code_insee) >= 2:
-            code_commune = code_insee[len(code_insee)-3:len(code_insee)-1]
+            code_commune = code_insee[len(code_insee)-2:len(code_insee)]
         shn_code = "GP{0}{1}{2}{3}{4}".format(code_region, code_departement, code_arrondissement, code_epci, code_commune)
         
     elif gcms_territoire == 'GUF':
         if len(code_insee) >= 2:
-            code_commune = code_insee[len(code_insee)-3:len(code_insee)-1]
+            code_commune = code_insee[len(code_insee)-2:len(code_insee)]
         shn_code = "GF{0}{1}{2}{3}{4}".format(code_region, code_departement, code_arrondissement, code_epci, code_commune)
         
     elif gcms_territoire == 'H_T':
@@ -44,17 +44,17 @@
         
     elif gcms_territoire == 'MTQ':
         if len(code_insee) >= 2:
-            code_commune = code_insee[len(code_insee)-3:len(code_insee)-1]
+            code_commune = code_insee[len(code_insee)-2:len(code_insee)]
         shn_code = "MQ{0}{1}{2}{3}{4}".format(code_region, code_departement, code_arrondissement, code_epci, code_commune)
         
     elif gcms_territoire == 'MYT': # Cas particulier : pas d'arrondissements
         if len(code_insee) >= 2:
-            code_commune = code_insee[len(code_insee)-3:len(code_insee)-1]
+            code_commune = code_insee[len(code_insee)-2:len(code_insee)]
         shn_code = "YT{0}{1}0{2}{3}".format(code_region, code_departement, code_epci, code_commune)
 
     elif gcms_territoire == 'REU':
         if len(code_insee) >= 2:
-            code_commune = code_insee[len(code_insee)-3:len(code_insee)-1]
+            code_commune = code_insee[len(code_insee)-2:len(code_insee)]
         shn_code = "RE{0}{1}{2}{3}{4}".format(code_region, code_departement, code_arrondissement, code_epci, code_commune)
 
     elif gcms_territoire == 'SPM':
@@ -62,7 +62,7 @@
 
     else: # Cas général métropole
         if len(code_insee) >= 3:
-            code_commune = code_insee[len(code_insee)-4:len(code_insee)-1]
+            code_commune = code_insee[len(code_insee)-3:len(code_insee)]
         else:
             code_commune = "000"
         shn_code = "FR{0}{1}{2}{3}{4}".format(code_region, code_departement, code_arrondissement, code_epci, code_commune)
