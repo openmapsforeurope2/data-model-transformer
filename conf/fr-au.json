@@ -141,7 +141,7 @@
                     "where": "gcms_territoire = 'GLP' AND (nom_officiel = 'Saint-Barthélemy' OR nom_officiel = 'Saint-Martin') OR gcms_territoire = 'SPM'",
                     "mapping": {
                         "country": { "eval": "'pm' if data['gcms_territoire'] == 'SPM' else 'mf' if data['nom_officiel'] == 'Saint-Martin' else 'bl'" },
-                        "national_code": { "eval": "data[code_insee][0:4] + '0'"},
+                        "national_code": { "eval": "data['code_insee'][0:4] + '0'"},
                         "shn_code": { "eval": "'PM97500' if data['gcms_territoire'] == 'SPM' else 'MF97800' if data['nom_officiel'] == 'Saint-Martin' else 'BL97700'" },
                         "name": { "function": "fr_au_name"},
                         "national_level_code": { "eval": "'1010'"},
