@@ -9,7 +9,7 @@
     # Highway (Autosnelweg), Main road (Hoofdweg), Regional road (Regionale weg), Local road (Lokale weg), 
     # Street (Straat), Runway (Start/landingsbaan), PlatformOther road (Overige weg), Unknown (Onbekend)
     typeweg = context['data']['typeweg']
-    if typeweg == "Autosnelweg":
+    if typeweg == "autosnelweg":
         return "motorway"
 
 
