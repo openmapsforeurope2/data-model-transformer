@@ -25,7 +25,7 @@ def run(
 
                 #Multiple country codes
                 if not 'country_code_list' in conf or conf['country_code_list'] is None:
-                    whereClause = conf['target_country_field']+'=\''+conf['country_code']+'\'"'
+                    whereClause = conf['target_country_field']+'=\''+conf['country_code']+'\''
 
                 else:
                     whereClause = conf['target_country_field'] + ' IN ('
