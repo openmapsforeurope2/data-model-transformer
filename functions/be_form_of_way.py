@@ -12,11 +12,11 @@
     # boolean
     sepcarrway = context['data']['sepcarrway']
 
-    if roadstatus == "Autoroute":
+    if roadstatus == 1:
         return "motorway"
-    if roadstatus == "Bretelle d’accès":
+    if roadstatus == 2:
         return "slip_road"
-    if sepcarrway:
+    if sepcarrway == 1:
         return "dual_carriage_way"
         
     return "single_carriage_way"
