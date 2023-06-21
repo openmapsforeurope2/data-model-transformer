@@ -15,7 +15,7 @@
         "port":"5432",
         "name":"ome2_hvlsp",
         "user":"ome2_hvlsp_user",
-        "pwd":"0m32_hv7sp_us3r",
+        "pwd":"",
         "schema": "public"
     },
     "target_srid": "4326",
