@@ -26,7 +26,7 @@
             "source_tables":{
                 "road_link": {
                     "mock": false,
-                    "where": "country = 'fr' LIMIT 20",
+                    "where": "",
                     "mapping": {
                         "country": "country",
                         "form_of_way": "form_of_way",
