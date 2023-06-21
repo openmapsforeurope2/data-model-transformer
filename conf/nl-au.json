@@ -17,6 +17,7 @@
         "pwd":"ome2_user",
         "schema": "au"
     },
+    "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
         "administrative_unit_area":{

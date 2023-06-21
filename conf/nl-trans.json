@@ -17,6 +17,7 @@
         "pwd":"ome2_user",
         "schema": "tn"
     },
+    "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
         "road_link":{

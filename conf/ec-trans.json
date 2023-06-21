@@ -1,15 +1,7 @@
 {
-    "country_code": "fr",
+    "country_code": "",
+    "country_code_list": ["fr","gf","gu","gp","mq","re","yt","bl","mf","pm","be","nl"],
     "source_db":{
-        "host":"patafix3.ign.fr",
-        "port":"5432",
-        "name":"bduni_france",
-        "user":"invite",
-        "pwd":"28de#",
-        "schema": "public"
-    },
-    "source_srid": "CASE gcms_territoire WHEN 'FXX' THEN 2154 WHEN 'GLP' THEN 4559 WHEN 'GUF' THEN 2972 WHEN 'H_T' THEN 4326 WHEN 'MTQ' THEN 4559 WHEN 'MYT' THEN 4471 WHEN 'REU' THEN 2975 WHEN 'SPM' THEN 4467 END",
-    "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
         "name":"ome2_hvlsp_release",
@@ -17,58 +9,50 @@
         "pwd":"postgres",
         "schema": "tn"
     },
-    "target_srid": "3035",
+    "source_srid": "3035",
+    "target_db":{
+        "host":"64.126.235.77",
+        "port":"5432",
+        "name":"ome2_hvlsp",
+        "user":"ome2_hvlsp_user",
+        "pwd":"0m32_hv7sp_us3r",
+        "schema": "public"
+    },
+    "target_srid": "4326",
     "target_country_field": "country",
     "target_tables": {
-        "road_link":{
+        "tn_road_link":{
             "mock": false,
             "source_tables":{
-                "troncon_de_route": {
+                "road_link": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND nature != 'Bac ou liaison maritime'",
+                    "where": "country = 'fr' LIMIT 20",
                     "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "form_of_way": { "function": "fr_form_of_way" },
-                        "functional_road_class": { "function": "fr_functional_road_class" },
-                        "number_of_lanes": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] != 'Sans objet' else '0'" },
-                        "vertical_position": { "function": "fr_vertical_position" },
-                        "vertical_level": { "eval": "data['position_par_rapport_au_sol'] if data['position_par_rapport_au_sol'] != 'Gué ou radier' else '0'" },
-                        "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
-                        "geographical_name": { "function": "fr_road_link_name" },
-                        "road_surface_category": { "function": "fr_road_surface_category" },
-                        "traffic_flow_direction": { "function": "fr_traffic_flow_direction" },
-                        "access_restriction": { "function": "fr_access_restriction" },
-                        "maximum_height": "restriction_de_hauteur",
-                        "maximum_length": "restriction_de_longueur",
-                        "maximum_width": "restriction_de_largeur",
-                        "maximum_total_weight": "restriction_de_poids_total",
-                        "maximum_single_axle_weight": "restriction_de_poids_par_essieu",
-                        "condition_of_facility": { "function": "fr_condition_of_facility" },
-                        "valid_from": "date_d_apparition",
-                        "w_national_identifier": "cleabs",
-                        "national_road_code": "cpx_numero",
-                        "european_route_number":"cpx_numero_route_europeenne"    
+                        "country": "country",
+                        "form_of_way": "form_of_way",
+                        "functional_road_class": "functional_road_class",
+                        "number_of_lanes": "number_of_lanes",
+                        "vertical_position": "vertical_position",
+                        "vertical_level": "vertical_level",
+                        "trans_european_transport_network": "trans_european_transport_network",
+                        "geographical_name": "geographical_name",
+                        "road_surface_category": "road_surface_category",
+                        "traffic_flow_direction": "traffic_flow_direction",
+                        "access_restriction": "access_restriction",
+                        "maximum_height": "maximum_height",
+                        "maximum_length": "maximum_length",
+                        "maximum_width": "maximum_width",
+                        "maximum_total_weight": "maximum_total_weight",
+                        "maximum_single_axle_weight": "maximum_single_axle_weight",
+                        "condition_of_facility": "condition_of_facility",
+                        "valid_from": "valid_from",
+                        "national_road_code": "national_road_code",
+                        "european_route_number":"european_route_number"    
                     },
                     "geomapping":{
-                        "geom": "geometrie"
+                        "geom": "geom"
                     },
                     "fetched_fields":[
-                        "nature",
-                        "importance",
-                        "sens_de_circulation",
-                        "position_par_rapport_au_sol",
-                        "nature_de_la_restriction",
-                        "acces_vehicule_leger",
-                        "periode_de_fermeture",
-                        "etat_de_l_objet",
-                        "gcms_territoire",
-                        "nombre_de_voies",
-                        "nom_1_gauche",
-                        "nom_1_droite",
-                        "date_d_apparition",
-                        "cleabs",
-                        "cpx_numero",
-                        "cpx_numero_route_europeenne"
                     ]
                 }
             }

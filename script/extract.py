@@ -34,7 +34,7 @@ def appendFieldToSelect(selectString, field):
     return selectString + ("," if selectString else "") + selectPart
 
 
-def appendGeometryFieldToSelect(selectString, geometryfield, sourceSRID):
+def appendGeometryFieldToSelect(selectString, geometryfield, sourceSRID, targetSRID):
     fieldName = ""
     transform = None
     if isinstance(geometryfield, dict) :
@@ -51,7 +51,7 @@ def appendGeometryFieldToSelect(selectString, geometryfield, sourceSRID):
         mappedField = geometryfield
 
     geometryField = mappedField
-    geometryField = transformGeometryToWGS84(sourceSRID, geometryField)
+    geometryField = transformGeometryToWGS84(sourceSRID, targetSRID, geometryField)
 
     if transform is not None:
         geometryField = transform.replace('${}', geometryField)
@@ -67,10 +67,10 @@ def appendGeometryFieldToSelect(selectString, geometryfield, sourceSRID):
 
 
 def transformGeometryToWGS84(
-    source_srid, geometry_field
+    source_srid, target_srid, geometry_field
 ):
-    if source_srid != "3035":
-        return "ST_Transform(ST_SetSRID("+geometry_field+", "+source_srid+"), 3035)"
+    if source_srid != target_srid:
+        return "ST_Transform(ST_SetSRID("+geometry_field+", "+source_srid+"), " + target_srid +")"
     return geometry_field
 
 
@@ -95,6 +95,7 @@ def run(
             if 'mock' in table_conf and table_conf['mock'] : continue
 
             table_conf['source_srid'] = conf['source_srid']
+            table_conf['target_srid'] = conf['target_srid']
 
             full_table_name = getTableName(table_name, conf, table_conf)
             select = ""
@@ -105,7 +106,7 @@ def run(
 
             if 'geomapping' in table_conf and table_conf['geomapping']:
                 for field, mappedField in table_conf['geomapping'].items():
-                    select = appendGeometryFieldToSelect( select, {field: mappedField}, table_conf["source_srid"] )
+                    select = appendGeometryFieldToSelect( select, {field: mappedField}, table_conf["source_srid"], table_conf['target_srid'] )
             
             if 'fetched_fields' in table_conf and table_conf['fetched_fields']:
                 for computational_field in table_conf['fetched_fields']:
