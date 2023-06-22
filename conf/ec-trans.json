@@ -4,7 +4,7 @@
     "source_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_release",
+        "name":"ome2_hvlsp_v1",
         "user":"postgres",
         "pwd":"postgres",
         "schema": "tn"
@@ -26,8 +26,9 @@
             "source_tables":{
                 "road_link": {
                     "mock": false,
-                    "where": "",
+                    "where": "ST_intersects(geom,ST_SetSRID(ST_GeomFromText('POLYGON((3709380 3025666,4049647 3025666,4049647 3188066,3709380 3188066,3709380 3025666))'), 3035))", 
                     "mapping": {
+                        "inspireid": "inspireid",
                         "country": "country",
                         "form_of_way": "form_of_way",
                         "functional_road_class": "functional_road_class",
