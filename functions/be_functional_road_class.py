@@ -7,13 +7,19 @@
     # / Route de liaison / Route locale / Route à restriction de circulation / Pas applicable
     roadstatus = context['data']['roadstatus']
 
-    if roadstatus == "Autoroute":
+    if roadstatus == 1:
         return "main_road"
     
-    if roadstatus == "Route principale":
+    if roadstatus == 3:
         return "first_class"
 
-    if roadstatus == "Route secondaire":
+    if roadstatus == 4:
         return "second_class"
+
+    if roadstatus == 5:
+        return "third_class"
+
+    if roadstatus == 6:
+        return "fourth_class"
     
-    return "third_class"
+    return ""
