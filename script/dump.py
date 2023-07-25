@@ -47,7 +47,7 @@ def getInsertStatement(data, tableConf, line, file, functions ):
         for field, mappedField in tableConf['mapping'].items():
             fields.append(field)
             value = None
-            
+
             if isinstance(mappedField, dict):
                 try:
                     if 'eval' in mappedField:
@@ -66,7 +66,7 @@ def getInsertStatement(data, tableConf, line, file, functions ):
             else:
                 value = data[field]
 
-            if value is None:
+            if value is None or (isinstance(value, list) and len(value) == 0):
                 value = 'NULL'
             elif isinstance(value, list) :
                     # Cas des champs jsonb

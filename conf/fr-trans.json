@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_test",
+        "name":"ome2_hvlsp_model_conversion_v1",
         "user":"postgres",
         "pwd":"postgres",
         "schema": "tn"
@@ -79,11 +79,11 @@
             }
         },
         "marker_post":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "point_de_repere":{
                     "mock": false,
-                    "where": "NOT gcms_detruit LIMIT 10",
+                    "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "link_to_national_road": { "eval": "data['lien_vers_route_nommee'] if data['lien_vers_route_nommee'] is not None else 'void'" },
@@ -93,7 +93,7 @@
                     "geomapping":{
                         "geom": {
                             "geometrie":{
-                                "transform": "ST_Force3D(${}, -1000)"
+                                "transform": "ST_Force3D(${})"
                             }
                         }
                     },
@@ -107,7 +107,7 @@
             }
         },
         "road_service_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -129,7 +129,7 @@
             }
         },
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_de_voie_ferree":{
                     "mock": false,
@@ -156,13 +156,14 @@
             }
         },
         "railway_station_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
-                    "where": "NOT gcms_detruit AND nature IN ('Arrêt voyageurs', 'Gare fret uniquement', 'Gare voyageurs et fret', 'Gare voyageurs uniquement', 'Station de métro', 'Station de tramway')  LIMIT 10",
+                    "where": "NOT gcms_detruit AND nature IN ('Arrêt voyageurs', 'Gare fret uniquement', 'Gare voyageurs et fret', 'Gare voyageurs uniquement', 'Station de métro', 'Station de tramway')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
+                        "geographical_name":  { "function": "fr_tn_name" },
                         "station_code": { "eval": "'void'" },
                         "railway_use": { "function": "fr_railway_use" }
                     },
@@ -177,7 +178,7 @@
             }
         },
         "aerodrome_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "aerodrome":{
                     "mock": false,
@@ -186,7 +187,7 @@
                         "country": { "function": "fr_country_code" },
                         "designator_iata": { "eval": "data['code_iata'] if data['code_iata'] is not None else 'void'" },
                         "location_indicator_icao": { "eval": "data['code_icao'] if data['code_icao'] is not None else 'void'" },
-                        "geographical_name":  { "function": "fr_au_name" },
+                        "geographical_name":  { "function": "fr_tn_name" },
                         "aerodrome_category": { "function": "fr_tn_aerodrome_category"},
                         "aerodrome_type": { "function": "fr_tn_aerodrome_type"},
                         "restriction": {"eval": "'reserved_for_military' if data['usage'] == 'Militaire' else 'void'"}
@@ -194,17 +195,18 @@
                     "geomapping":{
                         "geom": {
                             "geometrie": {
-                                "transform": "ST_Force3D(${},-1000)"
+                                "transform": "ST_Force3D(${})"
                             }
-                        },
-                        "geom_area": "geometrie"
+                        }
                     },
                     "fetched_fields":[
                         "nature",
                         "gcms_territoire",
                         "code_iata",
                         "code_icao",
-                        "usage"
+                        "usage",
+                        "toponyme",
+                        "categorie"
                     ]
                 }
             }
