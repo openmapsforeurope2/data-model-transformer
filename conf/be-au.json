@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_v1",
+        "name":"ome2_hvlsp_model_conversion_v1",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "au"
@@ -30,7 +30,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "national_code": "niscode",
                         "national_level": { "eval": "'5th_order'" },
-                        "name": { "function": "be_au_name"}
+                        "geographical_name": { "function": "be_au_name"}
                     },
                     "geomapping":{
                         "geom": "geom"
@@ -53,7 +53,7 @@
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "niscode",
                         "shn_code": { "eval": "'BE000000'" },
-                        "name": { "function": "be_au_name"},
+                        "geographical_name": { "function": "be_au_name"},
                         "national_level_code": { "eval": "4201" },
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid"                 
@@ -98,7 +98,7 @@
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "niscode",
                         "shn_code": { "eval": "'BE' + data['niscode'][1:2] + '00000'" },
-                        "name": { "function": "be_au_name"},
+                        "geographical_name": { "function": "be_au_name"},
                         "national_level_code": { "function": "be_au_national_level_code_region" },
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid"                 
@@ -127,7 +127,7 @@
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "niscode",
                         "shn_code": { "eval": "'BE' + data['niscode_region'][1:2] + data['niscode'][0:1] + '0000' if data['niscode'] != 'NA' else 'BE' + data['niscode_region'][1:2] + '00000'" },
-                        "name": { "function": "be_au_name"},
+                        "geographical_name": { "function": "be_au_name"},
                         "national_level_code": { "eval": "4204" },
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid"                 
@@ -157,7 +157,7 @@
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "niscode",
                         "shn_code": { "eval": "'BE' + data['niscode_region'][1:2] + data['niscode']" },
-                        "name": { "function": "be_au_name"},
+                        "geographical_name": { "function": "be_au_name"},
                         "national_level_code": { "eval": "4206" },
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid"                 
@@ -187,7 +187,7 @@
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "niscode",
                         "shn_code": { "eval": "'BE' + data['niscode_region'][1:2] + data['niscode']" },
-                        "name": { "function": "be_au_name"},
+                        "geographical_name": { "function": "be_au_name"},
                         "national_level_code": { "eval": "4207" },
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid"                 

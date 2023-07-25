@@ -13,7 +13,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_v1",
+        "name":"ome2_hvlsp_model_conversion_v1",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "au"
@@ -31,7 +31,7 @@
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_insee",
                         "national_level": { "eval": "'6th_order'" },
-                        "name": { "function": "fr_au_name"},
+                        "geographical_name": { "function": "fr_au_name"},
                         "shn_code": { "function": "fr_shn_code" },
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "cleabs"
@@ -66,7 +66,7 @@
                         "country": { "eval": "'fr'" },
                         "national_code": { "eval": "''" },
                         "shn_code": { "eval": "'FR00000000000'"},
-                        "name": { "function": "fr_au_name"},
+                        "geographical_name": { "function": "fr_au_name"},
                         "national_level_code": { "eval": "'1001'"},
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "cleabs"                        
@@ -90,7 +90,7 @@
                         "country": { "eval": "'fr'" },
                         "national_code": { "eval": "''" },
                         "shn_code": { "eval": "'FR00000000000'" },
-                        "name": { "eval": "'{\"spelling\": \"France\", \"language\": \"fre\", \"script\": \"latin\", \"name_status\": \"official\", \"nativeness\": \"endonym\"}'"},
+                        "geographical_name": { "eval": "'{\"spelling\": \"France\", \"language\": \"fre\", \"script\": \"latin\", \"name_status\": \"official\", \"nativeness\": \"endonym\"}'"},
                         "national_level_code": { "eval": "'1001'"},
                         "land_cover_type": { "eval": "'inland_water'" },
                         "w_national_identifier": "cleabs"                        
@@ -118,8 +118,8 @@
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_insee",
-                        "shn_code": { "function": "fr_shn_code_region"},
-                        "name": { "function": "fr_au_name"},
+                        "shn_code": { "function": "fr_au_shn_code_region"},
+                        "geographical_name": { "function": "fr_au_name"},
                         "national_level_code": { "eval": "'1002'"},
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "cleabs"                        
@@ -144,7 +144,7 @@
                         "country": { "eval": "'pm' if data['gcms_territoire'] == 'SPM' else 'mf' if data['nom_officiel'] == 'Saint-Martin' else 'bl'" },
                         "national_code": { "eval": "data['code_insee'][0:4] + '0'"},
                         "shn_code": { "eval": "'PM97500' if data['gcms_territoire'] == 'SPM' else 'MF97800' if data['nom_officiel'] == 'Saint-Martin' else 'BL97700'" },
-                        "name": { "function": "fr_au_name"},
+                        "geographical_name": { "function": "fr_au_name"},
                         "national_level_code": { "eval": "'1010'"},
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "cleabs"                        
@@ -169,7 +169,7 @@
                         "country": { "eval": "'fr'" },
                         "national_code": { "eval": "'84'" },
                         "shn_code": { "eval": "'FR84000000000'" },
-                        "name": { "eval": "'{\"spelling\": \"Auvergne-Rhône-Alpes\", \"language\": \"fre\", \"script\": \"latin\", \"name_status\": \"official\", \"nativeness\": \"endonym\"}'"},
+                        "geographical_name": { "eval": "'{\"spelling\": \"Auvergne-Rhône-Alpes\", \"language\": \"fre\", \"script\": \"latin\", \"name_status\": \"official\", \"nativeness\": \"endonym\"}'"},
                         "national_level_code": { "eval": "'1002'"},
                         "land_cover_type": { "eval": "'inland_water'" },
                         "w_national_identifier": "cleabs"                        
@@ -199,7 +199,7 @@
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_insee",
                         "shn_code": { "function": "fr_au_shn_code_departement"},
-                        "name": { "function": "fr_au_name"},
+                        "geographical_name": { "function": "fr_au_name"},
                         "national_level_code": { "eval": "'1003'"},
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "cleabs"                        
@@ -225,7 +225,7 @@
                         "country": { "eval": "'pm' if data['gcms_territoire'] == 'SPM' else 'mf' if data['nom_officiel'] == 'Saint-Martin' else 'bl'" },
                         "national_code": "code_insee",
                         "shn_code": { "eval": "'PM' + data['code_insee'] if data['gcms_territoire'] == 'SPM' else 'MF' + data['code_insee'] if data['nom_officiel'] == 'Saint-Martin' else 'BL'+ data['code_insee']" },
-                        "name": { "function": "fr_au_name"},
+                        "geographical_name": { "function": "fr_au_name"},
                         "national_level_code": { "eval": "'1023'"},
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "cleabs"                        
@@ -250,7 +250,7 @@
                         "country": { "eval": "'fr'" },
                         "national_code": { "eval": "'74000'" },
                         "shn_code": { "eval": "'FR84740000000'" },
-                        "name": { "eval": "'{\"spelling\": \"Haute-Savoie\", \"language\": \"fre\", \"script\": \"latin\", \"name_status\": \"official\", \"nativeness\": \"endonym\"}'"},
+                        "geographical_name": { "eval": "'{\"spelling\": \"Haute-Savoie\", \"language\": \"fre\", \"script\": \"latin\", \"name_status\": \"official\", \"nativeness\": \"endonym\"}'"},
                         "national_level_code": { "eval": "'1003'"},
                         "land_cover_type": { "eval": "'inland_water'" },
                         "w_national_identifier": "cleabs"                        
@@ -279,7 +279,7 @@
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_insee_de_l_arrondissement",
                         "shn_code": { "function": "fr_au_shn_code_arrondissement"},
-                        "name": { "function": "fr_au_name"},
+                        "geographical_name": { "function": "fr_au_name"},
                         "national_level_code": { "eval": "'1004'"},
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "cleabs"                        
@@ -311,7 +311,7 @@
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_epci_ebm",
                         "shn_code": { "function": "fr_au_shn_code_epci"},
-                        "name": { "function": "fr_au_name"},
+                        "geographical_name": { "function": "fr_au_name"},
                         "national_level_code": { "function": "fr_au_epci_national_level_code"},
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "cleabs"                        
@@ -342,7 +342,7 @@
                         "country": { "function": "fr_country_code" },
                         "national_code": "code_insee",
                         "shn_code": { "function": "fr_au_shn_code"},
-                        "name": { "function": "fr_au_name"},
+                        "geographical_name": { "function": "fr_au_name"},
                         "national_level_code": { "eval": "'1006'"},
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "cleabs"                        
@@ -371,7 +371,7 @@
                         "country": { "eval": "'fr'" },
                         "national_code": { "eval": "''" },
                         "shn_code": "shn",
-                        "name": { "function": "fr_au_name"},
+                        "geographical_name": { "function": "fr_au_name"},
                         "national_level_code": { "eval": "'1007'"},
                         "land_cover_type": { "eval": "'inland_water'" },
                         "w_national_identifier": "cleabs"                        

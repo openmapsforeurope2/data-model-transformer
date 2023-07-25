@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_v1",
+        "name":"ome2_hvlsp_model_conversion_v1",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "au"
@@ -30,7 +30,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "national_code": "nummer",
                         "national_level": { "eval": "'3rd_order'" },
-                        "name": { "function": "nl_au_name"},
+                        "geographical_name": { "function": "nl_au_name"},
                         "shn_code": { "eval": "'NL' + data['provincie_nummer'] + data['nummer']" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
                     },
@@ -53,7 +53,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "national_level": { "eval": "'1st_order'" },
-                        "name": { "function": "nl_au_name"},
+                        "geographical_name": { "function": "nl_au_name"},
                         "shn_code": { "eval": "'NL000000'" },
                         "land_cover_type": "'coastal_water'",
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
@@ -86,7 +86,7 @@
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "nummer",
                         "shn_code": { "eval": "'NL000000'" },
-                        "name": { "function": "nl_au_name"},
+                        "geographical_name": { "function": "nl_au_name"},
                         "national_level_code": { "eval": "2101" },
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }                       
@@ -111,7 +111,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "national_code": "nummer",          
                         "shn_code": { "eval": "'NL000000'" },
-                        "name": { "function": "nl_au_name"},
+                        "geographical_name": { "function": "nl_au_name"},
                         "national_level_code": { "eval": "2101" },
                         "land_cover_type": "'coastal_water'",
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
@@ -143,7 +143,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "national_code": "nummer",
                         "shn_code": { "eval": "'NL' + data['nummer'] + '0000'" },
-                        "name": { "function": "nl_au_name"},
+                        "geographical_name": { "function": "nl_au_name"},
                         "national_level_code": { "eval": "'2102'" },
                         "land_cover_type": "'land_area'",
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
@@ -172,7 +172,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "national_code": "nummer",
                         "shn_code": { "eval": "'NL' + data['provincie_nummer'] + data['nummer']" },                       
-                        "name": { "function": "nl_au_name"},
+                        "geographical_name": { "function": "nl_au_name"},
                         "national_level_code": { "eval": "'2103'" },
                         "land_cover_type": "'land_area'",
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
