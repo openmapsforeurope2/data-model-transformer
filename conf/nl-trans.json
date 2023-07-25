@@ -28,17 +28,17 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "form_of_way": { "function": "nl_form_of_way" },
-                        "functional_road_class": { "function": "nl_functional_road_class" },
+                        "form_of_way": { "function": "nl_tn_roadlink_form_of_way" },
+                        "functional_road_class": { "function": "nl_tn_roadlink_functional_road_class" },
                         "number_of_lanes": "aantalrijstroken",
                         "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface'" },
                         "vertical_level": { "eval": "str(data['hoogteniveau'])" },
                         "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
                         "geographical_name": "naam",
                         "road_surface_category": { "eval": "'unpaved' if data['verhardingstype'] == 'onverhard' else 'paved'" },           
-                        "condition_of_facility": { "function": "nl_condition_of_facility" },
+                        "condition_of_facility": { "function": "nl_tn_roadlink_condition_of_facility" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
-                        "national_road_code": { "function": "nl_national_road_code" },
+                        "national_road_code": { "function": "nl_tn_roadlink_national_road_code" },
                         "european_route_number":"ewegnummer"   
                     },
                     "geomapping":{

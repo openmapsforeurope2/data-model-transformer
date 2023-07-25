@@ -99,7 +99,7 @@
                         "national_code": "niscode",
                         "shn_code": { "eval": "'BE' + data['niscode'][1:2] + '00000'" },
                         "name": { "function": "be_au_name"},
-                        "national_level_code": { "function": "be_national_level_code_region" },
+                        "national_level_code": { "function": "be_au_national_level_code_region" },
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid"                 
                     },
