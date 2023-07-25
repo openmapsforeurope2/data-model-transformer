@@ -31,4 +31,4 @@
     if nature == "Chemin":
         return "tractor"
     
-    return ""
+    return "void"

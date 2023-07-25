@@ -13,4 +13,4 @@
     if nature in ["Route empierrée", "Chemin"]:
         return "unpaved"
 
-    return ""
+    return "void"

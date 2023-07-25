@@ -18,4 +18,4 @@
     if importance == "5":
         return "fourth_class"
 
-    return ""
+    return "void"

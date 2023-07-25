@@ -18,4 +18,4 @@
     if nature == "Tramway":
         return "tramway"
 
-    return "train"
+    return "void"

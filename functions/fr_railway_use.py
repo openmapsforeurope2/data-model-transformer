@@ -17,4 +17,4 @@
     # if nature == "Gare routière":
     #     return "car_shuttle"
 
-    return ""
+    return "void"

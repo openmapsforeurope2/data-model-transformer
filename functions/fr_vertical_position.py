@@ -11,4 +11,7 @@
     if position in ["1","2","3","4"]:
         return "suspended_or_elevated"
 
-    return "on_ground_surface"
+    if position == "0" or position == "Gué ou radier":
+        return "on_ground_surface"
+
+    return "void"

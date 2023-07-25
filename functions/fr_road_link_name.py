@@ -8,14 +8,14 @@
     if left_name == right_name:
         return left_name
     
-    if left_name != "" and right_name != "":
-        geo_name = "{0}#{1}".format(left_name, right_name)
+    if left_name != "" and left_name is not None and left_name.lower() != "null" and right_name != "" and right_name is not None and right_name.lower() != "null":
+        geo_name = "{0}/{1}".format(left_name, right_name)
         return geo_name
 
-    if right_name != "":
+    if right_name != "" and right_name is not None and right_name.lower() != "null":
         return right_name
 
-    if left_name != "":
+    if left_name != "" and left_name is not None and left_name.lower() != "null":
         return left_name
 
-    return ""
+    return "void"

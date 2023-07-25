@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_release",
+        "name":"ome2_hvlsp_model_conversion_v1",
         "user":"postgres",
         "pwd":"postgres",
         "schema": "tn"
@@ -30,24 +30,24 @@
                         "country": { "function": "fr_country_code" },
                         "form_of_way": { "function": "fr_form_of_way" },
                         "functional_road_class": { "function": "fr_functional_road_class" },
-                        "number_of_lanes": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] != 'Sans objet' else '0'" },
+                        "number_of_lanes": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] != 'Sans objet' and data['nombre_de_voies'] is not None else -32768" },
                         "vertical_position": { "function": "fr_vertical_position" },
-                        "vertical_level": { "eval": "data['position_par_rapport_au_sol'] if data['position_par_rapport_au_sol'] != 'Gué ou radier' else '0'" },
-                        "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
+                        "vertical_level": { "eval": "data['position_par_rapport_au_sol'] if data['position_par_rapport_au_sol'] != 'Gué ou radier' and data['position_par_rapport_au_sol'] is not None else 'void'" },
+                        "trans_european_transport_network": { "eval": "'void'" },
                         "geographical_name": { "function": "fr_road_link_name" },
                         "road_surface_category": { "function": "fr_road_surface_category" },
                         "traffic_flow_direction": { "function": "fr_traffic_flow_direction" },
                         "access_restriction": { "function": "fr_access_restriction" },
-                        "maximum_height": "restriction_de_hauteur",
-                        "maximum_length": "restriction_de_longueur",
-                        "maximum_width": "restriction_de_largeur",
-                        "maximum_total_weight": "restriction_de_poids_total",
-                        "maximum_single_axle_weight": "restriction_de_poids_par_essieu",
+                        "maximum_height": { "eval": "data['restriction_de_hauteur'] if data['restriction_de_hauteur'] is not None else -32768" },
+                        "maximum_length": { "eval": "data['restriction_de_longueur'] if data['restriction_de_longueur'] is not None else -32768" },
+                        "maximum_width": { "eval": "data['restriction_de_largeur'] if data['restriction_de_largeur'] is not None else -32768" },
+                        "maximum_total_weight": { "eval": "data['restriction_de_poids_total'] if data['restriction_de_poids_total'] is not None else -32768" },
+                        "maximum_single_axle_weight": { "eval": "data['restriction_de_poids_par_essieu'] if data['restriction_de_poids_par_essieu'] is not None else -32768" },
                         "condition_of_facility": { "function": "fr_condition_of_facility" },
                         "valid_from": "date_d_apparition",
                         "w_national_identifier": "cleabs",
-                        "national_road_code": "cpx_numero",
-                        "european_route_number":"cpx_numero_route_europeenne"    
+                        "national_road_code": { "eval": "data['cpx_numero'] if data['cpx_numero'] is not None else 'void'" },
+                        "european_route_number":{ "eval": "data['cpx_numero_route_europeenne'] if data['cpx_numero_route_europeenne'] is not None else 'void'" }    
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -67,6 +67,11 @@
                         "nom_1_droite",
                         "date_d_apparition",
                         "cleabs",
+                        "restriction_de_hauteur",
+                        "restriction_de_longueur",
+                        "restriction_de_largeur",
+                        "restriction_de_poids_total",
+                        "restriction_de_poids_par_essieu",
                         "cpx_numero",
                         "cpx_numero_route_europeenne"
                     ]
@@ -94,7 +99,7 @@
                 }
             }
         },
-        "road_service":{
+        "road_service_area":{
             "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
