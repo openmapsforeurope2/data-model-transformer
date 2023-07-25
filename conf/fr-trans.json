@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_model_conversion_v1",
+        "name":"ome2_hvlsp_test",
         "user":"postgres",
         "pwd":"postgres",
         "schema": "tn"
@@ -21,7 +21,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_de_route": {
                     "mock": false,
@@ -83,18 +83,25 @@
             "source_tables":{
                 "point_de_repere":{
                     "mock": false,
-                    "where": "NOT gcms_detruit",
+                    "where": "NOT gcms_detruit LIMIT 10",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "link_to_road": { "eval": "'link_to_road'" },
-                        "code": "identifiant_de_pr",
-                        "distance": "abscisse"
+                        "link_to_national_road": { "eval": "data['lien_vers_route_nommee'] if data['lien_vers_route_nommee'] is not None else 'void'" },
+                        "code": { "eval": "data['identifiant_de_pr'] if data['identifiant_de_pr'] is not None else 'void'" },
+                        "distance": { "eval": "data['abscisse'] if data['abscisse'] is not None else -32768" }
                     },
                     "geomapping":{
-                        "geom": "geometrie"
+                        "geom": {
+                            "geometrie":{
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
                     },
                     "fetched_fields":[
-                        "gcms_territoire"
+                        "gcms_territoire",
+                        "lien_vers_route_nommee",
+                        "identifiant_de_pr",
+                        "abscisse"
                     ]
                 }
             }
@@ -108,19 +115,15 @@
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "type": { "function": "fr_road_service_type" },
-                        "geographical_name": "toponyme"
+                        "geographical_name":  { "eval": "data['toponyme'] if data['toponyme'] is not None else 'void'" }
                     },
                     "geomapping":{
-                        "geom": {
-                            "geometrie": {
-                                "transform": "ST_PointOnSurface(${})"
-                            }
-                        },
-                        "geom_area": "geometrie"
+                        "geom": "geometrie"
                     },
                     "fetched_fields":[
                         "nature",
-                        "gcms_territoire"
+                        "gcms_territoire",
+                        "toponyme"
                     ]
                 }
             }
@@ -134,10 +137,10 @@
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "type": { "function": "fr_railway_type_value" },
-                        "number_of_tracks": "nombre_de_voies",
+                        "number_of_tracks": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] is not None else -32768" },
                         "vertical_position": { "function": "fr_vertical_position" },
-                        "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
-                        "electrified": "electrifie"
+                        "trans_european_transport_network": { "eval": "'void'" },
+                        "electrified": { "eval": "1 if data['electrifie'] else -32768 if data ['electrifie'] is None else 0" }
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -145,33 +148,63 @@
                     "fetched_fields":[
                         "nature",
                         "position_par_rapport_au_sol",
+                        "gcms_territoire",
+                        "nombre_de_voies",
+                        "electrifie"
+                    ]
+                }
+            }
+        },
+        "railway_station_area":{
+            "mock": true,
+            "source_tables":{
+                "equipement_de_transport":{
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature IN ('Arrêt voyageurs', 'Gare fret uniquement', 'Gare voyageurs et fret', 'Gare voyageurs uniquement', 'Station de métro', 'Station de tramway')  LIMIT 10",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },
+                        "station_code": { "eval": "'void'" },
+                        "railway_use": { "function": "fr_railway_use" }
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[
+                        "nature",
                         "gcms_territoire"
                     ]
                 }
             }
         },
-        "railway_station":{
+        "aerodrome_area":{
             "mock": true,
             "source_tables":{
-                "equipement_de_transport":{
+                "aerodrome":{
                     "mock": false,
-                    "where": "NOT gcms_detruit AND nature IN ('Arrêt voyageurs', 'Gare fret uniquement', 'Gare voyageurs et fret', 'Gare voyageurs uniquement', 'Station de métro', 'Station de tramway')",
+                    "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "station_code": { "eval": "'station_code'" },
-                        "railway_use": { "function": "fr_railway_use" }
+                        "designator_iata": { "eval": "data['code_iata'] if data['code_iata'] is not None else 'void'" },
+                        "location_indicator_icao": { "eval": "data['code_icao'] if data['code_icao'] is not None else 'void'" },
+                        "geographical_name":  { "function": "fr_au_name" },
+                        "aerodrome_category": { "function": "fr_tn_aerodrome_category"},
+                        "aerodrome_type": { "function": "fr_tn_aerodrome_type"},
+                        "restriction": {"eval": "'reserved_for_military' if data['usage'] == 'Militaire' else 'void'"}
                     },
                     "geomapping":{
                         "geom": {
                             "geometrie": {
-                                "transform": "ST_PointOnSurface(${})"
+                                "transform": "ST_Force3D(${},-1000)"
                             }
                         },
                         "geom_area": "geometrie"
                     },
                     "fetched_fields":[
                         "nature",
-                        "gcms_territoire"
+                        "gcms_territoire",
+                        "code_iata",
+                        "code_icao",
+                        "usage"
                     ]
                 }
             }
