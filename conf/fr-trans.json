@@ -172,7 +172,8 @@
                     },
                     "fetched_fields":[
                         "nature",
-                        "gcms_territoire"
+                        "gcms_territoire",
+                        "toponyme"
                     ]
                 }
             }
