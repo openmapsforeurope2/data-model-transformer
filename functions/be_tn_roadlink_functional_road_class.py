@@ -22,4 +22,4 @@
     if roadstatus == 6:
         return "fourth_class"
     
-    return ""
+    return "void"

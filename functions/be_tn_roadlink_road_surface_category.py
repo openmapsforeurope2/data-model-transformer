@@ -11,5 +11,5 @@
     if surftype == 2: 
         return "unpaved"
 
-    return ""
+    return "void"
     

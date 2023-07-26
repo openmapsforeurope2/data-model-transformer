@@ -30,16 +30,11 @@
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "be_tn_roadlink_form_of_way" },
                         "functional_road_class": { "function": "be_tn_roadlink_functional_road_class" },
-                        "number_of_lanes": "lanesnb",
-                        "vertical_position": { "eval": "''" },
-                        "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
-                        "geographical_name": { "eval": "''" },
+                        "number_of_lanes": { "eval": "data['lanesnb'] if data['lanesnb'] is not None else -32768" },
                         "road_surface_category": { "function": "be_tn_roadlink_road_surface_category" },
-                        "traffic_flow_direction": { "eval": "''" },
-                        "access_restriction": { "eval": "''" },
                         "condition_of_facility": { "function": "be_tn_roadlink_condition_of_facility" },
-                        "national_road_code": "natroadnb",
-                        "european_route_number": "euroadnb",
+                        "national_road_code": { "eval": "data['natroadnb'] if data['natroadnb'] is not None else 'void'" },
+                        "european_route_number": { "eval": "data['euroadnb'] if data['euroadnb'] is not None else 'void'" },
                         "w_national_identifier": "tgid"
                     },
                     "geomapping":{
@@ -62,6 +57,25 @@
                     "mock": true
                 }
             }
-        }
+        },
+        "marker_post":{
+            "mock": false,
+            "source_tables":{
+                "ro_roadkilometremarker":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "distance": { "eval": "data['kilometre'] if data['kilometre'] is not None else -32768" }
+                    },
+                    "geomapping":{
+                        "geom": "geom"
+                    },
+                    "fetched_fields":[
+                        "kilometre"
+                    ]
+                }
+            }
+        },
     }
 }

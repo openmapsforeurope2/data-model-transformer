@@ -14,5 +14,5 @@
     if opstate == 3:
         return "disused"
 
-    return ""
+    return "void"
     

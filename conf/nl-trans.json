@@ -25,7 +25,7 @@
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
-                    "where": "true limit 100",
+                    "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "nl_tn_roadlink_form_of_way" },
