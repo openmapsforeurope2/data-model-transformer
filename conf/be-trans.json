@@ -50,7 +50,8 @@
                         "sepcarrway",
                         "natroadnb",
                         "euroadnb",
-                        "tgid"
+                        "tgid",
+                        "lanesnb"
                     ]
                 },
                 "ro_dirtroadsegment":{
@@ -76,6 +77,6 @@
                     ]
                 }
             }
-        },
+        }
     }
 }
