@@ -44,4 +44,4 @@
         return "single_carriage_way"
 
     
-    return ""
+    return "void"

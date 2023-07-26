@@ -15,4 +15,4 @@
     if status == "buiten gebruik":
         return "disused"
 
-    return ""
+    return "void"

@@ -14,4 +14,4 @@
     if nwegnummer != "":
         return nwegnummer
 
-    return ""
+    return "void"

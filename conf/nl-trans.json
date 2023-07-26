@@ -25,21 +25,21 @@
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
-                    "where": "",
+                    "where": "true limit 100",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "nl_tn_roadlink_form_of_way" },
                         "functional_road_class": { "function": "nl_tn_roadlink_functional_road_class" },
-                        "number_of_lanes": "aantalrijstroken",
-                        "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface'" },
-                        "vertical_level": { "eval": "str(data['hoogteniveau'])" },
-                        "trans_european_transport_network": { "eval": "'no_ten_t_network'" },
-                        "geographical_name": "naam",
-                        "road_surface_category": { "eval": "'unpaved' if data['verhardingstype'] == 'onverhard' else 'paved'" },           
+                        "number_of_lanes": { "eval": "data['aantalrijstroken'] if data['aantalrijstroken'] is not None else -32768" },
+                        "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void'" },
+                        "vertical_level": { "eval": "data['hoogteniveau'] if data['hoogteniveau'] is not None else -32768" },
+                        "trans_european_transport_network": { "eval": "'void'" },
+                        "geographical_name": { "eval": "data['naam'] if data['naam'] is not None else 'void'" },
+                        "road_surface_category": { "eval": "'unpaved' if data['verhardingstype'] == 'onverhard' else 'paved' if data['verhardingstype'] is not None else 'void'" },           
                         "condition_of_facility": { "function": "nl_tn_roadlink_condition_of_facility" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "national_road_code": { "function": "nl_tn_roadlink_national_road_code" },
-                        "european_route_number":"ewegnummer"   
+                        "european_route_number": { "eval": "data['ewegnummer'] if data['ewegnummer'] is not None else 'void'" }   
                     },
                     "geomapping":{
                         "geom": {
@@ -59,7 +59,85 @@
                         "namespace",
                         "lokaalid",
                         "awegnummer",
-                        "nwegnummer"
+                        "nwegnummer",
+                        "aantalrijstroken",
+                        "ewegnummer",
+                        "naam"
+
+                    ]
+                }
+            }
+        },
+        "marker_post":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_inrichtingselement_punt":{
+                    "mock": false,
+                    "where": "typeinrichtingselement = 'kilometerpaal'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "code": { "eval": "data['nummer'] if data['nummer'] is not None else 'void'" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "nummer"
+                    ]
+                }
+            }
+        },
+        "railway_link":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_spoorbaandeel_lijn":{
+                    "mock": false,
+                    "where": "typespoorbaan in ('tram','trein','metro')",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "eval": "'train' if data['typespoorbaan'] == 'trein' else 'tram' if data['typespoorbaan'] == 'tram' else 'metro' if data['typespoorbaan'] == 'metro' else 'void'" },
+                        "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void'" },
+                        "trans_european_transport_network": { "eval": "'void'" },
+                        "electrified": { "eval": "1 if data['elektrificatie'] == 'ja' else -32768 if data ['elektrificatie'] is None else 0" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "typespoorbaan",
+                        "hoogteniveau",
+                        "elektrificatie"
+                    ]
+                }
+            }
+        },
+        "railway_station_point":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_inrichtingselement_punt":{
+                    "mock": false,
+                    "where": "typeinrichtingselement = 'treinstation' or typeinrichtingselement = 'metrostation'",
+                    "mapping": {
+                        "country":  { "eval": "'${country_code}'" },
+                        "geographical_name":  { "function": "nl_tn_name" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "naam"
                     ]
                 }
             }
