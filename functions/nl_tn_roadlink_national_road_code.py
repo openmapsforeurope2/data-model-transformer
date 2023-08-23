@@ -8,10 +8,10 @@
     nwegnummer = context['data']['nwegnummer']
 
 
-    if awegnummer != "":
+    if awegnummer != "" and awegnummer is not None:
         return awegnummer
 
-    if nwegnummer != "":
+    if nwegnummer != "" and nwegnummer is not None:
         return nwegnummer
 
     return "void"

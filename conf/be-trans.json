@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_model_conversion_v1",
+        "name":"ome2_hvlsp_v2",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "tn"
@@ -55,12 +55,25 @@
                     ]
                 },
                 "ro_dirtroadsegment":{
-                    "mock": true
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "form_of_way": { "eval": "'tractor'" },
+                        "road_surface_category": { "eval": "'unpaved'" },
+                        "w_national_identifier": "tgid"
+                    },
+                    "geomapping":{
+                        "geom": "geom"
+                    },
+                    "fetched_fields":[
+                        "tgid"
+                    ]
                 }
             }
         },
         "marker_post":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ro_roadkilometremarker":{
                     "mock": false,
