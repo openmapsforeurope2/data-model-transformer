@@ -1,0 +1,53 @@
+{
+    "country_code": "fr",
+    "country_code_list": ["fr","gf","gu","gp","mq","re","yt","bl","mf","pm"],
+    "source_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"fr_national",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema": "tn"
+    },
+    "source_srid": "CASE gcms_territoire WHEN 'FXX' THEN 2154 WHEN 'GLP' THEN 4559 WHEN 'GUF' THEN 2972 WHEN 'H_T' THEN 4326 WHEN 'MTQ' THEN 4559 WHEN 'MYT' THEN 4471 WHEN 'REU' THEN 2975 WHEN 'SPM' THEN 4467 END",
+    "target_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"ome2_hvlsp_v2",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema": "tn"
+    },
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {        
+        "runway":{
+            "mock": false,
+            "source_tables":{
+                "piste_d_aerodrome":{
+                    "mock": false,
+                    "where": "(ST_AsText(ST_CollectionExtract(geom)) LIKE 'MULTILINESTRING%' OR ST_AsText(ST_CollectionExtract(geom)) LIKE 'LINESTRING%') AND NOT gcms_detruit",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },
+                        "surface_composition":  { "eval": "'grass' if data['nature'] == 'Piste en herbe' else 'void'" },
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_CollectionExtract(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "date_d_apparition",
+                        "gcms_territoire",
+                        "nature",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        }
+    }
+}
