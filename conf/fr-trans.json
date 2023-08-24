@@ -26,7 +26,7 @@
             "source_tables":{
                 "troncon_de_route": {
                     "mock": false,
-                    "where": "nature != 'Bac ou liaison maritime' AND nature != 'Sentier' AND nature != 'Escalier' AND NOT gcms_detruit AND gcms_territoire = 'gf'",
+                    "where": "nature != 'Bac ou liaison maritime' AND nature != 'Sentier' AND nature != 'Escalier' AND NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "form_of_way": { "function": "fr_tn_roadlink_form_of_way" },
