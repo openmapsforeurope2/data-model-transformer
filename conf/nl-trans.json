@@ -21,7 +21,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
@@ -133,6 +133,54 @@
                         "geom": {
                             "geom":{
                                 "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "naam"
+                    ]
+                }
+            }
+        },
+        "road_service_area":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_wegdeel_vlak":{
+                    "mock": false,
+                    "where": "typeweg = 'parkeerplaats: P+R'",
+                    "mapping": {
+                        "country":  { "eval": "'${country_code}'" },
+                        "type":  { "eval": "'rest_area'" },
+                        "geographical_name":  { "function": "nl_tn_name" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Multi(ST_Force3D(${},-1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "naam"
+                    ]
+                }
+            }
+        },
+        "road_service_point":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_wegdeel_vlak":{
+                    "mock": false,
+                    "where": "typeweg = 'parkeerplaats: P+R'",
+                    "mapping": {
+                        "country":  { "eval": "'${country_code}'" },
+                        "type":  { "eval": "'rest_area'" },
+                        "geographical_name":  { "function": "nl_tn_name" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D(ST_Centroid(${}),-1000)"
                             }
                         }
                     },
