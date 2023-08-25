@@ -208,7 +208,7 @@
                     "geomapping":{
                         "geom": {
                             "geometrie": {
-                                "transform": "ST_Centroid(${})"
+                                "transform": "ST_Force3D(ST_Centroid(${}))"
                             }
                         }
                     },
