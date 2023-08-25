@@ -22,7 +22,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_de_route": {
                     "mock": false,
@@ -90,7 +90,7 @@
                         "link_to_national_road": { "eval": "data['lien_vers_route_nommee'] if data['lien_vers_route_nommee'] is not None else 'void'" },
                         "code": { "eval": "data['identifiant_de_pr'] if data['identifiant_de_pr'] is not None else 'void'" },
                         "distance": { "eval": "data['abscisse'] if data['abscisse'] is not None else -32768" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None"},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
                         "w_national_identifier": "cleabs"
                     },
                     "geomapping":{
@@ -183,17 +183,17 @@
             }
         },
         "railway_station_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
-                    "where": "NOT gcms_detruit AND nature IN ('Arrêt voyageurs', 'Gare fret uniquement', 'Gare voyageurs et fret', 'Gare voyageurs uniquement', 'Station de métro', 'Station de tramway') LIMIT 10",
+                    "where": "NOT gcms_detruit AND nature IN ('Arrêt voyageurs', 'Gare fret uniquement', 'Gare voyageurs et fret', 'Gare voyageurs uniquement', 'Station de métro', 'Station de tramway')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "geographical_name":  { "function": "fr_tn_name" },
                         "station_code": { "eval": "'void'" },
                         "railway_use": { "function": "fr_tn_railwaystation_railway_use" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None"},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
                         "w_national_identifier": "cleabs"
                     },
                     "geomapping":{
@@ -225,7 +225,7 @@
                         "aerodrome_category": { "function": "fr_tn_aerodrome_category"},
                         "aerodrome_type": { "function": "fr_tn_aerodrome_type"},
                         "restriction": {"eval": "'reserved_for_military' if data['usage'] == 'Militaire' else 'void'"},
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None"},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
                         "w_national_identifier": "cleabs"
                     },
                     "geomapping":{
@@ -249,7 +249,7 @@
             }
         },
         "aerodrome_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "aerodrome":{
                     "mock": false,
@@ -286,7 +286,7 @@
             }
         },
         "road_service_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -313,7 +313,7 @@
             }
         },
         "ferry_crossing":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "route_numerotee_ou_nommee":{
                     "mock": false,
@@ -343,7 +343,7 @@
             }
         },
         "port_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -369,7 +369,7 @@
             }
         },
         "port_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -398,11 +398,11 @@
             }
         },
         "road":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "route_numerotee_ou_nommee":{
                     "mock": false,
-                    "where": "NOT gcms_detruit LIMIT 10",
+                    "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "geographical_name":  { "function": "fr_tn_name" },
@@ -428,11 +428,11 @@
             }
         },
         "railway_line":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "voie_ferree_nommee":{
                     "mock": false,
-                    "where": "NOT gcms_detruit LIMIT 10",
+                    "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "geographical_name":  { "function": "fr_tn_name" },
