@@ -110,7 +110,7 @@
             }
         },
         "road_service_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -118,7 +118,9 @@
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "type": { "function": "fr_tn_road_service_type" },
-                        "geographical_name":  { "eval": "data['toponyme'] if data['toponyme'] is not None else 'void'" }
+                        "geographical_name":  { "eval": "data['toponyme'] if data['toponyme'] is not None else 'void'" },
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -126,14 +128,15 @@
                     "fetched_fields":[
                         "nature",
                         "gcms_territoire",
-                        "toponyme"
+                        "toponyme",
+                        "date_d_apparition"
                     ]
                 }
             }
         },
         
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_de_voie_ferree":{
                     "mock": false,
@@ -144,7 +147,9 @@
                         "number_of_tracks": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] is not None else -32768" },
                         "vertical_position": { "function": "fr_tn_vertical_position" },
                         "trans_european_transport_network": { "eval": "'void'" },
-                        "electrified": { "eval": "1 if data['electrifie'] else -32768 if data ['electrifie'] is None else 0" }
+                        "electrified": { "eval": "1 if data['electrifie'] else -32768 if data ['electrifie'] is None else 0" },
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -154,13 +159,14 @@
                         "position_par_rapport_au_sol",
                         "gcms_territoire",
                         "nombre_de_voies",
-                        "electrifie"
+                        "electrifie",
+                        "date_d_apparition"
                     ]
                 }
             }
         },
         "railway_station_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -169,7 +175,9 @@
                         "country": { "function": "fr_country_code" },
                         "geographical_name":  { "function": "fr_tn_name" },
                         "station_code": { "eval": "'void'" },
-                        "railway_use": { "function": "fr_tn_railwaystation_railway_use" }
+                        "railway_use": { "function": "fr_tn_railwaystation_railway_use" },
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -177,7 +185,8 @@
                     "fetched_fields":[
                         "nature",
                         "gcms_territoire",
-                        "toponyme"
+                        "toponyme",
+                        "date_d_apparition"
                     ]
                 }
             }
@@ -206,7 +215,8 @@
                     "fetched_fields":[
                         "nature",
                         "gcms_territoire",
-                        "toponyme"
+                        "toponyme",
+                        "date_d_apparition"
                     ]
                 }
             }
