@@ -39,6 +39,7 @@
                         "origine": "origine",
                         "fictif": "fictif",
                         "navigabilite": "navigabilite",
+                        "classe_de_largeur": "classe_de_largeur",
                         "date_d_apparition":"date_d_apparition"
                     },
                     "geomapping":{
@@ -54,6 +55,7 @@
                         "origine",
                         "fictif",
                         "navigabilite",
+                        "classe_de_largeur",
                         "date_d_apparition" 
                     ]
                 }
