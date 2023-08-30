@@ -39,7 +39,9 @@
                         "geographical_name": {"function": "fr_xx_name"},
                         "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] like 'Naturelle%' else 'void'"},
                         "fictitious": {"eval": "0 if not data['fictif'] else 1 if data['fictif'] else -32768"},
-                        "navigable": {"eval": "0 if not data['navigabilite'] else 1 if data['navigabilite'] else -32768"}
+                        "navigable": {"eval": "0 if not data['navigabilite'] else 1 if data['navigabilite'] else -32768"},
+                        "width_lower_range": {"function": "fr_hy_width_lower_range"},
+                        "width_upper_range": {"function": "fr_hy_width_upper_range"}
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -53,8 +55,8 @@
                         "fictif",
                         "navigabilite",
                         "gcms_territoire",
-                        "position_par_rapport_au_sol"
-   
+                        "position_par_rapport_au_sol",
+                        "classe_de_largeur"
                     ]
                 }
             }

@@ -73,7 +73,6 @@
                         "code_hydrographique": "code_hydrographique",
                         "influence_de_la_maree": "influence_de_la_maree",
                         "toponyme": "toponyme",
-                        "toponymie_detaillee": "toponymie_detaillee",
                         "date_d_apparition": "date_d_apparition"
                     },
                     "geomapping":{
@@ -84,7 +83,6 @@
                         "code_hydrographique",
                         "influence_de_la_maree",
                         "toponyme",
-                        "toponymie_detaillee",
                         "date_d_apparition"
                     ]
                 }
