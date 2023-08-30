@@ -1,0 +1,92 @@
+{
+    "country_code": "fr",
+    "country_code_list": ["fr","gf","gu","gp","mq","re","yt","bl","mf","pm"],
+    "source_db":{
+        "host":"patafix3.ign.fr",
+        "port":"5432",
+        "name":"bduni_france",
+        "user":"invite",
+        "pwd":"28de#",
+        "schema": "public"
+    },
+    "source_srid": "CASE gcms_territoire WHEN 'FXX' THEN 2154 WHEN 'GLP' THEN 4559 WHEN 'GUF' THEN 2972 WHEN 'H_T' THEN 4326 WHEN 'MTQ' THEN 4559 WHEN 'MYT' THEN 4471 WHEN 'REU' THEN 2975 WHEN 'SPM' THEN 4467 END",
+    "target_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"fr_national",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema": "hy"
+    },
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "troncon_hydrographique":{
+            "mock": false,
+            "source_tables":{
+                "troncon_hydrographique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "cleabs": "cleabs",
+                        "gcms_territoire": "gcms_territoire",
+                        "nature": "nature",
+                        "position_par_rapport_au_sol": "position_par_rapport_au_sol",
+                        "persistance": "persistance",
+                        "liens_vers_cours_d_eau": "liens_vers_cours_d_eau",
+                        "sens_de_l_ecoulement": "sens_de_l_ecoulement",
+                        "cpx_toponyme_de_cours_d_eau": "cpx_toponyme_de_cours_d_eau",
+                        "origine": "origine",
+                        "fictif": "fictif",
+                        "navigabilite": "navigabilite",
+                        "date_d_apparition":"date_d_apparition"
+                    },
+                    "geomapping":{
+                        "geometrie": "geometrie"
+                    },
+                    "fetched_fields":[
+                        "gcms_territoire",
+                        "position_par_rapport_au_sol",
+                        "persistance",
+                        "liens_vers_cours_d_eau",
+                        "sens_de_l_ecoulement",
+                        "cpx_toponyme_de_cours_d_eau",
+                        "origine",
+                        "fictif",
+                        "navigabilite",
+                        "date_d_apparition" 
+                    ]
+                }
+            }
+        },
+        "cours_d_eau":{
+            "mock": false,
+            "source_tables":{
+                "cours_d_eau": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "cleabs": "cleabs",
+                        "gcms_territoire": "gcms_territoire",
+                        "code_hydrographique": "code_hydrographique",
+                        "influence_de_la_maree": "influence_de_la_maree",
+                        "toponyme": "toponyme",
+                        "toponymie_detaillee": "toponymie_detaillee",
+                        "date_d_apparition": "date_d_apparition"
+                    },
+                    "geomapping":{
+                        "geometrie_ge": "geometrie_ge"
+                    },
+                    "fetched_fields":[
+                        "gcms_territoire",
+                        "code_hydrographique",
+                        "influence_de_la_maree",
+                        "toponyme",
+                        "toponymie_detaillee",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        }
+    }
+}
