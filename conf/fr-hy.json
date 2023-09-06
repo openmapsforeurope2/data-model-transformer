@@ -2,11 +2,11 @@
     "country_code": "fr",
     "country_code_list": ["fr","gf","gu","gp","mq","re","yt","bl","mf","pm"],
     "source_db":{
-        "host":"patafix3.ign.fr",
+        "host":"10.128.35.60",
         "port":"5432",
-        "name":"bduni_france",
-        "user":"invite",
-        "pwd":"28de#",
+        "name":"fr_national_hydro",
+        "user":"postgres",
+        "pwd":"postgres",
         "schema": "public"
     },
     "source_srid": "CASE gcms_territoire WHEN 'FXX' THEN 2154 WHEN 'GLP' THEN 4559 WHEN 'GUF' THEN 2972 WHEN 'H_T' THEN 4326 WHEN 'MTQ' THEN 4559 WHEN 'MYT' THEN 4471 WHEN 'REU' THEN 2975 WHEN 'SPM' THEN 4467 END",
@@ -22,7 +22,7 @@
     "target_country_field": "country",
     "target_tables": {
         "watercourse_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_hydrographique": {
                     "mock": false,
@@ -33,15 +33,17 @@
                         "persistence": {
                             "eval": "'dry' if data['persistance'] == 'Sec' else 'ephemeral' if data['persistance'] == 'Ephémère' else 'intermittent' if data['persistance'] == 'Intermittent' else 'perennial' if data['persistance'] == 'Permanent' else 'void'"
                         },
-                        "tidal": {"eval": "0 if not data['cpx_influence_de_la_maree'] else 1 if data['cpx_influence_de_la_maree'] else -32768"},
+                        "tidal": {"eval": "'false' if not data['cpx_influence_de_la_maree'] else 'true' if data['cpx_influence_de_la_maree'] else 'void'"},
                         "flow": {"eval": "'both_directions' if data['sens_de_l_ecoulement'] == 'Double sens' else 'in_direction' if data['sens_de_l_ecoulement'] == 'Sens direct' else 'in_opposite_direction' if data['sens_de_l_ecoulement'] == 'Sens inverse' else 'void'"},
                         "hydro_identifier": {"eval": "data['cpx_code_hydrographique'] if data['cpx_code_hydrographique'] is not None else 'void'"},
                         "geographical_name": {"function": "fr_xx_name"},
-                        "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] like 'Naturelle%' else 'void'"},
-                        "fictitious": {"eval": "0 if not data['fictif'] else 1 if data['fictif'] else -32768"},
-                        "navigable": {"eval": "0 if not data['navigabilite'] else 1 if data['navigabilite'] else -32768"},
+                        "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] == 'Naturelle aménagée' or data['origine'] == 'Naturelle non aménagée' else 'void'"},
+                        "fictitious": {"eval": "'false' if not data['fictif'] else 'true' if data['fictif'] else 'void'"},
+                        "navigable": {"eval": "'false' if not data['navigabilite'] else 'true' if data['navigabilite'] else 'void'"},
                         "width_lower_range": {"function": "fr_hy_width_lower_range"},
-                        "width_upper_range": {"function": "fr_hy_width_upper_range"}
+                        "width_upper_range": {"function": "fr_hy_width_upper_range"},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -56,7 +58,138 @@
                         "navigabilite",
                         "gcms_territoire",
                         "position_par_rapport_au_sol",
-                        "classe_de_largeur"
+                        "classe_de_largeur",
+                        "cleabs",
+                        "date_d_apparition",
+                        "cpx_toponyme_de_cours_d_eau"
+                    ]
+                }
+            }
+        },
+        "watercourse":{
+            "mock": true,
+            "source_tables":{
+                "cours_d_eau": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },
+                        "hydro_identifier": {"eval": "data['code_hydrographique'] if data['code_hydrographique'] is not None else 'void'"},
+                        "geographical_name": {"function": "fr_xx_name"},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gcms_territoire",
+                        "code_hydrographique",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"                      
+                    ]
+                }
+            }
+        },
+        "hydro_node":{
+            "mock": true,
+            "source_tables":{
+                "cours_d_eau": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit LIMIT 10",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },                 
+                        "geographical_name": {"function": "fr_xx_name"},
+                        "hydro_node_category": {},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gcms_territoire",
+                        "code_hydrographique",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"                      
+                    ]
+                }
+            }
+        },
+        "watercourse_area":{
+            "mock": true,
+            "source_tables":{
+                "surface_hydrographique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND (nature = 'Canal' OR nature = 'Delta' OR nature = 'Ecoulement canalisé' OR nature = 'Ecoulement endoréique' OR nature = 'Ecoulement hyporhéique' OR nature = 'Ecoulement karstique' OR nature = 'Ecoulement naturel' OR nature = 'Ecoulement phréatique' OR nature = 'Ravine')",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },
+                        "persistence": {
+                            "eval": "'dry' if data['persistance'] == 'Sec' else 'ephemeral' if data['persistance'] == 'Ephémère' else 'intermittent' if data['persistance'] == 'Intermittent' else 'perennial' if data['persistance'] == 'Permanent' else 'void'"
+                        },
+                        "tidal": {"eval": "'false' if not data['cpx_influence_de_la_maree'] else 'true' if data['cpx_influence_de_la_maree'] else 'void'"},                        
+                        "hydro_identifier": {"eval": "data['cpx_code_hydrographique'] if data['cpx_code_hydrographique'] is not None else 'void'"},
+                        "geographical_name": {"function": "fr_xx_name"},
+                        "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] == 'Naturelle aménagée' or data['origine'] == 'Naturelle non aménagée' else 'void'"},                    
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[
+                        "persistance",                        
+                        "origine",                  
+                        "gcms_territoire",
+                        "cpx_influence_de_la_maree",
+                        "cleabs",
+                        "date_d_apparition",
+                        "cpx_toponyme_de_cours_d_eau",
+                        "cpx_code_hydrographique"
+                    ]
+                }
+            }
+        },
+        "standing_water":{
+            "mock": false,
+            "source_tables":{
+                "surface_hydrographique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND (nature = 'Lac' OR nature = 'Mare' OR nature = 'Lagune' OR (nature = 'Plan d''eau de gravière' OR nature = 'Plan d''eau de mine' OR nature = 'Réservoir-bassin' OR nature = 'Réservoir-bassin d''orage' OR nature = 'Réservoir-bassin piscicole' OR nature = 'Retenue' OR nature = 'Retenue-barrage' OR nature = 'Retenue-bassin portuaire' OR nature = 'Retenue-digue') AND etat_de_l_objet = 'En service')",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },
+                        "persistence": {
+                            "eval": "'dry' if data['persistance'] == 'Sec' else 'ephemeral' if data['persistance'] == 'Ephémère' else 'intermittent' if data['persistance'] == 'Intermittent' else 'perennial' if data['persistance'] == 'Permanent' else 'void'"
+                        },
+                        "tidal": {"eval": "'false' if not data['cpx_pde_influence_de_la_maree'] else 'true' if data['cpx_pde_influence_de_la_maree'] else 'void'"},                        
+                        "hydro_identifier": {"eval": "data['cpx_pde_code_hydrographique'] if data['cpx_pde_code_hydrographique'] is not None else 'void'"},
+                        "geographical_name": {"function": "fr_xx_name"},
+                        "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] == 'Naturelle aménagée' or data['origine'] == 'Naturelle non aménagée' else 'void'"},                    
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[
+                        "persistance",                        
+                        "origine",                  
+                        "gcms_territoire",
+                        "cpx_pde_influence_de_la_maree",
+                        "cleabs",
+                        "date_d_apparition",
+                        "cpx_toponyme_de_plan_d_eau",
+                        "cpx_pde_code_hydrographique"
                     ]
                 }
             }
