@@ -22,7 +22,7 @@
     "target_country_field": "country",
     "target_tables": {
         "watercourse_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_hydrographique": {
                     "mock": false,
@@ -67,7 +67,7 @@
             }
         },
         "watercourse":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "cours_d_eau": {
                     "mock": false,
@@ -127,7 +127,7 @@
             }
         },
         "watercourse_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "surface_hydrographique": {
                     "mock": false,
@@ -161,7 +161,7 @@
             }
         },
         "standing_water":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "surface_hydrographique": {
                     "mock": false,
