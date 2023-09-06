@@ -1,0 +1,100 @@
+{
+    "country_code": "be",
+    "source_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"be_national",
+        "user":"ome2_user",
+        "pwd":"ome2_user",
+        "schema": "hy"
+    },
+    "source_srid": "4326",
+    "target_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"ome2_hvlsp_v2",
+        "user":"ome2_user",
+        "pwd":"ome2_user",
+        "schema": "hy"
+    },
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "watercourse_link":{
+            "mock": false,
+            "source_tables":{
+                "hy_watercoursesegment": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "persistence": { "eval": "'intermittent' if data['regime'] == 1 else 'perennial' if data['regime'] == 2 else 'void'" },
+                        "fictitious": {"eval": "'true' if data['fictitious'] == 1 else 'false' if data['fictitious'] == 2 else 'void'"},
+                        "navigable": {"eval": "'true' if data['navigable'] == 1 else 'false' if data['navigable'] == 2 else 'void'"},
+                        "width_lower_range": {"function": "be_hy_width_lower_range"},
+                        "width_upper_range": {"function": "be_hy_width_upper_range"},
+                        "w_national_identifier": "tgid"
+                    },
+                    "geomapping":{
+                        "geom": "geom"
+                    },
+                    "fetched_fields":[
+                        "regime",
+                        "fictitious",
+                        "navigable",
+                        "width",
+                        "tgid"
+                    ]
+                }
+            }
+        },
+        "watercourse_area":{
+            "mock": false,
+            "source_tables":{
+                "hy_watercoursesurface": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "w_national_identifier": "tgid"
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "tgid"
+                    ]
+                }
+            }
+        },
+        "standing_water":{
+            "mock": false,
+            "source_tables":{
+                "hy_watersurface": {
+                    "mock": false,
+                    "where": "type = 2 OR type = 4",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "persistence": { "eval": "'intermittent' if data['regime'] == 1 else 'perennial' if data['regime'] == 2 else 'void'" },
+                        "w_national_identifier": "tgid"
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "regime",                        
+                        "tgid"
+                    ]
+                }
+            }
+        }
+    }
+}
