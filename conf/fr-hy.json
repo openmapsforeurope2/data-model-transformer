@@ -67,7 +67,7 @@
             }
         },
         "watercourse":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "cours_d_eau": {
                     "mock": false,
@@ -127,7 +127,7 @@
             }
         },
         "watercourse_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "surface_hydrographique": {
                     "mock": false,
