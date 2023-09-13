@@ -22,7 +22,7 @@
     "target_country_field": "country",
     "target_tables": {
         "watercourse_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_hydrographique": {
                     "mock": false,
@@ -190,6 +190,184 @@
                         "date_d_apparition",
                         "cpx_toponyme_de_plan_d_eau",
                         "cpx_pde_code_hydrographique"
+                    ]
+                }
+            }
+        },
+        "dam_area":{
+            "mock": false,
+            "source_tables":{
+                "construction_surfacique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Barrage'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "geographical_name": {"function": "fr_xx_name"},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "dam_line":{
+            "mock": false,
+            "source_tables":{
+                "construction_lineaire": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Barrage'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "geographical_name": {"function": "fr_xx_name"},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "lock_area":{
+            "mock": false,
+            "source_tables":{
+                "construction_surfacique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Ecluse'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "geographical_name": {"function": "fr_xx_name"},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "falls_point":{
+            "mock": false,
+            "source_tables":{
+                "detail_hydrographique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Cascade'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "geographical_name": {"function": "fr_xx_name"},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "shoreline":{
+            "mock": false,
+            "source_tables":{
+                "limite_terre_mer": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND (code_du_pays = 'FR' OR code_du_pays = 'MC')",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "water_level": {"eval": "'high_water' if data['niveau'] == 'Plus hautes eaux' else 'low_water' if data['niveau'] == 'Plus basses eaux' else 'void'"},
+                        "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] == 'Naturelle aménagée' or data['origine'] == 'Naturelle non aménagée' or data['origine'] == 'Naturelle rocheuse' else 'void'"},
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "niveau",
+                        "origine",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "shore":{
+            "mock": false,
+            "source_tables":{
+                "zone_d_estran": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "drainage_basin":{
+            "mock": false,
+            "source_tables":{
+                "bassin_versant_topographique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "w_national_identifier": "cleabs"
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "cleabs",
+                        "date_d_apparition"
                     ]
                 }
             }
