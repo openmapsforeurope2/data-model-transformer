@@ -7,7 +7,7 @@
         name_list.append({
             "spelling": name,
             "language": "dut",
-            "script": "latin",
+            "script": "latn",
             "name_status": "official",
             "nativeness": "endonym"
         })

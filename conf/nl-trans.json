@@ -3,10 +3,10 @@
     "source_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"nl_national",
+        "name":"nl_national_20230925",
         "user":"postgres",
         "pwd":"postgres",
-        "schema": "tn"
+        "schema": "public"
     },
     "source_srid": "28992",
     "target_db":{
@@ -143,7 +143,7 @@
             }
         },
         "road_service_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_vlak":{
                     "mock": false,
@@ -167,7 +167,7 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_vlak":{
                     "mock": false,
@@ -185,6 +185,166 @@
                         }
                     },
                     "fetched_fields":[
+                        "naam"
+                    ]
+                }
+            }
+        },
+        "aerodrome_area":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_functioneel_gebied_vlak":{
+                    "mock": false,
+                    "where": "typefunctioneelgebied = 'vliegveld, luchthaven'",
+                    "mapping": {
+                        "country":  { "eval": "'${country_code}'" },
+                        "geographical_name":  { "function": "nl_xx_name" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "namespace",
+                        "lokaalid",
+                        "naamnl",
+                        "naamfries"
+                    ]
+                }
+            }
+        },
+        "aerodrome_point":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_functioneel_gebied_vlak":{
+                    "mock": false,
+                    "where": "typefunctioneelgebied = 'vliegveld, luchthaven'",
+                    "mapping": {
+                        "country":  { "eval": "'${country_code}'" },
+                        "geographical_name":  { "function": "nl_xx_name" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_Centroid(${}), -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "namespace",
+                        "lokaalid",
+                        "naamnl",
+                        "naamfries"
+                    ]
+                }
+            }
+        },
+        "port_area":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_functioneel_gebied_vlak":{
+                    "mock": false,
+                    "where": "typefunctioneelgebied = 'haven'",
+                    "mapping": {
+                        "country":  { "eval": "'${country_code}'" },
+                        "geographical_name":  { "function": "nl_xx_name" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "namespace",
+                        "lokaalid",
+                        "naamnl",
+                        "naamfries"
+                    ]
+                }
+            }
+        },
+        "port_point":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_functioneel_gebied_vlak":{
+                    "mock": false,
+                    "where": "typefunctioneelgebied = 'haven'",
+                    "mapping": {
+                        "country":  { "eval": "'${country_code}'" },
+                        "geographical_name":  { "function": "nl_xx_name" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_Centroid(${}), -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "namespace",
+                        "lokaalid",
+                        "naamnl",
+                        "naamfries"
+                    ]
+                }
+            }
+        },
+        "runway":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_wegdeel_hartlijn": {
+                    "mock": false,
+                    "where": "typeweg = 'startbaan, landingsbaan'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" } 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Multi(ST_Force3D(${},-1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "typeweg",
+                        "namespace",
+                        "lokaalid"
+                    ]
+                }
+            }
+        },
+        "ferry_crossing":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_wegdeel_hartlijn": {
+                    "mock": false,
+                    "where": "typeweg = 'veerverbinding'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "geographical_name":  { "function": "nl_xx_name" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" } 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Multi(ST_Force3D(${},-1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "typeweg",
+                        "namespace",
+                        "lokaalid",
                         "naam"
                     ]
                 }

@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_v2",
+        "name":"ome2_hvlsp_v3",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "tn"
@@ -35,7 +35,9 @@
                         "condition_of_facility": { "function": "be_tn_roadlink_condition_of_facility" },
                         "national_road_code": { "eval": "data['natroadnb'] if data['natroadnb'] is not None else 'void'" },
                         "european_route_number": { "eval": "data['euroadnb'] if data['euroadnb'] is not None else 'void'" },
-                        "w_national_identifier": "tgid"
+                        "w_national_identifier": "tgid",
+                        "xy_source": "nmca",
+                        "z_source": "nmca"
                     },
                     "geomapping":{
                         "geom": "geom"
@@ -61,7 +63,9 @@
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "eval": "'tractor'" },
                         "road_surface_category": { "eval": "'unpaved'" },
-                        "w_national_identifier": "tgid"
+                        "w_national_identifier": "tgid",
+                        "xy_source": "nmca",
+                        "z_source": "nmca"
                     },
                     "geomapping":{
                         "geom": "geom"
@@ -80,7 +84,10 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "distance": { "eval": "data['kilometre'] if data['kilometre'] is not None else -32768" }
+                        "distance": { "eval": "data['kilometre'] if data['kilometre'] is not None else -32768" },
+                        "w_national_identifier": "tgid",
+                        "xy_source": "nmca",
+                        "z_source": "nmca"
                     },
                     "geomapping":{
                         "geom": "geom"
