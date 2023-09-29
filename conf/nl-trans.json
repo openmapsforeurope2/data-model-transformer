@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_v2",
+        "name":"ome2_hvlsp_v3",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "tn"
@@ -21,7 +21,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
@@ -36,10 +36,12 @@
                         "trans_european_transport_network": { "eval": "'void'" },
                         "geographical_name": { "eval": "data['naam'] if data['naam'] is not None else 'void'" },
                         "road_surface_category": { "eval": "'unpaved' if data['verhardingstype'] == 'onverhard' else 'paved' if data['verhardingstype'] is not None else 'void'" },           
-                        "condition_of_facility": { "function": "nl_tn_roadlink_condition_of_facility" },
+                        "condition_of_facility": { "function": "nl_tn_roadlink_condition_of_facility" },                    
+                        "road_national_road_code": { "function": "nl_tn_roadlink_national_road_code" },
+                        "road_european_route_number": { "eval": "data['ewegnummer'] if data['ewegnummer'] is not None else 'void'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
-                        "national_road_code": { "function": "nl_tn_roadlink_national_road_code" },
-                        "european_route_number": { "eval": "data['ewegnummer'] if data['ewegnummer'] is not None else 'void'" }   
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void'"}   
                     },
                     "geomapping":{
                         "geom": {
@@ -69,14 +71,17 @@
             }
         },
         "marker_post":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_inrichtingselement_punt":{
                     "mock": false,
                     "where": "typeinrichtingselement = 'kilometerpaal'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "code": { "eval": "data['nummer'] if data['nummer'] is not None else 'void'" }
+                        "code": { "eval": "data['nummer'] if data['nummer'] is not None else 'void'" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void'"} 
                     },
                     "geomapping":{
                         "geom": {
@@ -86,7 +91,9 @@
                         }
                     },
                     "fetched_fields":[
-                        "nummer"
+                        "nummer",
+                        "namespace",
+                        "lokaalid"
                     ]
                 }
             }
@@ -102,7 +109,10 @@
                         "type": { "eval": "'train' if data['typespoorbaan'] == 'trein' else 'tram' if data['typespoorbaan'] == 'tram' else 'metro' if data['typespoorbaan'] == 'metro' else 'void'" },
                         "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void'" },
                         "trans_european_transport_network": { "eval": "'void'" },
-                        "electrified": { "eval": "1 if data['elektrificatie'] == 'ja' else -32768 if data ['elektrificatie'] is None else 0" }
+                        "electrified": { "eval": "1 if data['elektrificatie'] == 'ja' else -32768 if data ['elektrificatie'] is None else 0" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void'"} 
                     },
                     "geomapping":{
                         "geom": {
@@ -114,20 +124,25 @@
                     "fetched_fields":[
                         "typespoorbaan",
                         "hoogteniveau",
-                        "elektrificatie"
+                        "elektrificatie",
+                        "namespace",
+                        "lokaalid"
                     ]
                 }
             }
         },
         "railway_station_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_inrichtingselement_punt":{
                     "mock": false,
                     "where": "typeinrichtingselement = 'treinstation' or typeinrichtingselement = 'metrostation'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
-                        "geographical_name":  { "function": "nl_tn_name" }
+                        "geographical_name":  { "function": "nl_tn_name" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void'"} 
                     },
                     "geomapping":{
                         "geom": {
@@ -137,13 +152,15 @@
                         }
                     },
                     "fetched_fields":[
-                        "naam"
+                        "naam",
+                        "namespace",
+                        "lokaalid"
                     ]
                 }
             }
         },
         "road_service_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_wegdeel_vlak":{
                     "mock": false,
@@ -151,7 +168,10 @@
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "type":  { "eval": "'rest_area'" },
-                        "geographical_name":  { "function": "nl_tn_name" }
+                        "geographical_name":  { "function": "nl_tn_name" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void'"} 
                     },
                     "geomapping":{
                         "geom": {
@@ -161,13 +181,15 @@
                         }
                     },
                     "fetched_fields":[
-                        "naam"
+                        "naam",
+                        "namespace",
+                        "lokaalid"
                     ]
                 }
             }
         },
         "road_service_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_wegdeel_vlak":{
                     "mock": false,
@@ -175,7 +197,10 @@
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "type":  { "eval": "'rest_area'" },
-                        "geographical_name":  { "function": "nl_tn_name" }
+                        "geographical_name":  { "function": "nl_tn_name" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'ome2'"},
+                        "z_source": { "eval": "'void'"} 
                     },
                     "geomapping":{
                         "geom": {
@@ -185,7 +210,9 @@
                         }
                     },
                     "fetched_fields":[
-                        "naam"
+                        "naam",
+                        "namespace",
+                        "lokaalid"
                     ]
                 }
             }
@@ -199,7 +226,9 @@
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "geographical_name":  { "function": "nl_xx_name" },
-                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void'"} 
                     },
                     "geomapping":{
                         "geom": {
@@ -226,7 +255,9 @@
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "geographical_name":  { "function": "nl_xx_name" },
-                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'ome2'"},
+                        "z_source": { "eval": "'void'"} 
                     },
                     "geomapping":{
                         "geom": {
@@ -253,7 +284,9 @@
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "geographical_name":  { "function": "nl_xx_name" },
-                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void'"} 
                     },
                     "geomapping":{
                         "geom": {
@@ -280,7 +313,9 @@
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "geographical_name":  { "function": "nl_xx_name" },
-                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" }
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'ome2'"},
+                        "z_source": { "eval": "'void'"} 
                     },
                     "geomapping":{
                         "geom": {
@@ -298,7 +333,7 @@
                 }
             }
         },
-        "runway":{
+        "runway_line":{
             "mock": false,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
@@ -306,7 +341,9 @@
                     "where": "typeweg = 'startbaan, landingsbaan'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" } 
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void'"}  
                     },
                     "geomapping":{
                         "geom": {
@@ -332,7 +369,9 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "geographical_name":  { "function": "nl_xx_name" },
-                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" } 
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void'"}  
                     },
                     "geomapping":{
                         "geom": {
