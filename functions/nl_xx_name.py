@@ -7,8 +7,10 @@
     
     if 'naamnl' in context['data']:
         nl_name = context['data']['naamnl']
+
     elif 'naam' in context['data']:
         nl_name = context['data']['naam']
+        
     else:
         nl_name = ""
 
