@@ -11,4 +11,7 @@
     if access == "En projet":
         return "projected"
 
-    return "functional"
+    if access == "En service":
+        return "functional"
+
+    return "void"
