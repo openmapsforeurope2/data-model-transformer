@@ -21,7 +21,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
@@ -72,7 +72,7 @@
             }
         },
         "marker_post":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_inrichtingselement_punt":{
                     "mock": false,
@@ -100,7 +100,7 @@
             }
         },
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_spoorbaandeel_lijn":{
                     "mock": false,
@@ -133,7 +133,7 @@
             }
         },
         "railway_station_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_inrichtingselement_punt":{
                     "mock": false,
@@ -161,7 +161,7 @@
             }
         },
         "road_service_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_vlak":{
                     "mock": false,
@@ -190,7 +190,7 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_vlak":{
                     "mock": false,
@@ -219,7 +219,7 @@
             }
         },
         "aerodrome_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
                     "mock": false,
@@ -248,7 +248,7 @@
             }
         },
         "aerodrome_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
                     "mock": false,
@@ -277,7 +277,7 @@
             }
         },
         "port_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
                     "mock": false,
@@ -306,7 +306,7 @@
             }
         },
         "port_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
                     "mock": false,
@@ -335,7 +335,7 @@
             }
         },
         "runway_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
@@ -362,7 +362,7 @@
             }
         },
         "ferry_crossing":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,

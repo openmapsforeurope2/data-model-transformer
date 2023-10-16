@@ -21,7 +21,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ro_roadsegment": {
                     "mock": false,
@@ -77,7 +77,7 @@
             }
         },
         "marker_post":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "ro_roadkilometremarker":{
                     "mock": false,
@@ -94,6 +94,219 @@
                     },
                     "fetched_fields":[
                         "kilometre"
+                    ]
+                }
+            }
+        },
+        "railway_link":{
+            "mock": true,
+            "source_tables":{
+                "ra_railwaytracksegment":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "eval": "'void'" },
+                        "number_of_tracks": { "eval": "'1'" },
+                        "vertical_position": {  "eval": "'void'"  },
+                        "trans_european_transport_network": { "eval": "'void'" },
+                        "electrified": { "eval": "1 if data['electric'] else '-32768' if data ['electric'] is None else 0" },
+                        "railway_line_code": { "eval": "data['linenum'] if data['linenum'] is not None else 'void'" },
+                        "railway_line_geographical_name": {"function": "be_tn_name"},
+                        "w_national_identifier": "tgid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void'"}  
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "electric",
+                        "linenum",
+                        "linename",
+                        "tgid"
+                    ]
+                }
+            }
+        },
+        "railway_station_point":{
+            "mock": true,
+            "source_tables":{
+                "ra_railwaystop":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "w_national_identifier": "tgid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"}  
+                    },
+                    "geomapping":{
+                        "geom": "geom"
+                    },
+                    "fetched_fields":[
+                        "tgid"
+                    ]
+                }
+            }
+        },
+        "aerodrome_area":{
+            "mock": true,
+            "source_tables":{
+                "zo_particularzone":{
+                    "mock": false,
+                    "where": "type in (15, 16, 18)",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['type'] == 15 or data['type'] == 16 else 'heliport_only' if data['type'] == 18 else 'void'"},
+                        "w_national_identifier": "tgid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"}  
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "type",
+                        "tgid"
+                    ]
+                }
+            }
+        },
+        "aerodrome_point":{
+            "mock": true,
+            "source_tables":{
+                "zo_particularzone":{
+                    "mock": false,
+                    "where": "type in (15, 16, 18)",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['type'] == 15 or data['type'] == 16 else 'heliport_only' if data['type'] == 18 else 'void'"},
+                        "w_national_identifier": "tgid",
+                        "xy_source": { "eval": "'ome2'"},
+                        "z_source": { "eval": "'void'"}  
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_PointOnSurface(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "type",
+                        "tgid"
+                    ]
+                }
+            }
+        },
+        "runway_area":{
+            "mock": true,
+            "source_tables":{
+                "zo_particularzone":{
+                    "mock": false,
+                    "where": "type = 17",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "w_national_identifier": "tgid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"}  
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "tgid"
+                    ]
+                }
+            }
+        },
+
+        "runway_line":{
+            "mock": true,
+            "source_tables":{
+                "zo_particularzone":{
+                    "mock": false,
+                    "where": "type = 17",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "w_national_identifier": "tgid",
+                        "xy_source": { "eval": "'ome2'"},
+                        "z_source": { "eval": "'void'"}  
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_ApproximateMedialAxis(${}), -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "tgid"
+                    ]
+                }
+            }
+        },
+        "road_service_area":{
+            "mock": true,
+            "source_tables":{
+                "zo_particularzone":{
+                    "mock": false,
+                    "where": "type in (1,2)",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "eval": "'rest_area'"},
+                        "w_national_identifier": "tgid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "tgid"
+                    ]
+                }
+            }
+        },
+        "road_service_point":{
+            "mock": true,
+            "source_tables":{
+                "zo_particularzone":{
+                    "mock": false,
+                    "where": "type in (1,2)",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "eval": "'rest_area'"},
+                        "w_national_identifier": "tgid",
+                        "xy_source": { "eval": "'ome2'"},
+                        "z_source": { "eval": "'void'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_PointOnSurface(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "tgid"
                     ]
                 }
             }
