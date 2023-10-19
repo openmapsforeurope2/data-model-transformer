@@ -329,7 +329,7 @@
                     },
                     "geom": {
                         "geometrie": {
-                            "transform": "ST_PointOnSurface(${})"
+                            "transform": "ST_Force3D(ST_PointOnSurface(${}), -1000)"
                         }
                     },
                     "fetched_fields":[
