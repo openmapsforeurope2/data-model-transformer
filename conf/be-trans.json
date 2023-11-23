@@ -37,7 +37,9 @@
                         "road_european_route_number": { "eval": "data['euroadnb'] if data['euroadnb'] is not None and data['euroadnb'] != 999 else 'void'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
                     },
                     "geomapping":{
                         "geom": "geom"
@@ -65,7 +67,9 @@
                         "road_surface_category": { "eval": "'unpaved'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
                     },
                     "geomapping":{
                         "geom": "geom"
@@ -87,7 +91,9 @@
                         "distance": { "eval": "data['kilometre'] if data['kilometre'] is not None else -32768" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
                     },
                     "geomapping":{
                         "geom": "geom"
@@ -109,13 +115,14 @@
                         "type": { "eval": "'void'" },
                         "number_of_tracks": { "eval": "'1'" },
                         "vertical_position": {  "eval": "'void'"  },
-                        "trans_european_transport_network": { "eval": "'void'" },
                         "electrified": { "eval": "1 if data['electric'] else '-32768' if data ['electric'] is None else 0" },
                         "railway_line_code": { "eval": "data['linenum'] if data['linenum'] is not None else 'void'" },
                         "railway_line_name": {"function": "be_tn_name"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}  
                     },
                     "geomapping":{
                         "geom": {
@@ -143,7 +150,9 @@
                         "country": { "eval": "'${country_code}'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}  
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}  
                     },
                     "geomapping":{
                         "geom": "geom"
@@ -165,7 +174,9 @@
                         "aerodrome_type": { "eval": "'aerodrome_heliport' if data['type'] == 15 or data['type'] == 16 else 'heliport_only' if data['type'] == 18 else 'void'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}  
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}  
                     },
                     "geomapping":{
                         "geom": {
@@ -192,7 +203,9 @@
                         "aerodrome_type": { "eval": "'aerodrome_heliport' if data['type'] == 15 or data['type'] == 16 else 'heliport_only' if data['type'] == 18 else 'void'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}  
                     },
                     "geomapping":{
                         "geom": {
@@ -218,7 +231,9 @@
                         "country": { "eval": "'${country_code}'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}  
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}  
                     },
                     "geomapping":{
                         "geom": {
@@ -233,7 +248,6 @@
                 }
             }
         },
-
         "runway_line":{
             "mock": false,
             "source_tables":{
@@ -244,7 +258,9 @@
                         "country": { "eval": "'${country_code}'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}  
                     },
                     "geomapping":{
                         "geom": {
@@ -270,7 +286,9 @@
                         "type": { "eval": "'rest_area'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
                     },
                     "geomapping":{
                         "geom": {
@@ -296,7 +314,9 @@
                         "type": { "eval": "'rest_area'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"}
+                        "z_source": { "eval": "'void'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
                     },
                     "geomapping":{
                         "geom": {

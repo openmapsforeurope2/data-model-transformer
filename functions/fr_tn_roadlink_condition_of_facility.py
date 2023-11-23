@@ -14,4 +14,4 @@
     if access == "En service":
         return "functional"
 
-    return "void"
+    return "void_unk"

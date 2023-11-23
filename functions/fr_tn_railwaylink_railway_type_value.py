@@ -7,7 +7,6 @@
 
     if nature == "Funiculaire ou crémaillère":
         return "funicular"
-        # cog_railway = chemin de fer à crémaillère
 
     if nature in ["LGV", "Voie de service", "Voie ferrée principale"]:
         return "train"
@@ -18,4 +17,4 @@
     if nature == "Tramway":
         return "tramway"
 
-    return "void"
+    return "void_unk"

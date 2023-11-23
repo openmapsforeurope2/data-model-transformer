@@ -8,4 +8,4 @@
     if category == "Internationale":
         return "international"
 
-    return "void"
+    return "void_unk"

@@ -22,7 +22,10 @@
     if period is not None:
         return "seasonal"
 
-    return "public_access"
+    if access == "Libre":
+        return "public_access"
+
+    return "void_unk"
 
 
     # forbidden_legally ? 

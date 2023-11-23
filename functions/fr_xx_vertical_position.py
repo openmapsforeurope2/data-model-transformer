@@ -14,4 +14,4 @@
     if position == "0" or position == "Gué ou radier":
         return "on_ground_surface"
 
-    return "void"
+    return "void_unk"

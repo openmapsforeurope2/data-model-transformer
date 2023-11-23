@@ -16,4 +16,4 @@
     if nature == "Aire de repos ou de service":
         return "rest_area"
 
-    return "void"
+    return "void_unk"

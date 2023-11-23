@@ -13,7 +13,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_v3",
+        "name":"ome2_hvlsp_v4",
         "user":"postgres",
         "pwd":"postgres",
         "schema": "tn"
@@ -22,7 +22,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_de_route": {
                     "mock": false,
@@ -33,24 +33,21 @@
                         "functional_road_class": { "function": "fr_tn_roadlink_functional_road_class" },
                         "number_of_lanes": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] != 'Sans objet' and data['nombre_de_voies'] is not None else '-32768'" },
                         "vertical_position": { "function": "fr_xx_vertical_position" },
-                        "vertical_level": { "eval": "data['position_par_rapport_au_sol'] if data['position_par_rapport_au_sol'] != 'Gué ou radier' and data['position_par_rapport_au_sol'] is not None else 'void'" },
-                        "geographical_name": { "function": "fr_tn_roadlink_name" },
+                        "vertical_level": { "eval": "0 if data['position_par_rapport_au_sol'] == 'Gué ou radier' else data['position_par_rapport_au_sol'] if data['position_par_rapport_au_sol'] is not None else 'void_unk'" },
+                        "street_name": { "function": "fr_tn_roadlink_name" },
                         "road_surface_category": { "function": "fr_tn_roadlink_road_surface_category" },
                         "traffic_flow_direction": { "function": "fr_tn_roadlink_traffic_flow_direction" },
                         "access_restriction": { "function": "fr_tn_roadlink_access_restriction" },
-                        "maximum_height": { "eval": "data['restriction_de_hauteur'] if data['restriction_de_hauteur'] is not None else '-32768'" },
-                        "maximum_length": { "eval": "data['restriction_de_longueur'] if data['restriction_de_longueur'] is not None else '-32768'" },
-                        "maximum_width": { "eval": "data['restriction_de_largeur'] if data['restriction_de_largeur'] is not None else '-32768'" },
-                        "maximum_total_weight": { "eval": "data['restriction_de_poids_total'] if data['restriction_de_poids_total'] is not None else '-32768'" },
-                        "maximum_single_axle_weight": { "eval": "data['restriction_de_poids_par_essieu'] if data['restriction_de_poids_par_essieu'] is not None else '-32768'" },
+                        "restriction_for_vehicles": { "function": "fr_tn_roadlink_restriction_for_vehicles"},
                         "condition_of_facility": { "function": "fr_tn_roadlink_condition_of_facility" },
-                        "valid_from": "date_d_apparition",
                         "w_national_identifier": "cleabs",
-                        "road_national_road_code": { "eval": "data['cpx_numero'] if data['cpx_numero'] is not None and data['cpx_numero'] != '' else 'void'" },
-                        "road_european_route_number":{ "eval": "data['cpx_numero_route_europeenne'] if data['cpx_numero_route_europeenne'] is not None and data['cpx_numero_route_europeenne'] != '' else 'void'" },
-                        "road_geographical_name":{ "function": "fr_xx_name" },
+                        "road_national_road_code": { "eval": "data['cpx_numero'] if data['cpx_numero'] is not None and data['cpx_numero'] != '' else 'void_unk'" },
+                        "road_european_route_number":{ "eval": "data['cpx_numero_route_europeenne'] if data['cpx_numero_route_europeenne'] is not None and data['cpx_numero_route_europeenne'] != '' else 'void_unk'" },
+                        "road_name":{ "function": "fr_xx_name" },
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}       
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}         
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -83,20 +80,21 @@
             }
         },
         "marker_post":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "point_de_repere":{
                     "mock": false,
                     "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "link_to_national_road": { "eval": "data['lien_vers_route_nommee'] if data['lien_vers_route_nommee'] is not None and data['lien_vers_route_nommee'] is not None != '' else 'void'" },
-                        "code": { "eval": "data['identifiant_de_pr'] if data['identifiant_de_pr'] is not None and data['identifiant_de_pr'] != '' else 'void'" },
+                        "w_link_to_national_road": { "eval": "data['lien_vers_route_nommee'] if data['lien_vers_route_nommee'] is not None and data['lien_vers_route_nommee'] is not None != '' else 'void_unk'" },
+                        "code": { "eval": "data['identifiant_de_pr'] if data['identifiant_de_pr'] is not None and data['identifiant_de_pr'] != '' else 'void_unk'" },
                         "distance": { "eval": "data['abscisse'] if data['abscisse'] is not None else '-32768'" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": {
@@ -116,7 +114,7 @@
             }
         },        
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_de_voie_ferree":{
                     "mock": false,
@@ -126,12 +124,12 @@
                         "type": { "function": "fr_tn_railwaylink_railway_type_value" },
                         "number_of_tracks": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] is not None else '-32768'" },
                         "vertical_position": { "function": "fr_xx_vertical_position" },
-                        "trans_european_transport_network": { "eval": "'void'" },
                         "electrified": { "eval": "1 if data['electrifie'] else '-32768' if data ['electrifie'] is None else 0" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}  
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -148,20 +146,21 @@
             }
         },
         "railway_station_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
                     "where": "NOT gcms_detruit AND nature IN ('Arrêt voyageurs', 'Gare fret uniquement', 'Gare voyageurs et fret', 'Gare voyageurs uniquement', 'Station de métro', 'Station de tramway')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "geographical_name":  { "function": "fr_xx_name" },
-                        "station_code": { "eval": "'void'" },
+                        "name":  { "function": "fr_xx_name" },
+                        "station_code": { "eval": "'void_unk'" },
                         "railway_use": { "function": "fr_tn_railwaystation_railway_use" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}  
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -176,20 +175,21 @@
             }
         },
         "railway_station_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
                     "where": "NOT gcms_detruit AND nature IN ('Arrêt voyageurs', 'Gare fret uniquement', 'Gare voyageurs et fret', 'Gare voyageurs uniquement', 'Station de métro', 'Station de tramway')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "geographical_name":  { "function": "fr_xx_name" },
-                        "station_code": { "eval": "'void'" },
+                        "name":  { "function": "fr_xx_name" },
+                        "station_code": { "eval": "'void_unk'" },
                         "railway_use": { "function": "fr_tn_railwaystation_railway_use" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": {
@@ -208,23 +208,24 @@
             }
         },
         "aerodrome_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "aerodrome":{
                     "mock": false,
-                    "where": "NOT gcms_detruit",
+                    "where": "nature != 'Hydrobase' AND NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "designator_iata": { "eval": "data['code_iata'] if data['code_iata'] is not None else 'void'" },
-                        "location_indicator_icao": { "eval": "data['code_icao'] if data['code_icao'] is not None else 'void'" },
-                        "geographical_name":  { "function": "fr_xx_name" },
+                        "designator_iata": { "eval": "data['code_iata'] if data['code_iata'] is not None else 'void_unk'" },
+                        "location_indicator_icao": { "eval": "data['code_icao'] if data['code_icao'] is not None else 'void_unk'" },
+                        "name":  { "function": "fr_xx_name" },
                         "aerodrome_category": { "function": "fr_tn_aerodrome_category"},
                         "aerodrome_type": { "function": "fr_tn_aerodrome_type"},
-                        "restriction": {"eval": "'reserved_for_military' if data['usage'] == 'Militaire' else 'void'"},
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "use_restriction": { "function": "fr_tn_aerodrome_restriction"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": {
@@ -247,23 +248,24 @@
             }
         },
         "aerodrome_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "aerodrome":{
                     "mock": false,
-                    "where": "NOT gcms_detruit",
+                    "where": "nature != 'Hydrobase' AND NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "designator_iata": { "eval": "data['code_iata'] if data['code_iata'] is not None else 'void'" },
-                        "location_indicator_icao": { "eval": "data['code_icao'] if data['code_icao'] is not None else 'void'" },
-                        "geographical_name":  { "function": "fr_xx_name" },
+                        "designator_iata": { "eval": "data['code_iata'] if data['code_iata'] is not None else 'void_unk'" },
+                        "location_indicator_icao": { "eval": "data['code_icao'] if data['code_icao'] is not None else 'void_unk'" },
+                        "name":  { "function": "fr_xx_name" },
                         "aerodrome_category": { "function": "fr_tn_aerodrome_category"},
                         "aerodrome_type": { "function": "fr_tn_aerodrome_type"},
-                        "restriction": {"eval": "'reserved_for_military' if data['usage'] == 'Militaire' else 'void'"},
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "use_restriction": { "function": "fr_tn_aerodrome_restriction"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": {
@@ -286,7 +288,7 @@
             }
         },
         "road_service_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -294,11 +296,12 @@
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "type": { "function": "fr_tn_road_service_type" },
-                        "geographical_name":   { "function": "fr_xx_name" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "name":   { "function": "fr_xx_name" },
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}  
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -321,11 +324,12 @@
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "type": { "function": "fr_tn_road_service_type" },
-                        "geographical_name":   { "function": "fr_xx_name" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "name":   { "function": "fr_xx_name" },
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": {
@@ -344,20 +348,20 @@
             }
         },
         "ferry_crossing":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_de_route":{
                     "mock": false,
                     "where": "NOT gcms_detruit AND (nature = 'Bac ou liaison maritime')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "geographical_name":  { "function": "fr_xx_name" },
-                        "ferry_use": { "eval": "'void'"},
-                        "trans_european_transport_network": { "eval": "'void'" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "name":  { "function": "fr_xx_name" },
+                        "ferry_use": { "eval": "'void_unk'"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": {
@@ -376,20 +380,19 @@
             }
         },
         "port_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
                     "where": "NOT gcms_detruit AND nature = 'Port'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "geographical_name":  { "function": "fr_xx_name" },
-                        "un_locode": { "eval": "'void'"},
-                        "trans_european_transport_network": { "eval": "'void'" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "name":  { "function": "fr_xx_name" },
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}  
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -404,20 +407,19 @@
             }
         },
         "port_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
                     "where": "NOT gcms_detruit AND nature = 'Port'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "geographical_name":  { "function": "fr_xx_name" },
-                        "un_locode": { "eval": "'void'"},
-                        "trans_european_transport_network": { "eval": "'void'" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "name":  { "function": "fr_xx_name" },
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": {
@@ -435,20 +437,21 @@
             }
         },
         "road":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "route_numerotee_ou_nommee":{
                     "mock": false,
-                    "where": "NOT gcms_detruit",
+                    "where": "numero NOT LIKE 'E%' AND NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "geographical_name":  { "function": "fr_xx_name" },
-                        "national_road_code": { "eval": "data['numero'] if data['numero'] is not None else 'void'"},
-                        "european_route_number": { "eval": "'void'"},
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "road_name":  { "function": "fr_xx_name" },
+                        "national_road_code": { "eval": "data['numero'] if data['numero'] is not None and not(data['numero'].startswith('E')) else 'void_unk'"},
+                        "european_route_number": { "eval": "data['numero'] if data['numero'].startswith('E') else 'void_unk'"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": {
@@ -467,19 +470,20 @@
             }
         },
         "railway_line":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "voie_ferree_nommee":{
                     "mock": false,
                     "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "geographical_name":  { "function": "fr_xx_name" },
-                        "railway_line_code": { "eval": "'void'"},
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "railway_line_name":  { "function": "fr_xx_name" },
+                        "railway_line_code": { "eval": "'void_unk'"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"}  
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": {
@@ -498,18 +502,19 @@
             }
         },
         "runway_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "piste_d_aerodrome":{
                     "mock": false,
                     "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "surface_composition":  { "eval": "'grass' if data['nature'] == 'Piste en herbe' else 'void'" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "surface_composition":  { "eval": "'grass' if data['nature'] == 'Piste en herbe' else 'void_hard' if data['nature'] == 'Piste en dur' else 'void_unk'" },
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'nmca'"}  
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": "geometrie"
@@ -524,18 +529,19 @@
             }
         },
         "runway_line":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "piste_d_aerodrome":{
                     "mock": false,
                     "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "surface_composition":  { "eval": "'grass' if data['nature'] == 'Piste en herbe' else 'void'" },
-                        "valid_from": {"eval": "data['date_d_apparition'] if data['date_d_apparition'] is not None else None"},
+                        "surface_composition":  { "eval": "'grass' if data['nature'] == 'Piste en herbe' else 'void_hard' if data['nature'] == 'Piste en dur' else 'void_unk'" },
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'ome2'"}  
+                        "z_source": { "eval": "'ome2'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
                         "geom": {

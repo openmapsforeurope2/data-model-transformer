@@ -82,7 +82,7 @@ def getWhereStatement( tableConf ):
 
 
 def run(
-    conf, pathOut
+    conf, pathOut, testOnly
 ):
     print("EXTRACTING...", flush=True)
 
@@ -113,6 +113,8 @@ def run(
                     select = appendFieldToSelect( select, computational_field )
             
             where_statement = getWhereStatement(table_conf)
+            if testOnly:
+                where_statement += " LIMIT 10"
 
             select = "SELECT " + select + " FROM " + full_table_name + where_statement
             query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
@@ -134,7 +136,8 @@ if __name__ == "__main__":
         workspace = sys.argv[1]
         confFile = workspace+"/conf/"+sys.argv[2]
         pathOut = sys.argv[3]
-        verbose = True if sys.argv[4] == 'true' else False
+        testOnly = True if sys.argv[6] == 'true' else False
+        verbose = True if sys.argv[5] == 'true' else False
     except:
         print (comment)
         sys.exit()
@@ -142,4 +145,4 @@ if __name__ == "__main__":
     conf = utils.getConf(confFile)
 
     if conf is not None:
-        run(conf, pathOut)
+        run(conf, pathOut, testOnly)

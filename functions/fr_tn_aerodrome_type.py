@@ -2,13 +2,10 @@
     
     nature = context['data']['nature']
 
-    if nature == "Aérodrome":
+    if nature == "Aérodrome" or nature == "Altiport":
         return "aerodrome_only"
 
     if nature == "Héliport":
         return "heliport_only"
 
-    if nature == "Altiport" or nature == "Hydrobase":
-        return "landing_site"
-
-    return "void"
+    return "void_unk"

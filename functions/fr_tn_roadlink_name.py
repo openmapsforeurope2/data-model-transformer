@@ -33,7 +33,9 @@
             "language": "fre",
             "script": "latin",
             "name_status": "official",
-            "nativeness": "endonym"
+            "nativeness": "endonym",
+            "spelling_latn": nom,
+            "display": 1
         })
     
     return name_list

@@ -17,10 +17,11 @@ def transform(argv):
     arg_reset = False
     arg_verbose = False
     arg_help = "{0} -c <conf> -o <output> -v".format(argv[0])
+    arg_test = False
     
     try:
         opts, args = getopt.getopt(argv[1:], "hc:o:vr", ["help", "conf=", 
-        "output=", "verbose", "reset"])
+        "output=", "verbose", "reset", "test"])
     except:
         print(arg_help)
         sys.exit(2)
@@ -37,11 +38,15 @@ def transform(argv):
             arg_reset = True
         elif opt in ("-v", "--verbose"):
             arg_verbose = True
+        elif opt in ("-t", "--test"):
+            arg_test = True
+
 
     print('conf:', arg_conf)
     print('output:', arg_output)
     print('reset:', arg_reset)
     print('verbose:', arg_verbose)
+    print('test:', arg_test)
 
     workspace = os.path.dirname(currentDir)+"/"
     tempDir = arg_output + "/tmp"
@@ -63,7 +68,7 @@ def transform(argv):
     conf = utils.getConf(arg_conf)
     functions = utils.getFunctions(workspace+"/functions")
 
-    extract.run(conf, tempDir)
+    extract.run(conf, tempDir, arg_test)
     dump.run(functions, conf, tempDir, arg_output)
     restore.run(conf, arg_output, arg_reset, arg_verbose)
 

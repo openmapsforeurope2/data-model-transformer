@@ -25,5 +25,5 @@
     if territoire == "SPM":
         return "pm"
     
-    return ""
+    return "void_unk"
 
