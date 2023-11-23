@@ -9,9 +9,11 @@
         name_list.append({
             "spelling": nom_officiel,
             "language": "fre",
-            "script": "latin",
+            "script": "latn",
             "name_status": "official",
-            "nativeness": "endonym"
+            "nativeness": "endonym",
+            "spelling_latn": nom_officiel,
+            "display": 1
         })
     
     return name_list

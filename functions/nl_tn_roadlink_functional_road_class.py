@@ -23,4 +23,4 @@
     if typeweg == "Straat":
         return "fourth_class"
 
-    return "void"
+    return "void_unk"
