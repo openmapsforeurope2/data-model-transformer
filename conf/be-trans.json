@@ -32,9 +32,10 @@
                         "functional_road_class": { "function": "be_tn_roadlink_functional_road_class" },
                         "number_of_lanes": { "eval": "data['lanesnb'] if data['lanesnb'] is not None else -32768" },
                         "road_surface_category": { "function": "be_tn_roadlink_road_surface_category" },
+                        "access_restriction": { "eval": "'void_restricted' if data['roadstatus'] == 7 else 'public_access'"},
                         "condition_of_facility": { "function": "be_tn_roadlink_condition_of_facility" },
-                        "road_national_road_code": { "eval": "data['natroadnb'] if data['natroadnb'] is not None and data['natroadnb'] != 999 else 'void'" },
-                        "road_european_route_number": { "eval": "data['euroadnb'] if data['euroadnb'] is not None and data['euroadnb'] != 999 else 'void'" },
+                        "road_national_road_code": { "eval": "data['natroadnb'] if data['natroadnb'] is not None and data['natroadnb'] != 999 else 'void_unk'" },
+                        "road_european_route_number": { "eval": "data['euroadnb'] if data['euroadnb'] is not None and data['euroadnb'] != 999 else 'void_unk'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -112,15 +113,14 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "type": { "eval": "'void'" },
+                        "type": { "eval": "'train' if data['trackuse'] == 1 else 'magnetic_levitation' if data['trackuse'] == 2 else 'tramway' if data['trackuse'] == 3 else 'void_unk'"},
                         "number_of_tracks": { "eval": "'1'" },
-                        "vertical_position": {  "eval": "'void'"  },
                         "electrified": { "eval": "1 if data['electric'] else '-32768' if data ['electric'] is None else 0" },
-                        "railway_line_code": { "eval": "data['linenum'] if data['linenum'] is not None else 'void'" },
+                        "railway_line_code": { "eval": "data['linenum'] if data['linenum'] is not None else 'void_unk'" },
                         "railway_line_name": {"function": "be_tn_name"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}  
                     },
@@ -135,7 +135,8 @@
                         "electric",
                         "linenum",
                         "linename",
-                        "tgid"
+                        "tgid",
+                        "trackuse"
                     ]
                 }
             }
@@ -148,6 +149,7 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
+                        "railway_use": { "eval" : "'passenger'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -171,7 +173,7 @@
                     "where": "type in (15, 16, 18)",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['type'] == 15 or data['type'] == 16 else 'heliport_only' if data['type'] == 18 else 'void'"},
+                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['type'] == 15 or data['type'] == 16 else 'heliport_only' if data['type'] == 18 else 'void_unk'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -200,10 +202,10 @@
                     "where": "type in (15, 16, 18)",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['type'] == 15 or data['type'] == 16 else 'heliport_only' if data['type'] == 18 else 'void'"},
+                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['type'] == 15 or data['type'] == 16 else 'heliport_only' if data['type'] == 18 else 'void_unk'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}  
                     },
@@ -258,7 +260,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}  
                     },
@@ -283,7 +285,7 @@
                     "where": "type in (1,2)",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "type": { "eval": "'rest_area'"},
+                        "type": { "eval": "'rest_area' if data['type'] == 1 or data['type'] == 2 else 'void_unk'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -298,7 +300,8 @@
                         }
                     },
                     "fetched_fields":[
-                        "tgid"
+                        "tgid",
+                        "type"
                     ]
                 }
             }
@@ -311,10 +314,10 @@
                     "where": "type in (1,2)",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "type": { "eval": "'rest_area'"},
+                        "type": { "eval": "'rest_area' if data['type'] == 1 or data['type'] == 2 else 'void_unk'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}
                     },
@@ -326,7 +329,8 @@
                         }
                     },
                     "fetched_fields":[
-                        "tgid"
+                        "tgid",
+                        "type"
                     ]
                 }
             }

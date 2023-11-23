@@ -14,5 +14,5 @@
     if opstate == 3:
         return "disused"
 
-    return "void"
+    return "void_unk"
     

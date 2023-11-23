@@ -9,7 +9,9 @@
             "language": "dut",
             "script": "latn",
             "name_status": "official",
-            "nativeness": "endonym"
+            "nativeness": "endonym",
+            "spelling_latn": name,
+            "display": 1
         })
            
     return name_list

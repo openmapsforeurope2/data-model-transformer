@@ -6,10 +6,12 @@
     if linename != "" :
         name_list.append({
             "spelling": linename,
-            "language": "void",
-            "script": "latin",
-            "name_status": "official",
-            "nativeness": "endonym"
+            "language": "dut#fre",
+            "script": "latn",
+            "name_status": "standardised",
+            "nativeness": "endonym",
+            "spelling_latn": linename,
+            "display": 1
         })
     
     return name_list

@@ -14,4 +14,4 @@
     if nwegnummer != "" and nwegnummer is not None:
         return nwegnummer
 
-    return "void"
+    return "void_unk"

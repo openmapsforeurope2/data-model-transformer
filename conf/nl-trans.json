@@ -31,17 +31,17 @@
                         "form_of_way": { "function": "nl_tn_roadlink_form_of_way" },
                         "functional_road_class": { "function": "nl_tn_roadlink_functional_road_class" },
                         "number_of_lanes": { "eval": "data['aantalrijstroken'] if data['aantalrijstroken'] is not None else -32768" },
-                        "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void'" },
+                        "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void_unk'" },
                         "vertical_level": { "eval": "data['hoogteniveau'] if data['hoogteniveau'] is not None else -32768" },
                         "street_name": { "function": "nl_xx_name" },
-                        "road_surface_category": { "eval": "'unpaved' if data['verhardingstype'] == 'onverhard' else 'paved' if data['verhardingstype'] is not None else 'void'" },           
+                        "road_surface_category": { "eval": "'unpaved' if data['verhardingstype'] == 'onverhard' else 'paved' if data['verhardingstype'] is not None else 'void_unk'" },           
                         "condition_of_facility": { "function": "nl_tn_roadlink_condition_of_facility" },                    
                         "road_national_road_code": { "function": "nl_tn_roadlink_national_road_code" },
                         "road_name": { "function": "nl_xx_name" },
-                        "road_european_route_number": { "eval": "data['ewegnummer'] if data['ewegnummer'] is not None else 'void'" },
+                        "road_european_route_number": { "eval": "data['ewegnummer'] if data['ewegnummer'] is not None else 'void_unk'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}   
                     },
@@ -80,10 +80,10 @@
                     "where": "typeinrichtingselement = 'kilometerpaal'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "code": { "eval": "data['nummer'] if data['nummer'] is not None else 'void'" },
+                        "code": { "eval": "data['nummer'] if data['nummer'] is not None else 'void_unk'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"} 
                     },
@@ -110,12 +110,12 @@
                     "where": "typespoorbaan in ('tram','trein','metro')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "type": { "eval": "'train' if data['typespoorbaan'] == 'trein' else 'tram' if data['typespoorbaan'] == 'tram' else 'metro' if data['typespoorbaan'] == 'metro' else 'void'" },
-                        "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void'" },
+                        "type": { "eval": "'train' if data['typespoorbaan'] == 'trein' else 'tram' if data['typespoorbaan'] == 'tram' else 'metro' if data['typespoorbaan'] == 'metro' else 'void_unk'" },
+                        "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void_unk'" },
                         "electrified": { "eval": "'1' if data['elektrificatie'] == 'ja' else -32768 if data ['elektrificatie'] is None else '0'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"} 
                     },
@@ -147,7 +147,7 @@
                         "name":  { "function": "nl_tn_name" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"} 
                     },
@@ -178,7 +178,7 @@
                         "name":  { "function": "nl_tn_name" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"} 
                     },
@@ -209,7 +209,7 @@
                         "name":  { "function": "nl_tn_name" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"} 
                     },
@@ -239,7 +239,7 @@
                         "name":  { "function": "nl_xx_name" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"} 
                     },
@@ -270,7 +270,7 @@
                         "name":  { "function": "nl_xx_name" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"} 
                     },
@@ -301,7 +301,7 @@
                         "name":  { "function": "nl_xx_name" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"} 
                     },
@@ -332,7 +332,7 @@
                         "name":  { "function": "nl_xx_name" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"} 
                     },
@@ -362,7 +362,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}  
                     },
@@ -392,7 +392,7 @@
                         "name":  { "function": "nl_xx_name" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}  
                     },

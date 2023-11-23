@@ -27,7 +27,9 @@
                 "language": "dut",
                 "script": "latn",
                 "name_status": "official",
-                "nativeness": "endonym"
+                "nativeness": "endonym",
+                "spelling_latn": official_name,
+                "display": 1
             })
             if fries_name != "":
                 name_list.append({
@@ -35,7 +37,9 @@
                 "language": "fry",
                 "script": "latn",
                 "name_status": "official",
-                "nativeness": "endonym"
+                "nativeness": "endonym",
+                "spelling_latn": fries_name,
+                "display": 0
             })
                 
         else:
@@ -44,7 +48,9 @@
                 "language": "fry",
                 "script": "latn",
                 "name_status": "official",
-                "nativeness": "endonym"
+                "nativeness": "endonym",
+                "spelling_latn": official_name,
+                "display": 1
             })
             if nl_name != "":
                 name_list.append({
@@ -52,17 +58,21 @@
                 "language": "dut",
                 "script": "latn",
                 "name_status": "official",
-                "nativeness": "endonym"
+                "nativeness": "endonym",
+                "spelling_latn": nl_name,
+                "display": 0
             })
     
     else:
         if nl_name != "":
             name_list.append({
-                "spelling": official_name,
+                "spelling": nl_name,
                 "language": "dut",
                 "script": "latin",
                 "name_status": "official",
-                "nativeness": "endonym"
+                "nativeness": "endonym",
+                "spelling_latn": nl_name,
+                "display": 1
             })
         if fries_name != "":
             name_list.append({
@@ -70,7 +80,9 @@
                 "language": "fry",
                 "script": "latin",
                 "name_status": "official",
-                "nativeness": "endonym"
+                "nativeness": "endonym",
+                "spelling_latn": fries_name,
+                "display": 2
             })
 
     return name_list

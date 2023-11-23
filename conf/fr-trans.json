@@ -87,7 +87,7 @@
                     "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
-                        "w_link_to_national_road": { "eval": "data['lien_vers_route_nommee'] if data['lien_vers_route_nommee'] is not None and data['lien_vers_route_nommee'] is not None != '' else 'void_unk'" },
+                        "w_link_to_national_road": { "eval": "data['lien_vers_route_nommee'] if data['lien_vers_route_nommee'] is not None and data['lien_vers_route_nommee'] != '' else 'void_unk'" },
                         "code": { "eval": "data['identifiant_de_pr'] if data['identifiant_de_pr'] is not None and data['identifiant_de_pr'] != '' else 'void_unk'" },
                         "distance": { "eval": "data['abscisse'] if data['abscisse'] is not None else '-32768'" },
                         "w_national_identifier": "cleabs",
