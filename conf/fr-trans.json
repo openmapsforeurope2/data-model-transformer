@@ -80,7 +80,7 @@
             }
         },
         "marker_post":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "point_de_repere":{
                     "mock": false,
@@ -114,7 +114,7 @@
             }
         },        
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_de_voie_ferree":{
                     "mock": false,
@@ -146,7 +146,7 @@
             }
         },
         "railway_station_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -175,7 +175,7 @@
             }
         },
         "railway_station_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -208,7 +208,7 @@
             }
         },
         "aerodrome_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "aerodrome":{
                     "mock": false,
@@ -248,7 +248,7 @@
             }
         },
         "aerodrome_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "aerodrome":{
                     "mock": false,
@@ -288,7 +288,7 @@
             }
         },
         "road_service_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -316,7 +316,7 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -348,7 +348,7 @@
             }
         },
         "ferry_crossing":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_de_route":{
                     "mock": false,
@@ -380,7 +380,7 @@
             }
         },
         "port_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -407,7 +407,7 @@
             }
         },
         "port_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -437,7 +437,7 @@
             }
         },
         "road":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "route_numerotee_ou_nommee":{
                     "mock": false,
@@ -470,7 +470,7 @@
             }
         },
         "railway_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "voie_ferree_nommee":{
                     "mock": false,
@@ -502,7 +502,7 @@
             }
         },
         "runway_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "piste_d_aerodrome":{
                     "mock": false,
@@ -529,7 +529,7 @@
             }
         },
         "runway_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "piste_d_aerodrome":{
                     "mock": false,

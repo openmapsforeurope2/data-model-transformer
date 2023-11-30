@@ -82,7 +82,7 @@
             }
         },
         "marker_post":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ro_roadkilometremarker":{
                     "mock": false,
@@ -106,7 +106,7 @@
             }
         },
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ra_railwaytracksegment":{
                     "mock": false,
@@ -142,7 +142,7 @@
             }
         },
         "railway_station_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ra_railwaystop":{
                     "mock": false,
@@ -166,7 +166,7 @@
             }
         },
         "aerodrome_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "zo_particularzone":{
                     "mock": false,
@@ -195,7 +195,7 @@
             }
         },
         "aerodrome_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "zo_particularzone":{
                     "mock": false,
@@ -224,7 +224,7 @@
             }
         },
         "runway_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "zo_particularzone":{
                     "mock": false,
@@ -251,7 +251,7 @@
             }
         },
         "runway_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "zo_particularzone":{
                     "mock": false,
@@ -278,7 +278,7 @@
             }
         },
         "road_service_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "zo_particularzone":{
                     "mock": false,
@@ -307,7 +307,7 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "zo_particularzone":{
                     "mock": false,
