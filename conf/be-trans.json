@@ -137,7 +137,8 @@
                         "linenum",
                         "linename",
                         "tgid",
-                        "trackuse"
+                        "trackuse",
+                        "opstate"
                     ]
                 }
             }

@@ -132,7 +132,8 @@
                         "hoogteniveau",
                         "elektrificatie",
                         "namespace",
-                        "lokaalid"
+                        "lokaalid",
+                        "status"
                     ]
                 }
             }

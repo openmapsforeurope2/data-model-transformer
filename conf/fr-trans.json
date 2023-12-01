@@ -141,7 +141,8 @@
                         "gcms_territoire",
                         "nombre_de_voies",
                         "electrifie",
-                        "date_d_apparition"
+                        "date_d_apparition",
+                        "etat_de_l_objet"
                     ]
                 }
             }
