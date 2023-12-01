@@ -103,7 +103,7 @@
             }
         },
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_spoorbaandeel_lijn":{
                     "mock": false,
@@ -113,6 +113,7 @@
                         "type": { "eval": "'train' if data['typespoorbaan'] == 'trein' else 'tram' if data['typespoorbaan'] == 'tram' else 'metro' if data['typespoorbaan'] == 'metro' else 'void_unk'" },
                         "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void_unk'" },
                         "electrified": { "eval": "'1' if data['elektrificatie'] == 'ja' else -32768 if data ['elektrificatie'] is None else '0'" },
+                        "condition_of_facility": { "function": "nl_tn_roadlink_condition_of_facility" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},

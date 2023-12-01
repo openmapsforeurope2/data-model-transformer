@@ -29,6 +29,6 @@
         return "walkway"
 
     if nature == "Chemin":
-        return "tractor"
+        return "tractor_road"
     
     return "void_unk"

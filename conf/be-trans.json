@@ -64,7 +64,7 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "form_of_way": { "eval": "'tractor'" },
+                        "form_of_way": { "eval": "'tractor_road'" },
                         "road_surface_category": { "eval": "'unpaved'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
@@ -106,7 +106,7 @@
             }
         },
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "ra_railwaytracksegment":{
                     "mock": false,
@@ -118,6 +118,7 @@
                         "electrified": { "eval": "1 if data['electric'] else '-32768' if data ['electric'] is None else 0" },
                         "railway_line_code": { "eval": "data['linenum'] if data['linenum'] is not None else 'void_unk'" },
                         "railway_line_name": {"function": "be_tn_name"},
+                        "condition_of_facility": { "function": "be_tn_roadlink_condition_of_facility" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},

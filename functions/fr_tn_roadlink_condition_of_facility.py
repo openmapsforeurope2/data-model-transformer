@@ -3,15 +3,15 @@
     # 'disused', 'functional', 'projected', 'under_construction', 'decommissioned'
 
     # Sans valeur | En construction | En projet | En service
-    access = context['data']['etat_de_l_objet']
+    etat = context['data']['etat_de_l_objet']
 
-    if access == "En construction":
+    if etat == "En construction":
         return "under_construction"
 
-    if access == "En projet":
+    if etat == "En projet":
         return "projected"
 
-    if access == "En service":
+    if etat == "En service":
         return "functional"
 
     return "void_unk"
