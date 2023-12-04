@@ -3,12 +3,12 @@
     "source_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"be_national",
+        "name":"be_national_3812_20231204",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "tn"
     },
-    "source_srid": "4326",
+    "source_srid": "3812",
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
@@ -21,7 +21,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ro_roadsegment": {
                     "mock": false,
