@@ -4,8 +4,8 @@
         "host":"10.128.35.60",
         "port":"5432",
         "name":"be_national_3812_20231204",
-        "user":"ome2_user",
-        "pwd":"ome2_user",
+        "user":"postgres",
+        "pwd":"postgres",
         "schema": "tn"
     },
     "source_srid": "3812",
