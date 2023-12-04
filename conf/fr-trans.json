@@ -22,7 +22,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_de_route": {
                     "mock": false,
