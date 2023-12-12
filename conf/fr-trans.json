@@ -4,7 +4,7 @@
     "source_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"fr_national_hydro_trans",
+        "name":"fr_national_20231212",
         "user":"postgres",
         "pwd":"postgres",
         "schema": "public"
