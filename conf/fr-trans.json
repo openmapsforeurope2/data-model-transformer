@@ -114,7 +114,7 @@
             }
         },        
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_de_voie_ferree":{
                     "mock": false,
@@ -148,7 +148,7 @@
             }
         },
         "railway_station_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -177,7 +177,7 @@
             }
         },
         "railway_station_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -290,7 +290,7 @@
             }
         },
         "road_service_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -318,7 +318,7 @@
             }
         },
         "road_service_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -382,7 +382,7 @@
             }
         },
         "port_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -409,7 +409,7 @@
             }
         },
         "port_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
@@ -472,7 +472,7 @@
             }
         },
         "railway_line":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "voie_ferree_nommee":{
                     "mock": false,
