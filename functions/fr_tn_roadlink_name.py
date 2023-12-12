@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # def function_name(context):
     
-    left_name = context['data']['nom_1_gauche']
-    right_name = context['data']['nom_1_droite']
+    left_name = context['data']['nom_collaboratif_gauche']
+    right_name = context['data']['nom_collaboratif_droite']
 
     nom = ""
     
