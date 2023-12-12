@@ -114,11 +114,11 @@
             }
         },        
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_de_voie_ferree":{
                     "mock": false,
-                    "where": "NOT gcms_detruit AND nature != 'Sans objet'",
+                    "where": "NOT gcms_detruit AND diffusion",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "type": { "function": "fr_tn_railwaylink_railway_type_value" },
@@ -210,7 +210,7 @@
             }
         },
         "aerodrome_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "aerodrome":{
                     "mock": false,
@@ -250,7 +250,7 @@
             }
         },
         "aerodrome_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "aerodrome":{
                     "mock": false,

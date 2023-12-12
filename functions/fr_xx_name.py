@@ -2,7 +2,7 @@
 
     if 'toponyme' in context['data']:
         nom = context['data']['toponyme']
-    if 'cpx_toponyme_route_nommee' in context['data']:
+    elif 'cpx_toponyme_route_nommee' in context['data']:
         nom = context['data']['cpx_toponyme_route_nommee']
     elif 'cpx_toponyme_de_cours_d_eau' in context['data']:
         nom = context['data']['cpx_toponyme_de_cours_d_eau']
@@ -18,7 +18,7 @@
         name_list.append({
             "spelling": nom,
             "language": "fre",
-            "script": "latin",
+            "script": "latn",
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": nom,
