@@ -22,7 +22,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_de_route": {
                     "mock": false,
@@ -114,7 +114,7 @@
             }
         },        
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_de_voie_ferree":{
                     "mock": false,
@@ -126,6 +126,7 @@
                         "vertical_position": { "function": "fr_xx_vertical_position" },
                         "electrified": { "eval": "1 if data['electrifie'] else '-32768' if data ['electrifie'] is None else 0" },
                         "condition_of_facility": { "function": "fr_tn_roadlink_condition_of_facility" },
+                        "railway_line_name":  { "function": "fr_xx_name" },
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -142,7 +143,8 @@
                         "nombre_de_voies",
                         "electrifie",
                         "date_d_apparition",
-                        "etat_de_l_objet"
+                        "etat_de_l_objet",
+                        "cpx_toponyme"
                     ]
                 }
             }
@@ -439,7 +441,7 @@
             }
         },
         "road":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "route_numerotee_ou_nommee":{
                     "mock": false,
