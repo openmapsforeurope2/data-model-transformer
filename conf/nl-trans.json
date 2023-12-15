@@ -379,7 +379,8 @@
                     "fetched_fields":[
                         "typeweg",
                         "namespace",
-                        "lokaalid"
+                        "lokaalid",
+                        "verhardingstype"
                     ]
                 }
             }
@@ -409,7 +410,8 @@
                     "fetched_fields":[
                         "typeweg",
                         "namespace",
-                        "lokaalid"
+                        "lokaalid",
+                        "verhardingstype"
                     ]
                 }
             }
