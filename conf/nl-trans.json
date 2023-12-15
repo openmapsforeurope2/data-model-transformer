@@ -21,7 +21,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
@@ -103,7 +103,7 @@
             }
         },
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_spoorbaandeel_lijn":{
                     "mock": false,
@@ -355,15 +355,46 @@
             }
         },
         "runway_line":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
                     "where": "typeweg = 'startbaan, landingsbaan'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
+                        "surface_composition": { "eval": "'void_unpaved' if data['verhardingstype'] == 'onverhard' else 'void_hard' if data['verhardingstype'] is not None else 'void_unk'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}  
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Multi(ST_Force3D(${},-1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "typeweg",
+                        "namespace",
+                        "lokaalid"
+                    ]
+                }
+            }
+        },
+        "runway_area":{
+            "mock": false,
+            "source_tables":{
+                "ome2_runway_area": {
+                    "mock": false,
+                    "where": "typeweg = 'startbaan, landingsbaan'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "surface_composition": { "eval": "'void_unpaved' if data['verhardingstype'] == 'onverhard' else 'void_hard' if data['verhardingstype'] is not None else 'void_unk'" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}  
