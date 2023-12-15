@@ -390,7 +390,7 @@
             "source_tables":{
                 "ome2_runway_area": {
                     "mock": false,
-                    "where": "typeweg = 'startbaan, landingsbaan'",
+                    "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "surface_composition": { "eval": "'void_unpaved' if data['verhardingstype'] == 'onverhard' else 'void_hard' if data['verhardingstype'] is not None else 'void_unk'" },
