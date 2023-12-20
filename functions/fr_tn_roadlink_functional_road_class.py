@@ -17,5 +17,7 @@
         return "third_class"
     if importance == "5":
         return "fourth_class"
+    if importance == "6":
+        return "fifth_class"
 
     return "void_unk"
