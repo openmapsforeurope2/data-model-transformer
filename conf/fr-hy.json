@@ -540,7 +540,7 @@
             "source_tables":{
                 "bassin_versant_topographique": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND NOT bassin_fluvial",
+                    "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },  
                         "basin_order": { "eval": "'4'"},
