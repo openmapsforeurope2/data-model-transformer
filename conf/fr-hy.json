@@ -254,7 +254,11 @@
                         "w_scale": { "eval": "'10000'"}
                     },
                     "geomapping":{
-                        "geom": "geometrie"
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
                     },
                     "fetched_fields":[         
                         "gcms_territoire",
@@ -278,7 +282,7 @@
                     "geomapping":{
                         "geom": {
                             "geometrie": {
-                                "transform": "ST_Force3D(ST_ApproximateMedialAxis(${}),-1000)"
+                                "transform": "ST_Multi(ST_Force3D(ST_ApproximateMedialAxis(${}),-1000))"
                             }
                         }
                     },
@@ -393,7 +397,7 @@
                     "geomapping":{
                         "geom": {
                             "geometrie": {
-                                "transform": "ST_Force3D(ST_ApproximateMedialAxis(${}),-1000)"
+                                "transform": "ST_Multi(ST_Force3D(ST_ApproximateMedialAxis(${}),-1000))"
                             }
                         }
                     },
