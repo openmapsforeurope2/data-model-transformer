@@ -22,7 +22,7 @@
     "target_country_field": "country",
     "target_tables": {
         "watercourse_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_hydrographique": {
                     "mock": false,
@@ -73,7 +73,7 @@
             }
         },
         "watercourse":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "cours_d_eau": {
                     "mock": false,
@@ -122,11 +122,7 @@
                         "w_scale": { "eval": "'10000'"}
                     },
                     "geomapping":{
-                        "geom": {
-                            "geometrie_ge": {
-                                "transform": "ST_Force3D(${}, -1000)"
-                            }
-                        }
+                        "geom": "geometrie"
                     },
                     "fetched_fields":[
                         "gcms_territoire",
@@ -139,7 +135,7 @@
             }
         },
         "watercourse_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "surface_hydrographique": {
                     "mock": false,
@@ -175,7 +171,7 @@
             }
         },
         "standing_water":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "surface_hydrographique": {
                     "mock": false,
@@ -212,7 +208,7 @@
             }
         },
         "dam_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_surfacique": {
                     "mock": false,
@@ -239,7 +235,7 @@
             }
         },
         "dam_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_lineaire": {
                     "mock": false,
@@ -296,7 +292,7 @@
             }
         },
         "dam_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_lineaire": {
                     "mock": false,
@@ -353,7 +349,7 @@
             }
         },
         "lock_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_surfacique": {
                     "mock": false,
@@ -380,7 +376,7 @@
             }
         },
         "lock_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_surfacique": {
                     "mock": false,
@@ -411,7 +407,7 @@
             }
         },
         "lock_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_surfacique": {
                     "mock": false,
@@ -442,7 +438,7 @@
             }
         },
         "falls_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "detail_hydrographique": {
                     "mock": false,
@@ -473,7 +469,7 @@
             }
         },
         "shoreline":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "limite_terre_mer": {
                     "mock": false,
@@ -506,7 +502,7 @@
             }
         },
         "shore":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "zone_d_estran": {
                     "mock": false,
@@ -536,7 +532,7 @@
             }
         },
         "drainage_basin":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "bassin_versant_topographique": {
                     "mock": false,

@@ -28,9 +28,9 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "persistence": { "eval": "'intermittent' if data['regime'] == 1 else 'perennial' if data['regime'] == 2 else 'void'" },
-                        "fictitious": {"eval": "'true' if data['fictitious'] == 1 else 'false' if data['fictitious'] == 2 else 'void'"},
-                        "navigable": {"eval": "'true' if data['navigable'] == 1 else 'false' if data['navigable'] == 2 else 'void'"},
+                        "persistence": { "eval": "'intermittent' if data['regime'] == 1 else 'perennial' if data['regime'] == 2 else 'void_unk'" },
+                        "fictitious": {"eval": "'true' if data['fictitious'] == 1 else 'false' if data['fictitious'] == 2 else 'void_unk'"},
+                        "navigable": {"eval": "'true' if data['navigable'] == 1 else 'false' if data['navigable'] == 2 else 'void_unk'"},
                         "width_lower_range": {"function": "be_hy_width_lower_range"},
                         "width_upper_range": {"function": "be_hy_width_upper_range"},
                         "w_national_identifier": "tgid"
@@ -79,7 +79,27 @@
                     "where": "type = 2 OR type = 4",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "persistence": { "eval": "'intermittent' if data['regime'] == 1 else 'perennial' if data['regime'] == 2 else 'void'" },
+                        "persistence": { "eval": "'intermittent' if data['regime'] == 1 else 'perennial' if data['regime'] == 2 else 'void_unk'" },
+                        "w_national_identifier": "tgid"
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "regime",                        
+                        "tgid"
+                    ]
+                },
+                "hy_wetland": {
+                    "mock": false,
+                    "where": "type = 1 OR type = 2",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "persistence": { "eval": "'void_unk'" },
                         "w_national_identifier": "tgid"
                     },
                     "geomapping":{
