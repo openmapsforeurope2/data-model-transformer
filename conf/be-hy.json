@@ -109,8 +109,7 @@
                             }
                         }
                     },
-                    "fetched_fields":[
-                        "regime",                        
+                    "fetched_fields":[                       
                         "tgid"
                     ]
                 }
