@@ -1,0 +1,122 @@
+{
+    "country_code": "lu",
+    "source_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"lu_national_20240202",
+        "user":"ome2_user",
+        "pwd":"ome2_user",
+        "schema": "au"
+    },
+    "source_srid": "3035",
+    "target_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"ome2_hvlsp_v4",
+        "user":"ome2_user",
+        "pwd":"ome2_user",
+        "schema": "au"
+    },
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "administrative_unit_area_1":{
+            "mock": false,
+            "source_tables":{
+                "country": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": "nationalcode",
+                        "shn": { "eval": "'LU0000'" },
+                        "name": { "function": "lu_au_name"},
+                        "national_level_code": { "eval": "2001" },
+                        "w_national_identifier": "identifier",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": "geometry"
+                        }
+                    },
+                    "fetched_fields":[
+                        "name",
+                        "language",
+                        "nationalcode",
+                        "identifier"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_area_2":{
+            "mock": false,
+            "source_tables":{
+                "cantons": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": "nationalcode",
+                        "shn": { "eval": "'void_unk'" },
+                        "name": { "function": "lu_au_name"},
+                        "national_level_code": { "eval": "2002" },
+                        "land_cover_type": { "eval": "'void_unk'" },
+                        "w_national_identifier": "identifier",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": "geometry"
+                        }
+                    },
+                    "fetched_fields":[
+                        "name",
+                        "language",
+                        "nationalcode",
+                        "identifier"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_area_3":{
+            "mock": false,
+            "source_tables":{
+                "province_ome2": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": "nationalcode",
+                        "shn": { "function": "lu_au_shn_municipality" },
+                        "name": { "function": "be_au_name"},
+                        "national_level_code": { "eval": "2003" },
+                        "land_cover_type": { "eval": "'land_area'" },
+                        "w_national_identifier": "tgid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": "geom"
+                        }
+                    },
+                    "fetched_fields":[
+                        "name",
+                        "language",
+                        "nationalcode",
+                        "identifier"
+                    ]
+                }
+            }
+        }  
+    }
+}

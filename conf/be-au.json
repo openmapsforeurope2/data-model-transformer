@@ -35,7 +35,7 @@
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_na'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}                 
                     },
@@ -65,7 +65,7 @@
                         "zone_type": { "eval": "'territorial_sea'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_na'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}                    
                     },
@@ -94,7 +94,7 @@
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_na'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}                    
                     },
@@ -127,7 +127,7 @@
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_na'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}                    
                     },
@@ -161,7 +161,7 @@
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_na'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}                    
                     },
@@ -195,7 +195,7 @@
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_na'"},
+                        "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}                    
                     },
