@@ -4,8 +4,8 @@
         "host":"10.128.35.60",
         "port":"5432",
         "name":"lu_national_20240202",
-        "user":"ome2_user",
-        "pwd":"ome2_user",
+        "user":"postgres",
+        "pwd":"postgres",
         "schema": "au"
     },
     "source_srid": "3035",
@@ -39,12 +39,10 @@
                         "w_scale": { "eval": "'10000'"}                 
                     },
                     "geomapping":{
-                        "geom": {
-                            "geom": "geometry"
-                        }
+                        "geom": "geometry"
                     },
                     "fetched_fields":[
-                        "name",
+                        "text",
                         "language",
                         "nationalcode",
                         "identifier"
@@ -72,12 +70,10 @@
                         "w_scale": { "eval": "'10000'"}                    
                     },
                     "geomapping":{
-                        "geom": {
-                            "geom": "geometry"
-                        }
+                        "geom": "geometry"
                     },
                     "fetched_fields":[
-                        "name",
+                        "text",
                         "language",
                         "nationalcode",
                         "identifier"
@@ -88,29 +84,27 @@
         "administrative_unit_area_3":{
             "mock": false,
             "source_tables":{
-                "province_ome2": {
+                "municipalities": {
                     "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "nationalcode",
                         "shn": { "function": "lu_au_shn_municipality" },
-                        "name": { "function": "be_au_name"},
+                        "name": { "function": "lu_au_name"},
                         "national_level_code": { "eval": "2003" },
                         "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "tgid",
+                        "w_national_identifier": "identifier",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}                    
                     },
                     "geomapping":{
-                        "geom": {
-                            "geom": "geom"
-                        }
+                        "geom": "geometry"
                     },
                     "fetched_fields":[
-                        "name",
+                        "text",
                         "language",
                         "nationalcode",
                         "identifier"
