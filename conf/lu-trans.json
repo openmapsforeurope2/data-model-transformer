@@ -21,7 +21,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "roadlink": {
                     "mock": false,
@@ -72,7 +72,7 @@
             }
         },
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "railwaylink":{
                     "mock": false,
@@ -108,7 +108,7 @@
             }
         },
         "railway_station_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "railwaystationarea":{
                     "mock": false,
@@ -139,7 +139,7 @@
             }
         },
         "railway_station_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "railwaystationarea":{
                     "mock": false,
@@ -170,7 +170,7 @@
             }
         },
         "road_service_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "roadservicearea":{
                     "mock": false,
@@ -335,7 +335,7 @@
             }
         },     
         "runway_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "runwayarea":{
                     "mock": false,
