@@ -1,0 +1,366 @@
+{
+    "country_code": "lu",
+    "source_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"lu_national_20240202",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema": "public"
+    },
+    "source_srid": "3035",
+    "target_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"ome2_hvlsp_v4",
+        "user":"ome2_user",
+        "pwd":"ome2_user",
+        "schema": "tn"
+    },
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "road_link":{
+            "mock": true,
+            "source_tables":{
+                "roadlink": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "form_of_way": { "function": "inspire_tn_roadlink_form_of_way" },
+                        "functional_road_class": { "function": "inspire_tn_roadlink_functional_road_class" },
+                        "number_of_lanes": { "function": "inspire_tn_roadlink_number_of_lanes" },
+                        "vertical_position": { "function": "inspire_tn_vertical_position" },
+                        "vertical_level": { "eval": "'void_unk'" },
+                        "street_name": { "function": "inspire_tn_name" },
+                        "road_surface_category": { "eval": "'void_unk'" },
+                        "traffic_flow_direction": { "eval": "'void_unk'" },
+                        "access_restriction": { "function": "inspire_tn_roadlink_access_restriction" },
+                        "restriction_for_vehicles": { "eval": "{}"},
+                        "condition_of_facility": { "function": "inspire_tn_condition_of_facility" },
+                        "w_national_identifier": "gml_id",
+                        "road_national_road_code": { "eval": "data['nationalroadcode'] if 'nationalroadcode' in data and data['nationalroadcode'] is not None and data['nationalroadcode'] != '' else 'void_unk'" },
+                        "road_european_route_number":{ "eval": "data['europeanroutenumber'] if 'europeanroutenumber' in data and data['europeanroutenumber'] is not None and data['europeanroutenumber'] != '' else 'void_unk'" },
+                        "road_name":{ "eval": "{}" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}         
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "formofway",
+                        "functionalclass",
+                        "minmaxnumberoflanes",
+                        "numberoflanes",
+                        "verticalposition",
+                        "streetname",
+                        "restriction",
+                        "conditionoffacility",
+                        "gml_id",
+                        "nationalroadcode",
+                        "europeanroutenumber"
+                    ]
+                }
+            }
+        },
+        "railway_link":{
+            "mock": true,
+            "source_tables":{
+                "railwaylink":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "type": { "function": "inspire_tn_railwaylink_railway_type" },
+                        "number_of_tracks": { "eval": "'void_unk'" },
+                        "vertical_position": { "function": "inspire_tn_vertical_position" },
+                        "electrified": { "eval": "'void_unk'" },
+                        "condition_of_facility": { "function": "inspire_tn_condition_of_facility" },
+                        "railway_line_name":  { "eval": "{}" },
+                        "w_national_identifier": "gml_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "type",
+                        "verticalposition",
+                        "conditionoffacility",
+                        "gml_id"
+                    ]
+                }
+            }
+        },
+        "railway_station_area":{
+            "mock": true,
+            "source_tables":{
+                "railwaystationarea":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "name":  { "function": "inspire_tn_name" },
+                        "station_code": { "eval": "'void_unk'" },
+                        "railway_use": { "eval": "'void_unk'" },
+                        "w_national_identifier": "gml_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${},-1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "spellingofname_text",
+                        "gml_id"
+                    ]
+                }
+            }
+        },
+        "railway_station_point":{
+            "mock": true,
+            "source_tables":{
+                "railwaystationarea":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "name":  { "function": "inspire_tn_name" },
+                        "station_code": { "eval": "'void_unk'" },
+                        "railway_use": { "eval": "'void_unk'" },
+                        "w_national_identifier": "gml_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_PointOnSurface(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "spellingofname_text",
+                        "gml_id"
+                    ]
+                }
+            }
+        },
+        "road_service_area":{
+            "mock": true,
+            "source_tables":{
+                "roadservicearea":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"},
+                        "type": { "function": "inspire_tn_road_service_type" },
+                        "name": { "eval": "{}"},
+                        "w_national_identifier": "gml_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${},-1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gml_id",
+                        "type"
+                    ]
+                }
+            }
+        },
+        "road_service_point":{
+            "mock": false,
+            "source_tables":{
+                "roadservicearea":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"},
+                        "type": { "function": "inspire_tn_road_service_type" },
+                        "name": { "eval": "{}"},
+                        "w_national_identifier": "gml_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_PointOnSurface(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gml_id",
+                        "type"
+                    ]
+                },
+                "roadnode_electricalchargingstations":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"},
+                        "type": { "function": "inspire_tn_road_service_type" },
+                        "name":  { "function": "inspire_tn_name" },
+                        "w_national_identifier": "gml_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gml_id",
+                        "type",
+                        "spellingofname_text"
+                    ]
+                },
+                "roadservicepoint_busstation":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"},
+                        "type": { "eval": "'bus_station'" },
+                        "name":  { "eval": "{}" },
+                        "w_national_identifier": "gml_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gml_id"
+                    ]
+                }
+            }
+        }, 
+        "road_node":{
+            "mock": false,
+            "source_tables":{
+                "roadnode_electricalchargingstations":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"},
+                        "name": { "eval": "{}" },
+                        "form_of_road_node": { "function": "inspire_tn_form_of_road_node" },
+                        "w_national_identifier": "gml_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gml_id",
+                        "formofroadnode"
+                    ]
+                },
+                "roadnode_levelcrossing":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"},
+                        "name": { "eval": "{}" },
+                        "form_of_road_node": { "function": "inspire_tn_form_of_road_node" },
+                        "w_national_identifier": "gml_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gml_id",
+                        "formofroadnode"
+                    ]
+                }
+            }
+        },     
+        "runway_area":{
+            "mock": true,
+            "source_tables":{
+                "runwayarea":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"},
+                        "surface_composition":  { "eval": "'void_unk'" },
+                        "w_national_identifier": "gml_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${},-1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "gml_id"
+                    ]
+                }
+            }
+        }
+    }
+}
