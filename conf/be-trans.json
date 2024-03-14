@@ -30,7 +30,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "be_tn_roadlink_form_of_way" },
                         "functional_road_class": { "function": "be_tn_roadlink_functional_road_class" },
-                        "number_of_lanes": { "eval": "data['lanesnb'] if data['lanesnb'] is not None else -32768" },
+                        "number_of_lanes": { "eval": "data['lanesnb'] if data['lanesnb'] is not None and data['lanesnb'] != '999' else '-32768'" },
                         "road_surface_category": { "function": "be_tn_roadlink_road_surface_category" },
                         "access_restriction": { "eval": "'void_restricted' if data['roadstatus'] == 7 else 'public_access'"},
                         "condition_of_facility": { "function": "be_tn_roadlink_condition_of_facility" },
