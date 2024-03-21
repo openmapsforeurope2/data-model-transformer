@@ -29,7 +29,10 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "level": { "eval": "'on_ground_surface' if data['hoogteniveau'] == 0 else 'suspended_or_elevated' if data['hoogteniveau'] == 1 else 'underground' if data['hoogteniveau'] == -1 else 'underground' if data['hoogteniveau'] == -2 else 'void_unk'" },
+                        "persistence": { "eval": "'perennial'" },
                         "name": {"function": "nl_xx_name"},
+                        "width_lower_range": { "eval": "'0.5' if data['breedteklasse'] == '0,5 - 3 meter' else '3' if data['breedteklasse'] == '3 - 6 meter' else '-32768'" },
+                        "width_upper_range": { "eval": "'3' if data['breedteklasse'] == '0,5 - 3 meter' else '6' if data['breedteklasse'] == '3 - 6 meter' else '-32768'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
@@ -48,7 +51,8 @@
                         "namespace",
                         "lokaalid",
                         "naamnl",
-                        "naamfries"
+                        "naamfries",
+                        "breedteklasse"
                     ]
                 }
             }
@@ -243,12 +247,12 @@
         "shore":{
             "mock": false,
             "source_tables":{
-                "top10nl_terrein_vlak": {
+                "top10nl_waterdeel_vlak": {
                     "mock": false,
-                    "where": "typelandgebruik = 'basaltblokken, steenglooiing' OR typelandgebruik = 'duin' OR voorkomen = 'dras, moerassig'",
+                    "where": "typewater = 'droogvallend'",
                     "mapping": {
-                        "country": { "eval": "'${country_code}'" },      
-                        "composition": {"function": "nl_hy_shore_composition"},
+                        "country": { "eval": "'${country_code}'" },   
+                        "name": {"function": "nl_xx_name"},   
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
