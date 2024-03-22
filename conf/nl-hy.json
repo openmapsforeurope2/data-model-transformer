@@ -50,6 +50,7 @@
                         "hoogteniveau",
                         "namespace",
                         "lokaalid",
+                        "naamofficieel",
                         "naamnl",
                         "naamfries",
                         "breedteklasse"
@@ -114,6 +115,7 @@
                         "functie",
                         "namespace",
                         "lokaalid",
+                        "naamofficieel",
                         "naamnl",
                         "naamfries"
                     ]
@@ -146,6 +148,7 @@
                         "functie",
                         "namespace",
                         "lokaalid",
+                        "naamofficieel",
                         "naamnl",
                         "naamfries"
                     ]
@@ -177,6 +180,7 @@
                     "fetched_fields":[         
                         "namespace",
                         "lokaalid",
+                        "naamofficieel",
                         "naamnl",
                         "naamfries"
                     ]
@@ -208,6 +212,7 @@
                     "fetched_fields":[         
                         "namespace",
                         "lokaalid",
+                        "naamofficieel",
                         "naamnl",
                         "naamfries"
                     ]
@@ -267,11 +272,12 @@
                         }
                     },
                     "fetched_fields":[         
-                        "typelandgebruik",
                         "voorkomen",
                         "namespace",
                         "lokaalid",
-                        "naam"
+                        "naamofficieel",
+                        "naamnl",
+                        "naamfries"
                     ]
                 }
             }
@@ -304,6 +310,7 @@
                         "typewater",
                         "namespace",
                         "lokaalid",
+                        "naamofficieel",
                         "naamnl",
                         "naamfries"
                     ]
@@ -338,6 +345,7 @@
                         "typewater",
                         "namespace",
                         "lokaalid",
+                        "naamofficieel",
                         "naamnl",
                         "naamfries"
                     ]
