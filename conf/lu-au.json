@@ -30,6 +30,7 @@
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": "nationalcode",
                         "shn": { "eval": "'LU0000'" },
+                        "land_cover_type": { "eval": "'land_area'" },
                         "name": { "function": "lu_au_name"},
                         "national_level_code": { "eval": "2001" },
                         "w_national_identifier": "identifier",
