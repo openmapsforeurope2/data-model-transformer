@@ -25,11 +25,11 @@
             "source_tables":{
                 "top10nl_waterdeel_lijn": {
                     "mock": false,
-                    "where": "typewater = 'waterloop'",
+                    "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "level": { "eval": "'on_ground_surface' if data['hoogteniveau'] == 0 else 'suspended_or_elevated' if data['hoogteniveau'] == 1 else 'underground' if data['hoogteniveau'] == -1 else 'underground' if data['hoogteniveau'] == -2 else 'void_unk'" },
-                        "persistence": { "eval": "'perennial'" },
+                        "persistence": { "eval": "'perennial' if data['typewater'] == 'waterloop' else 'dry' if data['typewater'] == 'greppel, droge sloot' else 'void_unk'" },
                         "name": {"function": "nl_xx_name"},
                         "width_lower_range": { "eval": "'0.5' if data['breedteklasse'] == '0,5 - 3 meter' else '3' if data['breedteklasse'] == '3 - 6 meter' else '-32768'" },
                         "width_upper_range": { "eval": "'3' if data['breedteklasse'] == '0,5 - 3 meter' else '6' if data['breedteklasse'] == '3 - 6 meter' else '-32768'" },
@@ -53,13 +53,14 @@
                         "naamofficieel",
                         "naamnl",
                         "naamfries",
-                        "breedteklasse"
+                        "breedteklasse",
+                        "typewater"
                     ]
                 }
             }
         },
         "dam_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_inrichtingselement_punt": {
                     "mock": false,
@@ -90,7 +91,7 @@
             }
         },
         "falls_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_waterdeel_vlak": {
                     "mock": false,
@@ -123,7 +124,7 @@
             }
         },
         "falls_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_waterdeel_lijn": {
                     "mock": false,
@@ -156,7 +157,7 @@
             }
         },
         "lock_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_waterdeel_vlak": {
                     "mock": false,
@@ -188,7 +189,7 @@
             }
         },
         "lock_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_waterdeel_lijn": {
                     "mock": false,
@@ -220,7 +221,7 @@
             }
         },
         "lock_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_inrichtingselement_punt": {
                     "mock": false,
@@ -254,7 +255,7 @@
             "source_tables":{
                 "top10nl_waterdeel_vlak": {
                     "mock": false,
-                    "where": "typewater = 'droogvallend'",
+                    "where": "typewater = 'droogvallend' or typewater = 'droogvallend (LAT)'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },   
                         "name": {"function": "nl_xx_name"},   
@@ -279,11 +280,38 @@
                         "naamnl",
                         "naamfries"
                     ]
+                },
+                "top10nl_terrein_vlak": {
+                    "mock": false,
+                    "where": "typelandgebruik = 'basaltblokken, steenglooiing' or typelandgebruik = 'duin'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },   
+                        "name": {"function": "nl_xx_name"},   
+                        "composition": { "eval": "'boulders' if data['typelandgebruik'] == 'basaltblokken, steenglooiing' else 'sand' if data['typelandgebruik'] == 'duin' else 'void_unk'"},
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "namespace",
+                        "lokaalid",
+                        "naam",
+                        "typelandgebruik"
+                    ]
                 }
             }
         },
         "standing_water":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_waterdeel_vlak": {
                     "mock": false,
@@ -318,7 +346,7 @@
             }
         },
         "watercourse_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_waterdeel_vlak": {
                     "mock": false,
