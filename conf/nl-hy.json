@@ -60,7 +60,7 @@
             }
         },
         "dam_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_inrichtingselement_punt": {
                     "mock": false,
@@ -91,7 +91,7 @@
             }
         },
         "falls_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_waterdeel_vlak": {
                     "mock": false,
@@ -124,7 +124,7 @@
             }
         },
         "falls_line":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_waterdeel_lijn": {
                     "mock": false,
@@ -157,7 +157,7 @@
             }
         },
         "lock_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_waterdeel_vlak": {
                     "mock": false,
@@ -189,7 +189,7 @@
             }
         },
         "lock_line":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_waterdeel_lijn": {
                     "mock": false,
@@ -221,7 +221,7 @@
             }
         },
         "lock_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_inrichtingselement_punt": {
                     "mock": false,
@@ -311,7 +311,7 @@
             }
         },
         "standing_water":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_waterdeel_vlak": {
                     "mock": false,
@@ -346,7 +346,7 @@
             }
         },
         "watercourse_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_waterdeel_vlak": {
                     "mock": false,
