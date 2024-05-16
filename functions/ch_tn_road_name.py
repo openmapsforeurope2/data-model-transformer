@@ -4,8 +4,6 @@
         name_array = context['data']['ome2_road_name']
     else:
         name_array = []
-
-    print(name_array)
         
     name_list = []
 
