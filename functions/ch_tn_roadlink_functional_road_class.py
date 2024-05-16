@@ -2,7 +2,7 @@
 
     objektart = context['data']['objektart']
 
-    if objektart == "Autostrasse":
+    if objektart == "Autostrasse" or objektart == "Autobahn":
         return "main_road"
     if objektart == "8m Strasse":
         return "first_class"

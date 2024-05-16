@@ -10,7 +10,7 @@
     if stufe > 0:
         return "suspended_or_elevated"
 
-    if stufe == "0":
+    if stufe == 0:
         return "on_ground_surface"
 
     return "void_unk"

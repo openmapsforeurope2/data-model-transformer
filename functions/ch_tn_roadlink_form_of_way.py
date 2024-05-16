@@ -6,6 +6,9 @@
     kreisel = context['data']['kreisel']
 
     if objektart == 'Autobahn':
+        return "motorway"
+
+    if objektart == 'Autostrasse':
         return "freeway"
     
     if kreisel == "Wahr":
@@ -19,5 +22,9 @@
  
     if richtung == "Wahr":
         return "single_carriage_way"
+
+    if richtung == "Falsch":
+        return "dual_carriage_way"
+
     
     return "void_unk"
