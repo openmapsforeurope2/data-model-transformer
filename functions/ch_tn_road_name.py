@@ -7,7 +7,7 @@
         
     name_list = []
 
-    if name_array != [] :
+    if name_array != [] and name_array is not None:
         for name in name_array:
             name_list.append({
                 "spelling": name,
