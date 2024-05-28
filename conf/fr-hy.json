@@ -165,7 +165,8 @@
                         "cpx_influence_de_la_maree",
                         "cleabs",
                         "cpx_toponyme_de_cours_d_eau",
-                        "cpx_code_hydrographique"
+                        "cpx_code_hydrographique",
+                        "ome2_toponyme_troncon_hydrographique"
                     ]
                 }
             }
