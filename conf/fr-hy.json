@@ -147,7 +147,7 @@
                         },
                         "tidal": {"eval": "'false' if not data['cpx_influence_de_la_maree'] else 'true' if data['cpx_influence_de_la_maree'] else 'void_unk'"},                        
                         "hydro_identifier": {"eval": "data['cpx_code_hydrographique'] if data['cpx_code_hydrographique'] is not None else 'void_unk'"},
-                        "name": {"function": "fr_hy_watercourse_area_name"},
+                        "name": {"function": "xx_name_from_array"},
                         "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] == 'Naturelle aménagée' or data['origine'] == 'Naturelle non aménagée' else 'void_unk'"},                    
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},

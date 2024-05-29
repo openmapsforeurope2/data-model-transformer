@@ -43,7 +43,7 @@
                         "w_national_identifier": "uuid",
                         "road_national_road_code": { "eval": "data['ome2_national_routennummer'] if data['ome2_national_routennummer'] is not None and data['ome2_national_routennummer'] != '' else 'void_unk'" },
                         "road_european_route_number":{ "eval": "data['ome2_european_routennummer'] if data['ome2_european_routennummer'] is not None and data['ome2_european_routennummer'] != '' else 'void_unk'" },
-                        "road_name": { "function": "ch_tn_road_name" },
+                        "road_name": { "function": "xx_name_from_array" },
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
