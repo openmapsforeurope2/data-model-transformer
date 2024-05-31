@@ -18,10 +18,11 @@ def transform(argv):
     arg_verbose = False
     arg_help = "{0} -c <conf> -o <output> -v".format(argv[0])
     arg_test = False
+    arg_nohistory = False # life-cycle management is enabled as default
     
     try:
-        opts, args = getopt.getopt(argv[1:], "hc:o:vr", ["help", "conf=", 
-        "output=", "verbose", "reset", "test"])
+        opts, args = getopt.getopt(argv[1:], "hc:o:vrtn", ["help", "conf=", 
+        "output=", "verbose", "reset", "test", "no_history"])
     except:
         print(arg_help)
         sys.exit(2)
@@ -40,6 +41,8 @@ def transform(argv):
             arg_verbose = True
         elif opt in ("-t", "--test"):
             arg_test = True
+        elif opt in ("-n", "--no_history"):
+            arg_nohistory = True
 
 
     print('conf:', arg_conf)
@@ -47,6 +50,7 @@ def transform(argv):
     print('reset:', arg_reset)
     print('verbose:', arg_verbose)
     print('test:', arg_test)
+    print('no_history:', arg_nohistory)
 
     workspace = os.path.dirname(currentDir)+"/"
     tempDir = arg_output + "/tmp"
@@ -70,7 +74,7 @@ def transform(argv):
 
     extract.run(conf, tempDir, arg_test)
     dump.run(functions, conf, tempDir, arg_output)
-    restore.run(conf, arg_output, arg_reset, arg_verbose)
+    restore.run(conf, arg_output, arg_reset, arg_nohistory, arg_verbose)
 
     shutil.rmtree(tempDir)
 

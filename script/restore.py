@@ -5,7 +5,7 @@ import utils
 
 
 def run(
-    conf, pathIn, reset, verbose
+    conf, pathIn, reset, nohistory, verbose
 ):
     print("RESTORE...", flush=True)
 
@@ -20,7 +20,10 @@ def run(
 
             if reset:
                 targetTableCompleteName = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
-                resetCommand = commandBase + ' -q -c "DELETE FROM '+targetTableCompleteName+' WHERE '
+                resetCommand = commandBase + ' -q -c "'
+                if not(nohistory):
+                    resetCommand += 'ALTER TABLE '+targetTableCompleteName+ ' DISABLE TRIGGER ign_gcms_history_trigger; '
+                resetCommand += 'DELETE FROM '+targetTableCompleteName+' WHERE '
                 whereClause = ""
 
                 #Multiple country codes
@@ -33,7 +36,10 @@ def run(
                         whereClause += '\'' + code + '\','
                     whereClause = whereClause[0:len(whereClause)-1] + ')'
 
-                resetCommand += whereClause + '"'
+                resetCommand += whereClause + ';'
+                if not(nohistory):
+                    resetCommand += ' ALTER TABLE '+targetTableCompleteName+ ' ENABLE TRIGGER ign_gcms_history_trigger;'
+                resetCommand += '"'
 
                 print(resetCommand)
                 call( resetCommand, shell=True )
@@ -55,7 +61,8 @@ if __name__ == "__main__":
         confFile = workspace+"/conf/"+sys.argv[2]
         pathIn = sys.argv[3]
         reset = True if sys.argv[4] == 'true' else False
-        verbose = True if sys.argv[5] == 'true' else False
+        nohistory = True if sys.argv[5] == 'true' else False
+        verbose = True if sys.argv[6] == 'true' else False
     except:
         print (comment)
         sys.exit()
