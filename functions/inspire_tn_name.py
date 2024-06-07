@@ -15,7 +15,9 @@
     
     name_list = []
     
-    if name != "" and name is not None :      
+    if name != "" and name is not None :  
+        name = name.replace('\"', '')
+        name = name.replace('"', '')    
         name_list.append({
             "spelling": name,
             "language": language,

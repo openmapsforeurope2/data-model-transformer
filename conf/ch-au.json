@@ -1,7 +1,7 @@
 {
     "country_code": "ch",
     "source_db":{
-        "host":"10.128.35.60",
+        "host":"SMLPOPENMAPS2",
         "port":"5432",
         "name":"ch_20240325",
         "user":"postgres",
@@ -10,7 +10,7 @@
     },
     "source_srid": "2056",
     "target_db":{
-        "host":"10.128.35.60",
+        "host":"SMLPOPENMAPS2",
         "port":"5432",
         "name":"ome2_hvlsp_v4",
         "user":"ome2_user",

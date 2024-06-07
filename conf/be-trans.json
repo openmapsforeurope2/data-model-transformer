@@ -3,7 +3,7 @@
     "source_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"be_national_3812_20231204",
+        "name":"be_national",
         "user":"postgres",
         "pwd":"postgres",
         "schema": "tn"
@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_v4",
+        "name":"ome2_hvlsp_test_histo2",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "tn"
@@ -21,7 +21,7 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "ro_roadsegment": {
                     "mock": false,
@@ -106,7 +106,7 @@
             }
         },
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ra_railwaytracksegment":{
                     "mock": false,

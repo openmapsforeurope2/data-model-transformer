@@ -12,7 +12,7 @@
     "target_db":{
         "host":"10.128.35.60",
         "port":"5432",
-        "name":"ome2_hvlsp_v4",
+        "name":"ome2_hvlsp_test_histo2",
         "user":"ome2_user",
         "pwd":"ome2_user",
         "schema": "tn"
@@ -83,7 +83,6 @@
                         "number_of_tracks": { "eval": "'void_unk'" },
                         "vertical_position": { "function": "inspire_tn_vertical_position" },
                         "electrified": { "eval": "'void_unk'" },
-                        "condition_of_facility": { "function": "inspire_tn_condition_of_facility" },
                         "railway_line_name":  { "eval": "{}" },
                         "w_national_identifier": "gml_id",
                         "xy_source": { "eval": "'nmca'"},
