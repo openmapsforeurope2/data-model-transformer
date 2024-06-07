@@ -1,16 +1,18 @@
 # data-model-transformer
 
-Lancer le script transform.py
+Run script transform.py
 
-Les options de ce script sont:
-  -h, --help                Afficher l'aide
-  -v                        Mode verbeux
-  -r                        Suppression des données existentes dans les tables avant restauration
-  -c, --conf=FILE           Chemin vers le fichier JSON de configuration
-  -o, --output-dir=DIR      Spécifier le dossier de sortie
+Script options:
+* -h, --help: display help
+* -v: Verbose mode
+* -r: Delete existing data before restore
+* -c, --conf=FILE: Path to JSON configuration file
+* -o, --output-dir=DIR: Path to output directory
+* -t, --test: Test mode (process only 10 objects)
+* -n, --nohistory: Target database without life-cycle management system
 
 
-Exemples:
+Example:
 ~~~
 python3 script/transform.py -c xx-trans.json -o data -r
 ~~~
