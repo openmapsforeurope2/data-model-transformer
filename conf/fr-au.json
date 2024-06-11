@@ -2,7 +2,7 @@
     "country_code": "fr",
     "country_code_list": ["fr","gf","gu","gp","mq","re","yt","bl","mf","pm"],
     "source_db":{
-        "host":"10.128.35.60",
+        "host":"SMLPOPENMAPS2",
         "port":"5432",
         "name":"fr_national",
         "user":"ome2_user",
@@ -11,7 +11,7 @@
     },
     "source_srid": "CASE gcms_territoire WHEN 'FXX' THEN 2154 WHEN 'GLP' THEN 4559 WHEN 'GUF' THEN 2972 WHEN 'H_T' THEN 4326 WHEN 'MTQ' THEN 4559 WHEN 'MYT' THEN 4471 WHEN 'REU' THEN 2975 WHEN 'SPM' THEN 4467 END",
     "target_db":{
-        "host":"10.128.35.60",
+        "host":"SMLPOPENMAPS2",
         "port":"5432",
         "name":"ome2_hvlsp_v4",
         "user":"ome2_user",

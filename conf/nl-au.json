@@ -1,7 +1,7 @@
 {
     "country_code": "nl",
     "source_db":{
-        "host":"10.128.35.60",
+        "host":"SMLPOPENMAPS2",
         "port":"5432",
         "name":"nl_national",
         "user":"ome2_user",
@@ -10,7 +10,7 @@
     },
     "source_srid": "28992",
     "target_db":{
-        "host":"10.128.35.60",
+        "host":"SMLPOPENMAPS2",
         "port":"5432",
         "name":"ome2_hvlsp_v4",
         "user":"ome2_user",

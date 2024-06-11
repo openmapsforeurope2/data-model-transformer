@@ -10,7 +10,7 @@
     },
     "source_srid": "4326",
     "target_db":{
-        "host":"10.128.35.60",
+        "host":"SMLPOPENMAPS2",
         "port":"5432",
         "name":"ome2_hvlsp_test_histo2",
         "user":"ome2_user",
