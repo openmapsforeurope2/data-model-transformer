@@ -3,18 +3,18 @@
     "source_db":{
         "host":"SMLPOPENMAPS2",
         "port":"5432",
-        "name":"lu_national_20240202",
+        "name":"lu_20240624",
         "user":"postgres",
-        "pwd":"postgres",
-        "schema": "public"
+        "pwd":"",
+        "schema": "tn"
     },
     "source_srid": "3035",
     "target_db":{
         "host":"SMLPOPENMAPS2",
         "port":"5432",
-        "name":"ome2_hvlsp_test_histo2",
+        "name":"ome2_hvlsp_v4",
         "user":"ome2_user",
-        "pwd":"ome2_user",
+        "pwd":"",
         "schema": "tn"
     },
     "target_srid": "3035",
@@ -57,7 +57,7 @@
                     },
                     "fetched_fields":[
                         "formofway",
-                        "functionalclass",
+                        "functionalroadclass",
                         "minmaxnumberoflanes",
                         "numberoflanes",
                         "verticalposition",
@@ -107,7 +107,7 @@
             }
         },
         "railway_station_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "railwaystationarea":{
                     "mock": false,
@@ -140,7 +140,7 @@
         "railway_station_point":{
             "mock": false,
             "source_tables":{
-                "railwaystationarea":{
+                "railwaystationnode":{
                     "mock": false,
                     "where": "",
                     "mapping": {
@@ -162,7 +162,6 @@
                         }
                     },
                     "fetched_fields":[
-                        "spellingofname_text",
                         "gml_id"
                     ]
                 }
@@ -253,7 +252,7 @@
                     ]
                 },
                 "roadservicepoint_busstation":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},

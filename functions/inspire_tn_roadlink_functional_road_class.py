@@ -1,8 +1,10 @@
 # def function_name(context):
 
     frc_source = ""
-    if 'functionalclass' in context['data']:
-        frc_source = str.lower(context['data']['functionalclass'])
+    if 'functionalroadclass' in context['data']:
+        frc_source = str.lower(context['data']['functionalroadclass'])
+
+    print(frc_source)
 
     if frc_source == "":
         return "void_unk"
