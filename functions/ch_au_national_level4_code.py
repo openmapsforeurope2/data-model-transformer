@@ -7,7 +7,7 @@
 
     nature = context['data']['objektart']
 
-    if nature == "Gemeindgebiet":
+    if nature == "Gemeindegebiet":
         national_level_code = "3104"
 
     elif nature == "Kommunanz":
