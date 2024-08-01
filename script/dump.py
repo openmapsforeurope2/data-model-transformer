@@ -159,21 +159,33 @@ def convertEncodedCharacters(substring):
     # Equivalences entre les caractères spéciaux de l'API et les chaines Python
     charConversion = {
         "\\u00e0": 'à',
+        "\\u00e1": 'á',
         "\\u00e2": 'â',
         "\\u00e4": 'ä',
         "\\u00e7": 'ç',
+        "\\u010d": 'č',
+        "\\u010c": 'Č',
         "\\u00e8": 'è',
         "\\u00e9": 'é',
         "\\u00ea": 'ê',
         "\\u00eb": 'ë',
+        "\\u011b": 'ě',
         "\\u00ee": 'î',
         "\\u00ef": 'ï',
+        "\\u00ed": 'í',
+        "\\u0148": 'ň',
         "\\u00f4": 'ô',
         "\\u00f6": 'ö',
+        "\\u0159": 'ř',
+        "\\u0161": 'š',
+        "\\u0165": 'ť',
         "\\u00f9": 'ù',
         "\\u00fb": 'û',
         "\\u00fc": 'ü',
-        "\\u00ed": 'í'
+        "\\u00da": 'Ú',
+        "\\u00fd": 'ý',
+        "\\u017d": 'Ž',
+        
     }
 
     newString = substring
