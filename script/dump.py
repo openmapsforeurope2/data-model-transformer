@@ -186,6 +186,7 @@ def convertEncodedCharacters(substring):
         "\\u00fb": 'û',
         "\\u00fc": 'ü',
         "\\u00da": 'Ú',
+        "\\u00fa": 'ú',
         "\\u016f": 'ů',
         "\\u00fd": 'ý',
         "\\u017d": 'Ž',
