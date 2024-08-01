@@ -173,6 +173,7 @@ def convertEncodedCharacters(substring):
         "\\u00f9": 'ù',
         "\\u00fb": 'û',
         "\\u00fc": 'ü',
+        "\\u00ed": 'í'
     }
 
     newString = substring
