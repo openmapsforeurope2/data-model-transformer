@@ -8,7 +8,7 @@
         "pwd":"ome2_user",
         "schema": "au"
     },
-    "source_srid": "3035",
+    "source_srid": "4258",
     "target_db":{
         "host":"SMLPOPENMAPS2",
         "port":"5432",
