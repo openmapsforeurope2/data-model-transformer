@@ -69,7 +69,7 @@
                         "shn": { "eval": "'void_unk'" },
                         "name": { "function": "cz_xx_name" },
                         "label": {"eval": "data['text'] if data['text'] != '' and data['text'] is not None else 'void_unk'"},
-                        "national_level_code": { "eval": "'4606' if data['text'] like '%Praha%' else '4603'" },
+                        "national_level_code": { "eval": "'4606' if data['text'].find('Praha') != -1 else '4603'" },
                         "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['localid']" },
                         "xy_source": { "eval": "'nmca'"},
