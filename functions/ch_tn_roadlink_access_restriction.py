@@ -20,5 +20,11 @@
     if verkehr == "Keine":
         return "public_access"
 
+    if verkehr in ["Allgemeines Fahrverbot", "Rennestrecke", "Allgemeine Verkehrsbeschraenkung", "Gesperrt"]:
+        return "void_no_access"
+
+    if verkehr in ["Militaerstrasse", "Panzerpiste"]:
+        return "void_military_only"
+
     return "void_unk"
 
