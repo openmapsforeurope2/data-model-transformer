@@ -1,6 +1,6 @@
 # def function_name(context):
 
-    if 'name' in context['data']:
+    if 'strassenname' in context['data']:
         name = context['data']['strassenname']
     else:
         name = ""
