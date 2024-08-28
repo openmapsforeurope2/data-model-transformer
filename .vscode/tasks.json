@@ -10,7 +10,7 @@
         {
             "label": "run the code",
             "type": "shell",
-            "command": "docker run --privileged data-model-transformer python3 ./script/transform.py -r --no_history",
+            "command": "docker run --privileged data-model-transformer python3 ./script/transform.py --no_history",
             "group": "build",
             "problemMatcher": []
         }

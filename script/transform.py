@@ -16,15 +16,15 @@ def transform(argv):
     
     arg_conf = workspace+"conf/conf.json"
     arg_output = ""
-    arg_reset = False
+    arg_noreset = False
     arg_verbose = False
     arg_help = "{0} -c <conf> -o <output> -v".format(argv[0])
     arg_test = False
     arg_nohistory = False # life-cycle management is enabled as default
     
     try:
-        opts, args = getopt.getopt(argv[1:], "hc:o:vrtn", ["help", "conf=", 
-        "output=", "verbose", "reset", "test", "no_history"])
+        opts, args = getopt.getopt(argv[1:], "hc:o:vstn", ["help", "conf=", 
+        "output=", "verbose", "no_reset", "test", "no_history"])
     except:
         print(arg_help)
         sys.exit(2)
@@ -37,8 +37,8 @@ def transform(argv):
             arg_conf = arg
         elif opt in ("-o", "--output"):
             arg_output = arg
-        elif opt in ("-r", "--reset"):
-            arg_reset = True
+        elif opt in ("-s", "--no_reset"):
+            arg_noreset = True
         elif opt in ("-v", "--verbose"):
             arg_verbose = True
         elif opt in ("-t", "--test"):
@@ -59,7 +59,7 @@ def transform(argv):
 
     print('conf:', arg_conf)
     print('output:', arg_output)
-    print('reset:', arg_reset)
+    print('no_reset:', arg_noreset)
     print('verbose:', arg_verbose)
     print('test:', arg_test)
     print('no_history:', arg_nohistory)
@@ -85,7 +85,7 @@ def transform(argv):
 
     extract.run(conf, tempDir, arg_test)
     dump.run(functions, conf, tempDir, arg_output)
-    restore.run(conf, arg_output, arg_reset, arg_nohistory, arg_verbose)
+    restore.run(conf, arg_output, not arg_noreset, arg_nohistory, arg_verbose)
 
     shutil.rmtree(tempDir)
 
