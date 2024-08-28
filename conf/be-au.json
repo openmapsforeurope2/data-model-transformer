@@ -1,215 +1,39 @@
 {
     "country_code": "be",
-    "source_db":{
-        "host":"SMLPOPENMAPS2",
-        "port":"5432",
-        "name":"be_national",
-        "user":"ome2_user",
-        "pwd":"ome2_user",
-        "schema": "au"
-    },
+    // "source_db":{
+    //     "host":"10.128.35.60",
+    //     "port":"5432",
+    //     "name":"be_national",
+    //     "user":"postgres",
+    //     "pwd":"postgres",
+    //     "schema": "au"
+    // },
     "source_srid": "4326",
-    "target_db":{
-        "host":"SMLPOPENMAPS2",
-        "port":"5432",
-        "name":"ome2_hvlsp_test_histo2",
-        "user":"ome2_user",
-        "pwd":"ome2_user",
-        "schema": "au"
-    },
-    "target_srid": "3035",
-    "target_country_field": "country",
+    // "target_db":{
+    //     "host":"10.128.35.60",
+    //     "port":"5432",
+    //     "name":"ome2_v0",
+    //     "user":"postgres",
+    //     "pwd":"postgres",
+    //     "schema": "au"
+    // },
+    "source_srid": "3035",
     "target_tables": {
-        "administrative_unit_area_1":{
+        "administrative_unit":{
             "mock": false,
             "source_tables":{
-                "belgianterritory": {
+                "municipality": {
                     "mock": false,
                     "where": "",
                     "mapping": {
-                        "country": { "eval": "'${country_code}'"  },
+                        "country": { "eval": "'${country_code}'" },
                         "national_code": "niscode",
-                        "shn": { "eval": "'BE000000'" },
-                        "name": { "function": "be_au_name"},
-                        "national_level_code": { "eval": "4201" },
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "tgid",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                 
+                        "national_level": { "eval": "'5th_order'" }
                     },
                     "geomapping":{
-                        "geom": {
-                            "geom": "geom"
-                        }
+                        "geom": "geom"
                     },
                     "fetched_fields":[
-                        "nameger",
-                        "namefre",
-                        "namedut"
-                    ]
-                }
-            }
-        },
-        "maritime_zone":{
-            "mock": true,
-            "source_tables":{
-                "belgianmaritimezone": {
-                    "mock": false,
-                    "where": "",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'"  },
-                        "shn": { "eval": "'BE000000'" },
-                        "national_level_code": { "eval": "4201" },
-                        "zone_type": { "eval": "'territorial_sea'" },
-                        "w_national_identifier": "tgid",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                    
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": {
-                                "transform": "ST_Multi(ST_Force2D(${}))"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "administrative_unit_area_2":{
-            "mock": false,
-            "source_tables":{
-                "region": {
-                    "mock": false,
-                    "where": "",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'"  },
-                        "national_code": "niscode",
-                        "shn": { "eval": "'BE' + data['niscode'][1:2] + '00000'" },
-                        "name": { "function": "be_au_name"},
-                        "national_level_code": { "function": "be_au_national_level_code_region" },
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "tgid",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                    
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": "geom"
-                        }
-                    },
-                    "fetched_fields":[
-                        "nameger",
-                        "namefre",
-                        "namedut",
-                        "niscode"
-                    ]
-                }
-            }
-        },
-        "administrative_unit_area_3":{
-            "mock": true,
-            "source_tables":{
-                "province_ome2": {
-                    "mock": false,
-                    "where": "",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'"  },
-                        "national_code": "niscode",
-                        "shn": { "eval": "'BE' + data['niscode_region'][1:2] + data['niscode'][0:1] + '0000' if data['niscode'] != 'NA' else 'BE' + data['niscode_region'][1:2] + '00000'" },
-                        "name": { "function": "be_au_name"},
-                        "national_level_code": { "eval": "4204" },
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "tgid",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                    
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": "geom"
-                        }
-                    },
-                    "fetched_fields":[
-                        "nameger",
-                        "namefre",
-                        "namedut",
-                        "niscode",
-                        "niscode_region"
-                    ]
-                }
-            }
-        },
-        "administrative_unit_area_4":{
-            "mock": true,
-            "source_tables":{
-                "arrondissement_ome2": {
-                    "mock": false,
-                    "where": "",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'"  },
-                        "national_code": "niscode",
-                        "shn": { "eval": "'BE' + data['niscode_region'][1:2] + data['niscode']" },
-                        "name": { "function": "be_au_name"},
-                        "national_level_code": { "eval": "4206" },
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "tgid",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                    
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": "geom"
-                        }
-                    },
-                    "fetched_fields":[
-                        "nameger",
-                        "namefre",
-                        "namedut",
-                        "niscode",
-                        "niscode_region"
-                    ]
-                }
-            }
-        },
-        "administrative_unit_area_5":{
-            "mock": true,
-            "source_tables":{
-                "municipality_ome2": {
-                    "mock": false,
-                    "where": "",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'"  },
-                        "national_code": "niscode",
-                        "shn": { "eval": "'BE' + data['niscode_region'][1:2] + data['niscode']" },
-                        "name": { "function": "be_au_name"},
-                        "national_level_code": { "eval": "4207" },
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "tgid",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                    
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": "geom"
-                        }
-                    },
-                    "fetched_fields":[
-                        "nameger",
-                        "namefre",
-                        "namedut",
-                        "niscode",
-                        "niscode_region"
                     ]
                 }
             }

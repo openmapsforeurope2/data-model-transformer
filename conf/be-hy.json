@@ -1,22 +1,22 @@
 {
     "country_code": "be",
-    "source_db":{
-        "host":"SMLPOPENMAPS2",
-        "port":"5432",
-        "name":"be_national",
-        "user":"ome2_user",
-        "pwd":"ome2_user",
-        "schema": "hy"
-    },
+    // "source_db":{
+    //     "host":"SMLPOPENMAPS2",
+    //     "port":"5432",
+    //     "name":"be_national",
+    //     "user":"ome2_user",
+    //     "pwd":"ome2_user",
+    //     "schema": "hy"
+    // },
     "source_srid": "4326",
-    "target_db":{
-        "host":"SMLPOPENMAPS2",
-        "port":"5432",
-        "name":"ome2_hvlsp_v4",
-        "user":"ome2_user",
-        "pwd":"ome2_user",
-        "schema": "hy"
-    },
+    // "target_db":{
+    //     "host":"SMLPOPENMAPS2",
+    //     "port":"5432",
+    //     "name":"ome2_hvlsp_v4",
+    //     "user":"ome2_user",
+    //     "pwd":"ome2_user",
+    //     "schema": "hy"
+    // },
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {

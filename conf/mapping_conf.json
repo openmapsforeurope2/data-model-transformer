@@ -1,0 +1,49 @@
+{
+    "be": {
+        "conf_file": {
+            "au":"be-au.json",
+            "hy":"be-hy.json",
+            "tn":"be-tn.json"
+        }
+    },
+    "ch": {
+        "conf_file": {
+            "au":"ch-au.json",
+            "tn":"ch-tn.json"
+        }
+        
+    },
+    "cz": {
+        "conf_file": {
+            "au":"cz-au.json"
+        }
+        
+    },
+    "ec": {
+        "conf_file": {
+            "au":"ec-tn.json"
+        }
+    },
+    "fr": {
+        "conf_file": {
+            "au":"fr-au.json",
+            "hy":"fr-hy.json",
+            "tn":"fr-tn.json"
+        }
+        
+    },
+    "lu": {
+        "conf_file": {
+            "au":"lu-au.json",
+            "tn":"lu-tn.json"
+        }
+        
+    },
+    "nl": {
+        "conf_file": {
+            "au":"nl-au.json",
+            "hy":"nl-hy.json",
+            "tn":"nl-tn.json"
+        }
+    }
+}

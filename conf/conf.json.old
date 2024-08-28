@@ -1,0 +1,101 @@
+{
+    "source_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":{
+            "be":"be_national",
+            "ch":"ch_20240325",
+            "cz":"cz_20240620",
+            "ec":"ome2_hvlsp_v1",
+            "fr":"fr_national",
+            "lu":"lu_20240624",
+            "nl":"nl_national"
+        },
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema":{
+            "default": {
+                "au": "au",
+                "hy": "hy",
+                "tn": "tn"
+            },
+            "ch":{
+                "au": "public",
+                "tn": "public"
+            },
+            "fr":{
+                "tn": "public"
+            },
+            "nl":{
+                "hy": "public",
+                "tn": "public"
+            }
+        }
+    },
+    "target_db":{
+        "host":"10.128.35.60",
+        "port":"5432",
+        "name":"ome2_v0",
+        "user":"postgres",
+        "pwd":"postgres",
+        "schema":{
+            "au": "au",
+            "hy": "hy",
+            "tn": "tn"
+        }
+    }
+}
+
+
+
+{
+    "source_db":{
+        "default":{
+            "host":"",
+            "port":"5432",
+            "name":"",
+            "user":"",
+            "pwd":"",
+            "schema":{
+                "au": "au",
+                "hy": "hy",
+                "tn": "tn"
+            }
+            ##srid: "4326"???
+        },
+        "fr":{
+            "default":{
+                "name":"",
+                "schema":"public"
+            },
+            "tn":{
+                "name":"",
+                "schema":"tn"
+            }
+        }
+    },
+    "target_db":{
+        "default":{
+            "host":"SMLPOPENMAPS2",
+            "port":"5432",
+            "name":"ome2_hvlsp_v4",
+            "user":"ome2_user",
+            "pwd":"ome2_user",
+            "schema":{
+                "au": "au",
+                "hy": "hy",
+                "tn": "tn"
+            }
+        },
+        "ec":{
+            "default":{
+                "host":"64.126.235.77",
+                "port":"5432",
+                "name":"ome2_hvlsp",
+                "user":"ome2_hvlsp_user",
+                "pwd":"",
+                "schema": "public"
+            }
+        }
+    }
+}

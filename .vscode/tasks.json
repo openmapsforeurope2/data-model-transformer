@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "remove containers",
+            "type": "shell",
+            "command": "docker rm -f $(docker ps -a -q)",
+            "problemMatcher": []
+        },
+        {
+            "label": "run the code",
+            "type": "shell",
+            "command": "docker run --privileged data-model-transformer python3 ./script/transform.py -r --no_history",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}

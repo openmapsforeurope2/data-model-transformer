@@ -1,22 +1,22 @@
 {
     "country_code": "lu",
-    "source_db":{
-        "host":"SMLPOPENMAPS2",
-        "port":"5432",
-        "name":"lu_20240624",
-        "user":"postgres",
-        "pwd":"",
-        "schema": "tn"
-    },
+    // "source_db":{
+    //     "host":"SMLPOPENMAPS2",
+    //     "port":"5432",
+    //     "name":"lu_20240624",
+    //     "user":"postgres",
+    //     "pwd":"",
+    //     "schema": "tn"
+    // },
     "source_srid": "3035",
-    "target_db":{
-        "host":"SMLPOPENMAPS2",
-        "port":"5432",
-        "name":"ome2_hvlsp_v4",
-        "user":"ome2_user",
-        "pwd":"",
-        "schema": "tn"
-    },
+    // "target_db":{
+    //     "host":"SMLPOPENMAPS2",
+    //     "port":"5432",
+    //     "name":"ome2_hvlsp_v4",
+    //     "user":"ome2_user",
+    //     "pwd":"",
+    //     "schema": "tn"
+    // },
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {

@@ -9,11 +9,13 @@ import dump
 import restore
 
 def transform(argv):
+    print("coucou")
 
     currentDir = os.path.dirname(os.path.abspath(__file__))
-
-    arg_conf = ""
-    arg_output = os.path.dirname(currentDir)+"/data"
+    workspace = os.path.dirname(currentDir)+"/"
+    
+    arg_conf = workspace+"conf/conf.json"
+    arg_output = ""
     arg_reset = False
     arg_verbose = False
     arg_help = "{0} -c <conf> -o <output> -v".format(argv[0])
@@ -44,6 +46,16 @@ def transform(argv):
         elif opt in ("-n", "--no_history"):
             arg_nohistory = True
 
+    #configuration
+    conf = utils.getConf(arg_conf)
+    mapping_conf = utils.getConf(workspace+"conf/mapping_conf.json")
+    process_conf = utils.getConf(workspace+"conf/"+mapping_conf[conf["country"]]["conf_file"][conf["theme"]])
+    conf.update(process_conf)
+
+    if arg_output == "" :
+        arg_output = conf["output"]
+    if arg_output == "" :
+        arg_output = workspace+"data"
 
     print('conf:', arg_conf)
     print('output:', arg_output)
@@ -52,13 +64,11 @@ def transform(argv):
     print('test:', arg_test)
     print('no_history:', arg_nohistory)
 
-    workspace = os.path.dirname(currentDir)+"/"
     tempDir = arg_output + "/tmp"
 
-    if not os.path.isfile(workspace+"conf/"+arg_conf):
+    if not os.path.isfile(arg_conf):
         print("le fichier de configuration "+ arg_conf + " n'existe pas.")
         sys.exit(2)
-    arg_conf = workspace+"conf/"+arg_conf
 
     if not os.path.exists(arg_output):
         os.makedirs(arg_output)
@@ -67,9 +77,10 @@ def transform(argv):
         shutil.rmtree(tempDir)
     os.makedirs(tempDir)
 
+    return
+
     print("[START TRANSFORM] "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
-    conf = utils.getConf(arg_conf)
     functions = utils.getFunctions(workspace+"/functions")
 
     extract.run(conf, tempDir, arg_test)

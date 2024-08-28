@@ -1,0 +1,21 @@
+{
+    "country":"",
+    "theme":"",
+    "output":"",
+    "source_db":{
+        "host":"",
+        "port":"",
+        "name":"",
+        "user":"",
+        "pwd":"",
+        "schema": ""
+    },
+    "target_db":{
+        "host":"",
+        "port":"",
+        "name":"",
+        "user":"",
+        "pwd":"",
+        "schema": ""
+    }
+}
