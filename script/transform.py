@@ -77,8 +77,6 @@ def transform(argv):
         shutil.rmtree(tempDir)
     os.makedirs(tempDir)
 
-    return
-
     print("[START TRANSFORM] "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     functions = utils.getFunctions(workspace+"/functions")
