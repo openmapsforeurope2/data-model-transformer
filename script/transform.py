@@ -9,7 +9,6 @@ import dump
 import restore
 
 def transform(argv):
-    print("coucou")
 
     currentDir = os.path.dirname(os.path.abspath(__file__))
     workspace = os.path.dirname(currentDir)+"/"
