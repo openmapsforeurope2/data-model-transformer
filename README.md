@@ -1,5 +1,7 @@
 # data-model-transformer
 
+Purpose: transform data from a national or INSPIRE model to the OME2 data model
+
 Run script transform.py
 
 Script options:
