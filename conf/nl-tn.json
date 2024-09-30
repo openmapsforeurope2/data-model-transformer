@@ -1,22 +1,6 @@
 {
     "country_code": "nl",
-    // "source_db":{
-    //     "host":"SMLPOPENMAPS2",
-    //     "port":"5432",
-    //     "name":"nl_national_20230925",
-    //     "user":"postgres",
-    //     "pwd":"postgres",
-    //     "schema": "public"
-    // },
     "source_srid": "28992",
-    // "target_db":{
-    //     "host":"SMLPOPENMAPS2",
-    //     "port":"5432",
-    //     "name":"ome2_hvlsp_v4",
-    //     "user":"ome2_user",
-    //     "pwd":"ome2_user",
-    //     "schema": "tn"
-    // },
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
@@ -319,13 +303,13 @@
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
                     "mock": false,
-                    "where": "typefunctioneelgebied = 'vliegveld, luchthaven' or typefunctioneelgebied = 'helikopterlandingssterrein'",
+                    "where": "typefunctioneelgebied = 'vliegveld, luchthaven' or typefunctioneelgebied = 'helikopterlandingsterrein'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "name":  { "function": "nl_xx_name" },
                         "aerodrome_category": { "eval": "'domestic_national' if data['soortnaam'] == 'vliegveld' else 'international' if data['soortnaam'] == 'luchthaven' else 'void_unk'"},
-                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['typefunctioneelgebied'] == 'helikopterlandingssterrein' else 'void_unk'"},
-                        "restriction": { "eval": "'reserved_for_military' if data['soortnaam'] == 'vliegbasis' else 'void_unk'"},
+                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['typefunctioneelgebied'] == 'helikopterlandingsterrein' else 'void_airport'"},
+                        "use_restriction": { "eval": "'reserved_for_military' if data['soortnaam'] == 'vliegbasis' else 'void_unk'"},
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
@@ -355,13 +339,13 @@
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
                     "mock": false,
-                    "where": "typefunctioneelgebied = 'vliegveld, luchthaven' or typefunctioneelgebied = 'helikopterlandingssterrein'",
+                    "where": "typefunctioneelgebied = 'vliegveld, luchthaven' or typefunctioneelgebied = 'helikopterlandingsterrein'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "name":  { "function": "nl_xx_name" },
                         "aerodrome_category": { "eval": "'domestic_national' if data['soortnaam'] == 'vliegveld' else 'international' if data['soortnaam'] == 'luchthaven' else 'void_unk'"},
-                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['typefunctioneelgebied'] == 'helikopterlandingssterrein' else 'void_unk'"},
-                        "restriction": { "eval": "'reserved_for_military' if data['soortnaam'] == 'vliegbasis' else 'void_unk'"},
+                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['typefunctioneelgebied'] == 'helikopterlandingsterrein' else 'void_airport'"},
+                        "use_restriction": { "eval": "'reserved_for_military' if data['soortnaam'] == 'vliegbasis' else 'void_unk'"},
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
@@ -379,7 +363,9 @@
                         "namespace",
                         "lokaalid",
                         "naamnl",
-                        "naamfries"
+                        "naamfries",
+                        "soortnaam",
+                        "typefunctioneelgebied"
                     ]
                 }
             }
@@ -478,7 +464,7 @@
             }
         },
         "runway_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_runway_area": {
                     "mock": false,
