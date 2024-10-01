@@ -20,10 +20,12 @@
     # Other (Overig), Unkown (Onbekend)
     hoofdverkeersgebruik = context['data']['hoofdverkeersgebruik']
 
+    if hoofdverkeersgebruik == "snelverkeer":
+        return "freeway"
     if hoofdverkeersgebruik == "fietsers, bromfietsers":
         return "bicycle_road"
     if hoofdverkeersgebruik == "voetgangers":
-        return "walkway" 
+        return "pedestrian_zone" 
 
 
     # Roundabouts and slip roads
