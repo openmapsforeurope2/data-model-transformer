@@ -47,7 +47,7 @@
                         "shn": { "eval": "'void_unk'" },
                         "name": { "function": "lu_au_name"},
                         "national_level_code": { "eval": "2002" },
-                        "land_cover_type": { "eval": "'void_unk'" },
+                        "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "identifier",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
