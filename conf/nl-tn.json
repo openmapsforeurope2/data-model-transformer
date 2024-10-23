@@ -1,22 +1,6 @@
 {
     "country_code": "nl",
-    // "source_db":{
-    //     "host":"SMLPOPENMAPS2",
-    //     "port":"5432",
-    //     "name":"nl_national_20230925",
-    //     "user":"postgres",
-    //     "pwd":"postgres",
-    //     "schema": "public"
-    // },
     "source_srid": "28992",
-    // "target_db":{
-    //     "host":"SMLPOPENMAPS2",
-    //     "port":"5432",
-    //     "name":"ome2_hvlsp_v4",
-    //     "user":"ome2_user",
-    //     "pwd":"ome2_user",
-    //     "schema": "tn"
-    // },
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
@@ -72,6 +56,62 @@
                 }
             }
         },
+        "road_node":{
+            "mock": false,
+            "source_tables":{
+                "top10nl_wegdeel_hartpunt":{
+                    "mock": false,
+                    "where": "typeweg like '%autosnelweg%' OR fysiekvoorkomen = 'rotonde'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "form_of_road_node": { "eval": "'roundabout' if data['fysiekvoorkomen'] == 'rotonde' else 'interchange' if data['typeweg'] == 'autosnelweg' else 'junction'" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"} 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "namespace",
+                        "lokaalid",
+                        "typeweg",
+                        "fysiekvoorkomen"
+                    ]
+                },
+                "top10nl_wegdeel_punt":{
+                    "mock": false,
+                    "where": "typeinfrastructuur = 'kruising'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "form_of_road_node": { "eval": "'junction'" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"} 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "namespace",
+                        "lokaalid",
+                        "typeinfrastructuur"
+                    ]
+                }
+            }
+        },
         "marker_post":{
             "mock": true,
             "source_tables":{
@@ -111,6 +151,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "type": { "eval": "'train' if data['typespoorbaan'] == 'trein' else 'tram' if data['typespoorbaan'] == 'tram' else 'metro' if data['typespoorbaan'] == 'metro' else 'void_unk'" },
+                        "number_of_tracks": { "eval": "'1' if data['aantalsporen'] == 'enkel' else '2' if data['aantalsporen'] == 'dubbel' else '-32768'" },
                         "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void_unk'" },
                         "electrified": { "eval": "'1' if data['elektrificatie'] == 'ja' else -32768 if data ['elektrificatie'] is None else '0'" },
                         "condition_of_facility": { "function": "nl_tn_roadlink_condition_of_facility" },
@@ -200,10 +241,10 @@
             }
         },
         "road_service_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_wegdeel_vlak":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typeweg = 'parkeerplaats: P+R'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
@@ -227,18 +268,48 @@
                         "namespace",
                         "lokaalid"
                     ]
+                },
+                "top10nl_gebouw_punt":{
+                    "mock": false,
+                    "where": "typegebouw = 'tankstation' OR typegebouw = 'tol'",
+                    "mapping": {
+                        "country":  { "eval": "'${country_code}'" },
+                        "type":  { "eval": "'rest_area' if data['typegebouw'] == 'tankstation' else 'toll' if data['typegebouw'] == 'tol' else 'void_unk'" },
+                        "name":  { "function": "nl_tn_name" },
+                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
+                        "xy_source": { "eval": "'ome2'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"} 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D(ST_Centroid(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "naam",
+                        "namespace",
+                        "lokaalid",
+                        "typegebouw"
+                    ]
                 }
             }
         },
         "aerodrome_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
                     "mock": false,
-                    "where": "typefunctioneelgebied = 'vliegveld, luchthaven'",
+                    "where": "typefunctioneelgebied = 'vliegveld, luchthaven' or typefunctioneelgebied = 'helikopterlandingsterrein'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "name":  { "function": "nl_xx_name" },
+                        "aerodrome_category": { "eval": "'domestic_national' if data['soortnaam'] == 'vliegveld' else 'international' if data['soortnaam'] == 'luchthaven' else 'void_unk'"},
+                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['typefunctioneelgebied'] == 'helikopterlandingsterrein' else 'void_airport'"},
+                        "use_restriction": { "eval": "'reserved_for_military' if data['soortnaam'] == 'vliegbasis' else 'void_unk'"},
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
@@ -256,20 +327,25 @@
                         "namespace",
                         "lokaalid",
                         "naamnl",
-                        "naamfries"
+                        "naamfries",
+                        "soortnaam",
+                        "typefunctioneelgebied"
                     ]
                 }
             }
         },
         "aerodrome_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
                     "mock": false,
-                    "where": "typefunctioneelgebied = 'vliegveld, luchthaven'",
+                    "where": "typefunctioneelgebied = 'vliegveld, luchthaven' or typefunctioneelgebied = 'helikopterlandingsterrein'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "name":  { "function": "nl_xx_name" },
+                        "aerodrome_category": { "eval": "'domestic_national' if data['soortnaam'] == 'vliegveld' else 'international' if data['soortnaam'] == 'luchthaven' else 'void_unk'"},
+                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['typefunctioneelgebied'] == 'helikopterlandingsterrein' else 'void_airport'"},
+                        "use_restriction": { "eval": "'reserved_for_military' if data['soortnaam'] == 'vliegbasis' else 'void_unk'"},
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
@@ -287,7 +363,9 @@
                         "namespace",
                         "lokaalid",
                         "naamnl",
-                        "naamfries"
+                        "naamfries",
+                        "soortnaam",
+                        "typefunctioneelgebied"
                     ]
                 }
             }
@@ -355,7 +433,7 @@
             }
         },
         "runway_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
@@ -386,7 +464,7 @@
             }
         },
         "runway_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_runway_area": {
                     "mock": false,

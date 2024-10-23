@@ -23,4 +23,7 @@
     if typeweg == "Straat":
         return "fourth_class"
 
+    if typeweg == "overig":
+        return "fifth_class"
+
     return "void_unk"
