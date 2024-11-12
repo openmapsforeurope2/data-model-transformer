@@ -42,13 +42,19 @@ def run(
                 resetCommand += '"'
 
                 print(resetCommand)
-                call( resetCommand, shell=True )
+
+                returnValue = call( resetCommand, shell=True )
+                if returnValue != 0:
+                    raise
                 
             dumpFile = '{}/{}_{}.sql'.format(pathIn, prefix, target_table)
 
             restoreCommand = commandBase + " -q -f "+dumpFile
             print(restoreCommand)
-            call( restoreCommand, shell=True )
+
+            returnValue = call( restoreCommand, shell=True )
+            if returnValue != 0:
+                raise
 
 
 if __name__ == "__main__":

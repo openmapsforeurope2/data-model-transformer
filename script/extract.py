@@ -125,8 +125,9 @@ def run(
             print(u'command: {}'.format(command), flush=True)
             print('table: {}'.format(full_table_name), flush=True)
 
-            call( command, shell=True )
-
+            returnValue = call( command, shell=True )
+            if returnValue != 0:
+                raise
 
 if __name__ == "__main__":
     comment = '''
