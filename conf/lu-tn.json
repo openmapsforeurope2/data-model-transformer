@@ -56,7 +56,7 @@
             }
         },
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "railwaylink":{
                     "mock": false,
@@ -122,7 +122,7 @@
             }
         },
         "railway_station_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "railwaystationnode":{
                     "mock": false,
@@ -152,7 +152,7 @@
             }
         },
         "road_service_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "roadservicearea":{
                     "mock": false,
@@ -182,7 +182,7 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "roadservicearea":{
                     "mock": false,
@@ -262,7 +262,7 @@
             }
         }, 
         "road_node":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "roadnode_electricalchargingstations":{
                     "mock": false,
@@ -317,7 +317,7 @@
             }
         },     
         "runway_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "runwayarea":{
                     "mock": false,
