@@ -26,12 +26,12 @@ def transform(argv):
         "output=", "verbose", "no_reset", "test", "no_history"])
     except:
         print(arg_help)
-        sys.exit(2)
+        sys.exit(1)
     
     for opt, arg in opts:
         if opt in ("-h", "--help"):
             print(arg_help)  # print the help message
-            sys.exit(2)
+            sys.exit(1)
         elif opt in ("-c", "--conf"):
             arg_conf = arg
         elif opt in ("-o", "--output"):
@@ -46,6 +46,10 @@ def transform(argv):
             arg_nohistory = True
 
     #configuration
+    if not os.path.isfile(arg_conf):
+        print("le fichier de configuration "+ arg_conf + " n'existe pas.")
+        sys.exit(1)
+
     conf = utils.getConf(arg_conf)
     mapping_conf = utils.getConf(workspace+"conf/mapping_conf.json")
     process_conf = utils.getConf(workspace+"conf/"+mapping_conf[conf["country"]]["conf_file"][conf["theme"]])
@@ -56,6 +60,9 @@ def transform(argv):
     if arg_output == "" :
         arg_output = workspace+"data"
 
+    if not os.path.exists(arg_output):
+        os.makedirs(arg_output)
+
     print('conf:', arg_conf)
     print('output:', arg_output)
     print('no_reset:', arg_noreset)
@@ -65,13 +72,6 @@ def transform(argv):
 
     tempDir = arg_output + "/tmp"
 
-    if not os.path.isfile(arg_conf):
-        print("le fichier de configuration "+ arg_conf + " n'existe pas.")
-        sys.exit(2)
-
-    if not os.path.exists(arg_output):
-        os.makedirs(arg_output)
-
     if os.path.exists(tempDir):
         shutil.rmtree(tempDir)
     os.makedirs(tempDir)
@@ -80,9 +80,23 @@ def transform(argv):
 
     functions = utils.getFunctions(workspace+"/functions")
 
-    extract.run(conf, tempDir, arg_test)
-    dump.run(functions, conf, tempDir, arg_output)
-    restore.run(conf, arg_output, not arg_noreset, arg_nohistory, arg_verbose)
+    try:
+        extract.run(conf, tempDir, arg_test)
+    except:
+        print("EXTRACT ERROR")
+        sys.exit(1)
+
+    try:
+        dump.run(functions, conf, tempDir, arg_output)
+    except:
+        print("DUMP ERROR")
+        sys.exit(1)
+
+    try:
+        restore.run(conf, arg_output, not arg_noreset, arg_nohistory, arg_verbose)
+    except:
+        print("RESTORE ERROR")
+        sys.exit(1)
 
     shutil.rmtree(tempDir)
 
