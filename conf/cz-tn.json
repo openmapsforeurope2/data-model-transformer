@@ -1,27 +1,11 @@
 {
     "country_code": "cz",
-    // "source_db":{
-    //     "host":"SMLPOPENMAPS2",
-    //     "port":"5432",
-    //     "name":"lu_20240624",
-    //     "user":"postgres",
-    //     "pwd":"",
-    //     "schema": "tn"
-    // },
     "source_srid": "4258",
-    // "target_db":{
-    //     "host":"SMLPOPENMAPS2",
-    //     "port":"5432",
-    //     "name":"ome2_hvlsp_v4",
-    //     "user":"ome2_user",
-    //     "pwd":"",
-    //     "schema": "tn"
-    // },
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_road_road_link": {
                     "mock": false,
@@ -238,30 +222,30 @@
             }
         },         
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
-                "railwaylink":{
+                "ome2_rail_railway_link":{
                     "mock": false,
                     "where": "",
                     "mapping": {
-                        "country": { "eval": "'${country_code}'"  },
+                        "country": { "eval": "'${country_code}'" },
                         "type": { "function": "inspire_tn_railwaylink_railway_type" },
-                        "number_of_tracks": { "eval": "'void_unk'" },
-                        "min_max_track": {"eval": "'void_unk'"},
+                        "number_of_tracks": { "eval": "data['ome2_number_of_tracks_numberoftracks'] if data['ome2_number_of_tracks_numberoftracks'] is not None else '-32768'" },
+                        "min_max_track": {"eval": "data['ome2_number_of_tracks_minmaxnumberoftracks'] if data['ome2_number_of_tracks_minmaxnumberoftracks'] is not None else 'void_unk'" },
                         "nominal_track_gauge": {"eval": "'void_unk'"},
-                        "track_gauge_category": {"eval": "'void_unk'"},
+                        "track_gauge_category": {"eval": "data['ome2_nominal_track_gauge_nominalgaugecategory'] if data['ome2_nominal_track_gauge_nominalgaugecategory'] is not None else 'void_unk'" },
                         "vertical_position": { "function": "inspire_tn_vertical_position" },
-                        "vertical_level": {"eval": "'-32768'"},
+                        "vertical_level": {"eval": "'0' if data['ome2_vertical_position_verticalposition'].endswith('ongroundlevel') else '-32768'"},
                         "tent_network": {"eval": "'void_unk'"},
                         "condition_of_facility": {"eval": "'void_unk'"},
-                        "electrified": { "eval": "'void_unk'" },
+                        "electrified": { "eval": "data['ome2_railway_electrification_electrified'] if data['ome2_railway_electrification_electrified'] is not None else 'void_unk'" },
                         "speed_class": {"eval": "'void_unk'"},
                         "railway_use": {"eval": "'void_unk'"},
                         "access_restriction": {"eval": "'void_unk'"},
                         "railway_line_code": {"eval": "'void_unk'"},
                         "railway_line_name":  { "eval": "{}" },
                         "railway_line_label": {"eval": "'void_unk'"},
-                        "w_national_identifier": "gml_id",
+                        "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -269,16 +253,20 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geom": {
+                            "CENTRELINE_GEOMETRY": {
                                 "transform": "ST_Force3D(${},-1000)"
                             }
                         }
                     },
                     "fetched_fields":[
-                        "type",
-                        "verticalposition",
+                        "ome2_railway_type_type",
+                        "ome2_number_of_tracks_numberoftracks",
+                        "ome2_number_of_tracks_minmaxnumberoftracks",
                         "conditionoffacility",
-                        "gml_id"
+                        "inspireid_localid",
+                        "ome2_vertical_position_verticalposition",
+                        "ome2_railway_electrification_electrified",
+                        "ome2_railway_class_railwayclass"
                     ]
                 }
             }
@@ -288,11 +276,11 @@
             "source_tables":{
                 "xxx":{
                     "mock": false,
-                    "where": "NOT gcms_detruit",
+                    "where": "",
                     "mapping": {
-                        "country": { "function": "fr_country_code" },
+                        "country": { "eval": "'${country_code}'" },
                         "railway_line_code": { "eval": "'void_unk'"},
-                        "railway_line_name":  { "function": "fr_xx_name" },
+                        "railway_line_name":  { "eval": "{}" },
                         "railway_line_label": { "eval": "'void_unk'"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
@@ -308,61 +296,63 @@
                         }
                     },
                     "fetched_fields":[
-                        "date_d_apparition",
-                        "gcms_territoire",
-                        "toponyme",
-                        "date_d_apparition"
                     ]
                 }
             }
         },
         "railway_station_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "railwaystationarea":{
                     "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
-                        "name":  { "function": "inspire_tn_name" },
-                        "label":  { "eval": "'void_unk'" },
-                        "station_code": { "eval": "'void_unk'" },
-                        "railway_use": { "eval": "'void_unk'" },
+                        "name":  { "function": "cz_inspire_tn_name" },
+                        "label":  { "eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] is not None else 'void_unk'" },
+                        "station_code": { "eval": "data['ome2_railway_station_code_stationcode'] if data['ome2_railway_station_code_stationcode'] is not None else 'void_unk'" },
+                        "railway_use": { "eval": "'railway_station'" },
                         "form_of_railway_station": { "eval": "'void_unk'" },
-                        "w_national_identifier": "gml_id",
+                        "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}    
+                        "w_scale": { "eval": "'10000'"}      
                     },
                     "geomapping":{
                         "geom": {
-                            "geom": {
+                            "GEOMETRY": {
                                 "transform": "ST_Multi(ST_Force3D(${},-1000))"
                             }
                         }
                     },
                     "fetched_fields":[
-                        "spellingofname_text",
-                        "gml_id"
+                        "inspireid_localid",
+                        "geographicalname_spelling_text",
+                        "geographicalname_spelling_script",
+                        "geographicalname_nativeness",
+                        "geographicalname_namestatus",
+                        "geographicalname_language",
+                        "ome2_railway_station_code_stationcode"
                     ]
-                }
+                },
+                
             }
         },
         "railway_station_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "railwaystationnode":{
                     "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
-                        "name":  { "function": "inspire_tn_name" },
-                        "label":  { "eval": "'void_unk'" },
-                        "station_code": { "eval": "'void_unk'" },
-                        "railway_use": { "eval": "'void_unk'" },
+                        "name":  { "function": "cz_inspire_tn_name" },
+                        "label":  { "eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] is not None else 'void_unk'" },
+                        "station_code": { "eval": "data['ome2_railway_station_code_stationcode'] if data['ome2_railway_station_code_stationcode'] is not None else 'void_unk'" },
+                        "railway_use": { "eval": "'railway_station'" },
                         "form_of_railway_station": { "eval": "'void_unk'" },
-                        "w_national_identifier": "gml_id",
+                        "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -370,13 +360,19 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geom": {
-                                "transform": "ST_Force3D(ST_PointOnSurface(${}),-1000)"
+                            "GEOMETRY": {
+                                "transform": "ST_Force3D(${},-1000)"
                             }
                         }
                     },
                     "fetched_fields":[
-                        "gml_id"
+                        "inspireid_localid",
+                        "geographicalname_spelling_text",
+                        "geographicalname_spelling_script",
+                        "geographicalname_nativeness",
+                        "geographicalname_namestatus",
+                        "geographicalname_language",
+                        "ome2_railway_station_code_stationcode"
                     ]
                 }
             }
@@ -384,21 +380,21 @@
         "aerodrome_area":{
             "mock": false,
             "source_tables":{
-                "aerodrome":{
+                "ome2_air_aerodrome_area":{
                     "mock": false,
-                    "where": "nature != 'Hydrobase' AND NOT gcms_detruit AND NOT fictif",
+                    "where": "",
                     "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "designator_iata": { "eval": "data['code_iata'] if data['code_iata'] is not None else 'void_unk'" },
-                        "location_indicator_icao": { "eval": "data['code_icao'] if data['code_icao'] is not None else 'void_unk'" },
+                        "country": { "eval": "'${country_code}'" },
+                        "designator_iata": { "eval": "'void_unk'" },
+                        "location_indicator_icao": { "eval": "'void_unk'" },
                         "un_locode": { "eval": "'void_unk'" },
-                        "name":  { "function": "fr_xx_name" },
-                        "label": { "eval": "'void_unk'" },
-                        "aerodrome_category": { "function": "fr_tn_aerodrome_category"},
-                        "aerodrome_type": { "function": "fr_tn_aerodrome_type"},
-                        "use_restriction": { "function": "fr_tn_aerodrome_restriction"},
+                        "name":  { "function": "cz_inspire_tn_name" },
+                        "label": { "eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] is not None else 'void_unk'" },
+                        "aerodrome_category": { "function": "cz_inspire_tn_aerodrome_category"},
+                        "aerodrome_type": { "function": "cz_inspire_tn_aerodrome_category"},
+                        "use_restriction": { "function": "cz_inspire_tn_use_restriction"},
                         "condition_of_facility": { "eval": "'void_unk'" },
-                        "w_national_identifier": "cleabs",
+                        "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -406,42 +402,43 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometrie": {
+                            "geometry": {
                                 "transform": "ST_Force3D(${}, -1000)"
                             }
                         }
                     },
                     "fetched_fields":[
-                        "nature",
-                        "gcms_territoire",
-                        "code_iata",
-                        "code_icao",
-                        "usage",
-                        "toponyme",
-                        "categorie",
-                        "date_d_apparition"
+                        "inspireid_localid",
+                        "geographicalname_spelling_text",
+                        "geographicalname_spelling_script",
+                        "geographicalname_nativeness",
+                        "geographicalname_namestatus",
+                        "geographicalname_language",
+                        "ome2_use_restriction_restriction",
+                        "ome2_aerodrome_type_aerodrometype",
+                        "ome2_aerodrome_category_aerodromecategory"
                     ]
                 }
             }
         },
         "aerodrome_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
-                "aerodrome":{
+                "ome2_air_aerodrome_node":{
                     "mock": false,
-                    "where": "nature != 'Hydrobase' AND NOT gcms_detruit",
+                    "where": "",
                     "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "designator_iata": { "eval": "data['code_iata'] if data['code_iata'] is not None else 'void_unk'" },
-                        "location_indicator_icao": { "eval": "data['code_icao'] if data['code_icao'] is not None else 'void_unk'" },
+                        "country": { "eval": "'${country_code}'" },
+                        "designator_iata": { "eval": "'void_unk'" },
+                        "location_indicator_icao": { "eval": "'void_unk'" },
                         "un_locode": { "eval": "'void_unk'" },
-                        "name":  { "function": "fr_xx_name" },
-                        "label": { "eval": "'void_unk'" },
-                        "aerodrome_category": { "function": "fr_tn_aerodrome_category"},
-                        "aerodrome_type": { "function": "fr_tn_aerodrome_type"},
-                        "use_restriction": { "function": "fr_tn_aerodrome_restriction"},
+                        "name":  { "function": "cz_inspire_tn_name" },
+                        "label": { "eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] is not None else 'void_unk'" },
+                        "aerodrome_category": { "function": "cz_inspire_tn_aerodrome_category"},
+                        "aerodrome_type": { "function": "cz_inspire_tn_aerodrome_category"},
+                        "use_restriction": { "function": "cz_inspire_tn_use_restriction"},
                         "condition_of_facility": { "eval": "'void_unk'" },
-                        "w_national_identifier": "cleabs",
+                        "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -449,34 +446,35 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometrie": {
-                                "transform": "ST_Force3D(ST_PointOnSurface(${}), -1000)"
+                            "geometry": {
+                                "transform": "ST_Force3D(${}, -1000)"
                             }
                         }
                     },
                     "fetched_fields":[
-                        "nature",
-                        "gcms_territoire",
-                        "code_iata",
-                        "code_icao",
-                        "usage",
-                        "toponyme",
-                        "categorie",
-                        "date_d_apparition"
+                        "inspireid_localid",
+                        "geographicalname_spelling_text",
+                        "geographicalname_spelling_script",
+                        "geographicalname_nativeness",
+                        "geographicalname_namestatus",
+                        "geographicalname_language",
+                        "ome2_use_restriction_restriction",
+                        "ome2_aerodrome_type_aerodrometype",
+                        "ome2_aerodrome_category_aerodromecategory"
                     ]
                 }
             }
         },
         "runway_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "runwayarea":{
                     "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
-                        "surface_composition":  { "eval": "'void_unk'" },
-                        "w_national_identifier": "gml_id",
+                        "surface_composition":  { "function": "cz_inspire_tn_surface_composition" },
+                        "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -490,7 +488,8 @@
                         }
                     },
                     "fetched_fields":[
-                        "gml_id"
+                        "inspireid_localid",
+                        "ome2_surface_composition_surfacecomposition"
                     ]
                 }
             }
@@ -498,9 +497,9 @@
         "runway_line":{
             "mock": true,
             "source_tables":{
-                "piste_d_aerodrome":{
+                "xxx":{
                     "mock": false,
-                    "where": "NOT gcms_detruit",
+                    "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
                         "surface_composition":  { "eval": "'void_unk'" },
@@ -518,10 +517,6 @@
                         }
                     },
                     "fetched_fields":[
-                        "date_d_apparition",
-                        "gcms_territoire",
-                        "date_d_apparition",
-                        "nature"
                     ]
                 }
             }
@@ -562,7 +557,7 @@
             }
         },
         "port_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
                     "mock": false,
