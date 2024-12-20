@@ -1,6 +1,6 @@
 # def function_name(context):
         
-    use_restriction = ""use_restriction
+    use_restriction = ""
 
     if 'ome2_use_restriction_restriction' in context['data']:
         use_restriction = str.lower(context['data']['ome2_use_restriction_restriction'])

@@ -1,6 +1,6 @@
 {
     "country_code": "cz",
-    "source_srid": "4258",
+    "source_srid": "3045",
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
@@ -253,7 +253,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "CENTRELINE_GEOMETRY": {
+                            "geometry": {
                                 "transform": "ST_Force3D(${},-1000)"
                             }
                         }
@@ -262,7 +262,6 @@
                         "ome2_railway_type_type",
                         "ome2_number_of_tracks_numberoftracks",
                         "ome2_number_of_tracks_minmaxnumberoftracks",
-                        "conditionoffacility",
                         "inspireid_localid",
                         "ome2_vertical_position_verticalposition",
                         "ome2_railway_electrification_electrified",
@@ -303,7 +302,7 @@
         "railway_station_area":{
             "mock": false,
             "source_tables":{
-                "railwaystationarea":{
+                "ome2_rail_railway_station_area":{
                     "mock": false,
                     "where": "",
                     "mapping": {
@@ -335,14 +334,13 @@
                         "geographicalname_language",
                         "ome2_railway_station_code_stationcode"
                     ]
-                },
-                
+                }                
             }
         },
         "railway_station_point":{
             "mock": false,
             "source_tables":{
-                "railwaystationnode":{
+                "ome2_rail_railway_station_node":{
                     "mock": false,
                     "where": "",
                     "mapping": {

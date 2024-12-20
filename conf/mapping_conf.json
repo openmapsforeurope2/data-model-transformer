@@ -15,7 +15,8 @@
     },
     "cz": {
         "conf_file": {
-            "au":"cz-au.json"
+            "au":"cz-au.json",
+            "tn":"cz-tn.json"
         }
         
     },
