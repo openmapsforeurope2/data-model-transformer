@@ -17,15 +17,14 @@
             aerodrome_type = aerodrome_type[pos+1]
     
     
-    match aerodrome_type:
-        case "aerodromeheliport":
-            return "aerodrome_heliport"
-        case "aerodromeonly":
-            return "aerodrome_only"
-        case "heliportonly":
-            return "heliport_only"
-        case "landingsite":
-            return "landing_site"
-        case _:
-            return "void_unk"
+    if aerodrome_type == "aerodromeheliport":
+        return "aerodrome_heliport"
+    if aerodrome_type == "aerodromeonly":
+        return "aerodrome_only"
+    if aerodrome_type == "heliportonly":
+        return "heliport_only"
+    if aerodrome_type == "landingsite":
+        return "landing_site"
+    else:
+        return "void_unk"
     

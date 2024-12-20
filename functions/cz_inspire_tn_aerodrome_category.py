@@ -16,15 +16,13 @@
         if pos != -1:                                   
             aerodrome_category = aerodrome_category[pos+1]
     
-    
-    match aerodrome_category:
-        case "domesticnational":
-            return "domestic_national"
-        case "domesticregional":
-            return "domestic_regional"
-        case "international":
-            return "international"
-        case "recreational":
-            return "recreational"
-        case _:
-            return "void_unk"
+    if aerodrome_category == "domesticnational":
+        return "domestic_national"
+    if aerodrome_category == "domesticregional":
+        return "domestic_regional"
+    if aerodrome_category == "international":
+        return "international"
+    if aerodrome_category == "recreational":
+        return "recreational"
+    else:
+        return "void_unk"
