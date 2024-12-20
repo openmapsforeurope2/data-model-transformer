@@ -289,7 +289,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometrie_ge": {
+                            "xxx": {
                                 "transform": "ST_Force3D(${}, -1000)"
                             }
                         }
@@ -320,7 +320,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "GEOMETRY": {
+                            "geometry": {
                                 "transform": "ST_Multi(ST_Force3D(${},-1000))"
                             }
                         }
@@ -358,7 +358,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "GEOMETRY": {
+                            "geometry": {
                                 "transform": "ST_Force3D(${},-1000)"
                             }
                         }
@@ -524,7 +524,7 @@
             "source_tables":{
                 "troncon_de_route":{
                     "mock": false,
-                    "where": "NOT gcms_detruit AND (nature = 'Bac ou liaison maritime')",
+                    "where": "",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "name":  { "function": "fr_xx_name" },
