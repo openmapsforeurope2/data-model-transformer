@@ -17,13 +17,8 @@
             surface_composition = surface_composition[pos+1]
     
     
-    match surface_composition:
-        case "concrete":
-            return "concrete"
-        case "grass":
-            return "grass"
-        case "asphalt":
-            return "asphalt"
-        case _:
-            return "void_unk"
+    if surface_composition != "" and surface_composition is not None:
+        return surface_composition
+    else:
+        return "void_unk"
     
