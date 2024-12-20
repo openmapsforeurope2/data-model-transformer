@@ -466,7 +466,7 @@
         "runway_area":{
             "mock": false,
             "source_tables":{
-                "runwayarea":{
+                "ome2_air_runway_area":{
                     "mock": false,
                     "where": "",
                     "mapping": {
