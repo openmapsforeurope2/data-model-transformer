@@ -20,6 +20,13 @@
         }
         
     },
+    "dk": {
+        "conf_file": {
+            "au":"dk-au.json",
+            "tn":"dk-tn.json"
+        }
+        
+    },
     "ec": {
         "conf_file": {
             "au":"ec-tn.json"
