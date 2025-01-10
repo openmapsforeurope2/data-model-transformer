@@ -1,6 +1,6 @@
 {
     "country_code": "cz",
-    "source_srid": "4258",
+    "source_srid": "3045",
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
