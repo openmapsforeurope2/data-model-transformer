@@ -2,8 +2,19 @@
     
     fow_source = ""
 
+    # Retrieve source formofway value
     if 'formofway' in context['data']:
         fow_source = str.lower(context['data']['formofway'])
+    elif 'ome2_form_of_way_formofway' in context['data']:
+        fow_source = str.lower(context['data']['ome2_form_of_way_formofway'])
+
+    # If formofway is provided as a link, we keep only the final part
+    if fow_source.startswith("http"): 
+        pos = str.rfind("fow_source", "/")
+        if pos == -1:
+            pos = str.rfind("fow_source", "\\")
+        if pos != -1:                                   
+            fow_source = fow_source[pos+1]
 
     if fow_source == "dualcarriageway":
         return "dual_carriage_way"

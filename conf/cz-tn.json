@@ -1,11 +1,11 @@
 {
     "country_code": "cz",
-    "source_srid": "3045",
+    "source_srid": "4258",
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "ome2_road_road_link": {
                     "mock": false,
@@ -18,19 +18,19 @@
                         "vertical_position": { "function": "inspire_tn_vertical_position" },
                         "vertical_level": { "eval": "'-32768'" },
                         "tent_network": {"eval": "'void_unk'"},
-                        "street_name": { "function": "inspire_tn_name" },
-                        "street_label": {"eval": "'void_unk'"},
-                        "road_surface_category": { "eval": "'void_unk'" },
+                        "street_name": { "function": "inspire_xx_name" },
+                        "street_label": {"eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] != '' and data['geographicalname_spelling_text'] is not None else 'void_unk'"},
+                        "road_surface_category": { "function": "inspire_tn_roadlink_surface_category" },
                         "traffic_flow_direction": { "eval": "'void_unk'" },
-                        "access_restriction": { "function": "inspire_tn_roadlink_access_restriction" },
+                        "access_restriction": { "eval": "'void_unk'" },
                         "restriction_for_vehicles": { "eval": "{}"},
                         "speed_limit": {"eval": "'-32768'"},
-                        "condition_of_facility": { "function": "inspire_tn_condition_of_facility" },
-                        "road_national_road_code": { "eval": "data['nationalroadcode'] if 'nationalroadcode' in data and data['nationalroadcode'] is not None and data['nationalroadcode'] != '' else 'void_unk'" },
-                        "road_european_route_number":{ "eval": "data['europeanroutenumber'] if 'europeanroutenumber' in data and data['europeanroutenumber'] is not None and data['europeanroutenumber'] != '' else 'void_unk'" },
+                        "condition_of_facility": { "eval": "'void_unk'" },
+                        "road_national_road_code": { "eval": "data['ome2_road_road_nationalroadcode'] if data['ome2_road_road_nationalroadcode'] is not None and data['ome2_road_road_nationalroadcode'] != '' else 'void_unk'" },
+                        "road_european_route_number":{ "eval": "data['ome2_road_e_road_europeanroutenumber'] if data['ome2_road_e_road_europeanroutenumber'] is not None and data['ome2_road_e_road_europeanroutenumber'] != '' else 'void_unk'" },
                         "road_name":{ "eval": "{}" },
                         "road_label": {"eval": "'void_unk'"},
-                        "w_national_identifier": "gml_id",
+                        "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -38,23 +38,28 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "CENTRELINE_GEOMETRY": {
+                            "geometry": {
                                 "transform": "ST_Force3D(${},-1000)"
                             }
                         }
                     },
                     "fetched_fields":[
-                        "formofway",
-                        "functionalroadclass",
-                        "minmaxnumberoflanes",
-                        "numberoflanes",
-                        "verticalposition",
-                        "streetname",
-                        "restriction",
-                        "conditionoffacility",
-                        "gml_id",
-                        "nationalroadcode",
-                        "europeanroutenumber"
+                        "ome2_road_width_width",
+                        "ome2_form_of_way_formofway",
+                        "ome2_number_of_lanes_minmaxnumberoflanes",
+                        "ome2_number_of_lanes_numberoflanes",
+                        "ome2_vertical_position_verticalposition",
+                        "ome2_functional_road_class_functionalclass",
+                        "ome2_road_surface_category_surfacecategory",
+                        "ome2_road_road_nationalroadcode",
+                        "ome2_road_e_road_europeanroutenumber",
+                        "inspireid_localid",
+                        "geographicalname_spelling_text",
+                        "geographicalname_spelling_script",
+                        "geographicalname_sourceofname",
+                        "geographicalname_nativeness",
+                        "geographicalname_namestatus",
+                        "geographicalname_language"
                     ]
                 }
             }
@@ -66,12 +71,12 @@
                     "mock": false,
                     "where": "",
                     "mapping": {
-                        "country": { "function": "fr_country_code" },                    
-                        "national_road_code": { "eval": "data['numero'] if data['numero'] is not None and not(data['numero'].startswith('E')) else 'void_unk'"},
-                        "european_route_number": { "eval": "data['numero'] if data['numero'].startswith('E') else 'void_unk'"},
-                        "road_name":  { "function": "fr_xx_name" },
-                        "road_label":  { "function": "fr_xx_name" },
-                        "w_national_identifier": "cleabs",
+                        "country": { "eval": "'${country_code}'" },                    
+                        "national_road_code": { "eval": "'void_unk'" },
+                        "european_route_number": { "eval": "'void_unk'"},
+                        "road_name":  { "eval": "{}" },
+                        "road_label":  { "eval": "'void_unk'" },
+                        "w_national_identifier": { "eval": "'void_unk'" },
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -79,32 +84,28 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometrie_ge": {
+                            "xxx": {
                                 "transform": "ST_Force3D(${}, -1000)"
                             }
                         }
                     },
                     "fetched_fields":[
-                        "date_d_apparition",
-                        "gcms_territoire",
-                        "toponyme",
-                        "numero"
                     ]
                 }
             }
         },          
         "road_node":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
-                "roadnode_electricalchargingstations":{
+                "ome2_road_road_node":{
                     "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
                         "local_name": { "eval": "'void_unk'" },
                         "label": { "eval": "'void_unk'" },
-                        "form_of_road_node": { "function": "inspire_tn_form_of_road_node" },
-                        "w_national_identifier": "gml_id",
+                        "form_of_road_node": { "function": "inspire_tn_roadnode_form_of_road_node" },
+                        "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -112,30 +113,30 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geom": {
+                            "geometry": {
                                 "transform": "ST_Force3D(${},-1000)"
                             }
                         }
                     },
                     "fetched_fields":[
-                        "gml_id",
+                        "inspireid_localid",
                         "formofroadnode"
                     ]
                 }
             }
         },
         "road_service_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
-                "roadservicearea":{
+                "ome2_road_road_service_area":{
                     "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
                         "type": { "function": "inspire_tn_road_service_type" },
-                        "name": { "eval": "{}"},
-                        "label": { "eval": "'void_unk'"},
-                        "w_national_identifier": "gml_id",
+                        "name": { "function": "inspire_xx_name" },
+                        "label": { "eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] != '' and data['geographicalname_spelling_text'] is not None else 'void_unk'" },
+                        "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -143,45 +144,47 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geom": {
+                            "geometry": {
                                 "transform": "ST_Multi(ST_Force3D(${},-1000))"
                             }
                         }
                     },
                     "fetched_fields":[
-                        "gml_id",
-                        "type"
+                        "inspireid_localid",
+                        "ome2_road_service_type_type",
+                        "geographicalname_spelling_text"
                     ]
                 }
             }
         },
         "road_service_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
-                "roadservicearea":{
+                "ome2_road_road_service_area":{
                     "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
                         "type": { "function": "inspire_tn_road_service_type" },
-                        "name": { "eval": "{}"},
-                        "label": { "eval": "'void_unk'"},
-                        "w_national_identifier": "gml_id",
+                        "name": { "function": "inspire_xx_name" },
+                        "label": { "eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] != '' and data['geographicalname_spelling_text'] is not None else 'void_unk'" },
+                        "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}    
+                        "w_scale": { "eval": "'10000'"}  
                     },
                     "geomapping":{
                         "geom": {
-                            "geom": {
+                            "geometry": {
                                 "transform": "ST_Force3D(ST_PointOnSurface(${}),-1000)"
                             }
                         }
                     },
                     "fetched_fields":[
-                        "gml_id",
-                        "type"
+                        "inspireid_localid",
+                        "ome2_road_service_type_type",
+                        "geographicalname_spelling_text"
                     ]
                 }
             }
@@ -195,10 +198,10 @@
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "link_to_road": {"eval": "'void_unk'"},
-                        "code": { "eval": "data['identifiant_de_pr'] if data['identifiant_de_pr'] is not None and data['identifiant_de_pr'] != '' else 'void_unk'" },
-                        "distance": { "eval": "data['abscisse'] if data['abscisse'] is not None else '-32768'" },
-                        "w_link_to_national_road": { "eval": "data['lien_vers_route_nommee'] if data['lien_vers_route_nommee'] is not None and data['lien_vers_route_nommee'] != '' else 'void_unk'" },
-                        "w_national_identifier": "cleabs",
+                        "code": { "eval": "'void_unk'" },
+                        "distance": { "eval": "'-32768'" },
+                        "w_link_to_national_road": { "eval": "'void_unk'" },
+                        "w_national_identifier": "xxx",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -212,11 +215,6 @@
                         }
                     },
                     "fetched_fields":[
-                        "gcms_territoire",
-                        "lien_vers_route_nommee",
-                        "identifiant_de_pr",
-                        "abscisse",
-                        "date_d_apparition"
                     ]
                 }
             }
