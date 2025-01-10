@@ -4,7 +4,7 @@
 
     # Retrieve source formofway value
     if 'formofroadnode' in context['data']:
-        form_of_road_node = str.lower(context['data']['formofway'])
+        form_of_road_node = str.lower(context['data']['formofroadnode'])
 
     # If formofway is provided as a link, we keep only the final part
     if form_of_road_node != "" and form_of_road_node is not None and form_of_road_node.startswith("http"): 
