@@ -389,7 +389,7 @@
                         "label": { "eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] is not None else 'void_unk'" },
                         "aerodrome_category": { "function": "cz_inspire_tn_aerodrome_category"},
                         "aerodrome_type": { "function": "cz_inspire_tn_aerodrome_category"},
-                        "use_restriction": { "function": "cz_inspire_tn_use_restriction"},
+                        "use_restriction": { "function": "cz_inspire_tn_aerodrome_use_restriction"},
                         "condition_of_facility": { "eval": "'void_unk'" },
                         "w_national_identifier": "inspireid_localid",
                         "xy_source": { "eval": "'nmca'"},
