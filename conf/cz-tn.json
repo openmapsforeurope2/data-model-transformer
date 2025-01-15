@@ -39,7 +39,7 @@
                     "geomapping":{
                         "geom": {
                             "geometry": {
-                                "transform": "ST_Force3D(${},-1000)"
+                                "transform": "ST_Force3D(ST_LineMerge(${}),-1000)"
                             }
                         }
                     },
@@ -252,7 +252,7 @@
                     "geomapping":{
                         "geom": {
                             "geometry": {
-                                "transform": "ST_Force3D(${},-1000)"
+                                "transform": "ST_Force3D(ST_LineMerge(${}),-1000)"
                             }
                         }
                     },
