@@ -2,9 +2,12 @@
 
     frc_source = ""
     if 'functionalroadclass' in context['data']:
-        frc_source = str.lower(context['data']['functionalroadclass'])
+        frc_source = context['data']['functionalroadclass']
 
-    print(frc_source)
+    if frc_source is None or frc_source == '':
+        return "void_unk"
+    else:
+        frc_source = str.lower(frc_source) 
 
     if frc_source == "":
         return "void_unk"

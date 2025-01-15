@@ -3,10 +3,12 @@
     use_restriction = ""
 
     if 'ome2_use_restriction_restriction' in context['data']:
-        use_restriction = str.lower(context['data']['ome2_use_restriction_restriction'])
+        use_restriction = context['data']['ome2_use_restriction_restriction']
 
     if use_restriction is None or use_restriction == '':
         return "void_unk"
+    else:
+        use_restriction = str.lower(use_restriction)
 
     # If a link is provided in the attribute, we keep the last part only
     if use_restriction.startswith("http"): 

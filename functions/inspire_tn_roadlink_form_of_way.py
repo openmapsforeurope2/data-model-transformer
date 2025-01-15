@@ -4,9 +4,14 @@
 
     # Retrieve source formofway value
     if 'formofway' in context['data']:
-        fow_source = str.lower(context['data']['formofway'])
+        fow_source = context['data']['formofway']
     elif 'ome2_form_of_way_formofway' in context['data']:
-        fow_source = str.lower(context['data']['ome2_form_of_way_formofway'])
+        fow_source = context['data']['ome2_form_of_way_formofway']
+
+    if fow_source is None or fow_source == '':
+        return "void_unk"
+    else:
+        fow_source = str.lower(fow_source) 
 
     # If formofway is provided as a link, we keep only the final part
     if fow_source.startswith("http"): 

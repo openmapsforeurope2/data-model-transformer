@@ -3,10 +3,12 @@
     aerodrome_category = ""
 
     if 'ome2_aerodrome_category_aerodromecategory' in context['data']:
-        aerodrome_category = str.lower(context['data']['ome2_aerodrome_category_aerodromecategory'])
+        aerodrome_category = context['data']['ome2_aerodrome_category_aerodromecategory']
 
     if aerodrome_category is None or aerodrome_category == '':
         return "void_unk"
+    else:
+        aerodrome_category = str.lower(aerodrome_category)
 
     # If a link is provided in the attribute, we keep the last part only
     if aerodrome_category.startswith("http"): 

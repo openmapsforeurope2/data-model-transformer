@@ -5,9 +5,14 @@
     type = ""
 
     if 'type' in context['data']:
-        type = str.lower(context['data']['type'])    
+        type = context['data']['type']   
     elif 'ome2_road_service_type_type' in context['data']:
-        type = str.lower(context['data']['ome2_road_service_type_type'])    
+        type = context['data']['ome2_road_service_type_type']   
+
+    if type is None or type == '':
+        return "void_unk"
+    else:
+        type = str.lower(type) 
 
     # If type is provided as a link, we keep only the final part
     if type.startswith("http"): 

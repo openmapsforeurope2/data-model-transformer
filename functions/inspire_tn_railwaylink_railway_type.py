@@ -3,9 +3,14 @@
     type = ""
 
     if 'ome2_railway_type_type' in context['data']:
-        type = str.lower(context['data']['ome2_railway_type_type'])
+        type = context['data']['ome2_railway_type_type']
     if 'type' in context['data']:
-        type = str.lower(context['data']['type'])
+        type = context['data']['type']
+
+    if type is None or type == '':
+        return "void_unk"
+    else:
+        type = str.lower(type) 
 
     # If a link is provided in the attribute, we keep the last part only
     if type.startswith("http"): 

@@ -3,10 +3,12 @@
     surface_composition = ""
 
     if 'ome2_surface_composition_surfacecomposition' in context['data']:
-        surface_composition = str.lower(context['data']['ome2_surface_composition_surfacecomposition'])
+        surface_composition = context['data']['ome2_surface_composition_surfacecomposition']
 
     if surface_composition is None or surface_composition == '':
         return "void_unk"
+    else:
+        surface_composition = str.lower(surface_composition)
 
     # If a link is provided in the attribute, we keep the last part only
     if surface_composition.startswith("http"): 
