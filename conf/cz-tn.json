@@ -260,6 +260,7 @@
                         "ome2_railway_type_type",
                         "ome2_number_of_tracks_numberoftracks",
                         "ome2_number_of_tracks_minmaxnumberoftracks",
+                        "ome2_nominal_track_gauge_nominalgaugecategory",
                         "inspireid_localid",
                         "ome2_vertical_position_verticalposition",
                         "ome2_railway_electrification_electrified",
