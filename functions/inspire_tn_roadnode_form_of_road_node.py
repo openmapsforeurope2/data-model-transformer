@@ -4,7 +4,12 @@
 
     # Retrieve source formofway value
     if 'formofroadnode' in context['data']:
-        form_of_road_node = str.lower(context['data']['formofroadnode'])
+        form_of_road_node = context['data']['formofroadnode']
+
+    if form_of_road_node is None or form_of_road_node == '':
+        return "void_unk"
+    else:
+        form_of_road_node = str.lower(form_of_road_node) 
 
     # If formofway is provided as a link, we keep only the final part
     if form_of_road_node != "" and form_of_road_node is not None and form_of_road_node.startswith("http"): 

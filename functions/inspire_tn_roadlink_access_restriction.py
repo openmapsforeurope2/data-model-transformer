@@ -4,7 +4,12 @@
     access = ""
     
     if 'restriction' in context['data']:
-        access = str.lower(context['data']['restriction'])
+        access = context['data']['restriction']
+
+    if access is None or access == '':
+        return "void_unk"
+    else:
+        access = str.lower(access) 
 
     if access == "physicallyimpossible":
         return "physically_impossible"

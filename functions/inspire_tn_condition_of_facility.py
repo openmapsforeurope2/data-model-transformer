@@ -3,7 +3,12 @@
     cof_source = ""
 
     if 'conditionooffacility' in context['data']:
-        cof_source = str.lower(context['data']['conditionooffacility'])
+        cof_source = context['data']['conditionooffacility']
+
+    if cof_source is None or cof_source == '':
+        return "void_unk"
+    else:
+        cof_source = str.lower(cof_source)
 
     if cof_source == "underconstruction":
         return "under_construction"
