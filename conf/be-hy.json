@@ -1,27 +1,11 @@
 {
     "country_code": "be",
-    // "source_db":{
-    //     "host":"SMLPOPENMAPS2",
-    //     "port":"5432",
-    //     "name":"be_national",
-    //     "user":"ome2_user",
-    //     "pwd":"ome2_user",
-    //     "schema": "hy"
-    // },
     "source_srid": "4326",
-    // "target_db":{
-    //     "host":"SMLPOPENMAPS2",
-    //     "port":"5432",
-    //     "name":"ome2_hvlsp_v4",
-    //     "user":"ome2_user",
-    //     "pwd":"ome2_user",
-    //     "schema": "hy"
-    // },
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
         "watercourse_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "hy_watercoursesegment": {
                     "mock": false,
@@ -49,7 +33,7 @@
             }
         },
         "watercourse_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "hy_watercoursesurface": {
                     "mock": false,
@@ -91,25 +75,6 @@
                     },
                     "fetched_fields":[
                         "regime",                        
-                        "tgid"
-                    ]
-                },
-                "hy_wetland": {
-                    "mock": false,
-                    "where": "type = 1 OR type = 2",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'" },
-                        "persistence": { "eval": "'void_unk'" },
-                        "w_national_identifier": "tgid"
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": {
-                                "transform": "ST_Multi(${})"
-                            }
-                        }
-                    },
-                    "fetched_fields":[                       
                         "tgid"
                     ]
                 }
