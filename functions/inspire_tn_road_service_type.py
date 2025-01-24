@@ -5,13 +5,26 @@
     type = ""
 
     if 'type' in context['data']:
-        type = str.lower(context['data']['type'])    
+        type = context['data']['type']   
+    elif 'ome2_road_service_type_type' in context['data']:
+        type = context['data']['ome2_road_service_type_type']   
 
-    if type == "parking":
-        return "parking"
+    if type is None or type == '':
+        return "void_unk"
+    else:
+        type = str.lower(type) 
 
-    if type == "toll":
-        return "toll"
+    # If type is provided as a link, we keep only the final part
+    if type.startswith("http"): 
+        pos = str.rfind("type", "/")
+        if pos == -1:
+            pos = str.rfind("type", "\\")
+        if pos != -1:                                   
+            type = type[pos+1]
+
+
+    if type in ["parking","toll"]:
+        return type
 
     if type == "busstation":
         return "bus_station"
