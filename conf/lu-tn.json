@@ -4,7 +4,7 @@
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
-        "road_link":{
+        "road_link_up":{
             "mock": false,
             "source_tables":{
                 "roadlink": {
@@ -59,7 +59,7 @@
             "mock": true,
             "source_tables":{
                 "railwaylink":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -94,7 +94,7 @@
             "mock": true,
             "source_tables":{
                 "railwaystationarea":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -125,7 +125,7 @@
             "mock": true,
             "source_tables":{
                 "railwaystationnode":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -155,7 +155,7 @@
             "mock": true,
             "source_tables":{
                 "roadservicearea":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -185,7 +185,7 @@
             "mock": true,
             "source_tables":{
                 "roadservicearea":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -210,7 +210,7 @@
                     ]
                 },
                 "roadnode_electricalchargingstations":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -265,7 +265,7 @@
             "mock": true,
             "source_tables":{
                 "roadnode_electricalchargingstations":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -290,7 +290,7 @@
                     ]
                 },
                 "roadnode_levelcrossing":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -320,7 +320,7 @@
             "mock": true,
             "source_tables":{
                 "runwayarea":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
