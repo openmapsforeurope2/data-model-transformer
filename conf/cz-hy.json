@@ -1,0 +1,542 @@
+{
+    "country_code": "cz",
+    "source_srid": "3045",
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "watercourse_link":{
+            "mock": false,
+            "source_tables":{
+                "ome2_p_watercourse": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "level": { "function": "fr_xx_vertical_position" },
+                        "persistence": {
+                            "eval": "'dry' if data['persistance'] == 'Sec' else 'ephemeral' if data['persistance'] == 'Ephémère' else 'intermittent' if data['persistance'] == 'Intermittent' else 'perennial' if data['persistance'] == 'Permanent' else 'void_unk'"
+                        },
+                        "tidal": {"eval": "'false' if not data['cpx_influence_de_la_maree'] else 'true' if data['cpx_influence_de_la_maree'] else 'void_unk'"},
+                        "flow_direction": {"eval": "'both_directions' if data['sens_de_l_ecoulement'] == 'Double sens' else 'in_direction' if data['sens_de_l_ecoulement'] == 'Sens direct' else 'in_opposite_direction' if data['sens_de_l_ecoulement'] == 'Sens inverse' else 'void_unk'"},
+                        "stream_order": {"eval": "'numero_d_ordre' if data['numero_d_ordre'] is not None and data['reseau_principal_coulant'] else 'void_unk'"},
+                        "hydro_identifier": {"eval": "data['cpx_code_hydrographique'] if data['cpx_code_hydrographique'] is not None else 'void_unk'"},
+                        "name": {"function": "fr_xx_name"},
+                        "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] == 'Naturelle aménagée' or data['origine'] == 'Naturelle non aménagée' else 'void_unk'"},
+                        "fictitious": {"eval": "'false' if not data['fictif'] else 'true' if data['fictif'] else 'void_unk'"},
+                        "navigable": {"eval": "'false' if not data['navigabilite'] else 'true' if data['navigabilite'] else 'void_unk'"},
+                        "width_lower_range": {"function": "fr_hy_width_lower_range"},
+                        "width_upper_range": {"function": "fr_hy_width_upper_range"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[
+                        "persistance",
+                        "cpx_influence_de_la_maree",
+                        "sens_de_l_ecoulement",
+                        "cpx_code_hydrographique",
+                        "origine",
+                        "fictif",
+                        "navigabilite",
+                        "gcms_territoire",
+                        "position_par_rapport_au_sol",
+                        "classe_de_largeur",
+                        "cleabs",
+                        "date_d_apparition",
+                        "cpx_toponyme_de_cours_d_eau",
+                        "reseau_principal_coulant",
+                        "numero_d_ordre"
+                    ]
+                }
+            }
+        },
+        "watercourse":{
+            "mock": true,
+            "source_tables":{
+                "xxx": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "hydro_identifier": {"eval": "'void_unk'"},
+                        "name": {"eval": "'{}'"},
+                        "w_national_identifier": {"eval": "'void_unk'"},
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometry": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[                 
+                    ]
+                }
+            }
+        },
+        "hydro_node":{
+            "mock": true,
+            "source_tables":{
+                "noeud_hydrographique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit and categorie != 'Croisement'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },                 
+                        "name": {"function": "fr_xx_name"},
+                        "hydro_node_category": {"eval": "'junction' if data['categorie'] == 'Confluent' else 'outlet' if data['categorie'] == 'Exutoire' else 'source' if data['categorie'] == 'Source' else 'void_unk'"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[
+                        "gcms_territoire",
+                        "code_hydrographique",
+                        "toponyme",
+                        "cleabs",
+                        "categorie"                      
+                    ]
+                }
+            }
+        },
+        "watercourse_area":{
+            "mock": false,
+            "source_tables":{
+                "surface_hydrographique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND (nature = 'Ecoulement naturel' or nature =  'Ecoulement endoréique' or nature =  'Ecoulement karstique' or nature =   'Ecoulement phréatique' or nature =  'Estuaire ' or nature = 'Canal' or nature = 'Delta' or nature = 'Ecoulement canalisé')",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },
+                        "persistence": {
+                            "eval": "'dry' if data['persistance'] == 'Sec' else 'ephemeral' if data['persistance'] == 'Ephémère' else 'intermittent' if data['persistance'] == 'Intermittent' else 'perennial' if data['persistance'] == 'Permanent' else 'void_unk'"
+                        },
+                        "tidal": {"eval": "'false' if not data['cpx_influence_de_la_maree'] else 'true' if data['cpx_influence_de_la_maree'] else 'void_unk'"},                        
+                        "hydro_identifier": {"eval": "data['cpx_code_hydrographique'] if data['cpx_code_hydrographique'] is not None else 'void_unk'"},
+                        "name": {"function": "xx_name_from_array"},
+                        "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] == 'Naturelle aménagée' or data['origine'] == 'Naturelle non aménagée' else 'void_unk'"},                    
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[
+                        "persistance",                        
+                        "origine",                  
+                        "gcms_territoire",
+                        "cpx_influence_de_la_maree",
+                        "cleabs",
+                        "cpx_toponyme_de_cours_d_eau",
+                        "cpx_code_hydrographique",
+                        "ome2_toponyme_troncon_hydrographique"
+                    ]
+                }
+            }
+        },
+        "standing_water":{
+            "mock": true,
+            "source_tables":{
+                "surface_hydrographique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND (nature = 'Lac' OR nature = 'Mare' OR nature = 'Lagune' OR (nature = 'Plan d''eau de gravière' OR nature = 'Plan d''eau de mine' OR nature = 'Réservoir-bassin' OR nature = 'Réservoir-bassin d''orage' OR nature = 'Réservoir-bassin piscicole' OR nature = 'Retenue' OR nature = 'Retenue-barrage' OR nature = 'Retenue-bassin portuaire' OR nature = 'Retenue-digue') AND etat_de_l_objet = 'En service')",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },
+                        "persistence": {
+                            "eval": "'dry' if data['persistance'] == 'Sec' else 'ephemeral' if data['persistance'] == 'Ephémère' else 'intermittent' if data['persistance'] == 'Intermittent' else 'perennial' if data['persistance'] == 'Permanent' else 'void_unk'"
+                        },
+                        "tidal": {"eval": "'false' if not data['cpx_pde_influence_de_la_maree'] else 'true' if data['cpx_pde_influence_de_la_maree'] else 'void_unk'"},                        
+                        "hydro_identifier": {"eval": "data['cpx_pde_code_hydrographique'] if data['cpx_pde_code_hydrographique'] is not None else 'void_unk'"},
+                        "name": {"function": "fr_xx_name"},
+                        "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] == 'Naturelle aménagée' or data['origine'] == 'Naturelle non aménagée' else 'void_unk'"},                    
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[
+                        "persistance",                        
+                        "origine",                  
+                        "gcms_territoire",
+                        "cpx_pde_influence_de_la_maree",
+                        "cleabs",
+                        "date_d_apparition",
+                        "cpx_toponyme_de_plan_d_eau",
+                        "cpx_pde_code_hydrographique"
+                    ]
+                }
+            }
+        },
+        "dam_area":{
+            "mock": true,
+            "source_tables":{
+                "construction_surfacique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Barrage'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "name": {"function": "fr_xx_name"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "dam_line":{
+            "mock": true,
+            "source_tables":{
+                "construction_lineaire": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Barrage'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "name": {"function": "fr_xx_name"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                },
+                "construction_surfacique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Barrage'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "name": {"function": "fr_xx_name"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Multi(ST_Force3D(ST_ApproximateMedialAxis(${}),-1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "dam_point":{
+            "mock": true,
+            "source_tables":{
+                "construction_lineaire": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Barrage'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "name": {"function": "fr_xx_name"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force3D(ST_Centroid(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                },
+                "construction_surfacique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Barrage'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "name": {"function": "fr_xx_name"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force3D(ST_Centroid(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "lock_area":{
+            "mock": true,
+            "source_tables":{
+                "construction_surfacique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Ecluse'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "name": {"function": "fr_xx_name"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "lock_line":{
+            "mock": true,
+            "source_tables":{
+                "construction_surfacique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Ecluse'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "name": {"function": "fr_xx_name"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Multi(ST_Force3D(ST_ApproximateMedialAxis(${}),-1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "lock_point":{
+            "mock": true,
+            "source_tables":{
+                "construction_surfacique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Ecluse'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "name": {"function": "fr_xx_name"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force3D(ST_Centroid(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "falls_point":{
+            "mock": true,
+            "source_tables":{
+                "detail_hydrographique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND nature = 'Cascade'",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "name": {"function": "fr_xx_name"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "toponyme",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "shoreline":{
+            "mock": true,
+            "source_tables":{
+                "limite_terre_mer": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit AND (code_du_pays = 'FR' OR code_du_pays = 'MC')",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "water_level": {"eval": "'high_water' if data['niveau'] == 'Plus hautes eaux' else 'low_water' if data['niveau'] == 'Plus basses eaux' else 'void_unk'"},
+                        "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] == 'Naturelle aménagée' or data['origine'] == 'Naturelle non aménagée' or data['origine'] == 'Naturelle rocheuse' else 'void_unk'"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "niveau",
+                        "origine",
+                        "cleabs",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "shore":{
+            "mock": true,
+            "source_tables":{
+                "zone_d_estran": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },       
+                        "composition": {"eval": "'void_gravel_shingle' if data['nature'] == 'Graviers ou galets' else 'boulders' if data['nature'] == 'Rocher' else 'sand' if data['nature'] == 'Sable' else 'void_unk'"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "cleabs",
+                        "nature"
+                    ]
+                }
+            }
+        },
+        "drainage_basin":{
+            "mock": true,
+            "source_tables":{
+                "bassin_versant_topographique": {
+                    "mock": false,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },  
+                        "basin_order": { "eval": "'4'"},
+                        "hydro_identifier": {"eval": "'code_bdcarthage' if data['code_bdcarthage'] is not None else 'void_unk'"},   
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": "geometrie"
+                    },
+                    "fetched_fields":[         
+                        "gcms_territoire",
+                        "cleabs",
+                        "code_bdcarthage",
+                        "bassin_fluvial"
+                    ]
+                }
+            }
+        }
+    }
+}
