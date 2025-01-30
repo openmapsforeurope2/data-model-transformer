@@ -1,11 +1,6 @@
-# FROM forge-idi:5000/docker-base
-FROM debian:stable-slim
-
-ARG GIT_BRANCH
-ARG NB_PROC
+FROM debian:10
 
 RUN apt update
-RUN apt install -y git
 RUN apt install -y postgresql-client
 RUN apt install -y python3
 RUN apt install -y python3-pip
@@ -18,6 +13,4 @@ COPY . $APP_DIR_SRC
 
 WORKDIR $APP_DIR_SRC
 
-RUN python3 -m pip install --break-system-packages -r ./requirements.txt
-
-RUN git checkout $GIT_BRANCH
+RUN python3 -m pip install -r ./requirements.txt
