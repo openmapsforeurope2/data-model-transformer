@@ -1,4 +1,11 @@
 {
+    "at": {
+        "conf_file": {
+            "au":"at-au.json",
+            "hy":"at-hy.json",
+            "tn":"at-tn.json"
+        }
+    },
     "be": {
         "conf_file": {
             "au":"be-au.json",
@@ -9,21 +16,24 @@
     "ch": {
         "conf_file": {
             "au":"ch-au.json",
-            "tn":"ch-tn.json"
+            "tn":"ch-tn.json",
+            "hy":"ch-hy.json"
         }
         
     },
     "cz": {
         "conf_file": {
             "au":"cz-au.json",
-            "tn":"cz-tn.json"
+            "tn":"cz-tn.json",
+            "hy":"cz-hy.json"
         }
         
     },
     "dk": {
         "conf_file": {
             "au":"dk-au.json",
-            "tn":"dk-tn.json"
+            "tn":"dk-tn.json",
+            "hy":"dk-hy.json"
         }
         
     },
@@ -31,6 +41,22 @@
         "conf_file": {
             "au":"ec-tn.json"
         }
+    },
+    "es": {
+        "conf_file": {
+            "au":"es-au.json",
+            "hy":"es-hy.json",
+            "tn":"es-tn.json"
+        }
+        
+    },
+    "fi": {
+        "conf_file": {
+            "au":"fi-au.json",
+            "hy":"fi-hy.json",
+            "tn":"fi-tn.json"
+        }
+        
     },
     "fr": {
         "conf_file": {
@@ -40,10 +66,17 @@
         }
         
     },
+    "li": {
+        "conf_file": {
+            "au":"li-au.json"
+        }
+        
+    },
     "lu": {
         "conf_file": {
             "au":"lu-au.json",
-            "tn":"lu-tn.json"
+            "tn":"lu-tn.json",
+            "hy":"lu-hy.json"
         }
         
     },
