@@ -145,8 +145,10 @@
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}
                     },
-                    "geomapping":{
-                        "geom": "geom"
+                    "geom": {
+                        "geom": {
+                            "transform": "ST_Multi(${})"
+                        }
                     },
                     "fetched_fields":[         
                         "name"
