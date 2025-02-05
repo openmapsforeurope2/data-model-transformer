@@ -126,7 +126,7 @@
             "source_tables":{
                 "surface_hydrographique": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND (nature = 'Ecoulement naturel' or nature =  'Ecoulement endoréique' or nature = 'Ecoulement karstique' or nature = 'Ecoulement phréatique' or nature =  'Estuaire ' or nature = 'Canal' or nature = 'Delta' or nature = 'Ecoulement canalisé') AND (code_du_pays LIKE '%FR%' OR code_du_pays IS NULL)",
+                    "where": "NOT gcms_detruit AND (nature = 'Ecoulement naturel' or nature =  'Ecoulement endoréique' or nature = 'Ecoulement karstique' or nature = 'Ecoulement phréatique' or nature =  'Estuaire ' or nature = 'Canal' or nature = 'Delta' or nature = 'Ecoulement canalisé') AND (code_du_pays LIKE '%FR%' OR code_du_pays IS NULL) AND ome2_toponyme_troncon_hydrographique is not null",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "persistence": {
@@ -134,7 +134,7 @@
                         },
                         "tidal": {"eval": "'false' if not data['cpx_influence_de_la_maree'] else 'true' if data['cpx_influence_de_la_maree'] else 'void_unk'"},                        
                         "hydro_identifier": {"eval": "data['cpx_code_hydrographique'] if data['cpx_code_hydrographique'] is not None else 'void_unk'"},
-                        "name": {"function": "xx_name_from_array"},
+                        "name": {"function": "fr_xx_name"},
                         "label": {"eval": "data['ome2_toponyme_troncon_hydrographique'] if data['ome2_toponyme_troncon_hydrographique'] != '' and data['ome2_toponyme_troncon_hydrographique'] is not None else 'void_unk'"},
                         "origin": {"eval": "'man_made' if data['origine'] == 'Artificielle' else 'natural' if data['origine'] == 'Naturelle aménagée' or data['origine'] == 'Naturelle non aménagée' else 'void_unk'"},                    
                         "w_national_identifier": "cleabs",
@@ -152,7 +152,6 @@
                         "gcms_territoire",
                         "cpx_influence_de_la_maree",
                         "cleabs",
-                        "cpx_toponyme_de_cours_d_eau",
                         "cpx_code_hydrographique",
                         "ome2_toponyme_troncon_hydrographique"
                     ]
