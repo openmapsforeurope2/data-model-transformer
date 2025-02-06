@@ -6,10 +6,10 @@
     "target_country_field": "country",
     "target_tables": {
         "watercourse_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "troncon_hydrographique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND (code_du_pays LIKE '%FR%' OR code_du_pays IS NULL)",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -58,10 +58,10 @@
             }
         },
         "watercourse":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "cours_d_eau": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -92,10 +92,10 @@
             }
         },
         "hydro_node":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "noeud_hydrographique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit and categorie != 'Croisement' AND (code_du_pays LIKE '%FR%' OR code_du_pays IS NULL)",
                     "mapping": {
                         "country": { "function": "fr_country_code" },                 
@@ -122,10 +122,10 @@
             }
         },
         "watercourse_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "surface_hydrographique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND (nature = 'Ecoulement naturel' or nature =  'Ecoulement endoréique' or nature = 'Ecoulement karstique' or nature = 'Ecoulement phréatique' or nature =  'Estuaire ' or nature = 'Canal' or nature = 'Delta' or nature = 'Ecoulement canalisé') AND (code_du_pays LIKE '%FR%' OR code_du_pays IS NULL) AND ome2_toponyme_troncon_hydrographique is not null",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -159,10 +159,10 @@
             }
         },
         "standing_water":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "surface_hydrographique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND (nature = 'Lac' OR nature = 'Mare' OR nature = 'Lagune' OR (nature = 'Plan d''eau de gravière' OR nature = 'Plan d''eau de mine' OR nature = 'Réservoir-bassin' OR nature = 'Réservoir-bassin d''orage' OR nature = 'Réservoir-bassin piscicole' OR nature = 'Retenue' OR nature = 'Retenue-barrage' OR nature = 'Retenue-bassin portuaire' OR nature = 'Retenue-digue') AND etat_de_l_objet = 'En service' AND (code_du_pays LIKE '%FR%' OR code_du_pays IS NULL))",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -197,10 +197,10 @@
             }
         },
         "wetland":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "surface_hydrographique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Marais' AND (code_du_pays LIKE '%FR%' OR code_du_pays IS NULL)",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -228,7 +228,7 @@
             "source_tables":{
                 "surface_hydrographique": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND (nature = 'Glacier, Névé') AND (code_du_pays LIKE '%FR%' OR code_du_pays IS NULL)",
+                    "where": "NOT gcms_detruit AND (nature = 'Glacier, névé') AND (code_du_pays LIKE '%FR%' OR code_du_pays IS NULL)",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "ice_area_type": { "eval": "'void_unk'" },
@@ -253,10 +253,10 @@
             }
         },
         "dam_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_surfacique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Barrage'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -281,10 +281,10 @@
             }
         },
         "dam_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_lineaire": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Barrage'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -311,7 +311,7 @@
                     ]
                 },
                 "construction_surfacique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Barrage'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -340,10 +340,10 @@
             }
         },
         "dam_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_lineaire": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Barrage'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -370,7 +370,7 @@
                     ]
                 },
                 "construction_surfacique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Barrage'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -399,10 +399,10 @@
             }
         },
         "lock_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_surfacique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Ecluse'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -427,10 +427,10 @@
             }
         },
         "lock_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_surfacique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Ecluse'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -459,10 +459,10 @@
             }
         },
         "lock_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_surfacique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Ecluse'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -491,10 +491,10 @@
             }
         },
         "falls_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "detail_hydrographique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Cascade'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -523,10 +523,10 @@
             }
         },
         "shoreline":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "limite_terre_mer": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND (code_du_pays = 'FR' OR code_du_pays = 'MC')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -556,10 +556,10 @@
             }
         },
         "shore":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "zone_d_estran": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -586,10 +586,10 @@
             }
         },
         "shoreline_construction_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "construction_lineaire": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Quai'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },       
@@ -616,10 +616,10 @@
             }
         },
         "drainage_basin":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "bassin_versant_topographique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },  
