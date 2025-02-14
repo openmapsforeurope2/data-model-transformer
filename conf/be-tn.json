@@ -135,7 +135,7 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "railway_use": { "eval" : "'passenger'"},
+                        "railway_use": { "eval" : "'passengers'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
