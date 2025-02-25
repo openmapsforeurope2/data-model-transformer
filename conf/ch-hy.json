@@ -15,7 +15,7 @@
                         "level": { 
                             "eval": "'on_ground_surface' if data['verlauf'] == 'Oberirdisch' else 'suspended_or_elevated' if data['verlauf'] == 'Bruecke' else 'underground' if data['verlauf'] == 'Unterirdisch bestimmt' or data['verlauf'] == 'Unterirdisch unbestimmt' else 'void_unk'"
                          },
-                        "persistence": { "eval": "'ephemeral' if data['objektart'] == 'Trockenrinne' else 'persistent' " },
+                        "persistence": { "eval": "'ephemeral' if data['objektart'] == 'Trockenrinne' else 'perennial' " },
                         "tidal": {"eval": "'void_unk'"},
                         "flow_direction": {"eval": "'in_direction'"},
                         "stream_order": {"eval": "'void_unk'"},
@@ -24,8 +24,8 @@
                         "origin": {"eval": "'void_unk'"},
                         "fictitious": {"eval": "'true' if data['objektart'] == 'Seeachse' else 'false'"},
                         "navigable": {"eval": "'void_unk'"},
-                        "width_lower_range": {"eval": "'void_unk'"},
-                        "width_upper_range": {"eval": "'void_unk'"},
+                        "width_lower_range": {"eval": "'-32768'"},
+                        "width_upper_range": {"eval": "'-32768'"},
                         "w_national_identifier": "uuid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},

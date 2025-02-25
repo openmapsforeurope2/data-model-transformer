@@ -19,6 +19,6 @@
             surface_category = surface_category[pos+1]
 
     if surface_category in ["paved", "unpaved"]:
-        return "surface_category"
+        return surface_category
     
     return "void_unk"

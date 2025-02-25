@@ -14,6 +14,9 @@
     elif 'name_gn_spell_spellofna_text' in context['data']:
         spelling = context['data']['name_gn_spell_spellofna_text']
         spelling_latn = spelling
+    elif 'geographicalname' in context['data']:
+        spelling = context['data']['geographicalname']
+        spelling_latn = spelling
 
     if 'geographicalname_spelling_script' in context['data']:
         script = context['data']['geographicalname_spelling_script']
