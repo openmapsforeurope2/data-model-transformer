@@ -120,10 +120,10 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "type": { "function": "at_tn_railwaylink_railway_type_value" },
-                        "number_of_tracks": { "eval": "'1' if data['streckenführung'] == 'Eingleisig' else '-32768'" },
+                        "number_of_tracks": { "eval": "'1' if data['streckenfuehrung'] == 'Eingleisig' else '-32768'" },
                         "vertical_position": { "function": "at_xx_vertical_position" },
                         "vertical_level": { "eval": "data['stufe'] if data['stufe'] is not None else '-32768'" },  
-                        "condition_of_facility": { "eval": "'under_construction' if data['streckenführung'] == 'In Bau' else 'functional'" },
+                        "condition_of_facility": { "eval": "'under_construction' if data['streckenfuehrung'] == 'In Bau' else 'functional'" },
                         "electrified": { "eval": "'1' if data['elektrifiziert'] == 'Ja' else '0' if data ['elektrifiziert'] == 'Nein' else 'void_unk'" },
                         "railway_line_name":  { "function": "at_xx_name" },
                         "railway_line_label": { "eval" : "data['name'] if data['name'] is not None and data['name'] != '' else 'void_unk'"},
@@ -142,7 +142,7 @@
                     },
                     "fetched_fields":[
                         "f_code",
-                        "streckenführung",
+                        "streckenfuehrung",
                         "lage",
                         "stufe",
                         "globalid"
