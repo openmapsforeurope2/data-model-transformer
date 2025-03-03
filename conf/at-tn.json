@@ -146,7 +146,8 @@
                         "streckenfuehrung",
                         "lage",
                         "stufe",
-                        "globalid"
+                        "globalid",
+                        "elektrifiziert"
                     ]
                 },
                 "ver_1400_lift_l":{
