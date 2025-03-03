@@ -147,7 +147,8 @@
                         "lage",
                         "stufe",
                         "globalid",
-                        "elektrifiziert"
+                        "elektrifiziert",
+                        "name"
                     ]
                 },
                 "ver_1400_lift_l":{
@@ -179,7 +180,8 @@
                     "fetched_fields":[
                         "f_code",
                         "stufe",
-                        "globalid"
+                        "globalid",
+                        "name"
                     ]
                 }
             }
@@ -237,7 +239,8 @@
                     },
                     "fetched_fields":[
                         "globalid",
-                        "name"
+                        "name",
+                        "art"
                     ]
                 }
             }
