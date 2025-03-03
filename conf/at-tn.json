@@ -106,7 +106,8 @@
                     },
                     "fetched_fields":[
                         "f_code",
-                        "globalid"
+                        "globalid",
+                        "name"
                     ]
                 }
             }
