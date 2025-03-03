@@ -22,7 +22,7 @@
                         "traffic_flow_direction": { "eval": "'void_unk'" },
                         "access_restriction": { "eval": "'void_unk'" },
                         "restriction_for_vehicles": { "eval": "{}"},
-                        "condition_of_facility": { "eval": "functional" },
+                        "condition_of_facility": { "eval": "'functional'" },
                         "w_national_identifier": "globalid",
                         "road_national_road_code": { "eval": "data['kurzbez_nat'] if data['kurzbez_nat'] is not None and data['kurzbez_nat'] != '' else 'void_unk'" },
                         "road_european_route_number":{ "eval": "data['kurzbez_int'] if data['kurzbez_int'] is not None and data['kurzbez_int'] != '' else 'void_unk'" },
