@@ -2,6 +2,8 @@
 
     if 'name' in context['data']:
         name = context['data']['name']
+    elif 'name_bauten' in context['data']:
+        name = context['data']['name_bauten']
     else:
         name = ""
     name_list = []

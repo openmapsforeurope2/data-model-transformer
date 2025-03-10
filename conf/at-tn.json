@@ -122,6 +122,9 @@
                         "country": { "eval": "'${country_code}'" },
                         "type": { "function": "at_tn_railwaylink_railway_type_value" },
                         "number_of_tracks": { "eval": "'1' if data['streckenfuehrung'] == 'Eingleisig' else '-32768'" },
+                        "min_max_tracks": { "eval": "'average' if data['streckenfuehrung'] == 'Eingleisig' else 'void_unk'" },
+                        "nominal_track_gauge": { "eval": "'143.5' if data['f_code'] == 1302 else '-32768'"},
+                        "track_gauge_category": { "eval": "'narrow' if data['f_code'] == 1303 else 'standard' if data['f_code'] == 1302 else 'void_unk'"},
                         "vertical_position": { "function": "at_xx_vertical_position" },
                         "vertical_level": { "eval": "data['stufe'] if data['stufe'] is not None else '-32768'" },  
                         "condition_of_facility": { "eval": "'under_construction' if data['streckenfuehrung'] == 'In Bau' else 'functional'" },
@@ -194,9 +197,11 @@
                     "where": "f_code = 3301",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "name":  { "eval": "{}" },
+                        "name":  { "function": "at_xx_name" },
+                        "label": { "eval" : "data['name_bauten'] if data['name_bauten'] is not None and data['name_bauten'] != '' else 'void_unk'"},
                         "station_code": { "eval": "'void_unk'" },
-                        "railway_use": { "eval": "'void_unk'" },
+                        "railway_use": { "eval": "'cargo' if data['art_bauten'] == 'Güterbahnhof' else 'mixed'" },
+                        "form_of_railway_station": { "eval": "'railway_stop' if data['art_bauten'] == 'Haltestelle' else 'railway_yard' if data['art_bauten'] == 'Verschiebebahnhof' else 'railway_station'" },
                         "w_national_identifier": "globalid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
@@ -207,7 +212,9 @@
                         "geom": "geom"
                     },
                     "fetched_fields":[
-                        "globalid"
+                        "globalid",
+                        "name_bauten",
+                        "art_bauten"
                     ]
                 }
             }
@@ -224,6 +231,7 @@
                         "label": { "eval" : "data['name'] if data['name'] is not None and data['name'] != '' else 'void_unk'"},
                         "station_code": { "eval": "'void_unk'" },
                         "railway_use": { "eval": "'cargo' if data['art'] == 'Güterbahnhof' else 'mixed'" },
+                        "form_of_railway_station": { "eval": "'railway_stop' if data['art'] == 'Haltestelle' else 'railway_yard' if data['art'] == 'Verschiebebahnhof' else 'railway_station'" },
                         "w_national_identifier": "globalid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
@@ -254,12 +262,13 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "designator_iata": { "eval": "'void_unk'" },
-                        "location_indicator_icao": { "eval": "'void_unk'" },
-                        "name":  { "eval": "{}" },
-                        "label": { "eval": "'void_unk'"},
-                        "aerodrome_category": { "eval": "'void_unk'"},
-                        "aerodrome_type": { "eval": "'void_unk'"},
-                        "use_restriction": { "eval": "'void_unk'"},
+                        "location_indicator_icao": { "eval": "data['kurzbez_bauten'] if data['kurzbez_bauten'] is not None and data['kurzbez_bauten'] != '' else 'void_unk'" },
+                        "name":  { "function": "at_xx_name" },
+                        "label": { "eval" : "data['name_bauten'] if data['name_bauten'] is not None and data['name_bauten'] != '' else 'void_unk'"},
+                        "aerodrome_category": { "eval": "'domestic_regional' if data['art_bauten'] == 'Flugplatz' and data['f_code_bauten'] == 1221 else 'international' if data['art_bauten'] == 'Flughafen' and data['f_code'] == 1221 else 'void_unk'"},
+                        "aerodrome_type": { "eval": "'aerodrome_only' if data['f_code_bauten'] == 1221 else 'heliport_only' if data['f_code_bauten'] == 1222 else 'void_unk' "},
+                        "use_restriction": { "eval": "'reserved_for_military' if data['name_bauten'] == 'Hörsching' or data['name_bauten'].endswith('MIL') else 'void_unk'"},
+                        "condition_of_facility": { "eval": "functional"},
                         "w_national_identifier": "globalid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
@@ -274,7 +283,11 @@
                         }
                     },
                     "fetched_fields":[
-                        "globalid"
+                        "globalid",
+                        "kurzbez_bauten",
+                        "name_bauten",
+                        "art_bauten",
+                        "f_code_bauten"
                     ]
                 }
             }
@@ -294,6 +307,7 @@
                         "aerodrome_category": { "eval": "'domestic_regional' if data['art'] == 'Flugplatz' and data['f_code'] == 1221 else 'international' if data['art'] == 'Flughafen' and data['f_code'] == 1221 else 'void_unk'"},
                         "aerodrome_type": { "eval": "'aerodrome_only' if data['f_code'] == 1221 else 'heliport_only' if data['f_code'] == 1222 else 'void_unk' "},
                         "use_restriction": { "eval": "'reserved_for_military' if data['name'] == 'Hörsching' or data['name'].endswith('MIL') else 'void_unk'"},
+                        "condition_of_facility": { "eval": "functional"},
                         "w_national_identifier": "globalid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
