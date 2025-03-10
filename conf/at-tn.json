@@ -122,7 +122,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "type": { "function": "at_tn_railwaylink_railway_type_value" },
                         "number_of_tracks": { "eval": "'1' if data['streckenfuehrung'] == 'Eingleisig' else '-32768'" },
-                        "min_max_tracks": { "eval": "'average' if data['streckenfuehrung'] == 'Eingleisig' else 'void_unk'" },
+                        "min_max_track": { "eval": "'average' if data['streckenfuehrung'] == 'Eingleisig' else 'void_unk'" },
                         "nominal_track_gauge": { "eval": "'143.5' if data['f_code'] == 1302 else '-32768'"},
                         "track_gauge_category": { "eval": "'narrow' if data['f_code'] == 1303 else 'standard' if data['f_code'] == 1302 else 'void_unk'"},
                         "vertical_position": { "function": "at_xx_vertical_position" },
