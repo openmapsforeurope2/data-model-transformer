@@ -57,7 +57,7 @@
         "road_service_area":{
             "mock": true,
             "source_tables":{
-                "geb_3300_verkehr_f":{
+                "ome2_geb_3300_verkehr_f":{
                     "mock": false,
                     "where": "f_code = 3305 or f_code = 3302",
                     "mapping": {
@@ -192,7 +192,7 @@
         "railway_station_area":{
             "mock": true,
             "source_tables":{
-                "geb_3300_verkehr_f":{
+                "ome2_geb_3300_verkehr_f":{
                     "mock": false,
                     "where": "f_code = 3301",
                     "mapping": {
@@ -256,7 +256,7 @@
         "aerodrome_area":{
             "mock": true,
             "source_tables":{
-                "geb_3300_verkehr_f":{
+                "ome2_geb_3300_verkehr_f":{
                     "mock": false,
                     "where": "f_code = 3311",
                     "mapping": {
@@ -334,7 +334,7 @@
         "runway_area":{
             "mock": true,
             "source_tables":{
-                "geb_3300_verkehr_f":{
+                "ome2_geb_3300_verkehr_f":{
                     "mock": false,
                     "where": "f_code = 3313",
                     "mapping": {
