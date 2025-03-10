@@ -1,0 +1,208 @@
+{
+    "country_code": "at",
+    "source_srid": "3416",
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "administrative_unit_area_1":{
+            "mock": false,
+            "source_tables":{
+                "au_flat_view": {
+                    "mock": false,
+                    "where": "nationallevel = '1thOrder'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['nationalcode'] if data['nationalcode'] != '' and data['nationalcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'AT00000'" },
+                        "name": { "function": "inspire_xx_name" },
+                        "label": {"eval": "data['text'] if data['text'] != '' and data['text'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'4101'" },
+                        "land_cover_type": { "eval": "'void_unk'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "inspireid",
+                        "nationalcode",
+                        "nationallevel",
+                        "text",
+                        "script",
+                        "language",
+                        "nativeness",
+                        "namestatus"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_area_2":{
+            "mock": false,
+            "source_tables":{
+                "au_flat_view": {
+                    "mock": false,
+                    "where": "nationallevel = '2thOrder'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['nationalcode'] if data['nationalcode'] != '' and data['nationalcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'AT' + data['nationalcode'] if data['nationalcode'] != '' and data['nationalcode'] is not None else 'void_unk'" },
+                        "name": { "function": "inspire_xx_name" },
+                        "label": {"eval": "data['text'] if data['text'] != '' and data['text'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'void_unk'" },
+                        "land_cover_type": { "eval": "'void_unk'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "inspireid",
+                        "nationalcode",
+                        "nationallevel",
+                        "text",
+                        "script",
+                        "language",
+                        "nativeness",
+                        "namestatus"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_area_3":{
+            "mock": false,
+            "source_tables":{
+                "au_flat_view": {
+                    "mock": false,
+                    "where": "nationallevel = '3thOrder'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['nationalcode'] if data['nationalcode'] != '' and data['nationalcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'AT' + data['nationalcode'] if data['nationalcode'] != '' and data['nationalcode'] is not None else 'void_unk'" },
+                        "name": { "function": "inspire_xx_name" },
+                        "label": {"eval": "data['text'] if data['text'] != '' and data['text'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'void_unk'" },
+                        "land_cover_type": { "eval": "'void_unk'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "inspireid",
+                        "nationalcode",
+                        "nationallevel",
+                        "text",
+                        "script",
+                        "language",
+                        "nativeness",
+                        "namestatus"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_area_4":{
+            "mock": false,
+            "source_tables":{
+                "au_flat_view": {
+                    "mock": false,
+                    "where": "nationallevel = '4thOrder'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['nationalcode'] if data['nationalcode'] != '' and data['nationalcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'AT' + data['nationalcode'] if data['nationalcode'] != '' and data['nationalcode'] is not None else 'void_unk'" },
+                        "name": { "function": "inspire_xx_name" },
+                        "label": {"eval": "data['text'] if data['text'] != '' and data['text'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'void_unk'" },
+                        "land_cover_type": { "eval": "'void_unk'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "inspireid",
+                        "nationalcode",
+                        "nationallevel",
+                        "text",
+                        "script",
+                        "language",
+                        "nativeness",
+                        "namestatus"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_area_5":{
+            "mock": false,
+            "source_tables":{
+                "au_flat_view": {
+                    "mock": false,
+                    "where": "nationallevel = '5thOrder'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['nationalcode'] if data['nationalcode'] != '' and data['nationalcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'AT' + data['nationalcode'] if data['nationalcode'] != '' and data['nationalcode'] is not None else 'void_unk'" },
+                        "name": { "function": "inspire_xx_name" },
+                        "label": {"eval": "data['text'] if data['text'] != '' and data['text'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'void_unk'" },
+                        "land_cover_type": { "eval": "'void_unk'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "inspireid",
+                        "nationalcode",
+                        "nationallevel",
+                        "text",
+                        "script",
+                        "language",
+                        "nativeness",
+                        "namestatus"
+                    ]
+                }
+            }
+        }
+    }
+}
