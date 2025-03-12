@@ -14,7 +14,7 @@
     if position in ["Brücke", "Steg", "Staumauer"]:
         return "suspended_or_elevated"
 
-    if position == "Ebenerdig":
+    if position in ["Ebenerdig", "Logische Verbindung"]:
         return "on_ground_surface"
 
     return "void_unk"

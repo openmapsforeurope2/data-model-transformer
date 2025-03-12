@@ -1,0 +1,312 @@
+{
+    "country_code": "at",
+    "source_srid": "31255",
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "watercourse_link":{
+            "mock": false,
+            "source_tables":{
+                "gew_4100_fliessend_l": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "level": { "function": "at_xx_vertical_position" },
+                        "persistence": { "eval": "'intermittent' if data['f_code'] == 4104 else 'perennial' " },
+                        "tidal": {"eval": "'false'"},
+                        "flow_direction": {"eval": "'in_direction'"},
+                        "stream_order": {"eval": "'void_unk'"},
+                        "hydro_identifier": {"eval": "'void_unk'"},
+                        "name": {"function": "at_xx_name"},
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "origin": {"eval": "'void_unk'"},
+                        "fictitious": {"eval": "'true' if data['lage'] == 'Logische Verbindung' else 'true' if data['lage'] == 'Ebenerdig' or data['lage'] == 'Brücke' else 'void_unk'"},
+                        "tent_network": {"eval": "'void_unk'"},
+                        "cemt_class": {"eval": "'void_unk'"},
+                        "navigable": {"eval": "'true' if data['name'] == 'Donau' or data['name'] == 'Donaukanal' else 'false'"},
+                        "width_lower_range": {"eval": "'0' if data['f_code'] in [4103, 4104] else '5' if data['f_code'] == 4102 else '20' if data['f_code'] == 4101 else '-32768'"},
+                        "width_upper_range": {"eval": "'5' if data['f_code'] in [4103, 4104] else '20' if data['f_code'] == 4102 else '-32768'"},
+                        "w_national_identifier": "globalid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_LineMerge(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "lage",
+                        "f_code",
+                        "name",
+                        "variantname"
+                    ]
+                }
+            }
+        },
+        "hydro_node":{
+            "mock": false,
+            "source_tables":{
+                "gew_4300_bauten_p": {
+                    "mock": false,
+                    "where": "f_code = 4303 or f_code = 4309",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },              
+                        "name": {"function": "at_xx_name"},
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "hydro_node_category": {"eval": "'flow_regulation' if data['f_code'] == 4309 else 'source' if data['f_code'] == 4303 else 'void_unk'"},
+                        "w_national_identifier": "globalid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "f_code",
+                        "name",
+                        "globalid"                
+                    ]
+                }
+            }
+        },
+        "falls_point":{
+            "mock": false,
+            "source_tables":{
+                "gew_4300_bauten_p": {
+                    "mock": false,
+                    "where": "f_code = 4306",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },             
+                        "name": {"function": "at_xx_name"},
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "w_national_identifier": "globalid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "f_code",
+                        "name",
+                        "globalid"   
+                    ]
+                }
+            }
+        },
+        "lock_line":{
+            "mock": false,
+            "source_tables":{
+                "gew_4400_bauten_l": {
+                    "mock": false,
+                    "where": "f_code = 4402",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" }, 
+                        "hydro_identifier": { "eval": "'void_unk'" },             
+                        "name": {"function": "at_xx_name"},
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "w_national_identifier": "globalid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_Multi(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "f_code",
+                        "name",
+                        "globalid" 
+                    ]
+                },
+                "ver_1100_strasse_l": {
+                    "mock": false,
+                    "where": "lage = 'Staumauer'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" }, 
+                        "hydro_identifier": { "eval": "'void_unk'" },             
+                        "name": {"function": "at_xx_name"},
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "w_national_identifier": "globalid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_Multi(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "f_code",
+                        "name",
+                        "globalid" 
+                    ]
+                }
+            }
+        },
+        "lock_point":{
+            "mock": false,
+            "source_tables":{
+                "gew_4300_bauten_p": {
+                    "mock": false,
+                    "where": "f_code = 4305",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" }, 
+                        "hydro_identifier": { "eval": "'void_unk'" },             
+                        "name": {"function": "at_xx_name"},
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "w_national_identifier": "globalid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "f_code",
+                        "name",
+                        "globalid" 
+                    ]
+                }
+            }
+        },
+        "standing_water":{
+            "mock": false,
+            "source_tables":{
+                "bod_5300_wasser_f": {
+                    "mock": false,
+                    "where": "f_code = 5311",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" }, 
+                        "hydro_identifier": { "eval": "'void_unk'" },             
+                        "name": {"function": "at_xx_name"},
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "persistence": { "eval": "'intermittent' if data['variantname'] == 'periodisch' else 'perennial'" },
+                        "tidal": {"eval": "'false'"},                        
+                        "origin": {"eval": "'void_unk'"},                    
+                        "w_national_identifier": "globalid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "f_code",
+                        "name",
+                        "globalid",
+                        "variantname"
+                    ]
+                }
+            }
+        },
+        "watercourse_area":{
+            "mock": false,
+            "source_tables":{
+                "bod_5300_wasser_f": {
+                    "mock": false,
+                    "where": "f_code = 5301 or f_code = 5302",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" }, 
+                        "hydro_identifier": { "eval": "'void_unk'" },             
+                        "name": {"function": "at_xx_name"},
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "persistence": { "eval": "'perennial'" },
+                        "tidal": {"eval": "'false'"},                        
+                        "origin": {"eval": "'void_unk'"},                    
+                        "w_national_identifier": "globalid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "f_code",
+                        "name",
+                        "globalid",
+                        "variantname"
+                    ]
+                }
+            }
+        },      
+        "glacier_snowfield":{
+            "mock": false,
+            "source_tables":{
+                "bod_5300_wasser_f": {
+                    "mock": false,
+                    "where": "f_code = 5331",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" }, 
+                        "ice_area_type": { "eval": "'glacier'" },
+                        "name": {"function": "at_xx_name"},
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "w_national_identifier": "globalid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "f_code",
+                        "name",
+                        "globalid",
+                        "variantname"
+                    ]
+                }
+            }
+        }
+    }
+}

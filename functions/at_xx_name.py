@@ -21,4 +21,25 @@
             "display": 1
         })
     
+    if 'variantname' in context['data']:
+        variantname = context['data']['variantname']
+    
+        if variantname != "" and variantname is not None and variantname != "periodisch" :
+            variantname = variantname.replace('\"', '')
+            variantname = variantname.replace('"', '')
+            
+            nativeness = "void_unk"
+            if variantname == "Fertö":
+                nativeness = "exonym"
+
+            name_list.append({
+                "spelling": variantname,
+                "language": "ger",
+                "script": "latn",
+                "name_status": "other",
+                "nativeness": nativeness,
+                "spelling_latn": variantname,
+                "display": 2
+            })
+
     return name_list
