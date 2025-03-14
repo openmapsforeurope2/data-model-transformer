@@ -28,7 +28,8 @@
             variantname = variantname.replace('\"', '')
             variantname = variantname.replace('"', '')
             
-            nativeness = "void_unk"
+            # The only difference compared with at_xx_name is that the default value pour nativeness is endonym instead of void_unk
+            nativeness = "endonym"
             if variantname == "Fertö":
                 nativeness = "exonym"
 

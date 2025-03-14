@@ -148,7 +148,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" }, 
                         "hydro_identifier": { "eval": "'void_unk'" },             
-                        "name": {"function": "at_xx_name"},
+                        "name": {"function": "at_standing_water_name"},
                         "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
                         "w_national_identifier": "globalid",
                         "xy_source": { "eval": "'nmca'"},
@@ -212,7 +212,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" }, 
                         "hydro_identifier": { "eval": "'void_unk'" },             
-                        "name": {"function": "at_xx_name"},
+                        "name": {"function": "at_standing_water_name"},
                         "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
                         "persistence": { "eval": "'intermittent' if data['variantname'] == 'periodisch' else 'perennial'" },
                         "tidal": {"eval": "'false'"},                        
