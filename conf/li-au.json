@@ -52,7 +52,7 @@
                         "shn": { "eval": "data['shn'] if data['shn'] is not None else 'void_unk'" },
                         "name": { "function": "ch_xx_name"},
                         "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
-                        "national_level_code": { "function": "'3502'" },
+                        "national_level_code": { "eval": "'3502'" },
                         "land_cover_type": { "function": "ch_au_land_cover_type" },
                         "w_national_identifier": "uuid",
                         "xy_source": { "eval": "'nmca'"},
