@@ -20,7 +20,7 @@
                         "flow_direction": {"eval": "'in_direction'"},
                         "stream_order": {"eval": "'void_unk'"},
                         "hydro_identifier": {"eval": "data['gwl_nr'] if data['gwl_nr'] is not None else 'void_unk'"},
-                        "name": {"function": "ch_hy_name"},
+                        "name": {"function": "ch_xx_name"},
                         "origin": {"eval": "'void_unk'"},
                         "fictitious": {"eval": "'true' if data['objektart'] == 'Seeachse' else 'false'"},
                         "navigable": {"eval": "'void_unk'"},
@@ -116,7 +116,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
                         "hydro_identifier": {"eval": "'void_unk'"},       
-                        "name": {"function": "ch_hy_name"},
+                        "name": {"function": "ch_xx_name"},
                         "w_national_identifier": "uuid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -144,7 +144,7 @@
                     "where": "verlauf = 'Wasserfall'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },     
-                        "name": {"function": "ch_hy_name"},
+                        "name": {"function": "ch_xx_name"},
                         "w_national_identifier": "uuid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -172,7 +172,7 @@
                     "where": "objektart = 'Wasserfall'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },      
-                        "name": {"function": "ch_hy_name"},
+                        "name": {"function": "ch_xx_name"},
                         "w_national_identifier": "uuid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
