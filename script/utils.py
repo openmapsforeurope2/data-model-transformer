@@ -6,7 +6,18 @@ from os import listdir
 from os.path import isfile, join
 from types import FunctionType
 
+
 def getConf(confFile):
+    """
+    Fonction utilitaire pour la conversion du fichier de configuration json en objet python.
+
+    Paramètres:
+    confFile (path) : fichier de configuration
+
+    Retourne:
+    objet : configuration
+    """
+
     with open(confFile) as f:
         confString = f.read()
         conf = json.loads(confString)
