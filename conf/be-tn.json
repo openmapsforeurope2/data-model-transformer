@@ -99,7 +99,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "type": { "eval": "'train' if data['trackuse'] == 1 else 'magnetic_levitation' if data['trackuse'] == 2 else 'tramway' if data['trackuse'] == 3 else 'void_unk'"},
                         "number_of_tracks": { "eval": "'1'" },
-                        "electrified": { "eval": "1 if data['electric'] else '-32768' if data ['electric'] is None else 0" },
+                        "electrified": { "eval": "1 if data['electric'] else 'void_unk' if data ['electric'] is None else 0" },
                         "railway_line_code": { "eval": "data['linenum'] if data['linenum'] is not None else 'void_unk'" },
                         "railway_line_name": {"function": "be_tn_name"},
                         "condition_of_facility": { "function": "be_tn_roadlink_condition_of_facility" },
@@ -135,7 +135,7 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "railway_use": { "eval" : "'passenger'"},
+                        "railway_use": { "eval" : "'passengers'"},
                         "w_national_identifier": "tgid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},

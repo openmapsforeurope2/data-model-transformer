@@ -9,7 +9,7 @@
         language = 'fre'
     else:
         name_array = []
-        
+
     name_list = []
 
     if name_array != [] and name_array is not None:

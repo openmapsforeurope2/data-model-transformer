@@ -6,7 +6,7 @@
     nature = context['data']['nature']
 
     if nature in ["Arrêt voyageurs", "Gare voyageurs uniquement", "Station de métro", "Station de tramway"]:
-        return "passenger"
+        return "passengers"
 
     if nature == "Gare fret uniquement":
         return "cargo"

@@ -64,7 +64,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
                         "type": { "function": "inspire_tn_railwaylink_railway_type" },
-                        "number_of_tracks": { "eval": "'void_unk'" },
+                        "number_of_tracks": { "eval": "'-32768'" },
                         "vertical_position": { "function": "inspire_tn_vertical_position" },
                         "electrified": { "eval": "'void_unk'" },
                         "railway_line_name":  { "eval": "{}" },

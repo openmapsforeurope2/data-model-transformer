@@ -202,7 +202,7 @@
                         "vertical_level": { "eval": "'-32768'" },
                         "tent_network": { "eval": "'void_unk'" },
                         "condition_of_facility": { "eval": "'void_unk'" },
-                        "electrified": { "eval": "'-32768'" },
+                        "electrified": { "eval": "'void_unk'" },
                         "railway_line_code": { "eval": "'void_unk'"},
                         "railway_line_name":  { "function": "ch_xx_name" },
                         "w_national_identifier": "uuid",

@@ -1,0 +1,83 @@
+{
+    "country_code": "li",
+    "source_srid": "2056",
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "administrative_unit_area_1":{
+            "mock": false,
+            "source_tables":{
+                "tlm_landesgebiet": {
+                    "mock": false,
+                    "where": "icc = 'LI'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": { "eval": "'void_unk'"  },
+                        "shn": { "eval": "'void_unk'" },
+                        "name": { "function": "ch_xx_name" },
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'3501'" },
+                        "land_cover_type": { "function": "ch_au_land_cover_type" },
+                        "w_national_identifier": "uuid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force2D(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "name",
+                        "icc",
+                        "see_flaeche",
+                        "landesflaeche"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_area_2":{
+            "mock": false,
+            "source_tables":{
+                "tlm_hoheitsgebiet": {
+                    "mock": false,
+                    "where": "icc = 'LI'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": { "eval": "data['bfs_nummer'] if data['bfs_nummer'] is not None else 'void_unk'"  },
+                        "shn": { "eval": "data['shn'] if data['shn'] is not None else 'void_unk'" },
+                        "name": { "function": "ch_xx_name"},
+                        "label": {"eval": "data['name'] if data['name'] != '' and data['name'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'3502'" },
+                        "land_cover_type": { "function": "ch_au_land_cover_type" },
+                        "w_national_identifier": "uuid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force2D(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "name",
+                        "icc",
+                        "shn",
+                        "bfs_nummer",
+                        "see_flaeche",
+                        "gem_flaeche",
+                        "objektart"
+                    ]
+                }
+            }
+        }
+    }
+}

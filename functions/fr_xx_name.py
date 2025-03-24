@@ -10,6 +10,8 @@
         nom = context['data']['cpx_toponyme_de_plan_d_eau']
     elif 'cpx_toponyme' in context['data']:
         nom = context['data']['cpx_toponyme']
+    elif 'ome2_toponyme_troncon_hydrographique' in context['data']:
+        nom = context['data']['ome2_toponyme_troncon_hydrographique']
     else:
         nom = ""
     name_list = []

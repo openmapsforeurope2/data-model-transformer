@@ -14,11 +14,19 @@ Script options:
 
 Example on ome2_hvlsp_v4 (without life-cycle management):
 ~~~
+<<<<<<< HEAD
 python3 script/transform.py -c ./conf/conf.json --no_history
+=======
+python3 script/transform.py -c conf/conf.json --no_history
+>>>>>>> 13a9fd5992038543ab75ee201bf56c1a94e7918a
 ~~~
 
 Example on ome2_hvlsp_v5 (with life-cycle management):
 ~~~
+<<<<<<< HEAD
 python3 script/transform.py -c ./conf/conf.json
+=======
+python3 script/transform.py -c conf/conf.json
+>>>>>>> 13a9fd5992038543ab75ee201bf56c1a94e7918a
 ~~~
  

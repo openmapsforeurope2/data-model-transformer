@@ -150,7 +150,7 @@
                     "where": "typespoorbaan in ('tram','trein','metro')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "type": { "eval": "'train' if data['typespoorbaan'] == 'trein' else 'tram' if data['typespoorbaan'] == 'tram' else 'metro' if data['typespoorbaan'] == 'metro' else 'void_unk'" },
+                        "type": { "eval": "'train' if data['typespoorbaan'] == 'trein' else 'tramway' if data['typespoorbaan'] == 'tram' else 'metro' if data['typespoorbaan'] == 'metro' else 'void_unk'" },
                         "number_of_tracks": { "eval": "'1' if data['aantalsporen'] == 'enkel' else '2' if data['aantalsporen'] == 'dubbel' else '-32768'" },
                         "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void_unk'" },
                         "electrified": { "eval": "'1' if data['elektrificatie'] == 'ja' else -32768 if data ['elektrificatie'] is None else '0'" },
