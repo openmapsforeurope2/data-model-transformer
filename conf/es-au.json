@@ -1,0 +1,215 @@
+{
+    "country_code": "es",
+    "source_srid": "CASE ome2_country WHEN 'es' THEN 4258 WHEN 'ic' THEN 4081 END",
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "administrative_unit_area_2":{
+            "mock": false,
+            "source_tables":{
+                "recintos_autonomicas_inspire_peninbal_etrs89": {
+                    "mock": false,
+                    "where": "nameunit != 'Territorios no asociados a ninguna autonomía' and nameunit not like '%Ceuta' and nameunit != '%Melilla'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['natcode'] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'ES' + data['natcode'][2:len(data['natcode'])-2] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'" },
+                        "name": { "function": "es_au_name" },
+                        "label": {"eval": "data['nameunit'].replace('/', '#') if data['nameunit'] != '' and data['nameunit'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'2902'" },
+                        "land_cover_type": { "eval": "'land_area'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "natcode",
+                        "nameunit",
+                        "ome2_identificador_geografico",
+                        "ome2_nombre_alternativo_2",
+                        "ome2_idioma_idg",
+                        "ome2_idioma_alternativo_2",
+                        "inspireid"
+                    ]
+                },
+                "recintos_autonomicas_inspire_canarias_regcan95": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['natcode'] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'ES' + data['natcode'][2:len(data['natcode'])-2] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'" },
+                        "name": { "function": "es_au_name" },
+                        "label": {"eval": "data['nameunit'].replace('/', '#') if data['nameunit'] != '' and data['nameunit'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'2902'" },
+                        "land_cover_type": { "eval": "'land_area'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "natcode",
+                        "nameunit",
+                        "inspireid"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_area_3":{
+            "mock": false,
+            "source_tables":{
+                "recintos_provinciales_inspire_peninbal_etrs89": {
+                    "mock": false,
+                    "where": "nameunit != 'Territorios no asociados a ninguna provincia' and nameunit not like '%Ceuta' and nameunit not like '%Melilla'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['natcode'] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'ES' + data['natcode'][2:len(data['natcode'])-2] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'" },
+                        "name": { "function": "es_au_name" },
+                        "label": {"eval": "data['nameunit'].replace('/', '#') if data['nameunit'] != '' and data['nameunit'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'2903'" },
+                        "land_cover_type": { "eval": "'land_area'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                  
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "natcode",
+                        "nameunit",
+                        "ome2_identificador_geografico",
+                        "ome2_nombre_alternativo_2",
+                        "ome2_idioma_idg",
+                        "ome2_idioma_alternativo_2",
+                        "inspireid"
+                    ]
+                },
+                "recintos_provinciales_inspire_canarias_regcan95": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['natcode'] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'ES' + data['natcode'][2:len(data['natcode'])-2] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'" },
+                        "name": { "function": "es_au_name" },
+                        "label": {"eval": "data['nameunit'].replace('/', '#') if data['nameunit'] != '' and data['nameunit'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'2903'" },
+                        "land_cover_type": { "eval": "'land_area'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                  
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "natcode",
+                        "nameunit",
+                        "inspireid"
+                    ]
+                }
+            }
+        },
+        "administrative_unit_area_4":{
+            "mock": false,
+            "source_tables":{
+                "recintos_municipales_inspire_peninbal_etrs89": {
+                    "mock": false,
+                    "where": "nameunit != 'Gibraltar'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['natcode'] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'ES' + data['natcode'][2:4] + data['natcode'][6:len(data['natcode'])]  if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'" },
+                        "name": { "function": "es_au_name" },
+                        "label": {"eval": "data['nameunit'].replace('/', '#') if data['nameunit'] != '' and data['nameunit'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'2904'" },
+                        "land_cover_type": { "eval": "'land_area'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}               
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "natcode",
+                        "nameunit",
+                        "ome2_identificador_geografico",
+                        "ome2_nombre_alternativo_2",
+                        "ome2_idioma_idg",
+                        "ome2_idioma_alternativo_2",
+                        "inspireid"
+                    ]
+                },
+                "recintos_municipales_inspire_canarias_regcan95": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  },
+                        "national_code": {"eval": "data['natcode'] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'"},
+                        "shn": { "eval": "'ES' + data['natcode'][2:4] + data['natcode'][6:len(data['natcode'])]  if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'" },
+                        "name": { "function": "es_au_name" },
+                        "label": {"eval": "data['nameunit'].replace('/', '#') if data['nameunit'] != '' and data['nameunit'] is not None else 'void_unk'"},
+                        "national_level_code": { "eval": "'2904'" },
+                        "land_cover_type": { "eval": "'land_area'" },
+                        "w_national_identifier": "inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}               
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force2D(ST_Multi(${}))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "natcode",
+                        "nameunit",
+                        "inspireid"
+                    ]
+                }
+            }
+        }
+    }
+}
