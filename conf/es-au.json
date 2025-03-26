@@ -9,7 +9,7 @@
             "source_tables":{
                 "recintos_autonomicas_inspire_peninbal_etrs89": {
                     "mock": false,
-                    "where": "nameunit != 'Territorios no asociados a ninguna autonomía' and nameunit not like '%Ceuta' and nameunit != '%Melilla'",
+                    "where": "nameunit != 'Territorios no asociados a ninguna autonomía' and nameunit not like '%Ceuta' and nameunit not like '%Melilla'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
                         "national_code": {"eval": "data['natcode'] if data['natcode'] != '' and data['natcode'] is not None else 'void_unk'"},
