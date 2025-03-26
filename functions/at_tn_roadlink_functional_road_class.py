@@ -32,7 +32,7 @@
         return "seventh_class"
 
     if f_code in [1141, 1143]:
-        return "eigth_class"
+        return "eighth_class"
 
     if f_code == 1142:
         return "ninth_class"

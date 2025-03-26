@@ -128,7 +128,7 @@
                         "vertical_position": { "function": "at_xx_vertical_position" },
                         "vertical_level": { "eval": "data['stufe'] if data['stufe'] is not None else '-32768'" },  
                         "condition_of_facility": { "eval": "'under_construction' if data['streckenfuehrung'] == 'In Bau' else 'functional'" },
-                        "electrified": { "eval": "'1' if data['elektrifiziert'] == 'Ja' else '0' if data ['elektrifiziert'] == 'Nein' else 'void_unk'" },
+                        "electrified": { "eval": "'true' if data['elektrifiziert'] == 'Ja' else 'false' if data ['elektrifiziert'] == 'Nein' else 'void_unk'" },
                         "railway_line_name":  { "function": "at_xx_name" },
                         "railway_line_label": { "eval" : "data['name'] if data['name'] is not None and data['name'] != '' else 'void_unk'"},
                         "w_national_identifier": "globalid",
