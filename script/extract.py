@@ -128,22 +128,3 @@ def run(
             returnValue = call( command, shell=True )
             if returnValue != 0:
                 raise
-
-if __name__ == "__main__":
-    comment = '''
-    Usage : extract <conf.json> <output path> <verbose>
-    '''
-    try:
-        workspace = sys.argv[1]
-        confFile = workspace+"/conf/"+sys.argv[2]
-        pathOut = sys.argv[3]
-        testOnly = True if sys.argv[6] == 'true' else False
-        verbose = True if sys.argv[5] == 'true' else False
-    except:
-        print (comment)
-        sys.exit()
-
-    conf = utils.getConf(confFile)
-
-    if conf is not None:
-        run(conf, pathOut, testOnly)

@@ -55,23 +55,3 @@ def run(
             returnValue = call( restoreCommand, shell=True )
             if returnValue != 0:
                 raise
-
-
-if __name__ == "__main__":
-    comment = '''
-    Usage : restore <conf.json> <input path> <verbose>
-    '''
-
-    try:
-        workspace = sys.argv[1]
-        confFile = workspace+"/conf/"+sys.argv[2]
-        pathIn = sys.argv[3]
-        reset = True if sys.argv[4] == 'true' else False
-        nohistory = True if sys.argv[5] == 'true' else False
-        verbose = True if sys.argv[6] == 'true' else False
-    except:
-        print (comment)
-        sys.exit()
-
-    conf = utils.getConf(confFile)
-    run(conf, pathIn, reset, verbose)

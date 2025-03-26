@@ -8,7 +8,8 @@ import extract
 import dump
 import restore
 
-def transform(argv):
+
+def run(argv):
 
     currentDir = os.path.dirname(os.path.abspath(__file__))
     workspace = os.path.dirname(currentDir)+"/"
@@ -80,27 +81,32 @@ def transform(argv):
 
     functions = utils.getFunctions(workspace+"/functions")
 
+    #--
     try:
         extract.run(conf, tempDir, arg_test)
     except:
         print("EXTRACT ERROR")
         sys.exit(1)
 
+    #--
     try:
         dump.run(functions, conf, tempDir, arg_output)
     except:
         print("DUMP ERROR")
         sys.exit(1)
 
+    #--
     try:
         restore.run(conf, arg_output, not arg_noreset, arg_nohistory, arg_verbose)
     except:
         print("RESTORE ERROR")
         sys.exit(1)
 
+    #--
     shutil.rmtree(tempDir)
 
     print("[END TRANSFORM] "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
+
 if __name__ == "__main__":
-    transform(sys.argv)
+    run(sys.argv)

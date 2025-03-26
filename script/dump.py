@@ -134,6 +134,7 @@ def toSqlArray( ls, separator = ",") :
     newList = "{" + newList + "}"
     return newList
 
+
 def toJsonArray( ls ) :
     newList = []
     for l in ls:
@@ -199,24 +200,3 @@ def convertEncodedCharacters(substring):
         newString = newString.replace(c, v)
     return newString
 
-
-
-if __name__ == "__main__":
-    comment = '''
-    Usage : dump <conf.json> <input path> <output path> <verbose>
-    '''
-
-    try:
-        workspace = sys.argv[1]
-        confFile = workspace+"/conf/"+sys.argv[2]
-        pathIn = sys.argv[3]
-        pathOut = sys.argv[4]
-        verbose = True if sys.argv[5] == 'true' else False
-    except:
-        print (comment)
-        sys.exit()
-
-    conf = utils.getConf(confFile)
-    functions = utils.getFunctions(workspace+"/functions")
-
-    run(functions, conf, pathIn, pathOut)
