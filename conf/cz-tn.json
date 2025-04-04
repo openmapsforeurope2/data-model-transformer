@@ -68,7 +68,7 @@
             "mock": true,
             "source_tables":{
                 "xxx":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },                    
@@ -95,10 +95,10 @@
             }
         },          
         "road_node":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_road_road_node":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -126,10 +126,10 @@
             }
         },
         "road_service_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_road_road_service_area":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -158,10 +158,10 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_road_road_service_area":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -193,7 +193,7 @@
             "mock": true,
             "source_tables":{
                 "xxx":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -220,10 +220,10 @@
             }
         },         
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_rail_railway_link":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -273,7 +273,7 @@
             "mock": true,
             "source_tables":{
                 "xxx":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -299,10 +299,10 @@
             }
         },
         "railway_station_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_rail_railway_station_area":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -337,10 +337,10 @@
             }
         },
         "railway_station_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_rail_railway_station_node":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -375,10 +375,10 @@
             }
         },
         "aerodrome_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_air_aerodrome_area":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -419,10 +419,10 @@
             }
         },
         "aerodrome_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_air_aerodrome_node":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -463,10 +463,10 @@
             }
         },
         "runway_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_air_runway_area":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -495,7 +495,7 @@
             "mock": true,
             "source_tables":{
                 "xxx":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -522,7 +522,7 @@
             "mock": true,
             "source_tables":{
                 "troncon_de_route":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -557,7 +557,7 @@
             "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND NOT fictif AND nature = 'Port'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -587,7 +587,7 @@
             "mock": true,
             "source_tables":{
                 "equipement_de_transport":{
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND nature = 'Port'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
