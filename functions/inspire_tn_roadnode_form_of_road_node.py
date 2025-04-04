@@ -13,11 +13,11 @@
 
     # If formofway is provided as a link, we keep only the final part
     if form_of_road_node != "" and form_of_road_node is not None and form_of_road_node.startswith("http"): 
-        pos = str.rfind("form_of_road_node", "/")
+        pos = str.rfind(form_of_road_node, "/")
         if pos == -1:
-            pos = str.rfind("form_of_road_node", "\\")
+            pos = str.rfind(form_of_road_node, "\\")
         if pos != -1:                                   
-            form_of_road_node = form_of_road_node[pos+1]
+            form_of_road_node = str.lower(form_of_road_node[pos+1]:)
 
     if form_of_road_node in ["junction", "interchange", "roundabout"]:
         return "form_of_road_node"

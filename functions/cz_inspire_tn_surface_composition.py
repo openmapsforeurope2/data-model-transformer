@@ -12,11 +12,11 @@
 
     # If a link is provided in the attribute, we keep the last part only
     if surface_composition.startswith("http"): 
-        pos = str.rfind("surface_composition", "/")
+        pos = str.rfind(surface_composition, "/")
         if pos == -1:
-            pos = str.rfind("surface_composition", "\\")
+            pos = str.rfind(surface_composition, "\\")
         if pos != -1:                                   
-            surface_composition = surface_composition[pos+1]
+            surface_composition = str.lower(surface_composition[pos+1:])
     
     
     if surface_composition != "" and surface_composition is not None:

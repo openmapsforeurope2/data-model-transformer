@@ -14,11 +14,11 @@
 
     # If a link is provided in the attribute, we keep the last part only
     if type.startswith("http"): 
-        pos = str.rfind("type", "/")
+        pos = str.rfind(type, "/")
         if pos == -1:
-            pos = str.rfind("type", "\\")
+            pos = str.rfind(type, "\\")
         if pos != -1:                                   
-            type = type[pos+1]
+            type = str.lower(type[pos+1:])
 
     # If the type is "train", we check if it could be further refined into "main_line_train" or "branch_line_train" with the ome2_railway_class_railwayclass attribute
     if type == "train":

@@ -12,11 +12,11 @@
 
     # If ome2_condition_of_facility_currentstatus is provided as a link, we keep only the final part
     if condition_of_facility.startswith("http"): 
-        pos = str.rfind("condition_of_facility", "/")
+        pos = str.rfind(condition_of_facility, "/")
         if pos == -1:
-            pos = str.rfind("condition_of_facility", "\\")
+            pos = str.rfind(condition_of_facility, "\\")
         if pos != -1:                                   
-            condition_of_facility = condition_of_facility[pos+1]
+            condition_of_facility = str.lower(condition_of_facility[pos+1:])
 
     if condition_of_facility in ["disused", "functional", "projected", "decommissioned"]:
         return condition_of_facility

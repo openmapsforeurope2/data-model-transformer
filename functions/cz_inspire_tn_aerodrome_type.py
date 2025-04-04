@@ -12,11 +12,11 @@
 
     # If a link is provided in the attribute, we keep the last part only
     if aerodrome_type.startswith("http"): 
-        pos = str.rfind("aerodrome_type", "/")
+        pos = str.rfind(aerodrome_type, "/")
         if pos == -1:
-            pos = str.rfind("aerodrome_type", "\\")
+            pos = str.rfind(aerodrome_type, "\\")
         if pos != -1:                                   
-            aerodrome_type = aerodrome_type[pos+1]
+            aerodrome_type = str.lower(aerodrome_type[pos+1:])
     
     
     if aerodrome_type == "aerodromeheliport":

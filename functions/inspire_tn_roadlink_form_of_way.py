@@ -15,11 +15,11 @@
 
     # If formofway is provided as a link, we keep only the final part
     if fow_source.startswith("http"): 
-        pos = str.rfind("fow_source", "/")
+        pos = str.rfind(fow_source, "/")
         if pos == -1:
-            pos = str.rfind("fow_source", "\\")
+            pos = str.rfind(fow_source, "\\")
         if pos != -1:                                   
-            fow_source = str.lower(fow_source[pos+1])
+            fow_source = str.lower(fow_source[pos+1:])
 
     if fow_source == "dualcarriageway":
         return "dual_carriage_way"

@@ -12,11 +12,11 @@
 
     # If a link is provided in the attribute, we keep the last part only
     if aerodrome_category.startswith("http"): 
-        pos = str.rfind("aerodrome_category", "/")
+        pos = str.rfind(aerodrome_category, "/")
         if pos == -1:
-            pos = str.rfind("aerodrome_category", "\\")
+            pos = str.rfind(aerodrome_category, "\\")
         if pos != -1:                                   
-            aerodrome_category = aerodrome_category[pos+1]
+            aerodrome_category = str.lower(aerodrome_category[pos+1:])
     
     if aerodrome_category == "domesticnational":
         return "domestic_national"

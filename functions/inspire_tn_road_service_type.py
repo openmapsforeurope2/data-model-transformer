@@ -16,11 +16,11 @@
 
     # If type is provided as a link, we keep only the final part
     if type.startswith("http"): 
-        pos = str.rfind("type", "/")
+        pos = str.rfind(type, "/")
         if pos == -1:
-            pos = str.rfind("type", "\\")
+            pos = str.rfind(type, "\\")
         if pos != -1:                                   
-            type = type[pos+1]
+            type = str.lower(type[pos+1:])
 
 
     if type in ["parking","toll"]:

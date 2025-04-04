@@ -14,11 +14,11 @@
 
     # If a link is provided in the attribute, we keep the last part only
     if position.startswith("http"): 
-        pos = str.rfind("position", "/")
+        pos = str.rfind(position, "/")
         if pos == -1:
-            pos = str.rfind("position", "\\")
+            pos = str.rfind(position, "\\")
         if pos != -1:                                   
-            position = position[pos+1]
+            position = str.lower(position[pos+1:])
 
     if position == "underground":
         return "underground"

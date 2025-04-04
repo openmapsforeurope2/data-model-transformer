@@ -12,11 +12,11 @@
 
     # If a link is provided in the attribute, we keep the last part only
     if use_restriction.startswith("http"): 
-        pos = str.rfind("use_restriction", "/")
+        pos = str.rfind(use_restriction, "/")
         if pos == -1:
-            pos = str.rfind("use_restriction", "\\")
+            pos = str.rfind(use_restriction, "\\")
         if pos != -1:                                   
-            use_restriction = use_restriction[pos+1]
+            use_restriction = str.lower(use_restriction[pos+1:])
     
     
     if use_restriction == "reservedformilitary":
