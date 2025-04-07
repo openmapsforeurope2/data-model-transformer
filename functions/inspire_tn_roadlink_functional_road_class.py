@@ -6,8 +6,6 @@
     elif 'ome2_functional_road_class_functionalclass' in context['data']:
         frc_source = context['data']['ome2_functional_road_class_functionalclass']
 
-    print ("frc_source = " + frc_source)
-
     if frc_source is None or frc_source == '':
         return "void_unk"
     else:
