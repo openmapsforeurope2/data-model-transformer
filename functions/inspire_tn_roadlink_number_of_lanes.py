@@ -18,9 +18,10 @@
         nb_of_lanes = str(nb_of_lanes)
 
     if nb_of_lanes == "" or nb_of_lanes is None:
-        return "void_unk"
+        return "-32768"
 
-    if minmaxnumberoflanes is not None and minmaxnumberoflanes != "" and minmaxnumberoflanes != "average":
-        return "void_unk"
+    # This test should theoretically be applied but minmaxnumberoflanes is generally not filled
+    #if minmaxnumberoflanes is not None and minmaxnumberoflanes != "" and minmaxnumberoflanes != "average":
+    #    return "-32768"
 
     return nb_of_lanes
