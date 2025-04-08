@@ -94,7 +94,6 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },       
-                        "hydro_identifier": { "eval": "'void_unk'"  },
                         "name": {"function": "inspire_xx_name"},
                         "label": {"eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] != '' and data['geographicalname_spelling_text'] is not None else 'void_unk'"},
                         "w_national_identifier": {"eval": "data['inspireid_namespace'] + '.' + data['inspireid_localid']"},
@@ -106,7 +105,7 @@
                     "geomapping":{
                         "geom": {
                             "geometry": {
-                                "transform": "ST_Force3D(${}, -1000)"
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
                             }
                         }
                     },
@@ -130,7 +129,6 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },       
-                        "hydro_identifier": { "eval": "'void_unk'"  },
                         "name": {"function": "inspire_xx_name"},
                         "label": {"eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] != '' and data['geographicalname_spelling_text'] is not None else 'void_unk'"},
                         "w_national_identifier": {"eval": "data['inspireid_namespace'] + '.' + data['inspireid_localid']"},
@@ -178,7 +176,7 @@
                     "geomapping":{
                         "geom": {
                             "geometry": {
-                                "transform": "ST_Force3D(${}, -1000)"
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
                             }
                         }
                     },
@@ -215,7 +213,7 @@
                     "geomapping":{
                         "geom": {
                             "geometry": {
-                                "transform": "ST_Force3D(${}, -1000)"
+                                "transform": "ST_Multi(${})"
                             }
                         }
                     },
@@ -257,7 +255,7 @@
                     "geomapping":{
                         "geom": {
                             "geometry": {
-                                "transform": "ST_Force3D(${}, -1000)"
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
                             }
                         }
                     },
@@ -296,7 +294,7 @@
                     "geomapping":{
                         "geom": {
                             "geometry": {
-                                "transform": "ST_Force3D(${}, -1000)"
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
                             }
                         }
                     },
