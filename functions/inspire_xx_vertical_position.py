@@ -6,6 +6,8 @@
         position = context['data']['ome2_vertical_position_verticalposition']
     elif 'verticalposition' in context['data']:
         position = context['data']['verticalposition']
+    elif 'level' in context['data']:
+        position = context['data']['level']
 
     if position is None or position == '':
         return "void_unk"
