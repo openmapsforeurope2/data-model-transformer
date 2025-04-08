@@ -127,7 +127,7 @@
                         "min_max_track": {"eval": "'void_unk'" },
                         "nominal_track_gauge": {"eval": "'void_unk'"},
                         "track_gauge_category": {"eval": "'void_unk'" },
-                        "vertical_position": { "function": "inspire_tn_vertical_position" },
+                        "vertical_position": { "function": "inspire_xx_vertical_position" },
                         "vertical_level": {"eval": "'-32768'"},
                         "tent_network": {"eval": "'void_unk'"},
                         "condition_of_facility": {"eval": "'void_unk'"},
