@@ -42,6 +42,7 @@
                         "level",
                         "persistence",
                         "ome2_net_watercourse_link_flowdirection",
+                        "ome2_net_watercourse_link_fictitious",
                         "geographicalname_spelling_text",
                         "geographicalname_spelling_script",
                         "geographicalname_nativeness",
