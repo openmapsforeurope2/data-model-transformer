@@ -125,7 +125,7 @@
         "falls_point":{
             "mock": false,
             "source_tables":{
-                "detail_hydrographique": {
+                "p_falls_point": {
                     "mock": false,
                     "where": "NOT gcms_detruit AND nature = 'Cascade'",
                     "mapping": {
