@@ -127,7 +127,7 @@
             "source_tables":{
                 "p_falls_point": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND nature = 'Cascade'",
+                    "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },       
                         "hydro_identifier": { "eval": "'void_unk'"  },
