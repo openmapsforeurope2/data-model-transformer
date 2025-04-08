@@ -123,7 +123,7 @@
             }
         },
         "falls_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "detail_hydrographique": {
                     "mock": false,
@@ -267,6 +267,7 @@
                         "geographicalname_nativeness",
                         "geographicalname_namestatus",
                         "geographicalname_language",
+                        "inspireid_localid",
                         "inspireid_namespace_"
                     ]
                 }
