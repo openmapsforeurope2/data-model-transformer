@@ -3,9 +3,9 @@
     f_code = ""
     kreisverkehr = ""
 
-    if f_code in context['data']:
+    if 'f_code' in context['data']:
         f_code = context['data']['f_code']
-    if kreisverkehr in context['data']:
+    if 'kreisverkehr' in context['data']:
         kreisverkehr =  context['data']['kreisverkehr']
 
     if kreisverkehr == 'Ja':

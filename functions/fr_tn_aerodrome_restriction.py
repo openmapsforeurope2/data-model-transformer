@@ -6,7 +6,7 @@
         return "reserved_for_military"
 
     if use == "Civil":
-        return "void_civilian"
+        return "civilian"
 
     if use == "Civil et militaire":
         return "void_civilian_and_military"
