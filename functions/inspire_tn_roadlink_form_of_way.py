@@ -21,25 +21,40 @@
         if pos != -1:                                   
             fow_source = str.lower(fow_source[pos+1:])
 
+    if fow_source in ["freeway", "motorway", "walkway", "roundabout"]:
+        return fow_source
+
     if fow_source == "dualcarriageway":
         return "dual_carriage_way"
 
-    if fow_source == "motorway":
-        return "motorway"
-
-    if fow_source == "roundabout":
-        return "roundabout"
-
-    if fow_source == "sliproad":
-        return "slip_road"  
- 
     if fow_source == "singlecarriageway":
         return "single_carriage_way"
 
-    if fow_source == "walkway":
-        return "walkway"
+    if fow_source == "sliproad":
+        return "slip_road" 
 
-    if fow_source == "tractorroad":
+    if fow_source == "enclosedtrafficarea":
+        return "enclosed_traffic_area" 
+ 
+     if fow_source == "tractorroad":
         return "tractor_road"
-    
+
+    if fow_source == "bicycleroad":
+        return "bicycle_road"
+
+    if fow_source == "entranceorexitcarpark":
+        return "entrance_or_exit_car_park"
+
+    if fow_source == "entranceorexitservice":
+        return "entrance_or_exit_service"
+
+    if fow_source == "pedestrianzone":
+        return "pedestrian_zone"
+
+    if fow_source == "trafficsquare":
+        return "traffic_square"
+
+    if fow_source == "serviceroad":
+        return "service_road"
+
     return "void_unk"

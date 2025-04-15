@@ -295,7 +295,8 @@
                         "kurzbez_bauten",
                         "name_bauten",
                         "art_bauten",
-                        "f_code_bauten"
+                        "f_code_bauten",
+                        "f_code"
                     ]
                 }
             }
