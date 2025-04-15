@@ -36,7 +36,7 @@
     if fow_source == "enclosedtrafficarea":
         return "enclosed_traffic_area" 
  
-     if fow_source == "tractorroad":
+    if fow_source == "tractorroad":
         return "tractor_road"
 
     if fow_source == "bicycleroad":
