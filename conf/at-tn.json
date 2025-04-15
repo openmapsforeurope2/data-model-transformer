@@ -63,7 +63,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "type": { "eval": "'parking' if data['f_code'] == 3305 else 'rest_area' if data['f_code'] == 3302 else 'void_unk'" },
-                        "name":   { "function": "{}" },
+                        "name":   { "eval": "{}" },
                         "w_national_identifier": "globalid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
