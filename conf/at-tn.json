@@ -71,7 +71,11 @@
                         "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
-                        "geom": "geom"
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
                     },
                     "fetched_fields":[
                         "f_code",
@@ -209,7 +213,11 @@
                         "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
-                        "geom": "geom"
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
                     },
                     "fetched_fields":[
                         "globalid",
@@ -347,7 +355,11 @@
                         "w_scale": { "eval": "'10000'"}    
                     },
                     "geomapping":{
-                        "geom": "geometrie"
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
                     },
                     "fetched_fields":[
                         "globalid"
