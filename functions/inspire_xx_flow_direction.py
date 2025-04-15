@@ -4,6 +4,8 @@
 
     if 'ome2_net_watercourse_link_flowdirection' in context['data']:
         flowdirection = context['data']['ome2_net_watercourse_link_flowdirection']
+    elif 'flowdirection' in context['data']:
+        flowdirection = context['data']['flowdirection']
 
     if flowdirection is None or flowdirection == '':
         return "void_unk"
