@@ -226,7 +226,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometry": {
+                            "geom": {
                                 "transform": "ST_Force3D(${}, -1000)"
                             }
                         }
