@@ -139,7 +139,7 @@
         "standing_water":{
             "mock": false,
             "source_tables":{
-                "age_standing_water": {
+                "age_standingwater": {
                     "mock": false,
                     "where": "",
                     "mapping": {
