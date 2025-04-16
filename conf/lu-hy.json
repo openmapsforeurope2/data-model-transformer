@@ -33,7 +33,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometry": {
+                            "geom": {
                                 "transform": "ST_Force3D(${}, -1000)"
                             }
                         }
@@ -63,7 +63,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometrie": {
+                            "geom": {
                                 "transform": "ST_Force3D(${},-1000)"
                             }
                         }
@@ -79,7 +79,7 @@
             "source_tables":{
                 "bdltc_shorelineconstruction": {
                     "mock": false,
-                    "where": "NOT gcms_detruit AND nature = 'Quai'",
+                    "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },            
                         "shoreline_construction_type": {"eval": "'void_unk'"},
@@ -93,7 +93,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometrie": {
+                            "geom": {
                                 "transform": "ST_Force3D(${},-1000)"
                             }
                         }
@@ -124,7 +124,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometry": {
+                            "geom": {
                                 "transform": "ST_Multi(${})"
                             }
                         }
@@ -158,7 +158,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometry": {
+                            "geom": {
                                 "transform": "ST_Multi(ST_Force3D(${}, -1000))"
                             }
                         }
@@ -194,7 +194,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometry": {
+                            "geom": {
                                 "transform": "ST_Multi(ST_Force3D(${}, -1000))"
                             }
                         }
