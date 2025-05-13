@@ -17,7 +17,7 @@
                         "name": { "function": "inspire_xx_name" },
                         "label": {"eval": "data['text'] if data['text'] != '' and data['text'] is not None else 'void_unk'"},
                         "national_level_code": { "eval": "'4101'" },
-                        "land_cover_type": { "eval": "'void_unk'" },
+                        "land_cover_type": { "eval": "'land_area'" },
                         "w_national_identifier": "inspireid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
