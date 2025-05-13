@@ -91,7 +91,7 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  }, 
-                        "hydro_identifier": {"eval": "data['hydroidentifier_namespace'] + '.' + data['hydroidentifier_localid'] if data['hydroidentifier_namespace'] is not None and data['hydroidentifier_namespace'] != '' and data['hydroidentifier_localid'] is not None and data['hydroidentifier_localid'] != '' else 'void_unk'"},
+                        "hydro_identifier": {"eval": "data['hydroid'] if data['hydroid'] is not None and data['hydroid'] != '' else 'void_unk'"},
                         "name": {"function": "inspire_xx_name"},
                         "label": {"eval": "data['geographicalname'] if data['geographicalname'] != '' and data['geographicalname'] is not None else 'void_unk'"},
                         "persistence": { "eval": "'void_unk'" },
@@ -111,8 +111,7 @@
                         }
                     },
                     "fetched_fields":[
-                        "hydroidentifier_namespace",
-                        "hydroidentifier_localid",
+                        "hydroid",
                         "geographicalname",
                         "tidal",
                         "origin",
