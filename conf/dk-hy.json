@@ -138,7 +138,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geometry": {
+                            "geom": {
                                 "transform": "ST_Multi(ST_Force3D(${}, -1000))"
                             }
                         }
@@ -146,8 +146,7 @@
                     "fetched_fields":[               
                         "geographicalname",    
                         "tidal",
-                        "inspireid_namespace",
-                        "inspireid_localid"
+                        "gml_id"
                     ]
                 }
             }
