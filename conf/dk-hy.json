@@ -42,7 +42,6 @@
                         "ome2_watercourse_level",
                         "ome2_watercourse_persistence",
                         "flowdirection",
-                        "ome2_net_watercourse_link_fictitious",
                         "ome2_watercourse_hydroid",
                         "ome2_watercourse_geographicalname",
                         "fictitious",
