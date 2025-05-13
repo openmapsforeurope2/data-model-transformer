@@ -61,7 +61,7 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },       
-                        "shoreline_construction_type": {"eval": "'void_unk"},
+                        "shoreline_construction_type": {"eval": "'void_unk'"},
                         "name": {"function": "inspire_xx_name"},
                         "label": {"eval": "data['geographicalname'] if data['geographicalname'] != '' and data['geographicalname'] is not None else 'void_unk'" },
                         "w_national_identifier": "gml_id",
