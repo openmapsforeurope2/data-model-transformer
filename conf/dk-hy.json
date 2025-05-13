@@ -39,6 +39,7 @@
                         }
                     },
                     "fetched_fields":[
+                        "ome2_watercourse_tidal",
                         "ome2_watercourse_level",
                         "ome2_watercourse_persistence",
                         "flowdirection",
