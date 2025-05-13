@@ -4,6 +4,9 @@
 
     if 'persistence' in context['data']:
         persistence = context['data']['persistence']
+    elif 'ome2_watercourse_persistence' in context['data']:
+        persistence = context['data']['ome2_watercourse_persistence']
+        
 
     if persistence is None or persistence == '':
         return "void_unk"

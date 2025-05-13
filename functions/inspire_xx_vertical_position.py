@@ -6,6 +6,8 @@
         position = context['data']['ome2_vertical_position_verticalposition']
     elif 'verticalposition' in context['data']:
         position = context['data']['verticalposition']
+    elif 'ome2_watercourse_level' in context['data']:
+        position = context['data']['ome2_watercourse_level']
     elif 'level' in context['data']:
         position = context['data']['level']
 

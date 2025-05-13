@@ -4,6 +4,8 @@
 
     if 'origin' in context['data']:
         origin = context['data']['origin']
+    if 'ome2_watercourse_origin' in context['data']:
+        origin = context['data']['ome2_watercourse_origin']
 
     if origin is None or origin == '':
         return "void_unk"
