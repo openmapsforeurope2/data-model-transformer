@@ -1,0 +1,392 @@
+{
+    "country_code": "fi",
+    "source_srid": "3067",
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "road_link":{
+            "mock": false,
+            "source_tables":{
+                "tieviiva": {
+                    "mock": false,
+                    "where": "kohdeluokka != 12151 AND kohdeluokka != 12152",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "form_of_way": { "eval": "'void_unk'" },
+                        "functional_road_class": { "eval": "'void_unk'" },
+                        "number_of_lanes": { "eval": "'-32768'" },
+                        "vertical_position": { "eval": "'on_ground_surface' if data['tasosijainti'] == 0 else 'suspended_or_elevated' if data['tasosijainti'] > 0 else 'underground' if data['tasosijainti'] < 0 else 'void_unk'" },
+                        "vertical_level": { "eval": "data['tasosijainti'] if data['tasosijainti'] is not None else '-32768'" },
+                        "street_name": { "function": "fi_tn_name" },
+                        "street_label": { "function": "fi_tn_label" },
+                        "road_surface_category": { "eval": "'paved' if data['paallyste'] == 2 else 'unpaved' if data['paallyste'] == 1 else 'void_unk'" },
+                        "traffic_flow_direction": { "eval": "'both_directions' if data['yksisuuntaisuus'] == 0 else 'in_direction' if data['yksisuuntaisuus'] == 1 else 'opposite_direction' if data['yksisuuntaisuus'] == 2 else 'void_unk'" },
+                        "access_restriction": { "eval": "'void_unk'" },
+                        "restriction_for_vehicles": { "eval": "{}"},
+                        "speed_limit": { "eval": "'-32768'" },
+                        "condition_of_facility": { "eval": "'functional' if data['valmiusaste'] == 0 else 'under_construction' if data['valmiusaste'] == 1 else 'disused' if data['valmiusaste'] == 2 else 'projected' if data['valmiusaste'] == 3 else 'void_unk'" },
+                        "road_national_road_code": { "eval": "data['tienumero'] if data['tienumero'] is not None and data['tienumero'] != '' else 'void_unk'" },
+                        "road_european_route_number":{ "eval": "'void_unk'" },
+                        "road_name": { "eval": "{}"},
+                        "road_label": { "eval" : "'void_unk'"},
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}         
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id",
+                        "tasosijainti",
+                        "nimi_suomi",
+                        "nimi_ruotsi",
+                        "nimi_inarinsaame",
+                        "nimi_koltansaame",
+                        "nimi_pohjoissaame",
+                        "paallyste",
+                        "yksisuuntaisuus",
+                        "valmiusaste",
+                        "tienumero"
+
+                    ]
+                }
+            }
+        },
+        "road_service_area":{
+            "mock": false,
+            "source_tables":{
+                "autoliikennealue":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "eval": "'void_unk'" },
+                        "name":   { "eval": "{}" },
+                        "label": { "eval" : "'void_unk'"},
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id"
+                    ]
+                }
+            }
+        },
+        "road_service_point":{
+            "mock": false,
+            "source_tables":{
+                "autoliikennealue":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "eval": "'void_unk'" },
+                        "name":   { "eval": "{}" },
+                        "label": { "eval" : "'void_unk'"},
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_PointOnSurface(${}), -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id"
+                    ]
+                }
+            }
+        },
+        "railway_link":{
+            "mock": false,
+            "source_tables":{
+                "rautatie":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "function": "fi_tn_railwaylink_railway_type_value" },
+                        "number_of_tracks": { "eval": "'-32768'" },
+                        "min_max_track": { "eval": "'void_unk'" },
+                        "nominal_track_gauge": { "eval": "'-32768'"},
+                        "track_gauge_category": { "eval": "'void_unk'"},
+                        "vertical_position": { "eval": "'on_ground_surface' if data['tasosijainti'] == 0 else 'suspended_or_elevated' if data['tasosijainti'] > 0 else 'underground' if data['tasosijainti'] < 0 else 'void_unk'" },
+                        "vertical_level": { "eval": "data['tasosijainti'] if data['tasosijainti'] is not None else '-32768'" },  
+                        "condition_of_facility": { "eval": "'functional' if data['valmiusaste'] == 0 else 'under_construction' if data['valmiusaste'] == 1 else 'disused' if data['valmiusaste'] == 2 else 'projected' if data['valmiusaste'] == 3 else 'void_unk'" },
+                        "electrified": { "eval": "'void_unk'" },
+                        "speed_class": { "eval": "'void_unk'" },
+                        "railway_use":  { "eval": "'void_unk'" }, 
+                        "access_restriction":  { "eval": "'void_unk'" },
+                        "railway_line_code":  { "eval": "'void_unk'" },
+                        "railway_line_name":  { "eval": "{}"},
+                        "railway_line_label": { "eval" : "'void_unk'"},
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${},-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id",
+                        "kohdeluokka",
+                        "tasosijainti",
+                        "valmiusaste"
+                    ]
+                }
+            }
+        },
+        "railway_station_point":{
+            "mock": false,
+            "source_tables":{
+                "rautatieliikennepaikka":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "name":   { "eval": "{}" },
+                        "label": { "eval" : "'void_unk'"},
+                        "station_code": { "eval": "'void_unk'" },
+                        "railway_use": { "eval": "'void_unk'" },
+                        "form_of_railway_station": { "eval": "'void_unk'" },
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id"
+                    ]
+                }
+            }
+        },
+        "aerodrome_area":{
+            "mock": false,
+            "source_tables":{
+                "lentokenttaalue":{
+                    "mock": false,
+                    "where": "kohdeluokka != 32411 AND kohdeluokka != 32412",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "designator_iata": { "eval": "'void_unk'" },
+                        "location_indicator_icao": { "eval": "'void_unk'" },
+                        "name":   { "eval": "{}" },
+                        "label": { "eval" : "'void_unk'"},
+                        "aerodrome_category": { "eval": "'void_unk'"},
+                        "aerodrome_type": { "eval": "'void_unk' "},
+                        "use_restriction": { "eval": "'void_unk'"},
+                        "condition_of_facility": { "eval": "'void_unk'"},
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id"
+                    ]
+                }
+            }
+        },
+        "aerodrome_point":{
+            "mock": false,
+            "source_tables":{
+                "lentokenttaalue":{
+                    "mock": false,
+                    "where": "kohdeluokka != 32411 AND kohdeluokka != 32412",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "designator_iata": { "eval": "'void_unk'" },
+                        "location_indicator_icao": { "eval": "'void_unk'" },
+                        "name":   { "eval": "{}" },
+                        "label": { "eval" : "'void_unk'"},
+                        "aerodrome_category": { "eval": "'void_unk'"},
+                        "aerodrome_type": { "eval": "'void_unk' "},
+                        "use_restriction": { "eval": "'void_unk'"},
+                        "condition_of_facility": { "eval": "'void_unk'"},
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_PointOnSurface(${}), -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id"
+                    ]
+                }
+            }
+        },  
+        "runway_area":{
+            "mock": false,
+            "source_tables":{
+                "lentokenttaalue":{
+                    "mock": false,
+                    "where": "kohdeluokka = 32411 OR kohdeluokka = 32412",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "surface_composition":  { "eval": "'void_unk'" },
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id"
+                    ]
+                }
+            }
+        },      
+        "ferry_crossing":{
+            "mock": false,
+            "source_tables":{
+                "tieviiva":{
+                    "mock": false,
+                    "where": "kohdeluokka = 12151 OR kohdeluokka = 12152",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "name":   { "eval": "{}" },
+                        "label": { "eval" : "'void_unk'"},
+                        "ferry_use": { "eval": "'void_unk'"},
+                        "access_restriction": { "eval": "'void_unk'" },
+                        "tent_network": { "eval": "'void_unk'" },
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id"
+                    ]
+                }
+            }
+        },
+        "port_area":{
+            "mock": false,
+            "source_tables":{
+                "satama":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "name":   { "eval": "{}" },
+                        "label": { "eval" : "'void_unk'"},
+                        "un_locode": { "eval" : "'void_unk'"},
+                        "tent_network": { "eval" : "'void_unk'"},
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id"
+                    ]
+                }
+            }
+        },
+        "port_point":{
+            "mock": false,
+            "source_tables":{
+                "satama":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "name":   { "eval": "{}" },
+                        "label": { "eval" : "'void_unk'"},
+                        "un_locode": { "eval" : "'void_unk'"},
+                        "tent_network": { "eval" : "'void_unk'"},
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_PointOnSurface(${}), -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "mtk_id"
+                    ]
+                }
+            }
+        }
+    }
+}
