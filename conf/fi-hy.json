@@ -5,10 +5,10 @@
     "target_country_field": "country",
     "target_tables": {
         "watercourse_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "virtavesikapea": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -48,10 +48,10 @@
             }
         },
         "dam_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "pato": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  }, 
@@ -78,10 +78,10 @@
             }
         },
         "dam_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "pato": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  }, 
@@ -108,10 +108,10 @@
             }
         },
         "lock_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "sulkuportti": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  }, 
@@ -137,11 +137,41 @@
                 }
             }
         },
-        "shoreline_construction_line":{
+        "lock_point":{
             "mock": false,
             "source_tables":{
-                "maastokuvionreuna": {
+                "sulkuportti": {
                     "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'"  }, 
+                        "hydro_identifier": {"eval": "'void_unk'"},
+                        "name": {"eval": "{}"},
+                        "label": {"eval": "'void_unk'"},
+                        "w_national_identifier": "mtk_id",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_Centroid(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[         
+                        "mtk_id"
+                    ]
+                }
+            }
+        },
+        "shoreline_construction_line":{
+            "mock": true,
+            "source_tables":{
+                "maastokuvionreuna": {
+                    "mock": true,
                     "where": "kohdeluokka = 30100",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },       
@@ -166,7 +196,7 @@
                     ]
                 },
                 "aallonmurtaja": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },       
@@ -193,10 +223,10 @@
             }
         },
         "shoreline":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "maastokuvionreuna": {
-                    "mock": false,
+                    "mock": true,
                     "where": "kartografinenluokka = 36211",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -223,10 +253,10 @@
             }
         },
         "standing_water":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "jarvi": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -256,10 +286,10 @@
             }
         },
         "watercourse_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "virtavesialue": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -289,10 +319,10 @@
             }
         },     
         "wetland":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "suo": {
-                    "mock": false,
+                    "mock": true,
                     "where": "kohdeluokka in (35411, 35421, 35422)",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -316,7 +346,7 @@
                     ]
                 },
                 "muuavoinalue": {
-                    "mock": false,
+                    "mock": true,
                     "where": "kohdeluokka = 39130",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
