@@ -17,8 +17,8 @@
                         "number_of_lanes": { "eval": "'-32768'" },
                         "vertical_position": { "eval": "'on_ground_surface' if data['tasosijainti'] == 0 else 'suspended_or_elevated' if data['tasosijainti'] > 0 else 'underground' if data['tasosijainti'] < 0 else 'void_unk'" },
                         "vertical_level": { "eval": "data['tasosijainti'] if data['tasosijainti'] is not None else '-32768'" },
-                        "street_name": { "function": "fi_tn_name" },
-                        "street_label": { "function": "fi_tn_label" },
+                        "street_name": { "function": "fi_xx_name" },
+                        "street_label": { "function": "fi_xx_label" },
                         "road_surface_category": { "eval": "'paved' if data['paallyste'] == 2 else 'unpaved' if data['paallyste'] == 1 else 'void_unk'" },
                         "traffic_flow_direction": { "eval": "'both_directions' if data['yksisuuntaisuus'] == 0 else 'in_direction' if data['yksisuuntaisuus'] == 1 else 'opposite_direction' if data['yksisuuntaisuus'] == 2 else 'void_unk'" },
                         "access_restriction": { "eval": "'void_unk'" },
@@ -60,10 +60,10 @@
             }
         },
         "road_service_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "autoliikennealue":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -90,10 +90,10 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "autoliikennealue":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -120,10 +120,10 @@
             }
         },
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "rautatie":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -165,10 +165,10 @@
             }
         },
         "railway_station_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "rautatieliikennepaikka":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -197,10 +197,10 @@
             }
         },
         "aerodrome_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "lentokenttaalue":{
-                    "mock": false,
+                    "mock": true,
                     "where": "kohdeluokka != 32411 AND kohdeluokka != 32412",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -232,10 +232,10 @@
             }
         },
         "aerodrome_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "lentokenttaalue":{
-                    "mock": false,
+                    "mock": true,
                     "where": "kohdeluokka != 32411 AND kohdeluokka != 32412",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -267,10 +267,10 @@
             }
         },  
         "runway_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "lentokenttaalue":{
-                    "mock": false,
+                    "mock": true,
                     "where": "kohdeluokka = 32411 OR kohdeluokka = 32412",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -295,10 +295,10 @@
             }
         },      
         "ferry_crossing":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tieviiva":{
-                    "mock": false,
+                    "mock": true,
                     "where": "kohdeluokka = 12151 OR kohdeluokka = 12152",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -327,10 +327,10 @@
             }
         },
         "port_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "satama":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -358,10 +358,10 @@
             }
         },
         "port_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "satama":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
