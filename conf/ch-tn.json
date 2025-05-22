@@ -153,6 +153,32 @@
                         "uuid",
                         "name"
                     ]
+                },
+                "tlm_areale_verkehrsareal":{
+                    "mock": false,
+                    "where": "objektart in ('Oeffentliches Parkplatzareal','Privates Parkplatzareal')",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "eval": "'parking' if data['objektart'] == 'Oeffentliches Parkplatzareal' or data['objektart'] == 'Privates Parkplatzareal' else 'void_unk'" },
+                        "name":   { "function": "ch_xx_name" },
+                        "w_national_identifier": "uuid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}       
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_PointOnSurface(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "objektart",
+                        "uuid",
+                        "name"
+                    ]
                 }
             }
         },  
