@@ -65,7 +65,6 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "local_name": { "eval": "'void_unk'" },
-                        "label": { "eval": "'void_unk'" },
                         "form_of_road_node": { "eval": "'roundabout' if data['fysiekvoorkomen'] == 'rotonde' else 'interchange' if data['typeweg'] == 'autosnelweg' else 'junction'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},

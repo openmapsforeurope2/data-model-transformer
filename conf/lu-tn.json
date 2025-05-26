@@ -270,7 +270,6 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
                         "local_name": { "eval": "'void_unk" },
-                        "label": { "eval": "'void_unk" },
                         "form_of_road_node": { "function": "inspire_tn_form_of_road_node" },
                         "w_national_identifier": "gml_id",
                         "xy_source": { "eval": "'nmca'"},
@@ -295,7 +294,7 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
-                        "name": { "eval": "{}" },
+                        "local_name": { "eval": "'void_unk" },
                         "form_of_road_node": { "function": "inspire_tn_form_of_road_node" },
                         "w_national_identifier": "gml_id",
                         "xy_source": { "eval": "'nmca'"},

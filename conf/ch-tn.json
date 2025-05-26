@@ -80,7 +80,6 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "local_name": { "eval": "'void_unk'" },
-                        "label": { "eval": "'void_unk'" },
                         "form_of_road_node": { "eval": "'junction' if data['objektart'] == 'Loop Junction' else 'pseudo_node' if data['objektart'] == 'Standardknoten' else 'void_unk'" },
                         "w_national_identifier": "uuid",
                         "xy_source": { "eval": "'nmca'"},
