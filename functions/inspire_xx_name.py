@@ -59,8 +59,8 @@
         spelling = spelling.replace('"', '')    
         name_list.append({
             "spelling": spelling,
-            "language": language,
-            "script": script,
+            "language": str.lower(language),
+            "script": str.lower(script),
             "name_status": name_status,
             "nativeness": nativeness,
             "spelling_latn": spelling_latn,
