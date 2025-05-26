@@ -31,7 +31,7 @@
         name_list.append({
             "spelling": nom,
             "language": "fre",
-            "script": "latin",
+            "script": "latn",
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": nom,
