@@ -185,7 +185,8 @@
                         "nameswe",
                         "ome2_natcode_level2",
                         "ome2_natcode_level3",
-                        "ome2_natcode_level4"
+                        "ome2_natcode_level4",
+                        "ome2_targetcode"
                     ]
                 }
             }

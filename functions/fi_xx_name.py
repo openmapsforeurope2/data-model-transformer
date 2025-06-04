@@ -4,7 +4,15 @@
     script = "latn"
     display = 0
 
-    list_name_attributes = ['nimi_suomi', 'namefin', 'nimi_ruotsi', 'nameswe', 'nimi_inarinsaame', 'nimi_koltansaame', 'nimi_pohjoissaame' ]
+    list_name_attributes = []
+
+    if "ome2_targetcode" in context['data']:
+        targetcode = context['data']['ome2_targetcode']
+
+        if targetcode == '2' or targetcode == '3': #Swedish name first
+            list_name_attributes = ['nimi_ruotsi', 'nameswe', 'nimi_suomi', 'namefin', 'nimi_pohjoissaame', 'nimi_inarinsaame', 'nimi_koltansaame' ]
+    else:
+        list_name_attributes = ['nimi_suomi', 'namefin', 'nimi_ruotsi', 'nameswe', 'nimi_pohjoissaame', 'nimi_inarinsaame', 'nimi_koltansaame'  ]
     
     name_config = {
         "nimi_suomi" :{
@@ -57,14 +65,29 @@
 
             display += 1
 
-            name_list.append({
+            if str.find(spelling, "Åland") != -1:
+                for name_json in name_list:
+                    name_json["display"] = name_json["display"] + 1
+                
+                name_list.insert(0, {
                 "spelling": spelling,
                 "language": name_config[name_att]['language'],
                 "script": script,
                 "name_status": name_config[name_att]['name_status'],
                 "nativeness": name_config[name_att]['nativeness'],
                 "spelling_latn": spelling,
-                "display": display
-            })
+                "display": 1
+                })
+
+            else:
+                name_list.append({
+                    "spelling": spelling,
+                    "language": name_config[name_att]['language'],
+                    "script": script,
+                    "name_status": name_config[name_att]['name_status'],
+                    "nativeness": name_config[name_att]['nativeness'],
+                    "spelling_latn": spelling,
+                    "display": display
+                })
 
     return name_list

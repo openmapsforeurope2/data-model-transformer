@@ -5,10 +5,10 @@
     "target_country_field": "country",
     "target_tables": {
         "watercourse_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "virtavesikapea": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -48,10 +48,10 @@
             }
         },
         "dam_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "pato": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  }, 
@@ -78,10 +78,10 @@
             }
         },
         "dam_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "pato": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  }, 
@@ -108,10 +108,10 @@
             }
         },
         "lock_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "sulkuportti": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  }, 
@@ -138,10 +138,10 @@
             }
         },
         "lock_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "sulkuportti": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  }, 
@@ -168,10 +168,10 @@
             }
         },
         "shoreline_construction_line":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "maastokuvionreuna": {
-                    "mock": false,
+                    "mock": true,
                     "where": "kohdeluokka = 30100",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },       
@@ -196,7 +196,7 @@
                     ]
                 },
                 "aallonmurtaja": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },       
@@ -227,7 +227,7 @@
             "source_tables":{
                 "maastokuvionreuna": {
                     "mock": false,
-                    "where": "kartografinenluokka = 36211",
+                    "where": "kartografinenluokka = 36211 AND kohdeluokka != 30999",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "water_level": {"eval": "'mean_sea_level'"},
@@ -253,10 +253,10 @@
             }
         },
         "standing_water":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "jarvi": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -286,10 +286,10 @@
             }
         },
         "watercourse_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "virtavesialue": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -319,10 +319,10 @@
             }
         },     
         "wetland":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "suo": {
-                    "mock": false,
+                    "mock": true,
                     "where": "kohdeluokka in (35411, 35421, 35422)",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -346,7 +346,7 @@
                     ]
                 },
                 "muuavoinalue": {
-                    "mock": false,
+                    "mock": true,
                     "where": "kohdeluokka = 39130",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
