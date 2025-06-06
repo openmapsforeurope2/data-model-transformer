@@ -4,15 +4,13 @@
     script = "latn"
     display = 0
 
-    list_name_attributes = []
+    list_name_attributes = ['nimi_suomi', 'namefin', 'nimi_ruotsi', 'nameswe', 'nimi_pohjoissaame', 'nimi_inarinsaame', 'nimi_koltansaame'  ]
 
     if "ome2_targetcode" in context['data']:
         targetcode = context['data']['ome2_targetcode']
 
         if targetcode == '2' or targetcode == '3': #Swedish name first
             list_name_attributes = ['nimi_ruotsi', 'nameswe', 'nimi_suomi', 'namefin', 'nimi_pohjoissaame', 'nimi_inarinsaame', 'nimi_koltansaame' ]
-    else:
-        list_name_attributes = ['nimi_suomi', 'namefin', 'nimi_ruotsi', 'nameswe', 'nimi_pohjoissaame', 'nimi_inarinsaame', 'nimi_koltansaame'  ]
     
     name_config = {
         "nimi_suomi" :{
