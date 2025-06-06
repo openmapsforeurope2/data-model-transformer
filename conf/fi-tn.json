@@ -53,7 +53,8 @@
                         "paallyste",
                         "yksisuuntaisuus",
                         "valmiusaste",
-                        "tienumero"
+                        "tienumero",
+                        "ome2_targetcode"
 
                     ]
                 }
