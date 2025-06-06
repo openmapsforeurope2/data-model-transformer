@@ -3,7 +3,15 @@
     spelling = ""
     label = ""
 
-    list_name_attributes = ['nimi_suomi', 'namefin', 'nimi_ruotsi', 'nameswe', 'nimi_inarinsaame', 'nimi_koltansaame', 'nimi_pohjoissaame' ]
+    list_name_attributes = []
+
+    if "ome2_targetcode" in context['data']:
+        targetcode = context['data']['ome2_targetcode']
+
+        if targetcode == '2' or targetcode == '3': #Swedish name first
+            list_name_attributes = ['nimi_ruotsi', 'nameswe', 'nimi_suomi', 'namefin', 'nimi_pohjoissaame', 'nimi_inarinsaame', 'nimi_koltansaame' ]
+    else:
+        list_name_attributes = ['nimi_suomi', 'namefin', 'nimi_ruotsi', 'nameswe', 'nimi_pohjoissaame', 'nimi_inarinsaame', 'nimi_koltansaame'  ]
 
     for name_att in list_name_attributes:
         spelling = ""
