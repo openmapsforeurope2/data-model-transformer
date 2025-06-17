@@ -10,12 +10,12 @@
     name_list = []
 
     # Name as JSON
-    if name != "" and name is not None :
+    if name != "" and name is not None and name != "-997" :
         name = name.replace('\"', '')
         name = name.replace('"', '')
         name_list.append({
             "spelling": name,
-            "language": 'void_unk',
+            "language": "spa",
             "script": "latn",
             "name_status": "void_unk",
             "nativeness": "void_unk",

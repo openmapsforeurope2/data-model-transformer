@@ -19,6 +19,9 @@
             name = name.replace('"', '')
             label += name + "#"
     
-    label = label[0:len(label)-1]
-    return label
+    if label != "":
+        label = label[0:len(label)-1]
+        return label
+    
+    return "void_unk"
 

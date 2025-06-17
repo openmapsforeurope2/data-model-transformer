@@ -11,12 +11,12 @@
     if 'etiqueta' in context['data']:
         name_tmp = context['data']['etiqueta']
 
-        if name_tmp != '' and name_tmp is not None:
+        if name_tmp != '' and name_tmp is not None and name_tmp != "-997":
             name = name_tmp
 
     if name == '' and 'nombre' in context['data']:
         name_tmp = context['data']['nombre']
-        if name_tmp != '' and name_tmp is not None:
+        if name_tmp != '' and name_tmp is not None and name_tmp != "-997":
             name = name_tmp
 
 

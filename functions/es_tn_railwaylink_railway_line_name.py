@@ -2,7 +2,7 @@
 
     ome2_lineaffc = context['data']['ome2_lineaffc']
 
-    pattern_code_name = r'^\d{3} - [A-Za-z0-9]+$'
+    pattern_code_name = r'^\d{3} - .+$'
 
     name_list = []
 

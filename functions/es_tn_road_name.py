@@ -2,25 +2,27 @@
 
     # Retrieve name value
 
-    name = ""
-    
-    if 'nombre_alt' in context['data']:
-        name = context['data']['nombre_alt']
+    ome2_vial = context['data']['ome2_vial']
 
+    name = ""
     name_list = []
 
     # Name as JSON
-    if name != "" and name is not None :
-        name = name.replace('\"', '')
-        name = name.replace('"', '')
-        name_list.append({
-            "spelling": name,
-            "language": 'void_unk',
-            "script": "latn",
-            "name_status": "void_unk",
-            "nativeness": "void_unk",
-            "spelling_latn": name,
-            "display": 1
-        })
+
+    for vial in ome2_vial:
+        name = vial['nombre_alt']
+
+        if name != "" and name is not None and name != "-997" :
+            name = name.replace('\"', '')
+            name = name.replace('"', '')
+            name_list.append({
+                "spelling": name,
+                "language": "spa",
+                "script": "latn",
+                "name_status": "void_unk",
+                "nativeness": "void_unk",
+                "spelling_latn": name,
+                "display": 1
+            })
 
     return name_list
