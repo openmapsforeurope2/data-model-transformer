@@ -21,6 +21,6 @@
         if intermodal == 1:
             return "intermodal_rail_transport_terminal"
     
-    return void_unk
+    return "void_unk"
 
 
