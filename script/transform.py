@@ -7,6 +7,7 @@ import utils
 import extract
 import dump
 import restore
+import re
 
 
 def run(argv):
