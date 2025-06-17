@@ -7,7 +7,7 @@
     for vial in ome2_vial:
         tipo_vial = vial['tipo_vial']
 
-        if tipo_vial == 4005:
+        if tipo_vial is not None and tipo_vial == 4005:
             return "true"
     
     return tent_network
