@@ -1,0 +1,562 @@
+{
+    "country_code": "es",
+    "source_srid": "4258",
+    "target_srid": "3035",
+    "target_country_field": "country",
+    "target_tables": {
+        "road_link":{
+            "mock": false,
+            "source_tables":{
+                "ome2_igr_rt_rt_tramo_l": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "form_of_way": { "function": "es_tn_roadlink_form_of_way" },
+                        "functional_road_class": { "function": "es_tn_roadlink_functional_road_class" },
+                        "number_of_lanes": { "eval": "data['ncarriles'] if data['ncarriles'] is not None and data['ncarriles'] > 0 else '-32768'" },
+                        "vertical_position": { "eval": "'on_ground_surface' if data['situacion'] == 1 else 'suspended_or_elevated' if data['situacion'] == 3 or data['situacion'] == 6 else 'underground' if data['situacion'] == 2 else 'void_unk'" },
+                        "vertical_level": { "eval": "'-32768'" },
+                        "tent_network": { "function": "es_tn_roadlink_tent_network"},
+                        "street_name": { "function": "es_tn_roadlink_street_name" },
+                        "street_label": { "function": "es_tn_roadlink_street_label" },
+                        "road_surface_category": { "eval": "'paved' if data['firme'] in [1,4] else 'unpaved' if data['firme'] in [2,3] else 'void_unk'" },
+                        "traffic_flow_direction": { "eval": "'both_directions' if data['sentido'] == 2 else 'in_direction' if data['sentido'] == 1 else 'void_unk'" },
+                        "access_restriction": { "eval": "'public_access' if data['acceso'] == 1 else 'toll' if data['acceso'] == 2 else 'void_unk'" },
+                        "restriction_for_vehicles": { "eval": "{}"},
+                        "speed_limit": { "eval": "'-32768'" },
+                        "condition_of_facility": { "eval": "'functional' if data['estadofis'] == 1 else 'under_construction' if data['estadofis'] == 2 else 'disused' if data['estadofis'] == 3 else 'void_unk'" },
+                        "road_national_road_code": { "function": "es_tn_roadlink_national_road_code" },
+                        "road_european_route_number":{ "function": "es_tn_roadlink_european_route_number" },
+                        "road_name": { "eval": "{}"},
+                        "road_label": { "eval" : "data['nombre_alt'] if data['nombre_alt'] is not None and data['nombre_alt'] != '' else 'void_unk'"},
+                        "w_national_identifier": "id_tramo",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}         
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_LineMerge(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_tramo",
+                        "clase",
+                        "tipovehic",
+                        "tipo_tramo",
+                        "calzada",
+                        "orden",
+                        "ncarriles",
+                        "situacion",
+                        "firme",
+                        "sentido",
+                        "acceso",
+                        "estadofis",
+                        "titular",
+                        "ome2_vial"
+
+                    ]
+                }
+            }
+        },
+        "road_node":{
+            "mock": false,
+            "source_tables":{
+                "igr_rt_rt_nodoctra_p":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "local_name": { "eval": "'void_unk'" },
+                        "form_of_road_node": { "eval": "'junction' if data['tip_nodoct'] == 1 else 'level_crossing' if data['tip_nodoct'] == 2 else 'pseudo_node' if data['tip_nodoct'] == 3 else 'road_end' if data['tip_nodoct'] == 4 else 'road_service_area' if data['tip_nodoct'] == 5 else 'void_unk'"},
+                        "w_national_identifier": "id_nodoctr",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"} 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D((ST_Dump(${})).geom,-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_nodoctr",
+                        "tip_nodoct"
+                    ]
+                }
+            }
+        },
+        "road_service_area":{
+            "mock": false,
+            "source_tables":{
+                "ome2_igr_rt_rt_areactra_s":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "eval": "'bus_station' if data['tipo_infra'] == 2 else 'parking' if data['tipo_infra'] in [4,5] else 'rest_area' if data['tipo_infra'] == 1 else 'toll' if data['tipo_infra'] == 3 else 'electric_car_loading_stations' if data['tipo_infra'] == 6 else  'void_unk'" },
+                        "name":   { "function": "es_tn_name" },
+                        "label": { "eval" : "data['nombre'] if data['nombre'] is not None and data['nombre'] != '' else 'void_unk'"},
+                        "w_national_identifier": "id_areactr",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_areactr",
+                        "tipo_infra",
+                        "nombre"
+                    ]
+                }
+            }
+        },
+        "road_service_point":{
+            "mock": false,
+            "source_tables":{
+                "igr_rt_rt_puntoctra_p":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "eval": "'bus_station' if data['tipo_infra'] == 2 else 'parking' if data['tipo_infra'] in [4,5] else 'rest_area' if data['tipo_infra'] == 1 else 'toll' if data['tipo_infra'] == 3 else 'electric_car_loading_stations' if data['tipo_infra'] == 6 else  'void_unk'" },
+                        "name":   { "function": "es_tn_name" },
+                        "label": { "eval" : "data['nombre'] if data['nombre'] is not None and data['nombre'] != '' else 'void_unk'"},
+                        "w_national_identifier": "id_ptoctra",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D((ST_Dump(${})).geom, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_ptoctra",
+                        "tipo_infra",
+                        "nombre"
+                    ]
+                }
+            }
+        },
+        "marker_post":{
+            "mock": false,
+            "source_tables":{
+                "igr_rt_rt_portalpk_p":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "link_to_road": { "eval" : "data['id_vial'] if data['id_vial'] is not None else 'void_unk'" },
+                        "code": { "eval": "data['id_porpk'] if data['id_porpk'] is not None else 'void_unk'" },      
+                        "distance": { "eval" : "data['numero'] if data['numero'] is not None else 'void_unk'"},      
+                        "w_national_identifier": "id_porpk",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"} 
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom":{
+                                "transform": "ST_Force3D((ST_Dump(${})).geom,-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_porpk",
+                        "id_vial",
+                        "numero"
+                    ]
+                }
+            }
+        },
+        "road":{
+            "mock": true,
+            "source_tables":{
+                "ome2_vial_with_geom":{
+                    "mock": true,
+                    "where": "",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },
+                        "road_name":  { "function": "fr_xx_name" },
+                        "national_road_code": { "eval": "data['numero'] if data['numero'] is not None and data['numero'] != '' and not(data['numero'].startswith('E')) else 'void_unk'"},
+                        "european_route_number": { "eval": "data['numero'] if  data['numero'] != '' and data['numero'].startswith('E') else 'void_unk'"},
+                        "w_national_identifier": "id_vial",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "date_d_apparition",
+                        "gcms_territoire",
+                        "toponyme",
+                        "numero"
+                    ]
+                }
+            }
+        },
+        "railway_link":{
+            "mock": false,
+            "source_tables":{
+                "ome2_igr_rt_rt_tramoffcc_l":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "type": { "function": "es_tn_railwaylink_type_value" },
+                        "number_of_tracks": { "eval": "data['n_vias'] if data['n_vias'] is not None and data['n_vias'] > 0 else '-32768'" },
+                        "min_max_track": { "eval": "'average'" },
+                        "nominal_track_gauge": { "eval": "'-32768'"},
+                        "track_gauge_category": { "eval": "'broad' if data['ancho_via'] == 1 else 'narrow' if data['ancho_via'] == 3 else 'standard' if data['ancho_via'] == 2 else 'void_unk'"},
+                        "vertical_position": { "eval": "'on_ground_surface' if data['situacion'] == 1 else 'suspended_or_elevated' if data['situacion'] == 3 else 'underground' if data['situacion'] == 2 else 'void_unk'" },
+                        "vertical_level": { "eval": "'-32768'" },  
+                        "tent_network": {"eval": "'true' if data['red_tent'] in [1,2] else 'false' if data['red_tent'] == 3 else 'void_unk'"},
+                        "condition_of_facility": { "eval": "'functional' if data['estadofis'] == 1 else 'under_construction' if data['estadofis'] == 2 else 'disused' if data['estadofis'] == 3 else 'void_unk'" },
+                        "electrified": { "eval": "'true' if data['electrific'] == 1 else 'false' if data['electrific'] == 2 else 'void_unk'" },
+                        "speed_class": { "eval": "'conventional' if data['uso_ppal'] == 2 else 'dedicated_high_speed' if data['uso_ppal'] == 1 else 'void_unk'" },
+                        "railway_use":  { "eval": "'void_unk'" }, 
+                        "access_restriction":  { "eval": "'void_unk'" },
+                        "railway_line_code":  { "function": "es_tn_railwaylink_railway_line_code" },
+                        "railway_line_name":  { "function": "es_tn_railwaylink_railway_line_name" },
+                        "railway_line_label": { "function": "es_tn_railwaylink_railway_line_label" },
+                        "w_national_identifier": "id_tramo",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_LineMerge(${}),-1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_tramo",
+                        "tipo_linea",
+                        "tipo_tramo",
+                        "n_vias",
+                        "ancho_via",
+                        "situacion",
+                        "red_tent",
+                        "estadofis",
+                        "electrific",
+                        "uso_ppal",
+                        "ome2_lineaffc"
+                    ]
+                }
+            }
+        },
+        "railway_station_area":{
+            "mock": false,
+            "source_tables":{
+                "ome2_igr_rt_rt_areaffcc_s":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "name":   { "eval": "{}" },
+                        "label": { "eval" : "'void_unk'"},
+                        "station_code": { "eval": "'void_unk'" },
+                        "railway_use": { "eval": "'cargo' if data['tipo_uso'] == 2 else 'mixed' if data['tipo_uso'] == 3 else 'passengers' if data['tipo_uso'] == 1 else 'void_unk'" },
+                        "form_of_railway_station": { "function": "es_tn_railwaystation_form_of_railwaystation" },
+                        "w_national_identifier": "id_areafc",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_areafc",
+                        "tipo_uso",
+                        "tipo_estfc",
+                        "ome2_nodoffcc"
+                    ]
+                }
+            }
+        },
+        "railway_station_point":{
+            "mock": false,
+            "source_tables":{
+                "ome2_igr_rt_rt_estacionffcc_p":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "name":   { "eval": "{}" },
+                        "label": { "eval" : "'void_unk'"},
+                        "station_code": { "eval": "'void_unk'" },
+                        "railway_use": { "eval": "'cargo' if data['tipo_uso'] == 2 else 'mixed' if data['tipo_uso'] == 3 else 'passengers' if data['tipo_uso'] == 1 else 'void_unk'" },
+                        "form_of_railway_station": { "function": "es_tn_railwaystation_form_of_railwaystation" },
+                        "w_national_identifier": "id_estfc",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D((ST_Dump(${})).geom, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_estfc",
+                        "tipo_uso",
+                        "tipo_estfc",
+                        "ome2_nodoffcc"
+                    ]
+                }
+            }
+        },
+        "railway_line":{
+            "mock": true,
+            "source_tables":{
+                "voie_ferree_nommee":{
+                    "mock": true,
+                    "where": "NOT gcms_detruit",
+                    "mapping": {
+                        "country": { "function": "fr_country_code" },
+                        "railway_line_name":  { "function": "fr_xx_name" },
+                        "railway_line_code": { "eval": "'void_unk'"},
+                        "w_national_identifier": "cleabs",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometrie_ge": {
+                                "transform": "ST_Force3D(${}, -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "date_d_apparition",
+                        "gcms_territoire",
+                        "toponyme",
+                        "date_d_apparition"
+                    ]
+                }
+            }
+        },
+        "aerodrome_area":{
+            "mock": false,
+            "source_tables":{
+                "ome2_igr_rt_rt_areaaereo_s ":{
+                    "mock": false,
+                    "where": "tip_area = 1",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "designator_iata": { "eval": "data['cod_iata'] if data['cod_iata'] is not None and data['cod_iata'] != '' else 'void_unk'" },
+                        "location_indicator_icao": { "eval": "data['cod_icao'] if data['cod_icao'] is not None and data['cod_icao'] != '' else 'void_unk'" },
+                        "name":   { "function": "es_tn_name" },
+                        "label": { "eval": "data['nombre'] if data['nombre'] is not None and data['nombre'] != '' else 'void_unk'" },
+                        "aerodrome_category": { "eval": "'domestic_national' if data['categoria'] == 2 else 'international' if data['categoria'] == 1 else 'recreational' if data['categoria'] == 5 else 'void_unk'"},
+                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['t_aerodro'] == 2 else 'aerodrome_only' if data['t_aerodro'] == 1 else 'heliport_only' if data['t_aerodro'] == 3 else 'void_unk'"},
+                        "use_restriction": { "eval": "'reserved_for_military' if data['uso'] == 2 else 'civilian' if data['uso'] == 1 else 'mixed' if data['uso'] == 3 else 'void_unk'"},
+                        "condition_of_facility": { "eval": "'disused' if data['estadofis'] == 3 else 'functional' if data['estadofis'] == 1 else 'void_unk'"},
+                        "w_national_identifier": "id_area",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_area",
+                        "cod_iata",
+                        "cod_icao",
+                        "nombre",
+                        "categoria",
+                        "t_aerodro",
+                        "uso",
+                        "estadofis"
+                    ]
+                }
+            }
+        },
+        "aerodrome_point":{
+            "mock": false,
+            "source_tables":{
+                "igr_rt_rt_aerodromo_p":{
+                    "mock": false,
+                    "where": "t_aerodro = 1",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "designator_iata": { "eval": "data['cod_iata'] if data['cod_iata'] is not None and data['cod_iata'] != '' else 'void_unk'" },
+                        "location_indicator_icao": { "eval": "data['cod_icao'] if data['cod_icao'] is not None and data['cod_icao'] != '' else 'void_unk'" },
+                        "name":   { "function": "es_tn_name" },
+                        "label": { "eval": "data['nombre'] if data['nombre'] is not None and data['nombre'] != '' else 'void_unk'" },
+                        "aerodrome_category": { "eval": "'domestic_national' if data['categoria'] == 2 else 'international' if data['categoria'] == 1 else 'recreational' if data['categoria'] == 5 else 'void_unk'"},
+                        "aerodrome_type": { "eval": "'aerodrome_heliport' if data['t_aerodro'] == 2 else 'aerodrome_only' if data['t_aerodro'] == 1 else 'heliport_only' if data['t_aerodro'] == 3 else 'void_unk'"},
+                        "use_restriction": { "eval": "'reserved_for_military' if data['uso'] == 2 else 'civilian' if data['uso'] == 1 else 'mixed' if data['uso'] == 3 else 'void_unk'"},
+                        "condition_of_facility": { "eval": "'disused' if data['estadofis'] == 3 else 'functional' if data['estadofis'] == 1 else 'void_unk'"},
+                        "w_national_identifier": "id_aerodro",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}   
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_PointOnSurface(${}), -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_aerodro",
+                        "cod_iata",
+                        "cod_icao",
+                        "nombre",
+                        "categoria",
+                        "t_aerodro",
+                        "uso",
+                        "estadofis"
+                    ]
+                }
+            }
+        },  
+        "runway_area":{
+            "mock": false,
+            "source_tables":{
+                "ome2_igr_rt_rt_areaaereo_s":{
+                    "mock": false,
+                    "where": "tip_area = 2",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "surface_composition":  { "eval": "'asphalt' if data['comp_sup'] == 1 else 'concrete' if data['comp_sup'] == 2 else 'grass' if data['comp_sup'] == 3 else 'void_unk'"},
+                        "w_national_identifier": "id_area",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_area",
+                        "comp_sup"
+                    ]
+                }
+            }
+        },      
+        "port_area":{
+            "mock": false,
+            "source_tables":{
+                "ome2_igr_rt_rt_areamar_s":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "name": { "function": "es_tn_name" },
+                        "label": { "eval": "data['nombre'] if data['nombre'] is not None and data['nombre'] != '' else 'void_unk'" },
+                        "un_locode": { "eval": "data['cod_puerto'] if data['cod_puerto'] is not None and data['cod_puerto'] != '' else 'void_unk'" },
+                        "tent_network": { "eval" : "'true' if data['red_tent'] in [1,2] else 'false' if data['red_tent'] == 3 else 'void_unk'"},
+                        "w_national_identifier": "id_areamar",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(ST_Force3D(${}, -1000))"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_areamar",
+                        "nombre",
+                        "cod_puerto",
+                        "red_tent"
+                    ]
+                }
+            }
+        },
+        "port_point":{
+            "mock": false,
+            "source_tables":{
+                "igr_rt_rt_puerto_p":{
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "name": { "function": "es_tn_name" },
+                        "label": { "eval": "data['nombre'] if data['nombre'] is not None and data['nombre'] != '' else 'void_unk'" },
+                        "un_locode": { "eval": "data['cod_puerto'] if data['cod_puerto'] is not None and data['cod_puerto'] != '' else 'void_unk'" },
+                        "tent_network": { "eval" : "'true' if data['red_tent'] in [1,2] else 'false' if data['red_tent'] == 3 else 'void_unk'"},
+                        "w_national_identifier": "id_puerto",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}   
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Force3D(ST_PointOnSurface(${}), -1000)"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "id_puerto",
+                        "nombre",
+                        "cod_puerto",
+                        "red_tent"
+                    ]
+                }
+            }
+        }
+    }
+}
