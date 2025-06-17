@@ -28,7 +28,7 @@
                         "condition_of_facility": { "eval": "'functional' if data['estadofis'] == 1 else 'under_construction' if data['estadofis'] == 2 else 'disused' if data['estadofis'] == 3 else 'void_unk'" },
                         "road_national_road_code": { "function": "es_tn_roadlink_national_road_code" },
                         "road_european_route_number":{ "function": "es_tn_roadlink_european_route_number" },
-                        "road_name": { "eval": "{}"},
+                        "road_name": { "eval": "es_tn_road_name"},
                         "road_label": { "eval" : "data['nombre_alt'] if data['nombre_alt'] is not None and data['nombre_alt'] != '' else 'void_unk'"},
                         "w_national_identifier": "id_tramo",
                         "xy_source": { "eval": "'nmca'"},
@@ -57,6 +57,8 @@
                         "acceso",
                         "estadofis",
                         "titular",
+                        "nombre",
+                        "nombre_alt",
                         "ome2_vial"
 
                     ]
