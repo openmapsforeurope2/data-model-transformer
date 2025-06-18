@@ -255,7 +255,7 @@
                     "geomapping":{
                         "geom": {
                             "geom": {
-                                "transform": "ST_Force3D(ST_LineMerge(${}),-1000)"
+                                "transform": "ST_Force3D(ST_Dump(ST_LineMerge(geom))).geom,-1000)"
                             }
                         }
                     },
