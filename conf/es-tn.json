@@ -5,10 +5,10 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "ome2_igr_rt_rt_tramo_l": {
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -39,7 +39,7 @@
                     "geomapping":{
                         "geom": {
                             "geom": {
-                                "transform": "ST_Force3D(ST_LineMerge(${}),-1000)"
+                                "transform": "ST_Force3D(ST_Dump(ST_LineMerge(geom))).geom,-1000)"
                             }
                         }
                     },
@@ -223,10 +223,10 @@
             }
         },
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_igr_rt_rt_tramoffcc_l":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -255,7 +255,7 @@
                     "geomapping":{
                         "geom": {
                             "geom": {
-                                "transform": "ST_Force3D(ST_Dump(ST_LineMerge(geom))).geom,-1000)"
+                                "transform": "ST_Force3D(ST_LineMerge(${}),-1000)"
                             }
                         }
                     },
