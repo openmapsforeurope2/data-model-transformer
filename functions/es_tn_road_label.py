@@ -14,6 +14,7 @@
     
     if label != "":
         label = label[0:len(label)-1]
+        label = label[0:255]
         return label
     
     return "void_unk"

@@ -5,10 +5,10 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_igr_rt_rt_tramo_l": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -64,10 +64,10 @@
             }
         },
         "road_node":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "igr_rt_rt_nodoctra_p":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -94,10 +94,10 @@
             }
         },
         "road_service_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_igr_rt_rt_areactra_s":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -126,10 +126,10 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "igr_rt_rt_puntoctra_p":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -158,10 +158,10 @@
             }
         },
         "marker_post":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "igr_rt_rt_portalpk_p":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -276,10 +276,10 @@
             }
         },
         "railway_station_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_igr_rt_rt_areaffcc_s":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -311,10 +311,10 @@
             }
         },
         "railway_station_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_igr_rt_rt_estacionffcc_p":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -378,10 +378,10 @@
             }
         },
         "aerodrome_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_igr_rt_rt_areaaereo_s ":{
-                    "mock": false,
+                    "mock": true,
                     "where": "tip_area = 1",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -420,10 +420,10 @@
             }
         },
         "aerodrome_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "igr_rt_rt_aerodromo_p":{
-                    "mock": false,
+                    "mock": true,
                     "where": "t_aerodro = 1",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -462,10 +462,10 @@
             }
         },  
         "runway_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_igr_rt_rt_areaaereo_s":{
-                    "mock": false,
+                    "mock": true,
                     "where": "tip_area = 2",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -491,10 +491,10 @@
             }
         },      
         "port_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "ome2_igr_rt_rt_areamar_s":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -525,10 +525,10 @@
             }
         },
         "port_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "igr_rt_rt_puerto_p":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
