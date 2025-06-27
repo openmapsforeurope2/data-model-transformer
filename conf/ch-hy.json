@@ -21,6 +21,7 @@
                         "stream_order": {"eval": "'void_unk'"},
                         "hydro_identifier": {"eval": "data['gwl_nr'] if data['gwl_nr'] is not None else 'void_unk'"},
                         "name": {"function": "ch_xx_name"},
+                        "label": {"function": "ch_xx_label"},
                         "origin": {"eval": "'void_unk'"},
                         "fictitious": {"eval": "'true' if data['objektart'] == 'Seeachse' else 'false'"},
                         "navigable": {"eval": "'void_unk'"},
@@ -46,10 +47,10 @@
             }
         },
         "watercourse_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_bb_bodenbedeckung": {
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart = 'Fliessgewaesser'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -77,10 +78,10 @@
             }
         },
         "standing_water":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_bb_bodenbedeckung": {
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart = 'Stehende Gewaesser'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -108,7 +109,7 @@
             }
         },
         "dam_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "tlm_bauten_staubaute": {
                     "mock": false,
@@ -117,6 +118,7 @@
                         "country": { "eval": "'${country_code}'"  },
                         "hydro_identifier": {"eval": "'void_unk'"},       
                         "name": {"function": "ch_xx_name"},
+                        "label": {"function": "ch_xx_label"},
                         "w_national_identifier": "uuid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -145,6 +147,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },     
                         "name": {"function": "ch_xx_name"},
+                        "label": {"function": "ch_xx_label"},
                         "w_national_identifier": "uuid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -173,6 +176,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },      
                         "name": {"function": "ch_xx_name"},
+                        "label": {"function": "ch_xx_label"},
                         "w_national_identifier": "uuid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -189,10 +193,10 @@
             }
         },
         "glacier_snowfield":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_bb_bodenbedeckung": {
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart = 'Gletscher'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -216,10 +220,10 @@
             }
         },
         "wetland":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_bb_bodenbedeckung": {
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart = 'Feuchtgebiet'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },

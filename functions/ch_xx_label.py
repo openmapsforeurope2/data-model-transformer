@@ -10,8 +10,10 @@
     pos_start = 0
     pos_pipe = 0
 
+    label = ""
+
     if name is None or name == "":
-        return name_json
+        return "void_unk"
 
     # Remove spaces
     name = name.replace(' ', '')
@@ -28,14 +30,11 @@
         for name in name_list:
             name = name.replace('\"', '')
             name = name.replace('"', '')
-            name_json.append({
-                "spelling": name,
-                "language": "void_unk",
-                "script": "latn",
-                "name_status": "official",
-                "nativeness": "endonym",
-                "spelling_latn": name,
-                "display": 1
-            })
-    
-    return name_json
+            label = label + '#' + name
+
+    if label is not None and label != "":
+        label = label[1:]
+    else:
+        label = "void_unk"
+
+    return label       
