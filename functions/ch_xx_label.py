@@ -16,7 +16,7 @@
         return "void_unk"
 
     # Remove spaces
-    name = name.replace(' ', '')
+    name = name.strip()
 
     while pos_pipe != -1:
         pos_pipe = name.find("|", pos_start)
