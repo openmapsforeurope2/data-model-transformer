@@ -19,9 +19,9 @@
     while pos_pipe != -1:
         pos_pipe = name.find("|", pos_start)
         if pos_pipe != -1:
-            name_list.append(name[pos_start:pos_pipe])
+            name_list.append(name[pos_start:pos_pipe].strip())
         else:
-            name_list.append(name[pos_start:])
+            name_list.append(name[pos_start:].strip())
         pos_start = pos_pipe + 1
     
     if len(name_list) > 0 :
