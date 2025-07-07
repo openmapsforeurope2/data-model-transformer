@@ -458,7 +458,8 @@
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "ice_area_type": { "eval": "'void_unk'" },
-                        "name": {"function": "xx_name_from_array"},
+                        "name": {"function": "fr_xx_name"},
+                        "label": {"eval" : "data['cpx_toponyme_de_plan_d_eau'] if data['cpx_toponyme_de_plan_d_eau'] is not None and data['cpx_toponyme_de_plan_d_eau'] != '' else 'void_unk'"},
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -471,9 +472,7 @@
                     "fetched_fields":[              
                         "gcms_territoire",
                         "cleabs",
-                        "cpx_toponyme_de_cours_d_eau",
-                        "cpx_code_hydrographique",
-                        "ome2_toponyme_troncon_hydrographique"
+                        "cpx_toponyme_de_plan_d_eau"
                     ]
                 }
             }
