@@ -7,7 +7,7 @@
     for vial in ome2_vial:
         name = vial['nombre_alt']
 
-        if name != "" and name is not None and name != '-997':
+        if name != "" and name is not None and name != '-997' and name != '-998':
             name = name.replace('\"', '')
             name = name.replace('"', '')
             label += name + "#"

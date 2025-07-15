@@ -9,7 +9,7 @@
     for linea in ome2_lineaffc:
         name = linea['nombre']
 
-        if name == "" or name is None or name == '-997':
+        if name == "" or name is None or name == '-997' or name == "-998":
             continue
         
         if re.match(pattern_code_name, name):

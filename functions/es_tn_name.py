@@ -10,7 +10,7 @@
     name_list = []
 
     # Name as JSON
-    if name != "" and name is not None and name != "-997" :
+    if name != "" and name is not None and name != "-997" and name != "-998" :
         name = name.replace('\"', '')
         name = name.replace('"', '')
         name_list.append({
