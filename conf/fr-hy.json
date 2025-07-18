@@ -426,11 +426,13 @@
             "source_tables":{
                 "bassin_versant_topographique": {
                     "mock": false,
-                    "where": "NOT gcms_detruit",
+                    "where": "NOT gcms_detruit AND libelle_du_bassin_hydrographique NOT LIKE '% BVT (Domaine marin)'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },  
                         "basin_order": { "eval": "'4'"},
-                        "hydro_identifier": {"eval": "data['code_bdcarthage'] if data['code_bdcarthage'] is not None else 'void_unk'"},   
+                        "hydro_identifier": {"eval": "data['code_bdcarthage'] if data['code_bdcarthage'] is not None else 'void_unk'"},  
+                        "name": {"function": "fr_xx_name"},
+                        "label": {"eval": "data['toponyme'] if data['toponyme'] != '' and data['toponyme'] is not None else 'void_unk'"}, 
                         "w_national_identifier": "cleabs",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'nmca'"},
@@ -444,7 +446,8 @@
                         "gcms_territoire",
                         "cleabs",
                         "code_bdcarthage",
-                        "bassin_fluvial"
+                        "bassin_fluvial",
+                        "toponyme"
                     ]
                 }
             }
