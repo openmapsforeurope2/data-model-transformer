@@ -1,22 +1,6 @@
 {
     "country_code": "nl",
-    // "source_db":{
-    //     "host":"SMLPOPENMAPS2",
-    //     "port":"5432",
-    //     "name":"nl_national_20230925",
-    //     "user":"postgres",
-    //     "pwd":"postgres",
-    //     "schema": "public"
-    // },
     "source_srid": "28992",
-    // "target_db":{
-    //     "host":"SMLPOPENMAPS2",
-    //     "port":"5432",
-    //     "name":"ome2_hvlsp_v4",
-    //     "user":"ome2_user",
-    //     "pwd":"ome2_user",
-    //     "schema": "hy"
-    // },
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
