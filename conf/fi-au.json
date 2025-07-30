@@ -194,17 +194,17 @@
         "maritime_zone":{
             "mock": false,
             "source_tables":{               
-                "meri": {
+                "territorialseaarea_apolygon": {
                     "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "national_code": { "eval": "'void_unk'"},          
-                        "shn": { "eval": "'void_unk'" },
+                        "shn": { "eval": "'FI00000000'" },
                         "name": { "eval": "'{}'"},
                         "label": { "eval": "'void_unk'"},
-                        "national_level_code": { "eval": "'void_unk'" },
-                        "zone_type": "'void_unk'",
+                        "national_level_code": { "eval": "'4901'" },
+                        "zone_type": "'territorial_sea'",
                         "w_national_identifier": { "eval": "'void_unk'"},
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
