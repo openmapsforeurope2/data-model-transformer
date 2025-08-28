@@ -236,33 +236,6 @@
                 }
             }
         },
-        "runway_line":{
-            "mock": true,
-            "source_tables":{
-                "zo_particularzone":{
-                    "mock": false,
-                    "where": "type = 17",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'" },
-                        "w_national_identifier": "tgid",
-                        "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}  
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": {
-                                "transform": "ST_Force3D(ST_ApproximateMedialAxis(${}), -1000)"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "tgid"
-                    ]
-                }
-            }
-        },
         "road_service_area":{
             "mock": true,
             "source_tables":{
