@@ -92,7 +92,7 @@
             "source_tables":{
                 "cours_d_eau": {
                     "mock": true,
-                    "where": "NOT gcms_detruit",
+                    "where": "NOT gcms_detruit AND geometrie_ge IS NOT NULL",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "hydro_identifier": {"eval": "data['code_hydrographique'] if data['code_hydrographique'] is not None else 'void_unk'"},

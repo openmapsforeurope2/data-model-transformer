@@ -462,7 +462,7 @@
             "source_tables":{
                 "voie_ferree_nommee":{
                     "mock": true,
-                    "where": "NOT gcms_detruit",
+                    "where": "NOT gcms_detruit AND geometrie_ge IS NOT NULL",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
                         "railway_line_name":  { "function": "fr_xx_name" },
@@ -506,37 +506,6 @@
                     },
                     "geomapping":{
                         "geom": "geometrie"
-                    },
-                    "fetched_fields":[
-                        "date_d_apparition",
-                        "gcms_territoire",
-                        "date_d_apparition",
-                        "nature"
-                    ]
-                }
-            }
-        },
-        "runway_line":{
-            "mock": true,
-            "source_tables":{
-                "piste_d_aerodrome":{
-                    "mock": true,
-                    "where": "NOT gcms_detruit",
-                    "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "surface_composition":  { "eval": "'grass' if data['nature'] == 'Piste en herbe' else 'void_hard' if data['nature'] == 'Piste en dur' else 'void_unk'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'ome2'"},
-                        "z_source": { "eval": "'ome2'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}    
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geometrie": {
-                                "transform": "ST_Force3D(ST_ApproximateMedialAxis(${}),-1000)"
-                            }
-                        }
                     },
                     "fetched_fields":[
                         "date_d_apparition",
