@@ -458,10 +458,10 @@
             }
         },
         "railway_line":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "voie_ferree_nommee":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit AND geometrie_ge IS NOT NULL",
                     "mapping": {
                         "country": { "function": "fr_country_code" },

@@ -88,10 +88,10 @@
             }
         },
         "watercourse":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "cours_d_eau": {
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit AND geometrie_ge IS NOT NULL",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -422,10 +422,10 @@
             }
         },
         "drainage_basin":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "bassin_versant_topographique": {
-                    "mock": false,
+                    "mock": true,
                     "where": "NOT gcms_detruit AND libelle_du_bassin_hydrographique NOT LIKE '% BVT (Domaine marin)'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },  
