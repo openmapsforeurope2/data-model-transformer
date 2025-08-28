@@ -6,10 +6,10 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_de_route": {
-                    "mock": true,
+                    "mock": false,
                     "where": "nature != 'Bac ou liaison maritime' AND nature != 'Sentier' AND nature != 'Escalier' AND NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -64,10 +64,10 @@
             }
         },
         "marker_post":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "point_de_repere":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -98,10 +98,10 @@
             }
         },        
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_de_voie_ferree":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit AND diffusion",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -134,10 +134,10 @@
             }
         },
         "railway_station_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit AND NOT fictif AND nature IN ('Arrêt voyageurs', 'Gare fret uniquement', 'Gare voyageurs et fret', 'Gare voyageurs uniquement', 'Station de métro', 'Station de tramway')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -163,10 +163,10 @@
             }
         },
         "railway_station_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit AND nature IN ('Arrêt voyageurs', 'Gare fret uniquement', 'Gare voyageurs et fret', 'Gare voyageurs uniquement', 'Station de métro', 'Station de tramway')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -196,10 +196,10 @@
             }
         },
         "aerodrome_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "aerodrome":{
-                    "mock": true,
+                    "mock": false,
                     "where": "nature != 'Hydrobase' AND NOT gcms_detruit AND NOT fictif",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -236,10 +236,10 @@
             }
         },
         "aerodrome_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "aerodrome":{
-                    "mock": true,
+                    "mock": false,
                     "where": "nature != 'Hydrobase' AND NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -276,10 +276,10 @@
             }
         },
         "road_service_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit AND NOT fictif AND nature IN ('Parking', 'Péage', 'Gare routière', 'Aire de repos ou de service')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -304,10 +304,10 @@
             }
         },
         "road_service_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit AND nature IN ('Parking', 'Péage', 'Gare routière', 'Aire de repos ou de service')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -336,10 +336,10 @@
             }
         },
         "ferry_crossing":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "troncon_de_route":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit AND (nature = 'Bac ou liaison maritime')",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -368,10 +368,10 @@
             }
         },
         "port_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit AND NOT fictif AND nature = 'Port'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -395,10 +395,10 @@
             }
         },
         "port_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit AND nature = 'Port'",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -490,10 +490,10 @@
             }
         },
         "runway_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "piste_d_aerodrome":{
-                    "mock": true,
+                    "mock": false,
                     "where": "NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
