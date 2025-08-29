@@ -6,18 +6,17 @@
 
     code = ""
 
+    # Code after receiving an adapted version of rt_lineaffcc_a with codigo and nombre separated
     for linea in ome2_lineaffc:
-        name = linea['nombre']
+        codigo = linea['codigo']
 
-        if name is None or name == "" or name == "-997" or name == "-998":
+        if codigo is None or codigo == "" or codigo == "-997" or codigo == "-998":
             continue
 
-        if re.match(pattern_code_name, name) :
-            code += name[0:4] + "#"
+        code += codigo + "#"
         
     if code != "":
         code = code[0:len(code)-1]
         return code
-    
-    return 'void_unk'
 
+    return 'void_unk'

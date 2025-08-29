@@ -11,9 +11,10 @@
 
         if name == "" or name is None or name == '-997' or name == "-998":
             continue
-        
-        if re.match(pattern_code_name, name):
-            name = name[6:]
+
+        # To be used for the original version where codes and names were stored in the same "nombre" field       
+        #if re.match(pattern_code_name, name):
+        #    name = name[6:]
              
         name_list.append({
             "spelling": name,
