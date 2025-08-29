@@ -618,7 +618,7 @@
                 }
             }
         },
-        "surface_hydrographique":{
+        "wetland":{
             "mock": true,
             "source_tables":{
                 "surface_hydrographique": {
