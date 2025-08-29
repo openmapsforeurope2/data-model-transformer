@@ -18,5 +18,8 @@
 
     if orden == '3':
         return "third_class"
+    
+    if orden == 'N':
+        return "fourth_class"
 
     return "void_unk"
