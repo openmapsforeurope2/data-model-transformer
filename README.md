@@ -16,7 +16,7 @@ Ce projet fournir les scripts python permettant de convertir les données de leu
 ## Fonctionnement
 
 La première étape du changement de modèle consiste à créer les [fichiers de configuration] (un fichier par pays-thème) s'il n'existe pas déjà ou à les modifier si le modèle de données de la nouvelle version des données sources d'un pays a évolué depuis la version antérieure.
-Si le mapping entre les champs sources et cibles nécessite l'écriture de plusieures lignes de code le fichier de configuration pourra appeler des fonctions dont le corps sera écrit dans un fichier portant le nom de la fonction stocké dans le dossier [functions](https://github.com/openmapsforeurope2/data-model-transformer/tree/main/functions).
+Si le mapping entre les champs sources et cibles nécessite l'écriture de plusieurs lignes de code le fichier de configuration pourra appeler des fonctions dont le corps sera écrit dans un fichier portant le nom de la fonction stocké dans le dossier [functions](https://github.com/openmapsforeurope2/data-model-transformer/tree/main/functions).
 
 Précisions concernant certains paramètres de configuration:
 - mock : si la valeur est 'true', permet de ne pas jouer la convertion pour la table en question
@@ -60,11 +60,11 @@ L'outil s'utilise en ligne de commande.
 
 Script options:
 * -h, --help: display help
-* -v, --verbose: Verbose mode
-* -s, --no_reset: Not delete existing data before restore
-* -c, --conf=FILE: Path to JSON configuration file
-* -t, --test: Test mode (process only 10 objects)
-* -n, --no_history: Target database without life-cycle management system
+* -v, --verbose: verbose mode
+* -s, --no_reset: not delete existing data before restore
+* -c, --conf=FILE: path to JSON configuration file
+* -t, --test: test mode (process only 10 objects)
+* -n, --no_history: target database without life-cycle management system
 
 <br>
 
