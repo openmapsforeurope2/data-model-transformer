@@ -16,15 +16,14 @@ def run(argv):
     arg_output = ""
     arg_noreset = False
     arg_verbose = False
-    arg_help = "{0} -c <conf> -o <output> -v".format(argv[0])
     arg_test = False
     arg_nohistory = False # life-cycle management is enabled as default
     
     try:
         opts, args = getopt.getopt(argv[1:], "hc:o:vstn", ["help", "conf=", 
         "output=", "verbose", "no_reset", "test", "no_history"])
-    except:
-        print(arg_help)
+    except getopt.GetoptError as err:
+        print(err)
         sys.exit(1)
     
     for opt, arg in opts:
