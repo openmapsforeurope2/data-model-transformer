@@ -10,7 +10,7 @@ L'élaboration de la chaîne de production a nécessité le développement d'un 
 
 ## Description
 
-Ce projet fournir les scripts python permettant de convertir les données de leur modèle nationale vers le modèle OME2.
+Ce projet fournit les scripts python permettant de convertir les données de leur modèle nationale vers le modèle OME2.
 
 
 ## Fonctionnement
@@ -70,11 +70,10 @@ Script options:
 
 Example on ome2_hvlsp_v4 (without life-cycle management):
 ~~~
-python3 script/transform.py -c conf/conf.json --no_history
+python3 script/transform.py -c path/to/conf.json --no_history
 ~~~
 
 Example on ome2_hvlsp_v5 (with life-cycle management):
 ~~~
-python3 script/transform.py -c conf/conf.json
+python3 script/transform.py -c path/to/conf.json
 ~~~
- 

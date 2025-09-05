@@ -11,11 +11,8 @@ import re
 
 
 def run(argv):
-
-    currentDir = os.path.dirname(os.path.abspath(__file__))
-    workspace = os.path.dirname(currentDir)+"/"
     
-    arg_conf = workspace+"conf/conf.json"
+    arg_conf = ""
     arg_output = ""
     arg_noreset = False
     arg_verbose = False
@@ -49,13 +46,24 @@ def run(argv):
 
     #configuration
     if not os.path.isfile(arg_conf):
-        print("le fichier de configuration "+ arg_conf + " n'existe pas.")
+        print("The configuration file "+ arg_conf + " does not exist.")
+        sys.exit(1)
+    
+    conf = utils.getConf(arg_conf)
+
+    #mapping conf
+    if not os.path.isfile(conf["mapping_conf"]):
+        print("The mapping configuration file "+ conf["mapping_conf_file"] + " does not exist.")
         sys.exit(1)
 
-    conf = utils.getConf(arg_conf)
-    mapping_conf = utils.getConf(workspace+"conf/mapping_conf.json")
-    process_conf = utils.getConf(workspace+"conf/"+mapping_conf[conf["country"]]["conf_file"][conf["theme"]])
+    mapping_conf = utils.getConf(conf["mapping_conf_file"])
+
+    #process conf
+    process_conf = os.path.join(os.path.dirname(conf["mapping_conf_file"]), mapping_conf[conf["country"]]["conf_file"][conf["theme"]])
+
+    #merge conf
     conf.update(process_conf)
+
 
     if arg_output == "" :
         arg_output = conf["output"]
