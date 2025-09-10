@@ -13,15 +13,14 @@ import re
 def run(argv):
     
     arg_conf = ""
-    arg_output = ""
     arg_noreset = False
     arg_verbose = False
     arg_test = False
     arg_nohistory = False # life-cycle management is enabled as default
     
     try:
-        opts, args = getopt.getopt(argv[1:], "hc:o:vstn", ["help", "conf=", 
-        "output=", "verbose", "no_reset", "test", "no_history"])
+        opts, args = getopt.getopt(argv[1:], "hc:vstn", ["help", "conf=", 
+        "verbose", "no_reset", "test", "no_history"])
     except getopt.GetoptError as err:
         print(err)
         sys.exit(1)
@@ -32,8 +31,6 @@ def run(argv):
             sys.exit(1)
         elif opt in ("-c", "--conf"):
             arg_conf = arg
-        elif opt in ("-o", "--output"):
-            arg_output = arg
         elif opt in ("-s", "--no_reset"):
             arg_noreset = True
         elif opt in ("-v", "--verbose"):
@@ -51,35 +48,30 @@ def run(argv):
     conf = utils.getConf(arg_conf)
 
     #mapping conf
-    if not os.path.isfile(conf["mapping_conf"]):
+    if not os.path.isfile(conf["mapping_conf_file"]):
         print("The mapping configuration file "+ conf["mapping_conf_file"] + " does not exist.")
         sys.exit(1)
 
     mapping_conf = utils.getConf(conf["mapping_conf_file"])
 
     #process conf
-    process_conf = os.path.join(os.path.dirname(conf["mapping_conf_file"]), mapping_conf[conf["country"]]["conf_file"][conf["theme"]])
+    process_conf_file = os.path.join(os.path.dirname(conf["mapping_conf_file"]), mapping_conf[conf["country"]]["conf_file"][conf["theme"]])
+    process_conf = utils.getConf(process_conf_file)
 
     #merge conf
     conf.update(process_conf)
 
-
-    if arg_output == "" :
-        arg_output = conf["output"]
-    if arg_output == "" :
-        arg_output = workspace+"data"
-
-    if not os.path.exists(arg_output):
-        os.makedirs(arg_output)
+    if not os.path.exists(conf["output_dir"]):
+        os.makedirs(conf["output_dir"])
 
     print('conf:', arg_conf)
-    print('output:', arg_output)
+    print('output:', conf["output_dir"])
     print('no_reset:', arg_noreset)
     print('verbose:', arg_verbose)
     print('test:', arg_test)
     print('no_history:', arg_nohistory)
 
-    tempDir = arg_output + "/tmp"
+    tempDir = conf["output_dir"] + "/tmp"
 
     if os.path.exists(tempDir):
         shutil.rmtree(tempDir)
@@ -87,7 +79,7 @@ def run(argv):
 
     print("[START TRANSFORM] "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
-    functions = utils.getFunctions(workspace+"/functions")
+    functions = utils.getFunctions(conf["functions_dir"])
 
     #--
     try:
@@ -98,14 +90,14 @@ def run(argv):
 
     #--
     try:
-        dump.run(functions, conf, tempDir, arg_output)
+        dump.run(functions, conf, tempDir, conf["output_dir"])
     except:
         print("DUMP ERROR")
         sys.exit(1)
 
     #--
     try:
-        restore.run(conf, arg_output, not arg_noreset, arg_nohistory, arg_verbose)
+        restore.run(conf, conf["output_dir"], not arg_noreset, arg_nohistory, arg_verbose)
     except:
         print("RESTORE ERROR")
         sys.exit(1)

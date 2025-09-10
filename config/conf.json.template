@@ -2,7 +2,8 @@
     "mapping_conf_file":"",
     "country":"",
     "theme":"",
-    "output":"",
+    "output_dir":"",
+    "functions_dir":"",
     "source_db":{
         "host":"",
         "port":"",
