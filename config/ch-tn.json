@@ -113,7 +113,7 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_strassen_strasseninfo":{
                     "mock": true,
@@ -138,7 +138,7 @@
                     ]
                 },
                 "tlm_areale_verkehrsareal":{
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart in ('Oeffentliches Parkplatzareal','Privates Parkplatzareal')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -199,14 +199,14 @@
             }
         },    
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "tlm_oev_eisenbahn":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "type": { "eval": "'train'" },
+                        "type": { "eval": "'train' if data['verkehrsmittel'] == 'Bahn' else 'metro' if data['verkehrsmittel'] == 'Metro' else 'tramway' if data['verkehrsmittel'] == 'Tram' else 'void_unk'" },
                         "number_of_tracks": { "eval": "'-32768'" },
                         "vertical_position": { "eval": "'void_unk'" },
                         "vertical_level": { "eval": "'-32768'" },
@@ -226,7 +226,8 @@
                     },
                     "fetched_fields":[
                         "uuid",
-                        "name"
+                        "name",
+                        "verkehrsmittel"
                         
                     ]
                 }
