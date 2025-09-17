@@ -380,7 +380,7 @@
         "aerodrome_area":{
             "mock": true,
             "source_tables":{
-                "ome2_igr_rt_rt_areaaereo_s ":{
+                "ome2_igr_rt_rt_areaaereo_s":{
                     "mock": true,
                     "where": "tip_area = 1",
                     "mapping": {
