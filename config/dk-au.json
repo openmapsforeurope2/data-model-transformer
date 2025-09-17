@@ -149,7 +149,7 @@
                     },
                     "geomapping":{
                         "geom": {
-                            "geom": {
+                            "geometry": {
                                 "transform": "ST_Multi(${})"
                             }
                         }
