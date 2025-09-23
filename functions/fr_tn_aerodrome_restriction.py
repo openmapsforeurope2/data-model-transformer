@@ -9,7 +9,7 @@
         return "civilian"
 
     if use == "Civil et militaire":
-        return "void_civilian_and_military"
+        return "mixed"
 
     if use == "Privé":
         return "void_private"
