@@ -97,7 +97,7 @@
                 }
             }
         },        
-        "fr_railway_link":{
+        "railway_link":{
             "mock": false,
             "source_tables":{
                 "troncon_de_voie_ferree":{
@@ -144,7 +144,7 @@
                 }
             }
         },
-        "fr_railway_station_area":{
+        "railway_station_area":{
             "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
@@ -174,7 +174,7 @@
                 }
             }
         },
-        "fr_railway_station_point":{
+        "railway_station_point":{
             "mock": false,
             "source_tables":{
                 "equipement_de_transport":{
@@ -208,7 +208,7 @@
                 }
             }
         },
-        "fr_aerodrome_area":{
+        "aerodrome_area":{
             "mock": false,
             "source_tables":{
                 "aerodrome":{
@@ -249,7 +249,7 @@
                 }
             }
         },
-        "fr_aerodrome_point":{
+        "aerodrome_point":{
             "mock": false,
             "source_tables":{
                 "aerodrome":{
