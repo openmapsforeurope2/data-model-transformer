@@ -4,11 +4,11 @@
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
-        "road_link":{
-            "mock": true,
+        "ch_road_link":{
+            "mock": false,
             "source_tables":{
                 "tlm_strassen_strasse": {
-                    "mock": true,
+                    "mock": false,
                     "where": "objektart != 'Autozug' AND objektart != 'Faehre' AND objektart != 'Klettersteig'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -18,8 +18,8 @@
                         "vertical_position": { "function": "ch_xx_vertical_position" },
                         "vertical_level": { "eval": "data['stufe'] if data['stufe'] is not None else '-32768'" },
                         "tent_network": { "eval": "'void_unk'" },
-                        "street_name": { "function": "ch_xx_name" },
-                        "street_label": { "eval": "data['strassenname'] if data['strassenname'] is not None else 'void_unk'"},
+                        "street_name": { "function": "ch_tn_name" },
+                        "street_label": { "eval": "data['strassenname'] if data['strassenname'] is not None and data['strassenname'] != '' else 'void_unk'"},
                         "road_surface_category": { "eval": "'paved' if data['belagsart'] == 'Hart' else 'unpaved' if data['belagsart'] == 'Natur' else 'void_unk'" },
                         "traffic_flow_direction": { "eval": "'both_directions' if data['richtungsgetrennt'] == 'Falsch' else 'void_one_direction' if data['richtungsgetrennt'] == 'Wahr' else 'void_unk'" },
                         "access_restriction": { "function": "ch_tn_roadlink_access_restriction" },
@@ -199,10 +199,10 @@
             }
         },    
         "railway_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_oev_eisenbahn":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },

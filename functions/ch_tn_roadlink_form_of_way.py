@@ -22,18 +22,18 @@
 
     if objektart == 'Autobahn':
         return "motorway"
-
-    if objektart == 'Raststaette':
-        return "enclosed_traffic_area"
-
+    
     if objektart == 'Autostrasse':
         return "freeway"
-    
-    if objektart in ["10m Strasse",'8m Strasse']:
-        return "void_single_or_dual_carriage_way"
 
-    if objektart in ['6m Strasse','4m Strasse','3m Strasse']:
-        return "single_carriage_way"
+    if objektart == 'Raststaette':
+        return "entrance_or_exit_service"
+    
+    if objektart in ["10m Strasse",'8m Strasse','6m Strasse','4m Strasse','3m Strasse']:
+        if richtung = 'Wahr':
+            return 'dual_carriage_way'
+        else:
+            return 'single_carriage_way'
  
     if objektart == 'Platz':
         return "traffic_square"
@@ -41,10 +41,10 @@
     if objektart == '2m Weg':
         return "tractor_road"
 
-    if objektart == '1m Weg' or objektart == '1m Wegfragment' or objektart == '2m Wegfragment' or objektart == 'Markierte Spur':
+    if objektart in ['1m Weg', '1m Wegfragment','2m Wegfragment','Markierte Spur']:
         return "walkway"
 
     if objektart == 'Provisorium':
-        return "void_bicycle_or_pedetrian"
+        return "void_unk"
     
     return "void_unk"
