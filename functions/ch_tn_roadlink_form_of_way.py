@@ -30,7 +30,7 @@
         return "entrance_or_exit_service"
     
     if objektart in ["10m Strasse",'8m Strasse','6m Strasse','4m Strasse','3m Strasse']:
-        if richtung = 'Wahr':
+        if richtung == 'Wahr':
             return 'dual_carriage_way'
         else:
             return 'single_carriage_way'
