@@ -14,4 +14,6 @@ COPY . $APP_DIR_SRC
 
 WORKDIR $APP_DIR_SRC
 
+RUN chown -R 1000:1000 $APP_DIR_SRC
+
 RUN python3 -m pip install -r ./requirements.txt --break-system-packages

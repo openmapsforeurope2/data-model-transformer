@@ -27,8 +27,6 @@ def run(argv):
 		
 
     for opt, arg in opts:
-        print("db1",arg)
-        print("db2",opt)
         if opt in ("-h", "--help"):
             print(arg_help)  # print the help message
             sys.exit(1)
