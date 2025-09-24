@@ -13,8 +13,6 @@ import re
 def run(argv):
     
     arg_conf = ""
-    arg_country=""
-    arg_theme=""
     arg_noreset = False
     arg_verbose = False
     arg_test = False
@@ -22,12 +20,15 @@ def run(argv):
     
     try:
         opts, args = getopt.getopt(argv[1:], "hc:vstn", ["help", "conf=", 
-        "verbose", "no_reset", "test", "no_history", "country", "theme"])
+        "verbose", "no_reset", "test", "no_history"])
     except getopt.GetoptError as err:
         print(err)
         sys.exit(1)
-    
+		
+
     for opt, arg in opts:
+        print("db1",arg)
+        print("db2",opt)
         if opt in ("-h", "--help"):
             print(arg_help)  # print the help message
             sys.exit(1)
@@ -41,10 +42,6 @@ def run(argv):
             arg_test = True
         elif opt in ("-n", "--no_history"):
             arg_nohistory = True
-        elif opt in ("-cc", "--country"):
-            arg_country = arg
-        elif opt in ("-th", "--theme"):
-            arg_theme = arg
 
     #configuration
     if not os.path.isfile(arg_conf):
@@ -82,7 +79,7 @@ def run(argv):
     mapping_conf = utils.getConf(conf["mapping_conf_file"])
 
     #process conf
-    process_conf_file = os.path.join(os.path.dirname(conf["mapping_conf_file"]), mapping_conf[arg_country]["conf_file"][arg_theme])
+    process_conf_file = os.path.join(os.path.dirname(conf["mapping_conf_file"]), mapping_conf[os.environ["COUNTRY"]]["conf_file"][os.environ["THEME"]])
     process_conf = utils.getConf(process_conf_file)
 
     #merge conf
@@ -97,8 +94,7 @@ def run(argv):
     print('verbose:', arg_verbose)
     print('test:', arg_test)
     print('no_history:', arg_nohistory)
-    print('country:', arg_country)
-    print('theme:', arg_theme)
+
 
     tempDir = conf["output_dir"] + "/tmp"
 
