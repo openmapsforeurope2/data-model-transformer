@@ -51,7 +51,6 @@ def run(argv):
     source_db={}
     source_db["host"]=os.environ["PGHOST"]
     source_db["port"]=os.environ["PGPORT"]
-	
     source_db["name"]=os.environ["PGDATABASE-NAT"]
     source_db["user"]=os.environ["PGUSER"]
     source_db["pwd"]=os.environ["PGPASSWORD"]
@@ -60,10 +59,10 @@ def run(argv):
     target_db={}
     target_db["host"]=os.environ["PGHOST"]
     target_db["port"]=os.environ["PGPORT"]	
-    source_db["name"]=os.environ["PGDATABASE"]
-    source_db["user"]=os.environ["PGUSER"]
-    source_db["pwd"]=os.environ["PGPASSWORD"]
-    source_db["schema"]=os.environ["PGSCHEMA"]
+    target_db["name"]=os.environ["PGDATABASE"]
+    target_db["user"]=os.environ["PGUSER"]
+    target_db["pwd"]=os.environ["PGPASSWORD"]
+    target_db["schema"]=os.environ["PGSCHEMA"]
 	
     conf["source_db"]=source_db
     conf["target_db"]=target_db
