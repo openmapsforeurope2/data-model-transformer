@@ -1,9 +1,10 @@
-FROM debian:11
+FROM ubuntu:24.04
 
-RUN apt update
-RUN apt install -y postgresql-client
-RUN apt install -y python3
-RUN apt install -y python3-pip
+RUN apt update \
+ && apt install -y postgresql-client \
+ && apt install -y python3 \
+ && apt install -y python3-pip \
+ && rm -rf /var/lib/apt/lists/*
 
 ENV APP_DIR_SRC=/usr/local/src/data-model-transformer/                                              
 
