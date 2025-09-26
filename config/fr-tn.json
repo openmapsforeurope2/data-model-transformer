@@ -108,7 +108,7 @@
                         "type": { "function": "fr_tn_railwaylink_railway_type_value" },
                         "number_of_tracks": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] is not None and data['nombre_de_voies'] != '0' else '-32768'" },
                         "min_max_track": { "eval": "'average'"},
-                        "nominal_track_gauge": {"eval": "'1.435' if data['largeur'] == 'Normale' else '-32768'"},
+                        "nominal_track_gauge": {"eval": "'143.5' if data['largeur'] == 'Normale' else '-32768'"},
                         "track_gauge_category": {"eval": "'broad' if data['largeur'] == 'Large' else 'narrow' if data['largeur'] == 'Etroite' else 'standard' if data['largeur'] == 'Normale' else 'void_unk'"},
                         "vertical_position": { "function": "fr_xx_vertical_position" },
                         "vertical_level": { "eval": "'0' if data['position_par_rapport_au_sol'] == 'Gué ou radier' else data['position_par_rapport_au_sol'] if data['position_par_rapport_au_sol'] is not None and data['position_par_rapport_au_sol'] != '' else '-32768'" },
