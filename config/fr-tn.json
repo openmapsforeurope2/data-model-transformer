@@ -107,7 +107,7 @@
                         "country": { "function": "fr_country_code" },
                         "type": { "function": "fr_tn_railwaylink_railway_type_value" },
                         "number_of_tracks": { "eval": "data['nombre_de_voies'] if data['nombre_de_voies'] is not None and data['nombre_de_voies'] != '0' else '-32768'" },
-                        "min_max_track": { "eval": "'average'"},
+                        "min_max_track": { "eval": "'void_exact'"},
                         "nominal_track_gauge": {"eval": "'143.5' if data['largeur'] == 'Normale' else '-32768'"},
                         "track_gauge_category": {"eval": "'broad' if data['largeur'] == 'Large' else 'narrow' if data['largeur'] == 'Etroite' else 'standard' if data['largeur'] == 'Normale' else 'void_unk'"},
                         "vertical_position": { "function": "fr_xx_vertical_position" },
