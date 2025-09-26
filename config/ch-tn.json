@@ -5,10 +5,10 @@
     "target_country_field": "country",
     "target_tables": {
         "road_link":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_strassen_strasse": {
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart != 'Autozug' AND objektart != 'Faehre' AND objektart != 'Klettersteig'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -56,10 +56,10 @@
             }
         },
         "road_node":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_strassen_strasseninfo":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -82,10 +82,10 @@
             }
         },        
         "road_service_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_areale_verkehrsareal":{
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart in ('Oeffentliches Parkplatzareal','Privates Parkplatzareal','Rastplatzareal')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -113,10 +113,10 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_strassen_strasseninfo":{
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart in ('Zollamt 24h eingeschraenkt','Zollamt 24h 24h','Raststaette')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -138,7 +138,7 @@
                     ]
                 },
                 "tlm_areale_verkehrsareal":{
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart in ('Oeffentliches Parkplatzareal','Privates Parkplatzareal')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -166,10 +166,10 @@
             }
         },  
         "road":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "route_numerotee_ou_nommee":{
-                    "mock": false,
+                    "mock": true,
                     "where": "numero NOT LIKE 'E%' AND NOT gcms_detruit",
                     "mapping": {
                         "country": { "function": "fr_country_code" },
@@ -198,7 +198,7 @@
                 }
             }
         },    
-        "railway_link":{
+        "ch_railway_link":{
             "mock": false,
             "source_tables":{
                 "tlm_oev_eisenbahn":{
@@ -206,13 +206,19 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "type": { "eval": "'train' if data['verkehrsmittel'] == 'Bahn' else 'metro' if data['verkehrsmittel'] == 'Metro' else 'tramway' if data['verkehrsmittel'] == 'Tram' else 'void_unk'" },
-                        "number_of_tracks": { "eval": "'-32768'" },
-                        "vertical_position": { "eval": "'void_unk'" },
-                        "vertical_level": { "eval": "'-32768'" },
+                        "type": { "eval": "'main_line_train' if data['verkehrsmittel'] == 'Bahn' and data['anschlussgleis'] == 'Falsch' else 'branch_line_train' if data['verkehrsmittel'] == 'Bahn' and data['anschlussgleis'] == 'Wahr' else 'metro' if data['verkehrsmittel'] == 'Metro' else 'tramway' if data['verkehrsmittel'] == 'Tram' else 'void_unk'" },
+                        "number_of_tracks": { "eval": "'1'" },
+                        "min_max_track": { "eval": "'maximum'" },         
+                        "nominal_track_gauge": {"eval": "'143.5' if data['objektart'] == 'Normalspurbahn' else '-32768'"},
+                        "track_gauge_category": {"eval": "'narrow' if data['objektart'] == 'Schmalspurbahn' or data['objektart'] == 'Kleinbahn' else 'standard' if data['objektart'] == 'Normalspurbahn' else 'void_unk'"},
+                        "vertical_position": { "function": "ch_xx_vertical_position" },
+                        "vertical_level": { "eval": "data['stufe'] if data['stufe'] is not None else '-32768'" },
                         "tent_network": { "eval": "'void_unk'" },
-                        "condition_of_facility": { "eval": "'void_unk'" },
+                        "condition_of_facility": { "eval": "'disused' if data['ausser_betrieb'] == 'Wahr' else 'functional' if data['ausser_betrieb'] == 'Falsch' else 'void_unk'" },
                         "electrified": { "eval": "'void_unk'" },
+                        "speed_class": { "eval": "'void_unk'" },
+                        "railway_use": { "eval": "'void_unk'" },
+                        "access_restriction": {"eval": "'forbidden_legally' if data['ausser_betrieb'] == 'Wahr' else 'private' if data['betriebsbahn'] == 'Wahr' else 'public_access'"},
                         "railway_line_code": { "eval": "'void_unk'"},
                         "railway_line_name":  { "function": "ch_xx_name" },
                         "w_national_identifier": "uuid",
@@ -227,17 +233,21 @@
                     "fetched_fields":[
                         "uuid",
                         "name",
-                        "verkehrsmittel"
-                        
+                        "verkehrsmittel",
+                        "anschlussgleis",
+                        "objektart",
+                        "stufe",
+                        "ausser_betrieb",
+                        "betriebsbahn"           
                     ]
                 }
             }
         },
         "railway_station_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_oev_haltestelle":{
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart = 'Haltestelle Bahn'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -262,10 +272,10 @@
             }
         },
         "aerodrome_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_areale_verkehrsareal":{
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart in ('Flughafenareal', 'Heliport', 'Flugfeldareal')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -297,10 +307,10 @@
             }
         },
         "aerodrome_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_areale_verkehrsareal":{
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart in ('Flughafenareal', 'Heliport', 'Flugfeldareal')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -332,10 +342,10 @@
             }
         },
         "ferry_crossing":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_oev_schifffahrt":{
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -363,10 +373,10 @@
             }
         },
         "port_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "tlm_oev_haltestelle":{
-                    "mock": false,
+                    "mock": true,
                     "where": "objektart = 'Haltestelle Schiff'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -384,6 +394,35 @@
                         "objektart",
                         "uuid",
                         "name"
+                    ]
+                }
+            }
+        },
+        "runway_area":{
+            "mock": true,
+            "source_tables":{
+                "tlm_bauten_verkehrsbaute_ply":{
+                    "mock": true,
+                    "where": "objektart = 'Hartbelagpiste' or objektart = 'Graspiste'",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "surface_composition":  { "eval": "'grass' if data['objektart'] == 'Graspiste' else 'void_hard'" },
+                        "w_national_identifier": "uuid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'nmca'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}    
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geom": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "objektart",
+                        "uuid"
                     ]
                 }
             }
