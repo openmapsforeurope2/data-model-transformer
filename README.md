@@ -3,65 +3,62 @@
 
 ## Context
 
-Open Maps For Europe 2 est un projet qui a pour objectif de développer un nouveau processus de production dont la finalité est la construction d'un référentiel cartographique pan-européen à grande échelle (1:10 000).
+Open Maps For Europe 2 is a project aimed at developing a new production process whose goal is to build a large-scale (1:10,000) pan-European mapping reference.
 
-L'élaboration de la chaîne de production a nécessité le développement d'un ensemble de composants logiciels qui constituent le projet [OME2](https://github.com/openmapsforeurope2/OME2).
-
+The development of the production pipeline required the creation of a set of software components that make up the [OME2](https://github.com/openmapsforeurope2/OME2) project.
 
 ## Description
 
-Ce projet fournit les scripts python permettant de convertir les données de leur modèle nationale vers le modèle OME2.
+This project provides Python scripts to convert data from their national model to the OME2 model.
 
+## How it works
 
-## Fonctionnement
+The first step in the model transformation is to create the [configuration files] (one file per country-theme) if they do not already exist or to modify them if the data model of the new version of a country’s source data has changed since the previous version.
+If the mapping between source and target fields requires writing several lines of code, the configuration file can call functions whose bodies are written in files named after the function and stored in the [functions](https://github.com/openmapsforeurope2/data-model-transformer/tree/main/functions) folder.
 
-La première étape du changement de modèle consiste à créer les [fichiers de configuration] (un fichier par pays-thème) s'il n'existe pas déjà ou à les modifier si le modèle de données de la nouvelle version des données sources d'un pays a évolué depuis la version antérieure.
-Si le mapping entre les champs sources et cibles nécessite l'écriture de plusieurs lignes de code le fichier de configuration pourra appeler des fonctions dont le corps sera écrit dans un fichier portant le nom de la fonction stocké dans le dossier [functions](https://github.com/openmapsforeurope2/data-model-transformer/tree/main/functions).
+Details regarding certain configuration parameters:
+- mock: if the value is 'true', the conversion for the given table will be skipped
+- where: SQL statement to filter the source data to convert
+- mapping: defines the mapping instructions for each target field. Here are some examples:
+    - writing code directly in the configuration file: `"national_code": {"eval": "data['nationalcode'] if data['nationalcode'] != '' else 'void_unk'"}`
+    - calling a function stored in the functions directory: `"name": {"function": "inspire_xx_name"}`
+    - assigning a fixed value: `"national_level_code": {"eval": "'void_unk'"}`
+    - mapping directly from target field to source field: `"w_national_identifier": "inspireid"`
+- geomapping: allows for simple geometric transformations (projection, type casting, etc.)
+- fetched_fields: list of fields to load from the source data that are needed for mapping. This information is stored in the Python object `data`. If the source field is mapped field-to-field, it does not need to be included in this list.
 
-Précisions concernant certains paramètres de configuration:
-- mock : si la valeur est 'true', permet de ne pas jouer la convertion pour la table en question
-- where : instruction SQL pour filtrer les données sources à convertir
-- mapping : défini les instructions de mapping pour chaque champ cible. Voici quelques exemples:
-    - écriture du code directement dans le fichier de  configuration : `"national_code": {"eval": "data['nationalcode'] if data['nationalcode'] != '' else 'void_unk'"}`
-    - appel d'une fonction stocké dans le répertoire functions : `"name": {"function": "inspire_xx_name"}`
-    - affectation d'une valeur fixe : `"national_level_code": {"eval": "'void_unk'"}`
-    - mapping directement de champ cible à champ source : `"w_national_identifier": "inspireid"`
-- geomapping : permet de réaliser des transformations géométriques simples (projection, transtypage...)
-- fetched_fields : liste des champs à charger depuis les données sources nécessaire au mapping. C'est informations sont stockées dans l'objet python `data`. Si le champ source fait l'objet d'un mapping champ à champ il n'est pas nécessaire de l'intégrer dans cette liste.
+> _Note: You can use template parameters (e.g., `${a_parameter}`) that refer to a parameter (`a_parameter`) present in the same file. The template `${a_parameter}` will be resolved when the configuration is loaded by the application, replacing it with the value of the parameter `a_parameter`._
 
-> _Note : il est possible d'utiliser des paramètres template (ex: `${un_parametre}`) faisant référence à un paramètre (`un_parametre`) présent dans le même fichier. Le template `${un_parametre}` sera réalisé lors du chargement de la configuration par l'application en le remplaçant par la valeur du paramètre `un_parametre`._
+The transformation process takes place in three phases:
+1. Extracting the relevant source data into .json files stored in a temporary directory (output/tmp)
+2. Creating .sql dump files saved in the output directory
+3. Restoring the dump files into the target database
 
-Le processus de transformation se déroule en trois phases :
-1. extraction des données sources utiles dans des fichiers .json stockés dans un répertoire temporaire (output/tmp)
-2. création des fichiers de dump .sql enregistré dans le répertoire output
-3. restauration des fichiers dump dans la base cible
+> _Notes:_
+> - _The output parameter must be set in the conf.json configuration file_
+> - _The output/tmp folder is deleted at the end of the process_
 
-> _Notes :_
-> - _le paramètre output est à renseigner dans le fichier de configuration conf.json_
-> - _le dossier output/tmp est supprimé à l'issu du traitement_
-
-> _Attention : il est important de s'assurer que le volume contenant le dossier output dispose bien de l'espace suffisant pour stocker les fichiers de dump et les fichiers temporaires qui sont tous volumineux._
+> _Warning: It is important to ensure that the volume containing the output folder has enough space to store the dump files and temporary files, as all these files can be quite large._
 
 ## Configuration
 
-La configuration est ici particulièrement importante car c'est elle qui recèle la logique de conversion.
+Configuration is especially important here because it contains the conversion logic.
 
-Les fichiers de configuration se trouvent dans le [dossier de configuration](https://github.com/openmapsforeurope2/data-model-transformer/tree/main/conf). On y trouve :
-- le fichier template [conf.json.template](https://github.com/openmapsforeurope2/data-model-transformer/blob/main/conf/conf.json.template) qui doit être réalisé en **conf.json**
-- les fichiers de configuration **pays-theme.json** créés par l'utilisateur.
-- le fichier **mapping_conf.json** permettant d'associer un pays à des fichier de configuration. L'utilisateur doit modifier ce fichier en conséquence lorsqu'il crée un nouveau fichier pays-theme.json.
+Configuration files are located in the [configuration folder](https://github.com/openmapsforeurope2/data-model-transformer/tree/main/conf). You will find:
+- the template file [conf.json.template](https://github.com/openmapsforeurope2/data-model-transformer/blob/main/conf/conf.json.template), which must be completed as **conf.json**
+- **country-theme.json** configuration files created by the user.
+- the file **mapping_conf.json** which allows associating a country with configuration files. You must edit this file accordingly when you create a new country-theme.json file.
 
-Les fichiers de configuration peuvent être associés à des fonctions qui doivent être stockées dans le répertoire [functions](https://github.com/openmapsforeurope2/data-model-transformer/tree/main/functions).
+Configuration files can be associated with functions which must be stored in the [functions](https://github.com/openmapsforeurope2/data-model-transformer/tree/main/functions) directory.
 
+## Usage
 
-## Utilisation
-
-L'outil s'utilise en ligne de commande.
+The tool is used from the command line.
 
 Script options:
 * -h, --help: display help
 * -v, --verbose: verbose mode
-* -s, --no_reset: not delete existing data before restore
+* -s, --no_reset: do not delete existing data before restore
 * -c, --conf=FILE: path to JSON configuration file
 * -t, --test: test mode (process only 10 objects)
 * -n, --no_history: target database without life-cycle management system
