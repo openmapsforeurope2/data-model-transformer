@@ -45,5 +45,7 @@
     if gescheidenrijbaan == "nee":
         return "single_carriage_way"
 
-    
+    if hoofdverkeersgebruik == "busverkeer":
+        return "void_bus_lane"
+
     return "void_unk"
