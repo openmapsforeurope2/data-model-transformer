@@ -188,7 +188,7 @@
                         "name": {"function": "es_hy_name"},
                         "label": {"eval": "data['etiqueta'] if data['etiqueta'] != '' and data['etiqueta'] is not None else data['nombre'] if data['nombre'] != '' and data['nombre'] is not None  else 'void_unk'"},
                         "w_national_identifier": {"eval": "'void_unk'"},
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}

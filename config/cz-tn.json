@@ -139,7 +139,7 @@
                         "name": { "function": "inspire_xx_name" },
                         "label": { "eval": "data['geographicalname_spelling_text'] if data['geographicalname_spelling_text'] != '' and data['geographicalname_spelling_text'] is not None else 'void_unk'" },
                         "w_national_identifier": "inspireid_localid",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}  

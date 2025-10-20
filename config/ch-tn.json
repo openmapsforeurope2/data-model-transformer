@@ -145,7 +145,7 @@
                         "type": { "eval": "'parking'" },
                         "name":   { "function": "ch_xx_name" },
                         "w_national_identifier": "uuid",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}       
@@ -165,39 +165,6 @@
                 }
             }
         },  
-        "road":{
-            "mock": false,
-            "source_tables":{
-                "route_numerotee_ou_nommee":{
-                    "mock": false,
-                    "where": "numero NOT LIKE 'E%' AND NOT gcms_detruit",
-                    "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "road_name":  { "function": "fr_xx_name" },
-                        "national_road_code": { "eval": "data['numero'] if data['numero'] is not None and not(data['numero'].startswith('E')) else 'void_unk'"},
-                        "european_route_number": { "eval": "data['numero'] if data['numero'].startswith('E') else 'void_unk'"},
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}    
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geometrie_ge": {
-                                "transform": "ST_Force3D(${}, -1000)"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "date_d_apparition",
-                        "gcms_territoire",
-                        "toponyme",
-                        "numero"
-                    ]
-                }
-            }
-        },    
         "railway_link":{
             "mock": false,
             "source_tables":{

@@ -436,7 +436,7 @@
                         "use_restriction": { "eval": "'reserved_for_military' if data['uso'] == 2 else 'civilian' if data['uso'] == 1 else 'mixed' if data['uso'] == 3 else 'void_unk'"},
                         "condition_of_facility": { "eval": "'disused' if data['estadofis'] == 3 else 'functional' if data['estadofis'] == 1 else 'void_unk'"},
                         "w_national_identifier": "id_aerodro",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}   
@@ -537,7 +537,7 @@
                         "un_locode": { "eval": "data['cod_puerto'] if data['cod_puerto'] is not None and data['cod_puerto'] != '' and data['cod_puerto'] != '-997' and data['cod_puerto'] != '-998' else 'void_unk'" },
                         "tent_network": { "eval" : "'true' if data['red_tent'] in [1,2] else 'false' if data['red_tent'] == 3 else 'void_unk'"},
                         "w_national_identifier": "id_puerto",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}   

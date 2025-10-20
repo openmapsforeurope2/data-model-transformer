@@ -96,7 +96,7 @@
                         "name": { "eval": "{}" },
                         "label": { "eval": "'void_unk'" },
                         "w_national_identifier": "inspireid",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}    
@@ -206,7 +206,7 @@
                         "railway_use": { "eval": "'void_unk'" },
                         "form_of_railway_station": { "eval": "'railway_station'" },
                         "w_national_identifier": "inspireid",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}      
@@ -279,7 +279,7 @@
                         "use_restriction": { "eval": "'void_unk'" },
                         "condition_of_facility": { "eval": "'void_unk'" },
                         "w_national_identifier": "inspireid",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}    
