@@ -133,7 +133,7 @@
                         "station_code": { "eval": "'void_unk'" },
                         "railway_use": { "eval": "'void_unk'" },
                         "w_national_identifier": "gml_id",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}    
@@ -192,7 +192,7 @@
                         "type": { "function": "inspire_tn_road_service_type" },
                         "name": { "eval": "{}"},
                         "w_national_identifier": "gml_id",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}    

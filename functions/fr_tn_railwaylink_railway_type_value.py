@@ -8,8 +8,11 @@
     if nature == "Funiculaire ou crémaillère":
         return "funicular"
 
-    if nature in ["LGV", "Voie de service", "Voie ferrée principale"]:
-        return "train"
+    if nature in ["LGV", "Voie ferrée principale"]:
+        return "main_line_train"
+
+    if nature == "Voie de service":
+        return "branch_line_train" 
 
     if nature == "Métro":
         return "metro"

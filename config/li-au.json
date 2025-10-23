@@ -4,7 +4,7 @@
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
-        "administrative_unit_area_1":{
+        "li_administrative_unit_area_1":{
             "mock": false,
             "source_tables":{
                 "tlm_landesgebiet": {
@@ -40,7 +40,7 @@
                 }
             }
         },
-        "administrative_unit_area_2":{
+        "li_administrative_unit_area_2":{
             "mock": false,
             "source_tables":{
                 "tlm_hoheitsgebiet": {

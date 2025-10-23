@@ -89,7 +89,7 @@
                         "name": {"eval": "{}"},
                         "label": {"eval": "'void_unk'"},
                         "w_national_identifier": "mtk_id",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}
@@ -149,7 +149,7 @@
                         "name": {"eval": "{}"},
                         "label": {"eval": "'void_unk'"},
                         "w_national_identifier": "mtk_id",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}

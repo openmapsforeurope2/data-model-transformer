@@ -14,7 +14,4 @@
     if nature == "Gare voyageurs et fret":
         return "mixed"
 
-    # if nature == "Gare routière":
-    #     return "car_shuttle"
-
     return "void_unk"

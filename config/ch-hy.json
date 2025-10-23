@@ -113,7 +113,7 @@
             "source_tables":{
                 "tlm_bauten_staubaute": {
                     "mock": false,
-                    "where": "objektart = 'Staudamm'",
+                    "where": "objektart = 'Staudamm' or objektart = 'Staumauer'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
                         "hydro_identifier": {"eval": "'void_unk'"},       

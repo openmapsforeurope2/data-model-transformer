@@ -5,10 +5,10 @@
     "target_country_field": "country",
     "target_tables": {
         "administrative_unit_area_1":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "au_administrative_unit": {
-                    "mock": false,
+                    "mock": true,
                     "where": "nationallevel = '1stOrder'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -46,10 +46,10 @@
             }
         },
         "administrative_unit_area_2":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "au_administrative_unit": {
-                    "mock": false,
+                    "mock": true,
                     "where": "nationallevel = '2ndOrder'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -87,10 +87,10 @@
             }
         },
         "administrative_unit_area_3":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "au_administrative_unit": {
-                    "mock": false,
+                    "mock": true,
                     "where": "nationallevel = '3rdOrder'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -123,6 +123,39 @@
                         "name_gn_language",
                         "inspireid"
 
+                    ]
+                }
+            }
+        },
+        "maritime_zone":{
+            "mock": false,
+            "source_tables":{               
+                "mu_maritime_zone": {
+                    "mock": false,
+                    "where": "",
+                    "mapping": {
+                        "country": { "eval": "'${country_code}'" },
+                        "national_code": { "eval": "'void_unk'"},          
+                        "shn": { "eval": "'DK00000000000'" },
+                        "name": { "eval": "'{}'"},
+                        "label": { "eval": "'void_unk'"},
+                        "national_level_code": { "eval": "'4701'" },
+                        "zone_type": { "eval": "'contiguous_zone' if data['zonetype'] == 'contiguouszone' else 'continental_shelf' if data['zonetype'] == 'continentalshelf' else 'exclusive_economic_zone' if data['zonetype'] == 'exclusiveeconomiczone' else 'internal_waters' if data['zonetype'] == 'internalwaters' else 'territorial_sea' if data['zonetype'] == 'territorialsea' else 'void_unk'"},
+                        "w_national_identifier":"inspireid",
+                        "xy_source": { "eval": "'nmca'"},
+                        "z_source": { "eval": "'void_unk'"},
+                        "w_release": { "eval": "1"},
+                        "w_scale": { "eval": "'10000'"}                          
+                    },
+                    "geomapping":{
+                        "geom": {
+                            "geometry": {
+                                "transform": "ST_Multi(${})"
+                            }
+                        }
+                    },
+                    "fetched_fields":[
+                        "zonetype"
                     ]
                 }
             }

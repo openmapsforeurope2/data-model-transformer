@@ -45,5 +45,8 @@
     if gescheidenrijbaan == "nee":
         return "single_carriage_way"
 
-    
+    # Possible value: bus lane. To be placed before the test on gescheidenrijbaan if we want to retrieve them
+    if hoofdverkeersgebruik == "busverkeer":
+        return "void_bus_lane"
+
     return "void_unk"

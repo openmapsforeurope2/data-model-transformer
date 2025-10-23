@@ -187,7 +187,7 @@
                         "name": {"function": "fr_xx_name"},
                         "label": {"eval": "data['toponyme'] if data['toponyme'] != '' and data['toponyme'] is not None else 'void_unk'"},
                         "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}
@@ -219,7 +219,7 @@
                         "name": {"function": "fr_xx_name"},
                         "label": {"eval": "data['toponyme'] if data['toponyme'] != '' and data['toponyme'] is not None else 'void_unk'"},
                         "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}
@@ -246,7 +246,7 @@
                         "name": {"function": "fr_xx_name"},
                         "label": {"eval": "data['toponyme'] if data['toponyme'] != '' and data['toponyme'] is not None else 'void_unk'"},
                         "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}
@@ -338,7 +338,7 @@
                         "name": {"function": "fr_xx_name"},
                         "label": {"eval": "data['toponyme'] if data['toponyme'] != '' and data['toponyme'] is not None else 'void_unk'"},
                         "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'nmca'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}

@@ -14,4 +14,7 @@
     if etat == "En service":
         return "functional"
 
+    if etat == "Non exploité":
+        return "disused"
+
     return "void_unk"

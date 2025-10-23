@@ -102,7 +102,7 @@
                         "name":   { "eval": "{}" },
                         "label": { "eval" : "'void_unk'"},
                         "w_national_identifier": "mtk_id",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}    
@@ -249,7 +249,7 @@
                         "use_restriction": { "eval": "'void_unk'"},
                         "condition_of_facility": { "eval": "'void_unk'"},
                         "w_national_identifier": "mtk_id",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}    
@@ -371,7 +371,7 @@
                         "un_locode": { "eval" : "'void_unk'"},
                         "tent_network": { "eval" : "'void_unk'"},
                         "w_national_identifier": "mtk_id",
-                        "xy_source": { "eval": "'nmca'"},
+                        "xy_source": { "eval": "'ome2'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
                         "w_scale": { "eval": "'10000'"}    

@@ -4,8 +4,8 @@
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
-        "road_link":{
-            "mock": true,
+        "nl_road_link":{
+            "mock": false,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
                     "mock": false,
@@ -57,10 +57,10 @@
             }
         },
         "road_node":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_hartpunt":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typeweg like '%autosnelweg%' OR fysiekvoorkomen = 'rotonde'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -87,7 +87,7 @@
                     ]
                 },
                 "top10nl_wegdeel_punt":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typeinfrastructuur = 'kruising'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -117,7 +117,7 @@
             "mock": true,
             "source_tables":{
                 "top10nl_inrichtingselement_punt":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typeinrichtingselement = 'kilometerpaal'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -143,18 +143,23 @@
                 }
             }
         },
-        "railway_link":{
-            "mock": true,
+        "nl_railway_link":{
+            "mock": false,
             "source_tables":{
                 "top10nl_spoorbaandeel_lijn":{
                     "mock": false,
                     "where": "typespoorbaan in ('tram','trein','metro')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "type": { "eval": "'train' if data['typespoorbaan'] == 'trein' else 'tramway' if data['typespoorbaan'] == 'tram' else 'metro' if data['typespoorbaan'] == 'metro' else 'void_unk'" },
+                        "type": { "eval": "'main_line_train' if data['typespoorbaan'] == 'trein' and data['hoofdspoor'] == 'ja' else 'branch_line_train' if data['typespoorbaan'] == 'trein' and data['hoofdspoor'] == 'nee' else 'train' if data['typespoorbaan'] == 'trein' else 'tramway' if data['typespoorbaan'] == 'tram' else 'metro' if data['typespoorbaan'] == 'metro' else 'void_unk'" },
                         "number_of_tracks": { "eval": "'1' if data['aantalsporen'] == 'enkel' else '2' if data['aantalsporen'] == 'dubbel' else '-32768'" },
+                        "min_max_track": {"eval": "'void_unk'"},
+                        "nominal_track_gauge": {"eval": "'-32768'"},
+                        "track_gauge_category": {"eval": "'narrow' if data['spoorbreedte'] == 'smalspoor' else 'standard' if data['spoorbreedte'] == 'normalspoor' else 'void_unk'"},
                         "vertical_position": { "eval": "'underground' if data['hoogteniveau'] < 0 else 'suspended_or_elevated' if data['hoogteniveau'] > 0 else 'on_ground_surface' if data['hoogteniveau'] == 0 else 'void_unk'" },
                         "electrified": { "eval": "'1' if data['elektrificatie'] == 'ja' else -32768 if data ['elektrificatie'] is None else '0'" },
+                        "speed_class": {"eval": "'void_unk'"},
+                        "railway_use": {"eval":"'cargo' if data['vervoerfunctie'] == 'goederenvervoer' else 'mixed' if data['vervoerfunctie'] == 'gemengd gebruik' else 'passengers' if data['vervoerfunctie'] == 'personenvervoer' else 'void_museum' if data['vervoerfunctie'] == 'museumlijn' else 'void_unk'"},
                         "condition_of_facility": { "function": "nl_tn_roadlink_condition_of_facility" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
@@ -171,11 +176,15 @@
                     },
                     "fetched_fields":[
                         "typespoorbaan",
+                        "aantalsporen",
                         "hoogteniveau",
                         "elektrificatie",
                         "namespace",
                         "lokaalid",
-                        "status"
+                        "status",
+                        "hoofdspoor",
+                        "spoorbreedte",
+                        "vervoerfunctie"
                     ]
                 }
             }
@@ -184,11 +193,12 @@
             "mock": true,
             "source_tables":{
                 "top10nl_inrichtingselement_punt":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typeinrichtingselement = 'treinstation' or typeinrichtingselement = 'metrostation'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
                         "name":  { "function": "nl_tn_name" },
+                        "form_of_railway_station": {"eval": "'railway_station'"},
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
@@ -214,7 +224,7 @@
             "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_vlak":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typeweg = 'parkeerplaats: P+R'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
@@ -242,7 +252,7 @@
             }
         },
         "road_service_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_vlak":{
                     "mock": true,
@@ -271,7 +281,7 @@
                     ]
                 },
                 "top10nl_gebouw_punt":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typegebouw = 'tankstation' OR typegebouw = 'tol'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
@@ -300,10 +310,10 @@
             }
         },
         "aerodrome_area":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typefunctioneelgebied = 'vliegveld, luchthaven' or typefunctioneelgebied = 'helikopterlandingsterrein'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
@@ -336,10 +346,10 @@
             }
         },
         "aerodrome_point":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typefunctioneelgebied = 'vliegveld, luchthaven' or typefunctioneelgebied = 'helikopterlandingsterrein'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
@@ -375,7 +385,7 @@
             "mock": true,
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typefunctioneelgebied = 'haven'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
@@ -406,7 +416,7 @@
             "mock": true,
             "source_tables":{
                 "top10nl_functioneel_gebied_vlak":{
-                    "mock": false,
+                    "mock": true,
                     "where": "typefunctioneelgebied = 'haven'",
                     "mapping": {
                         "country":  { "eval": "'${country_code}'" },
@@ -437,7 +447,7 @@
             "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
-                    "mock": false,
+                    "mock": true,
                     "where": "typeweg = 'startbaan, landingsbaan'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -468,7 +478,7 @@
             "mock": true,
             "source_tables":{
                 "ome2_runway_area": {
-                    "mock": false,
+                    "mock": true,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
@@ -499,7 +509,7 @@
             "mock": true,
             "source_tables":{
                 "top10nl_wegdeel_hartlijn": {
-                    "mock": false,
+                    "mock": true,
                     "where": "typeweg = 'veerverbinding'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
