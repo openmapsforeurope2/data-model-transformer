@@ -24,7 +24,7 @@ def run(argv):
     except getopt.GetoptError as err:
         print(err)
         sys.exit(1)
-		
+        
 
     for opt, arg in opts:
         if opt in ("-h", "--help"):
@@ -45,28 +45,52 @@ def run(argv):
     if not os.path.isfile(arg_conf):
         print("The configuration file "+ arg_conf + " does not exist.")
         sys.exit(1)
-	
+    
     conf = utils.getConf(arg_conf)
 
-    source_db={}
-    source_db["host"]=os.environ["PGHOST"]
-    source_db["port"]=os.environ["PGPORT"]
-    source_db["name"]=os.environ["PGDATABASE-NAT"]
-    source_db["user"]=os.environ["PGUSER"]
-    source_db["pwd"]=os.environ["PGPASSWORD"]
-    source_db["schema"]=os.environ["PGSCHEMA-NAT"]
-	
-    target_db={}
-    target_db["host"]=os.environ["PGHOST"]
-    target_db["port"]=os.environ["PGPORT"]	
-    target_db["name"]=os.environ["PGDATABASE"]
-    target_db["user"]=os.environ["PGUSER"]
-    target_db["pwd"]=os.environ["PGPASSWORD"]
-    target_db["schema"]=os.environ["PGSCHEMA"]
-	
+    if not conf["source_db"]:
+        source_db={}
+    else:
+        source_db = conf["source_db"]
+    if not conf["source_db"] or conf["source_db"]["host"]=="":
+        source_db["host"]=os.environ["PGHOST"]
+    if not conf["source_db"] or conf["source_db"]["port"]=="":
+        source_db["port"]=os.environ["PGPORT"]
+    if not conf["source_db"] or conf["source_db"]["name"]=="":
+        source_db["name"]=os.environ["PGDATABASE-NAT"]
+    if not conf["source_db"] or conf["source_db"]["user"]=="":
+        source_db["user"]=os.environ["PGUSER"]
+    if not conf["source_db"] or conf["source_db"]["pwd"]=="":
+        source_db["pwd"]=os.environ["PGPASSWORD"]
+    if not conf["source_db"] or conf["source_db"]["schema"]=="":
+        source_db["schema"]=os.environ["PGSCHEMA-NAT"]
+    
+    if not conf["target_db"]:
+        target_db={}
+    else:
+        target_db = conf["target_db"]
+    if not conf["target_db"] or conf["target_db"]["host"]=="":
+        target_db["host"]=os.environ["PGHOST"]
+    if not conf["target_db"] or conf["target_db"]["port"]=="":
+        target_db["port"]=os.environ["PGPORT"]    
+    if not conf["target_db"] or conf["target_db"]["name"]=="":
+        target_db["name"]=os.environ["PGDATABASE"]
+    if not conf["target_db"] or conf["target_db"]["user"]=="":
+        target_db["user"]=os.environ["PGUSER"]
+    if not conf["target_db"] or conf["target_db"]["pwd"]=="":
+        target_db["pwd"]=os.environ["PGPASSWORD"]
+    if not conf["target_db"] or conf["target_db"]["schema"]=="":
+        target_db["schema"]=os.environ["PGSCHEMA"]
+    
     conf["source_db"]=source_db
     conf["target_db"]=target_db
 
+
+    if not conf["country"]:
+	    conf["country"] =os.environ["COUNTRY"]
+	
+    if not conf["theme"]:
+	    conf["theme"]=os.environ["THEME"]	
 
     #mapping conf
     if not os.path.isfile(conf["mapping_conf_file"]):
@@ -76,7 +100,7 @@ def run(argv):
     mapping_conf = utils.getConf(conf["mapping_conf_file"])
 
     #process conf
-    process_conf_file = os.path.join(os.path.dirname(conf["mapping_conf_file"]), mapping_conf[os.environ["COUNTRY"]]["conf_file"][os.environ["THEME"]])
+    process_conf_file = os.path.join(os.path.dirname(conf["mapping_conf_file"]), mapping_conf[conf["country"]]["conf_file"][conf["theme"]])
     process_conf = utils.getConf(process_conf_file)
 
     #merge conf
