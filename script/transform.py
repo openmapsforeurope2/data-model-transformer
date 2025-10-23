@@ -48,48 +48,42 @@ def run(argv):
     
     conf = utils.getConf(arg_conf)
 
-    if not conf["source_db"]:
-        source_db={}
-    else:
-        source_db = conf["source_db"]
-    if not conf["source_db"] or conf["source_db"]["host"]=="":
-        source_db["host"]=os.environ["PGHOST"]
-    if not conf["source_db"] or conf["source_db"]["port"]=="":
-        source_db["port"]=os.environ["PGPORT"]
-    if not conf["source_db"] or conf["source_db"]["name"]=="":
-        source_db["name"]=os.environ["PGDATABASE-NAT"]
-    if not conf["source_db"] or conf["source_db"]["user"]=="":
-        source_db["user"]=os.environ["PGUSER"]
-    if not conf["source_db"] or conf["source_db"]["pwd"]=="":
-        source_db["pwd"]=os.environ["PGPASSWORD"]
-    if not conf["source_db"] or conf["source_db"]["schema"]=="":
-        source_db["schema"]=os.environ["PGSCHEMA-NAT"]
-    
-    if not conf["target_db"]:
-        target_db={}
-    else:
-        target_db = conf["target_db"]
-    if not conf["target_db"] or conf["target_db"]["host"]=="":
-        target_db["host"]=os.environ["PGHOST"]
-    if not conf["target_db"] or conf["target_db"]["port"]=="":
-        target_db["port"]=os.environ["PGPORT"]    
-    if not conf["target_db"] or conf["target_db"]["name"]=="":
-        target_db["name"]=os.environ["PGDATABASE"]
-    if not conf["target_db"] or conf["target_db"]["user"]=="":
-        target_db["user"]=os.environ["PGUSER"]
-    if not conf["target_db"] or conf["target_db"]["pwd"]=="":
-        target_db["pwd"]=os.environ["PGPASSWORD"]
-    if not conf["target_db"] or conf["target_db"]["schema"]=="":
-        target_db["schema"]=os.environ["PGSCHEMA"]
-    
-    conf["source_db"]=source_db
-    conf["target_db"]=target_db
+    if "source_db" not in conf:
+        conf["source_db"]={}
 
+    if "host" not in conf["source_db"] or conf["source_db"]["host"]=="":
+        conf["source_db"]["host"]=os.environ["PGHOST"]
+    if "port" not in conf["source_db"] or conf["source_db"]["port"]=="":
+        conf["source_db"]["port"]=os.environ["PGPORT"]
+    if "name" not in conf["source_db"] or conf["source_db"]["name"]=="":
+        conf["source_db"]["name"]=os.environ["PGDATABASE-NAT"]
+    if "user" not in conf["source_db"] or conf["source_db"]["user"]=="":
+        conf["source_db"]["user"]=os.environ["PGUSER"]
+    if "pwd" not in conf["source_db"] or conf["source_db"]["pwd"]=="":
+        conf["source_db"]["pwd"]=os.environ["PGPASSWORD"]
+    if "schema" not in conf["source_db"] or conf["source_db"]["schema"]=="":
+        conf["source_db"]["schema"]=os.environ["PGSCHEMA-NAT"]
 
-    if not conf["country"]:
+    if "target_db" not in conf:
+        conf["target_db"]={}
+
+    if "host" not in conf["target_db"] or conf["target_db"]["host"]=="":
+        conf["target_db"]["host"]=os.environ["PGHOST"]
+    if "port" not in conf["target_db"] or conf["target_db"]["port"]=="":
+        conf["target_db"]["port"]=os.environ["PGPORT"]    
+    if "name" not in conf["target_db"] or conf["target_db"]["name"]=="":
+        conf["target_db"]["name"]=os.environ["PGDATABASE"]
+    if "user" not in conf["target_db"] or conf["target_db"]["user"]=="":
+        conf["target_db"]["user"]=os.environ["PGUSER"]
+    if "pwd" not in conf["target_db"] or conf["target_db"]["pwd"]=="":
+        conf["target_db"]["pwd"]=os.environ["PGPASSWORD"]
+    if "schema" not in conf["target_db"] or conf["target_db"]["schema"]=="":
+        conf["target_db"]["schema"]=os.environ["PGSCHEMA"]
+
+    if "country" not in conf or not conf["country"]:
 	    conf["country"] =os.environ["COUNTRY"]
 	
-    if not conf["theme"]:
+    if "theme" not in conf or not conf["theme"]:
 	    conf["theme"]=os.environ["THEME"]	
 
     #mapping conf

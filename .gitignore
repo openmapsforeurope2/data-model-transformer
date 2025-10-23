@@ -2,3 +2,4 @@
 /script/__pycache__
 /script/*.pyc
 /config/conf.json
+/docker/push-image.sh
