@@ -84,22 +84,25 @@ def run(argv):
     #--
     try:
         extract.run(conf, tempDir, arg_test)
-    except:
-        print("EXTRACT ERROR")
+    except Exception as e:
+        print("EXTRACT ERROR:")
+        print(e)
         sys.exit(1)
 
     #--
     try:
         dump.run(functions, conf, tempDir, conf["output_dir"])
-    except:
-        print("DUMP ERROR")
+    except Exception as e:
+        print("DUMP ERROR:")
+        print(e)
         sys.exit(1)
 
     #--
     try:
         restore.run(conf, conf["output_dir"], not arg_noreset, arg_nohistory, arg_verbose)
-    except:
-        print("RESTORE ERROR")
+    except Exception as e:
+        print("RESTORE ERROR:")
+        print(e)
         sys.exit(1)
 
     #--
