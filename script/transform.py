@@ -24,7 +24,8 @@ def run(argv):
     except getopt.GetoptError as err:
         print(err)
         sys.exit(1)
-    
+        
+
     for opt, arg in opts:
         if opt in ("-h", "--help"):
             print(arg_help)  # print the help message
@@ -46,6 +47,50 @@ def run(argv):
         sys.exit(1)
     
     conf = utils.getConf(arg_conf)
+
+    if not conf["source_db"]:
+        source_db={}
+    else:
+        source_db = conf["source_db"]
+    if not conf["source_db"] or conf["source_db"]["host"]=="":
+        source_db["host"]=os.environ["PGHOST"]
+    if not conf["source_db"] or conf["source_db"]["port"]=="":
+        source_db["port"]=os.environ["PGPORT"]
+    if not conf["source_db"] or conf["source_db"]["name"]=="":
+        source_db["name"]=os.environ["PGDATABASE-NAT"]
+    if not conf["source_db"] or conf["source_db"]["user"]=="":
+        source_db["user"]=os.environ["PGUSER"]
+    if not conf["source_db"] or conf["source_db"]["pwd"]=="":
+        source_db["pwd"]=os.environ["PGPASSWORD"]
+    if not conf["source_db"] or conf["source_db"]["schema"]=="":
+        source_db["schema"]=os.environ["PGSCHEMA-NAT"]
+    
+    if not conf["target_db"]:
+        target_db={}
+    else:
+        target_db = conf["target_db"]
+    if not conf["target_db"] or conf["target_db"]["host"]=="":
+        target_db["host"]=os.environ["PGHOST"]
+    if not conf["target_db"] or conf["target_db"]["port"]=="":
+        target_db["port"]=os.environ["PGPORT"]    
+    if not conf["target_db"] or conf["target_db"]["name"]=="":
+        target_db["name"]=os.environ["PGDATABASE"]
+    if not conf["target_db"] or conf["target_db"]["user"]=="":
+        target_db["user"]=os.environ["PGUSER"]
+    if not conf["target_db"] or conf["target_db"]["pwd"]=="":
+        target_db["pwd"]=os.environ["PGPASSWORD"]
+    if not conf["target_db"] or conf["target_db"]["schema"]=="":
+        target_db["schema"]=os.environ["PGSCHEMA"]
+    
+    conf["source_db"]=source_db
+    conf["target_db"]=target_db
+
+
+    if not conf["country"]:
+	    conf["country"] =os.environ["COUNTRY"]
+	
+    if not conf["theme"]:
+	    conf["theme"]=os.environ["THEME"]	
 
     #mapping conf
     if not os.path.isfile(conf["mapping_conf_file"]):
@@ -70,6 +115,7 @@ def run(argv):
     print('verbose:', arg_verbose)
     print('test:', arg_test)
     print('no_history:', arg_nohistory)
+
 
     tempDir = conf["output_dir"] + "/tmp"
 

@@ -1,0 +1,5 @@
+{
+    "mapping_conf_file":"config/mapping_conf.json",
+    "output_dir":"data",
+    "functions_dir":"functions"
+}
