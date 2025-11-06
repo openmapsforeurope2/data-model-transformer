@@ -5,7 +5,7 @@ import utils
 
 
 def run(
-    conf, pathIn, reset, nohistory, verbose
+    conf, pathIn, reset, nohistory
 ):
     print("RESTORE...", flush=True)
 
@@ -22,7 +22,6 @@ def run(
                 targetTableCompleteName = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
                 resetCommand = commandBase + ' -q -c "'
                 resetCommand += "BEGIN;"
-                resetCommand += "SELECT nextval('seqnumrec');"
                 resetCommand += 'UPDATE '+targetTableCompleteName+' SET gcms_detruit = true WHERE gcms_detruit = false AND '
 
                 whereClause = ""
@@ -39,32 +38,35 @@ def run(
 
                 resetCommand += whereClause + ';'
 
-                # on enregistre l'objet reconciliation
-                    #numéro de réconciliation
-                    #numéro de client
-                    #classes impactées
-                    #nom de la zone de reconciliation (ex: be#fr ?)
-                    #changement zr
-                    #nature de l'operation
-                    #commentaire
-                    #géométried de la zone de réconciliation
-                    #nombre d'objets
-                    #operateur zr (user)
-                    #groupe/profil
-                    #source --> DEFAULT NULL
-                resetCommand += "SELECT ign_gcms_finalize_transaction(" \
-                        "currval('seqnumrec')::int," \
-                        "-1," \
-                        "'"+target_table+"'," \
-                        "NULL," \
-                        "NULL," \
-                        "'FLUSH'," \
-                        "'"+conf['country_code']+" data removal'," \
-                        "ST_GeomFromText('MultiPolygon(((9 9, 9 9, 9 9, 9 9)))')," \
-                        "(SELECT COUNT(*)::integer FROM "+targetTableCompleteName+" WHERE gcms_numrec = currval('seqnumrec'))," \
-                        "NULL," \
-                        "NULL" \
-                    ");"
+                if not nohistory:
+                    resetCommand += "SELECT nextval('seqnumrec');"
+                    # on enregistre l'objet reconciliation
+                        #numéro de réconciliation
+                        #numéro de client
+                        #classes impactées
+                        #nom de la zone de reconciliation (ex: be#fr ?)
+                        #changement zr
+                        #nature de l'operation
+                        #commentaire
+                        #géométried de la zone de réconciliation
+                        #nombre d'objets
+                        #operateur zr (user)
+                        #groupe/profil
+                        #source --> DEFAULT NULL
+                    resetCommand += "SELECT ign_gcms_finalize_transaction(" \
+                            "currval('seqnumrec')::int," \
+                            "-1," \
+                            "'"+target_table+"'," \
+                            "NULL," \
+                            "NULL," \
+                            "'FLUSH'," \
+                            "'"+conf['country_code']+" data removal'," \
+                            "ST_GeomFromText('MultiPolygon(((9 9, 9 9, 9 9, 9 9)))')," \
+                            "(SELECT COUNT(*)::integer FROM "+targetTableCompleteName+" WHERE gcms_numrec = currval('seqnumrec'))," \
+                            "NULL," \
+                            "NULL" \
+                        ");"
+                    
                 resetCommand += "COMMIT;"
 
                 resetCommand += '"'

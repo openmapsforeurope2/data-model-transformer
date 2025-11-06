@@ -1,11 +1,10 @@
 import json
-import sys
 import traceback
 import utils
 
 
 def run(
-    functions, conf, pathIn, pathOut
+    functions, conf, pathIn, pathOut, nohistory
 ):
     print("DUMP...", flush=True)
 
@@ -21,8 +20,9 @@ def run(
                 count = 0
 
                 # pour historisation
-                outFile.write("BEGIN;\n")
-                outFile.write("SELECT nextval('seqnumrec');\n")
+                if not nohistory:
+                    outFile.write("BEGIN;\n")
+                    outFile.write("SELECT nextval('seqnumrec');\n")
 
                 for table_name, table_conf in target_table_conf['source_tables'].items():
                     if 'mock' in table_conf and table_conf['mock'] : continue
@@ -42,34 +42,35 @@ def run(
                             outFile.write(insertStatement.encode('utf8').decode()+"\n")
 
                 # pour historisation
-                # on enregistre l'objet reconciliation
-                    #numéro de réconciliation
-                    #numéro de client
-                    #classes impactées
-                    #nom de la zone de reconciliation (ex: be#fr ?)
-                    #changement zr
-                    #nature de l'operation
-                    #commentaire
-                    #géométried de la zone de réconciliation
-                    #nombre d'objets
-                    #operateur zr (user)
-                    #groupe/profil
-                    #source --> DEFAULT NULL
-                recStatement = "SELECT ign_gcms_finalize_transaction(" \
-                        "currval('seqnumrec')::int," \
-                        "-1," \
-                        "'"+target_table+"'," \
-                        "NULL," \
-                        "NULL," \
-                        "'INIT'," \
-                        "'"+conf['country_code']+" data initialization'," \
-                        "ST_GeomFromText('MultiPolygon(((9 9, 9 9, 9 9, 9 9)))')," \
-                        +str(count)+"," \
-                        "NULL," \
-                        "NULL" \
-                    ");"
-                outFile.write(recStatement+"\n")
-                outFile.write("COMMIT;\n")
+                if not nohistory:
+                    # on enregistre l'objet reconciliation
+                        #numéro de réconciliation
+                        #numéro de client
+                        #classes impactées
+                        #nom de la zone de reconciliation (ex: be#fr ?)
+                        #changement zr
+                        #nature de l'operation
+                        #commentaire
+                        #géométried de la zone de réconciliation
+                        #nombre d'objets
+                        #operateur zr (user)
+                        #groupe/profil
+                        #source --> DEFAULT NULL
+                    recStatement = "SELECT ign_gcms_finalize_transaction(" \
+                            "currval('seqnumrec')::int," \
+                            "-1," \
+                            "'"+target_table+"'," \
+                            "NULL," \
+                            "NULL," \
+                            "'INIT'," \
+                            "'"+conf['country_code']+" data initialization'," \
+                            "ST_GeomFromText('MultiPolygon(((9 9, 9 9, 9 9, 9 9)))')," \
+                            +str(count)+"," \
+                            "NULL," \
+                            "NULL" \
+                        ");"
+                    outFile.write(recStatement+"\n")
+                    outFile.write("COMMIT;\n")
 
                 print('{} {}'.format(count, target_table), flush=True)
 
