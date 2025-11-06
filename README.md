@@ -5,7 +5,7 @@
 
 Open Maps For Europe 2 is a project aimed at developing a new production process whose goal is to build a large-scale (1:10,000) pan-European mapping reference.
 
-The development of the production pipeline required the creation of a set of software components that make up the [OME2](https://github.com/openmapsforeurope2/OME2) project.
+The development of the production pipeline required the creation of a set of software components that make up the [OME2](https://github.com/openmapsforeurope2/OME2) project. 
 
 ## Description
 
