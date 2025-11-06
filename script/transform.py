@@ -56,13 +56,13 @@ def run(argv):
     if "port" not in conf["source_db"] or conf["source_db"]["port"]=="":
         conf["source_db"]["port"]=os.environ["PGPORT"]
     if "name" not in conf["source_db"] or conf["source_db"]["name"]=="":
-        conf["source_db"]["name"]=os.environ["PGDATABASE-NAT"]
+        conf["source_db"]["name"]=os.environ["PGDATABASE_NAT"]
     if "user" not in conf["source_db"] or conf["source_db"]["user"]=="":
         conf["source_db"]["user"]=os.environ["PGUSER"]
     if "pwd" not in conf["source_db"] or conf["source_db"]["pwd"]=="":
         conf["source_db"]["pwd"]=os.environ["PGPASSWORD"]
     if "schema" not in conf["source_db"] or conf["source_db"]["schema"]=="":
-        conf["source_db"]["schema"]=os.environ["PGSCHEMA-NAT"]
+        conf["source_db"]["schema"]=os.environ["PGSCHEMA_NAT"]
 
     if "target_db" not in conf:
         conf["target_db"]={}
