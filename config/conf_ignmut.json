@@ -1,5 +1,5 @@
 {
     "mapping_conf_file":"config/mapping_conf.json",
-    "output_dir":"data",
+    "output_dir":"${APP_DIR_SRC}/data",
     "functions_dir":"functions"
 }

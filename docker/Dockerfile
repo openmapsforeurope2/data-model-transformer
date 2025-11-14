@@ -13,6 +13,7 @@ WORKDIR $APP_DIR_SRC/../
 
 COPY . $APP_DIR_SRC
 
+# ATTENTION : Jenkins surchargera à l'exécution
 WORKDIR $APP_DIR_SRC
 
 RUN chown -R 1000:1000 $APP_DIR_SRC
