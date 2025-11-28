@@ -38,7 +38,7 @@ def run(
                             ligne = ligne.replace("\\\\","\\")
                             data = json.loads(ligne)
 
-                            insertStatement = getInsertStatement( data, table_conf, count, importPath, functions )
+                            insertStatement = getInsertStatement( data, table_conf, count, importPath, functions, nohistory)
                             outFile.write(insertStatement.encode('utf8').decode()+"\n")
 
                 # pour historisation
@@ -75,15 +75,16 @@ def run(
                 print('{} {}'.format(count, target_table), flush=True)
 
 
-def getInsertStatement(data, tableConf, line, file, functions ):
+def getInsertStatement(data, tableConf, line, file, functions, nohistory):
     fields = []
     values = []
 
     # pour historisation
-    fields.append("gcms_numrec")
-    values.append("currval('seqnumrec')")
-    fields.append("gcms_date_creation")
-    values.append("NOW()")
+    if not nohistory:
+        fields.append("gcms_numrec")
+        values.append("currval('seqnumrec')")
+        fields.append("gcms_date_creation")
+        values.append("NOW()")
 
     if 'mapping' in tableConf and tableConf['mapping']:
         for field, mappedField in tableConf['mapping'].items():
