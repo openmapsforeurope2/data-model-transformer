@@ -2,6 +2,8 @@
 /script/__pycache__
 /script/*.pyc
 /docker/push-image.sh
+/docker/push-docker-image-github.sh
+/docker/nul
 /config/conf*
 !/config/conf_ignmut.json
 !/config/conf.json.template
