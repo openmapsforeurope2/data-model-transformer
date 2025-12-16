@@ -22,6 +22,8 @@ def run(
                 targetTableCompleteName = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
                 resetCommand = commandBase + ' -q -c "'
                 resetCommand += "BEGIN;"
+                if not nohistory:
+                    resetCommand += "SELECT nextval('seqnumrec');"
                 resetCommand += 'UPDATE '+targetTableCompleteName+' SET gcms_detruit = true WHERE gcms_detruit = false AND '
 
                 whereClause = ""
@@ -39,7 +41,6 @@ def run(
                 resetCommand += whereClause + ';'
 
                 if not nohistory:
-                    resetCommand += "SELECT nextval('seqnumrec');"
                     # on enregistre l'objet reconciliation
                         #numéro de réconciliation
                         #numéro de client
