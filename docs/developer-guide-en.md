@@ -32,7 +32,9 @@ The Harmonization tool may be run from the OME2 production platform where a simp
 -	The target PostGIS schema name in the HVLSP central database;
 -	The country code of the country to process;
 -	The theme to process (au = Administrative units, tn = Transport network, hy = Hydrography).
-<img width="1019" height="642" alt="image" src="https://github.com/user-attachments/assets/2d0a7afe-fe65-4b97-88de-f8a17d977055" />
+
+<img width="509" height="321" alt="image" src="https://github.com/user-attachments/assets/2d0a7afe-fe65-4b97-88de-f8a17d977055" />
+
 Once the parameters are filled, the tool can be run by clicking on the “Build” button.
 
 ### Demonstration
