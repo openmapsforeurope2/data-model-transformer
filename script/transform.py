@@ -131,7 +131,7 @@ def run(argv):
 
     #--
     try:
-        dump.run(functions, conf, tempDir, conf["output_dir"])
+        dump.run(functions, conf, tempDir, conf["output_dir"], arg_nohistory)
     except Exception as e:
         print("DUMP ERROR:")
         print(e)
@@ -139,7 +139,7 @@ def run(argv):
 
     #--
     try:
-        restore.run(conf, conf["output_dir"], not arg_noreset, arg_nohistory, arg_verbose)
+        restore.run(conf, conf["output_dir"], not arg_noreset, arg_nohistory)
     except Exception as e:
         print("RESTORE ERROR:")
         print(e)
