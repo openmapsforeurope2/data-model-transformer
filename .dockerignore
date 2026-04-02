@@ -28,3 +28,6 @@ core
 gmon.out
 log.txt
 docker
+config/conf*
+!config/conf_ignmut.json
+docs
