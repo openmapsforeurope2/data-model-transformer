@@ -4,7 +4,7 @@
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
-        "nl_watercourse_link":{
+        "watercourse_link":{
             "mock": true,
             "source_tables":{
                 "top10nl_waterdeel_lijn": {
@@ -14,7 +14,7 @@
                         "country": { "eval": "'${country_code}'" },
                         "level": { "eval": "'on_ground_surface' if data['hoogteniveau'] == 0 else 'suspended_or_elevated' if data['hoogteniveau'] == 1 else 'underground' if data['hoogteniveau'] == -1 else 'underground' if data['hoogteniveau'] == -2 else 'void_unk'" },
                         "persistence": { "eval": "'perennial' if data['typewater'] == 'waterloop' else 'dry' if data['typewater'] == 'greppel, droge sloot' else 'void_unk'" },
-                        "tidal": {"eval":"'1' if data['getijdeinvloed'] == 'ja' else '0' if data['getijdeinvloed'] == 'nee' else 'void_unk'"},
+                        "tidal": {"eval":"'true' if data['getijdeinvloed'] == 'ja' else 'false' if data['getijdeinvloed'] == 'nee' else 'void_unk'"},
                         "name": {"function": "nl_xx_name"},
                         "width_lower_range": { "eval": "'0.5' if data['breedteklasse'] == '0,5 - 3 meter' else '3' if data['breedteklasse'] == '3 - 6 meter' else '-32768'" },
                         "width_upper_range": { "eval": "'3' if data['breedteklasse'] == '0,5 - 3 meter' else '6' if data['breedteklasse'] == '3 - 6 meter' else '-32768'" },
