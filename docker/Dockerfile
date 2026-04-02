@@ -2,7 +2,7 @@ FROM ubuntu:24.04 AS build
 
 RUN apt update \
  && apt install -y python3 \
-    python3-pip \
+                   python3-pip \
  && rm -rf /var/lib/apt/lists/*
 
 ENV APP_DIR_SRC=/usr/local/src/data-model-transformer/                                              
@@ -21,9 +21,11 @@ FROM ubuntu:24.04
 
 RUN apt update \
  && apt install -y --no-install-recommends postgresql-client-16 \
-    python3 \
+                                           python3 \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /usr/local/ /usr/local/
 
-WORKDIR /usr/local/src/data-model-transformer
+ENV APP_DIR_SRC=/usr/local/src/data-model-transformer/ 
+
+WORKDIR $APP_DIR_SRC
