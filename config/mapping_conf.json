@@ -86,5 +86,12 @@
             "hy":"nl-hy.json",
             "tn":"nl-tn.json"
         }
+    },
+    "de": {
+        "conf_file": {
+            "au":"de-au.json",
+            "hy":"de-hy.json",
+            "tn":"de-tn.json"
+        }
     }
 }
