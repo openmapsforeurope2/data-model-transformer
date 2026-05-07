@@ -76,39 +76,6 @@
                 }
             }
         },
-        "falls_area":{
-            "mock": true,
-            "source_tables":{
-                "top10nl_waterdeel_vlak": {
-                    "mock": true,
-                    "where": "functie = 'waterval'",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'" },       
-                        "name": {"function": "nl_xx_name"},
-                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom":{
-                                "transform": "ST_Force3D(${},-1000)"
-                            }
-                        }
-                    },
-                    "fetched_fields":[         
-                        "functie",
-                        "namespace",
-                        "lokaalid",
-                        "naamofficieel",
-                        "naamnl",
-                        "naamfries"
-                    ]
-                }
-            }
-        },
         "falls_line":{
             "mock": true,
             "source_tables":{
