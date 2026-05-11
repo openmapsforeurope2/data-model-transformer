@@ -97,7 +97,7 @@
             }
         },
         "administrative_unit_area_3":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "province_ome2": {
                     "mock": false,
@@ -131,7 +131,7 @@
             }
         },
         "administrative_unit_area_4":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "arrondissement_ome2": {
                     "mock": false,
@@ -165,7 +165,7 @@
             }
         },
         "administrative_unit_area_5":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "municipality_ome2": {
                     "mock": false,
