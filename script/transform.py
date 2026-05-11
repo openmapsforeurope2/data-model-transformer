@@ -27,10 +27,7 @@ def run(argv):
         
 
     for opt, arg in opts:
-        if opt in ("-h", "--help"):
-            print(arg_help)  # print the help message
-            sys.exit(1)
-        elif opt in ("-c", "--conf"):
+        if opt in ("-c", "--conf"):
             arg_conf = arg
         elif opt in ("-s", "--no_reset"):
             arg_noreset = True
