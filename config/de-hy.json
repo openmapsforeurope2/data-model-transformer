@@ -230,38 +230,6 @@
                 }
             }
         },
-        "falls_area":{
-            "mock": false,
-            "source_tables":{
-                "gew02_f": {
-                    "mock": false,
-                    "where": "objart = '55001' AND art = '1620'",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'" },
-                        "name":{ "function": "de_xx_name" },
-                        "label": { "function" : "de_xx_label"},
-                        "w_national_identifier": { "eval": "data['objid']" },
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}        
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": {
-                                "transform": "ST_Multi(ST_Translate(ST_Force3D(${}), 0, 0, -1000))"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "objid",
-                        "objart",
-                        "nam",
-                        "art"
-                    ]
-                }
-            }
-        },
         "falls_line":{
             "mock": false,
             "source_tables":{
@@ -386,40 +354,6 @@
                         "objid",
                         "objart",
                         "nam"
-                    ]
-                }
-            }
-        },
-        "shoreline_construction_area":{
-            "mock": false,
-            "source_tables":{
-                "ver06_f": {
-                    "mock": false,
-                    "where": "objart = '53009' AND bwf IN ('2130','2131','2132','2133','2134','2135','2136')",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'" },
-                        "shoreline_construction_type": { "eval": "'breakwater' if data['bwf'] == '2131' else 'groin' if data['bwf'] == '2132' else 'training_wall' if data['bwf'] == '2133' else 'seawall' if data['bwf'] in ['2130', '2136'] else 'void_unk'" },
-                        "name":{ "function": "de_xx_name" },
-                        "label": { "function" : "de_xx_label"},
-                        "w_national_identifier": { "eval": "data['objid']" },
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}        
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": {
-                                "transform": "ST_Multi(ST_Translate(ST_Force3D(${}), 0, 0, -1000))"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "objid",
-                        "objart",
-                        "nam",
-			            "znm",
-                        "bwf"
                     ]
                 }
             }
