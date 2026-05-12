@@ -443,37 +443,6 @@
                 }
             }
         },
-        "runway_line":{
-            "mock": false,
-            "source_tables":{
-                "top10nl_wegdeel_hartlijn": {
-                    "mock": false,
-                    "where": "typeweg = 'startbaan, landingsbaan'",
-                    "mapping": {
-                        "country": { "eval": "'${country_code}'" },
-                        "surface_composition": { "eval": "'void_unpaved' if data['verhardingstype'] == 'onverhard' else 'void_hard' if data['verhardingstype'] is not None else 'void_unk'" },
-                        "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}  
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom":{
-                                "transform": "ST_Multi(ST_Force3D(${},-1000))"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "typeweg",
-                        "namespace",
-                        "lokaalid",
-                        "verhardingstype"
-                    ]
-                }
-            }
-        },
         "runway_area":{
             "mock": false,
             "source_tables":{

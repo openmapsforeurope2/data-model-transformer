@@ -86,40 +86,6 @@
                     ]
                 }
             }
-        },
-        "watercourse":{
-            "mock": true,
-            "source_tables":{
-                "cours_d_eau": {
-                    "mock": true,
-                    "where": "NOT gcms_detruit AND geometrie_ge IS NOT NULL",
-                    "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "hydro_identifier": {"eval": "data['code_hydrographique'] if data['code_hydrographique'] is not None else 'void_unk'"},
-                        "name": {"function": "fr_xx_name"},
-                        "label": {"eval": "data['toponyme'] if data['toponyme'] != '' and data['toponyme'] is not None else 'void_unk'"},
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geometrie_ge": {
-                                "transform": "ST_Force3D(${}, -1000)"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "gcms_territoire",
-                        "code_hydrographique",
-                        "toponyme",
-                        "cleabs",
-                        "date_d_apparition"                      
-                    ]
-                }
-            }
         },     
         "dam_area":{
             "mock": true,
