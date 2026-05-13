@@ -20,7 +20,7 @@
                         "street_name": { "function": "nl_xx_name" },
                         "road_surface_category": { "eval": "'unpaved' if data['verhardingstype'] == 'onverhard' else 'paved' if data['verhardingstype'] is not None else 'void_unk'" },           
                         "condition_of_facility": { "function": "nl_tn_roadlink_condition_of_facility" },                    
-                        "road_national_road_code": { "function": "nl_tn_roadlink_national_road_code" },
+                        "national_road_code": { "function": "nl_tn_roadlink_national_road_code" },
                         "road_name": { "function": "nl_xx_name" },
                         "road_european_route_number": { "eval": "data['ewegnummer'] if data['ewegnummer'] is not None else 'void_unk'" },
                         "w_national_identifier": { "eval": "data['namespace'] + data['lokaalid']" },
