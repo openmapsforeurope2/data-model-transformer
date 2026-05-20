@@ -3,7 +3,7 @@
     use = context['data']['usage']
 
     if use == "Militaire":
-        return "reserved_for_military"
+        return "military"
 
     if use == "Civil":
         return "civilian"

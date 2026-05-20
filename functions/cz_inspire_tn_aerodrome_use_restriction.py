@@ -20,7 +20,7 @@
     
     
     if use_restriction == "reservedformilitary":
-        return "reserved_for_military"
+        return "military"
     if use_restriction == "temporalrestrictions":
         return "void_temporal_restrictions"
     else:

@@ -114,7 +114,6 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "local_name": { "eval": "data['znm'] if data['znm'] is not None and data['znm'] != '' else 'void_unk'" },
-                        "label": { "function": "de_xx_label" },
                         "form_of_road_node": { "eval": "'interchange' if data['art'] in ('3001','3002','3003') else 'traffic_square' if data['art'] == '4000' else 'void_unk'" },
                         "w_national_identifier": { "eval": "data['objid']" },
                         "xy_source": { "eval": "'nmca'"},
@@ -313,7 +312,7 @@
                         "un_locode": { "eval": "'void_unk'" },
                         "aerodrome_category": { "eval": "'domestic_regional' if data['art'] == '5512' else 'international' if data['art'] == '5511' else 'recreational' if data['art'] == '5550' else 'void_unk'" },
                         "aerodrome_type": { "eval": "'heliport_only' if data['art'] == '5530' else 'void_unk'" },
-                        "use_restriction": { "eval": "'reserved_for_military' if data['ntz'] == '2000' else 'civilian' if data['ntz'] == '1000' else 'mixed' if data['ntz'] == '3000' else 'void_unk'" },
+                        "use_restriction": { "eval": "'military' if data['ntz'] == '2000' else 'civilian' if data['ntz'] == '1000' else 'mixed' if data['ntz'] == '3000' else 'void_unk'" },
                         "condition_of_facility": { "function": "de_tn_xx_condition_of_facility" },
                         "name": { "function": "de_xx_name" },
                         "label": { "function": "de_xx_label" },
