@@ -17,6 +17,7 @@
         "name_status": name_status,
         "nativeness": nativeness,
         "spelling_latn": spelling_latn,
+        "country": "de",
         "display": display
         })
 

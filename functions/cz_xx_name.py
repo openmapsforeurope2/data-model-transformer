@@ -22,6 +22,7 @@
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": name,
+            "country": "cz",
             "display": 1
         })
     

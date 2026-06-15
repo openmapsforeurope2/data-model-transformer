@@ -13,6 +13,7 @@
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": nameger,
+            "country": "be",
             "display": 3
         })
 
@@ -24,6 +25,7 @@
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": namefre,
+            "country": "be",
             "display": 2
         })
 
@@ -35,6 +37,7 @@
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": namedut,
+            "country": "be",
             "display": 1
         })
     

@@ -38,7 +38,7 @@ def run(
                             ligne = ligne.replace("\\\\","\\")
                             data = json.loads(ligne)
 
-                            insertStatement = getInsertStatement( data, table_conf, count, importPath, functions, nohistory)
+                            insertStatement = getInsertStatement( data, prefix, table_conf, count, importPath, functions, nohistory)
                             outFile.write(insertStatement.encode('utf8').decode()+"\n")
 
                 # pour historisation
@@ -75,7 +75,7 @@ def run(
                 print('{} {}'.format(count, target_table), flush=True)
 
 
-def getInsertStatement(data, tableConf, line, file, functions, nohistory):
+def getInsertStatement(data, country_code, tableConf, line, file, functions, nohistory):
     fields = []
     values = []
 
@@ -96,7 +96,7 @@ def getInsertStatement(data, tableConf, line, file, functions, nohistory):
                     if 'eval' in mappedField:
                         value = eval(mappedField['eval'], {'data': data, 'json': json})
                     elif 'function' in mappedField:
-                        value = functions[mappedField['function']]({'data': data, 'json': json})
+                        value = functions[mappedField['function']]({'data': data, 'json': json, 'country': country_code})
                 except Exception as e:
                     print("file: "+file)
                     print("line: "+str(line))

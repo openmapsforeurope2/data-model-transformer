@@ -11,6 +11,7 @@
             "name_status": "standardised",
             "nativeness": "endonym",
             "spelling_latn": linename,
+            "country": "be",
             "display": 1
         })
     

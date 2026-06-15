@@ -18,6 +18,7 @@
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": name,
+            "country": "at",
             "display": 1
         })
     
@@ -40,6 +41,7 @@
                 "name_status": "other",
                 "nativeness": nativeness,
                 "spelling_latn": variantname,
+                "country": "at",
                 "display": 0
             })
 

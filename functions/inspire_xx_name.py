@@ -8,6 +8,11 @@
     spelling_latn = ""
     display = 1
 
+
+    country = context['country']
+    if country = '' or country is None:
+        country = 'void_unk'
+
     if 'geographicalname_spelling_text' in context['data']:
         spelling = context['data']['geographicalname_spelling_text']
         spelling_latn = spelling
@@ -64,6 +69,7 @@
             "name_status": name_status,
             "nativeness": nativeness,
             "spelling_latn": spelling_latn,
+            "country": country,
             "display": display
         })
            

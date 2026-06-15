@@ -26,7 +26,7 @@ def run(
                     resetCommand += "SELECT nextval('seqnumrec');"
                     resetCommand += 'UPDATE '+targetTableCompleteName+' SET gcms_detruit = true WHERE gcms_detruit = false AND '
                 else :
-                    resetCommand += "DELETE FROM " + targetTableCompleteName + " "
+                    resetCommand += "DELETE FROM " + targetTableCompleteName + " WHERE "
 
                 whereClause = ""
 

@@ -1,5 +1,9 @@
 # def function_name(context):
 
+    country = context['country']
+    if country = '' or country is None:
+        country = 'void_unk'
+
     if 'name' in context['data']:
         name = context['data']['name']
     elif 'name_bauten' in context['data']:
@@ -13,11 +17,12 @@
         name = name.replace('"', '')
         name_list.append({
             "spelling": name,
-            "language": "ger",
+            "language": "ger",          
             "script": "latn",
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": name,
+            "country": country,
             "display": 1
         })
     
@@ -35,10 +40,12 @@
             name_list.append({
                 "spelling": variantname,
                 "language": "ger",
+                "country": "at",
                 "script": "latn",
                 "name_status": "other",
                 "nativeness": nativeness,
                 "spelling_latn": variantname,
+                "country": country,
                 "display": 0
             })
 

@@ -5,7 +5,7 @@
     "target_country_field": "country",
     "target_tables": {
         "administrative_unit_area_1":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "au_flat_view": {
                     "mock": false,
@@ -45,7 +45,7 @@
             }
         },
         "administrative_unit_area_2":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "au_flat_view": {
                     "mock": false,
@@ -125,7 +125,7 @@
             }
         },
         "administrative_unit_area_4":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "au_flat_view": {
                     "mock": false,
@@ -165,7 +165,7 @@
             }
         },
         "administrative_unit_area_5":{
-            "mock": false,
+            "mock": true,
             "source_tables":{
                 "au_flat_view": {
                     "mock": false,

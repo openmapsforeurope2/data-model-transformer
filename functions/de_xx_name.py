@@ -19,6 +19,7 @@
                 "name_status": "offical",
                 "nativeness": "endonym",
                 "spelling_latn": nam,
+                "country": "de",
                 "display": 1
                 })
         
@@ -30,6 +31,7 @@
                 "name_status": "void_unk",
                 "nativeness": "endonym",
                 "spelling_latn": znm,
+                "country": "de",
                 "display": 2
                 })
         
