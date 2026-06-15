@@ -9,9 +9,7 @@
     display = 1
 
 
-    country = context['country']
-    if country == '' or country is None:
-        country = 'void_unk'
+    country = 'void_unk' if 'country' not in context['data'] or context['data'] == '' or context['data'] is None else context['data']['country']
 
     if 'geographicalname_spelling_text' in context['data']:
         spelling = context['data']['geographicalname_spelling_text']

@@ -1,6 +1,6 @@
 # def function_name(context):
 
-    country = 'void_unk' if 'country' not in context['data'] or context['data'] == '' or context['data'] is None else context['country']
+    country = 'void_unk' if 'country' not in context['data'] or context['data'] == '' or context['data'] is None else context['data']['country']
 
     if 'name' in context['data']:
         name = context['data']['name']
