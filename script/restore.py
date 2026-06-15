@@ -26,21 +26,20 @@ def run(
                     resetCommand += "SELECT nextval('seqnumrec');"
                     resetCommand += 'UPDATE '+targetTableCompleteName+' SET gcms_detruit = true WHERE gcms_detruit = false AND '
                 else :
-                    resetCommand += "DELETE FROM " + targetTableCompleteName + " WHERE "
+                    resetCommand += "DELETE FROM " + targetTableCompleteName
 
                 whereClause = ""
 
                 #Multiple country codes
                 if not 'country_code_list' in conf or conf['country_code_list'] is None:
                     whereClause = conf['target_country_field']+'=\''+conf['country_code']+'\''
-
                 else:
                     whereClause = conf['target_country_field'] + ' IN ('
                     for code in conf['country_code_list']:
                         whereClause += '\'' + code + '\','
                     whereClause = whereClause[0:len(whereClause)-1] + ')'
 
-                resetCommand += whereClause + ';'
+                resetCommand += " WHERE " + whereClause + ';'
 
                 if not nohistory:
                     # on enregistre l'objet reconciliation
