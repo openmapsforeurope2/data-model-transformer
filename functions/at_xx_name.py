@@ -1,7 +1,7 @@
 # def function_name(context):
 
     country = context['country']
-    if country = '' or country is None:
+    if country == '' or country is None:
         country = 'void_unk'
 
     if 'name' in context['data']:
