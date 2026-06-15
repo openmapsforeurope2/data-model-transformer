@@ -10,7 +10,7 @@
 
 
     country = context['country']
-    if country = '' or country is None:
+    if country == '' or country is None:
         country = 'void_unk'
 
     if 'geographicalname_spelling_text' in context['data']:
