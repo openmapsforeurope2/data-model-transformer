@@ -74,6 +74,7 @@
                 "name_status": name_config[name_att]['name_status'],
                 "nativeness": name_config[name_att]['nativeness'],
                 "spelling_latn": spelling,
+                "country": "fi",
                 "display": 1
                 })
 
@@ -85,6 +86,7 @@
                     "name_status": name_config[name_att]['name_status'],
                     "nativeness": name_config[name_att]['nativeness'],
                     "spelling_latn": spelling,
+                    "country": "fi",
                     "display": display
                 })
 

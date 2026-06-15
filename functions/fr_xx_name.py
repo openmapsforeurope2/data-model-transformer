@@ -15,6 +15,26 @@
     else:
         nom = ""
     name_list = []
+
+    country = "void_unk"
+    territoire = context['data']['gcms_territoire']
+
+    if territoire == "FXX":
+        country = "fr"
+    if territoire == "GLP":
+        country = "gp"
+    if territoire == "GUF":
+        country = "gf"
+    if territoire == "H_T":
+        country = "ht"
+    if territoire == "MTQ":
+        country = "mq"
+    if territoire == "MYT":
+        country = "yt"
+    if territoire == "REU":
+        country = "re"
+    if territoire == "SPM":
+        country = "pm"
     
     if nom != "" and nom is not None :
         nom = nom.replace('\"', '')
@@ -26,6 +46,7 @@
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": nom,
+            "country": country,
             "display": 1
         })
     

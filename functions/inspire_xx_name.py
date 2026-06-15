@@ -28,6 +28,10 @@
     elif 'ome2_watercourse_geographicalname' in context['data']:
         spelling = context['data']['ome2_watercourse_geographicalname']
         spelling_latn = spelling
+    elif 'streetname' in context['data']:
+        name = context['data']['streetname']
+    elif 'spellingofname_text' in context['data']:
+        name = context['data']['spellingofname_text']
 
     if 'geographicalname_spelling_script' in context['data']:
         script = context['data']['geographicalname_spelling_script']

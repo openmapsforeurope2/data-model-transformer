@@ -10,6 +10,10 @@
     pos_start = 0
     pos_pipe = 0
 
+    country = context['country']
+    if country == '' or country is None:
+        country = 'void_unk'
+
     if name is None or name == "":
         return name_json
 
@@ -35,6 +39,7 @@
                 "name_status": "official",
                 "nativeness": "endonym",
                 "spelling_latn": name,
+                "country": country,
                 "display": 1
             })
     

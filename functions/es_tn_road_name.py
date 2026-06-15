@@ -30,6 +30,7 @@
                 "name_status": "official",
                 "nativeness": "endonym",
                 "spelling_latn": name,
+                "country": "es",
                 "display": 1
             })
     

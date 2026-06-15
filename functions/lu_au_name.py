@@ -12,6 +12,7 @@
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": name,
+            "country": "lu",
             "display": 1
         })
 

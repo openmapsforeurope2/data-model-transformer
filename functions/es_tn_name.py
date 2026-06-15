@@ -20,6 +20,7 @@
             "name_status": "void_unk",
             "nativeness": "void_unk",
             "spelling_latn": name,
+            "country": "es",
             "display": 1
         })
 

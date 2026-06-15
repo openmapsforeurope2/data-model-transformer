@@ -17,7 +17,7 @@
                         "number_of_lanes": { "function": "inspire_tn_roadlink_number_of_lanes" },
                         "vertical_position": { "function": "inspire_tn_vertical_position" },
                         "vertical_level": { "eval": "'void_unk'" },
-                        "street_name": { "function": "inspire_tn_name" },
+                        "street_name": { "function": "inspire_xx_name" },
                         "road_surface_category": { "eval": "'void_unk'" },
                         "traffic_flow_direction": { "eval": "'void_unk'" },
                         "access_restriction": { "function": "inspire_tn_roadlink_access_restriction" },
@@ -104,7 +104,7 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
-                        "name":  { "function": "inspire_tn_name" },
+                        "name":  { "function": "inspire_xx_name" },
                         "station_code": { "eval": "'void_unk'" },
                         "railway_use": { "eval": "'void_unk'" },
                         "w_national_identifier": "gml_id",
@@ -135,7 +135,7 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
-                        "name":  { "function": "inspire_tn_name" },
+                        "name":  { "function": "inspire_xx_name" },
                         "station_code": { "eval": "'void_unk'" },
                         "railway_use": { "eval": "'void_unk'" },
                         "w_national_identifier": "gml_id",
@@ -221,7 +221,7 @@
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
                         "type": { "function": "inspire_tn_road_service_type" },
-                        "name":  { "function": "inspire_tn_name" },
+                        "name":  { "function": "inspire_xx_name" },
                         "w_national_identifier": "gml_id",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},

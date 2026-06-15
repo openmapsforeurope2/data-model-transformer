@@ -33,7 +33,8 @@
                     },
                     "fetched_fields":[
                         "code_insee",
-                        "nom_officiel"
+                        "nom_officiel",
+                        "gcms_territoire"
                     ]
                 },
                 "berre_leman_polygons": {

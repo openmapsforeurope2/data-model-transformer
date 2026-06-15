@@ -29,6 +29,7 @@
                 "name_status": "official",
                 "nativeness": "endonym",
                 "spelling_latn": official_name.replace('"', ''),
+                "country": "nl",
                 "display": 1
             })
             if fries_name != "" and fries_name is not None:
@@ -39,6 +40,7 @@
                 "name_status": "official",
                 "nativeness": "endonym",
                 "spelling_latn": fries_name.replace('"', ''),
+                "country": "nl",
                 "display": 0
             })
                 
@@ -50,6 +52,7 @@
                 "name_status": "official",
                 "nativeness": "endonym",
                 "spelling_latn": official_name.replace('"', ''),
+                "country": "nl",
                 "display": 1
             })
             if nl_name != "" and nl_name is not None:
@@ -60,6 +63,7 @@
                 "name_status": "official",
                 "nativeness": "endonym",
                 "spelling_latn": nl_name.replace('"', ''),
+                "country": "nl",
                 "display": 0
             })
     
@@ -72,6 +76,7 @@
                 "name_status": "official",
                 "nativeness": "endonym",
                 "spelling_latn": nl_name.replace('"', ''),
+                "country": "nl",
                 "display": 1
             })
         if fries_name != "" and fries_name is not None:
@@ -82,6 +87,7 @@
                 "name_status": "official",
                 "nativeness": "endonym",
                 "spelling_latn": fries_name.replace('"', ''),
+                "country": "nl",
                 "display": 2
             })
 

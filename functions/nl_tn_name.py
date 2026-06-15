@@ -11,6 +11,7 @@
             "name_status": "official",
             "nativeness": "endonym",
             "spelling_latn": name,
+            "country": "nl",
             "display": 1
         })
            
