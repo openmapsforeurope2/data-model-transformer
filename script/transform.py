@@ -37,6 +37,8 @@ def run(argv):
             arg_test = True
         elif opt in ("-n", "--no_history"):
             arg_nohistory = True
+        elif opt in ("-d", "--dbname"):
+            arg_dbname = True
 
     #configuration
     if not os.path.isfile(arg_conf):
@@ -76,12 +78,16 @@ def run(argv):
         conf["target_db"]["pwd"]=os.environ["PGPASSWORD"]
     if "schema" not in conf["target_db"] or conf["target_db"]["schema"]=="":
         conf["target_db"]["schema"]=os.environ["PGSCHEMA"]
+    if arg_dbname is not None :
+        conf["target_db"]["name"]=arg_dbname
 
     if "country" not in conf or not conf["country"]:
 	    conf["country"] =os.environ["COUNTRY"]
 	
     if "theme" not in conf or not conf["theme"]:
-	    conf["theme"]=os.environ["THEME"]	
+	    conf["theme"]=os.environ["THEME"]
+
+    	
 
     #mapping conf
     if not os.path.isfile(conf["mapping_conf_file"]):
