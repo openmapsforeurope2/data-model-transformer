@@ -171,7 +171,6 @@
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
-                        "link_to_road": { "eval" : "data['id_vial'] if data['id_vial'] is not None and data['id_vial'] != '' and data['id_vial'] != '-997' and data['id_vial'] != '-998' else 'void_unk'" },
                         "code": { "eval": "data['id_porpk'] if data['id_porpk'] is not None and data['id_porpk'] != '' and data['id_porpk'] != '-997' and data['id_porpk'] != '-998' else 'void_unk'" },      
                         "distance": { "eval" : "data['numero'] if data['numero'] is not None and data['numero'] != '' and data['numero'] != '-997' and data['numero'] != '-998' else 'void_unk'"},      
                         "w_national_identifier": "id_porpk",
