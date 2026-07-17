@@ -17,6 +17,7 @@ def run(argv):
     arg_verbose = False
     arg_test = False
     arg_nohistory = False # life-cycle management is enabled as default
+    arg_dbname = False
     
     try:
         opts, args = getopt.getopt(argv[1:], "hc:vstn", ["help", "conf=", 
