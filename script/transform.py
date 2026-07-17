@@ -79,7 +79,7 @@ def run(argv):
         conf["target_db"]["pwd"]=os.environ["PGPASSWORD"]
     if "schema" not in conf["target_db"] or conf["target_db"]["schema"]=="":
         conf["target_db"]["schema"]=os.environ["PGSCHEMA"]
-    if arg_dbname is not None :
+    if arg_dbname :
         conf["target_db"]["name"]=arg_dbname
 
     if "country" not in conf or not conf["country"]:
