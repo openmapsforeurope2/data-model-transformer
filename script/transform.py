@@ -38,7 +38,7 @@ def run(argv):
         if opt in ("-c", "--conf"):
             arg_conf = arg
         elif opt in ("-d", "--db_name"):
-            arg_db_name = True
+            arg_db_name = arg
         elif opt in ("-s", "--no_reset"):
             arg_noreset = True
         elif opt in ("-v", "--verbose"):
@@ -47,7 +47,7 @@ def run(argv):
             arg_test = True
         elif opt in ("-n", "--no_history"):
             arg_nohistory = True
-        
+
     #configuration
     if not os.path.isfile(arg_conf):
         print("The configuration file "+ arg_conf + " does not exist.")
