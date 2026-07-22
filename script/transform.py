@@ -13,14 +13,22 @@ import re
 def run(argv):
     
     arg_conf = ""
+    arg_db_name = None
     arg_noreset = False
     arg_verbose = False
     arg_test = False
     arg_nohistory = False # life-cycle management is enabled as default
     
     try:
-        opts, args = getopt.getopt(argv[1:], "hc:vstn", ["help", "conf=", 
-        "verbose", "no_reset", "test", "no_history"])
+        opts, args = getopt.getopt(argv[1:], "hc:d:vstn", [
+            "help", 
+            "conf=", 
+            "db_name="
+            "verbose",
+            "no_reset", 
+            "test", 
+            "no_history"
+        ])
     except getopt.GetoptError as err:
         print(err)
         sys.exit(1)
@@ -29,6 +37,8 @@ def run(argv):
     for opt, arg in opts:
         if opt in ("-c", "--conf"):
             arg_conf = arg
+        elif opt in ("-d", "--db_name"):
+            arg_db_name = True
         elif opt in ("-s", "--no_reset"):
             arg_noreset = True
         elif opt in ("-v", "--verbose"):
@@ -37,9 +47,7 @@ def run(argv):
             arg_test = True
         elif opt in ("-n", "--no_history"):
             arg_nohistory = True
-        elif opt in ("-d", "--dbname"):
-            arg_dbname = True
-
+        
     #configuration
     if not os.path.isfile(arg_conf):
         print("The configuration file "+ arg_conf + " does not exist.")
@@ -78,8 +86,9 @@ def run(argv):
         conf["target_db"]["pwd"]=os.environ["PGPASSWORD"]
     if "schema" not in conf["target_db"] or conf["target_db"]["schema"]=="":
         conf["target_db"]["schema"]=os.environ["PGSCHEMA"]
-    if arg_dbname is not None :
-        conf["target_db"]["name"]=arg_dbname
+
+    if arg_db_name is not None:
+        conf["target_db"]["name"]=arg_db_name
 
     if "country" not in conf or not conf["country"]:
 	    conf["country"] =os.environ["COUNTRY"]
@@ -88,7 +97,6 @@ def run(argv):
 	    conf["theme"]=os.environ["THEME"]
 
     	
-
     #mapping conf
     if not os.path.isfile(conf["mapping_conf_file"]):
         print("The mapping configuration file "+ conf["mapping_conf_file"] + " does not exist.")
@@ -107,6 +115,7 @@ def run(argv):
         os.makedirs(conf["output_dir"])
 
     print('conf:', arg_conf)
+    print('db_name:', arg_db_name)
     print('output:', conf["output_dir"])
     print('no_reset:', arg_noreset)
     print('verbose:', arg_verbose)
