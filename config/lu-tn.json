@@ -4,7 +4,7 @@
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
-        "road_link_up":{
+        "road_link":{
             "mock": false,
             "source_tables":{
                 "roadlink": {
@@ -62,10 +62,10 @@
             }
         },
         "railway_link":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "railwaylink":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -97,10 +97,10 @@
             }
         },
         "railway_station_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "railwaystationarea":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -128,10 +128,10 @@
             }
         },
         "railway_station_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "railwaystationnode":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"  },
@@ -158,10 +158,10 @@
             }
         },
         "road_service_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "roadservicearea":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -188,10 +188,10 @@
             }
         },
         "road_service_point":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "roadservicearea":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -216,7 +216,7 @@
                     ]
                 },
                 "roadnode_electricalchargingstations":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -242,7 +242,7 @@
                     ]
                 },
                 "roadservicepoint_busstation":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -268,10 +268,10 @@
             }
         }, 
         "road_node":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "roadnode_electricalchargingstations":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -296,7 +296,7 @@
                     ]
                 },
                 "roadnode_levelcrossing":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
@@ -323,10 +323,10 @@
             }
         },     
         "runway_area":{
-            "mock": true,
+            "mock": false,
             "source_tables":{
                 "runwayarea":{
-                    "mock": true,
+                    "mock": false,
                     "where": "",
                     "mapping": {
                         "country": { "eval": "'${country_code}'"},
