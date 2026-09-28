@@ -199,23 +199,21 @@ def toSqlArray( ls, separator = ",") :
     return newList
 
 
-def toJsonArray( ls ) :
+def toJsonArray(ls):
     newList = []
-    for l in ls:
-        if l is None or not l :
-            continue
-        else:
-            l = convertEncodedCharacters(json.dumps(l))
-            newList.append(l)
 
-    if len(newList) == 0 : 
+    for l in ls:
+        if l is None or not l:
+            continue
+
+        l = convertEncodedCharacters(json.dumps(l, ensure_ascii=False))
+        newList.append(l)
+
+    if len(newList) == 0:
         return None
 
-    newList = str(newList)
-    newList = newList.replace("\'{", "{")
-    newList = newList.replace("}\'", "}")
-    newList = newList.replace("\\'", "\'\'")
-    newList = "\'" + newList + "\'"
+    newList = "[" + ",".join(newList) + "]"
+    newList = "'" + newList + "'"
 
     return newList
 
