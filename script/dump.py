@@ -213,6 +213,7 @@ def toJsonArray(ls):
         return None
 
     newList = "[" + ",".join(newList) + "]"
+    newList = newList.replace("'", "''")
     newList = "'" + newList + "'"
 
     return newList
