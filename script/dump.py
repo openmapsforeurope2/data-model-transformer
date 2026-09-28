@@ -4,7 +4,7 @@ import utils
 
 
 def run(
-    functions, conf, pathIn, pathOut, nohistory
+    functions, conf, pathIn, pathOut, nohistory, extractToUp
 ):
     print("DUMP...", flush=True)
 
@@ -15,6 +15,9 @@ def run(
             if 'mock' in target_table_conf and target_table_conf['mock'] : continue
 
             exportPath = '{}/{}_{}.sql'.format(pathOut, prefix, target_table)
+
+            if extractToUp :
+                target_table += "_up"
 
             with open(exportPath, 'w') as outFile:
                 count = 0

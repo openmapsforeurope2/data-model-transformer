@@ -14,17 +14,19 @@ def run(argv):
     arg_conf = ""
     arg_db_name = None
     arg_noreset = False
+    arg_extractToUp = False
     arg_verbose = False
     arg_test = False
     arg_nohistory = False # life-cycle management is enabled as default
     
     try:
-        opts, args = getopt.getopt(argv[1:], "hc:d:vstn", [
+        opts, args = getopt.getopt(argv[1:], "hc:d:vsutn", [
             "help", 
             "conf=", 
             "db_name="
             "verbose",
-            "no_reset", 
+            "no_reset",
+            "to_up",
             "test", 
             "no_history"
         ])
@@ -42,6 +44,8 @@ def run(argv):
             arg_noreset = True
         elif opt in ("-v", "--verbose"):
             arg_verbose = True
+        elif opt in ("-u", "--extract_to_up"):
+            arg_extractToUp = True
         elif opt in ("-t", "--test"):
             arg_test = True
         elif opt in ("-n", "--no_history"):
@@ -142,7 +146,7 @@ def run(argv):
 
     #--
     try:
-        dump.run(functions, conf, tempDir, conf["output_dir"], arg_nohistory)
+        dump.run(functions, conf, tempDir, conf["output_dir"], arg_nohistory, arg_extractToUp)
     except Exception as e:
         print("DUMP ERROR:")
         print(e)
