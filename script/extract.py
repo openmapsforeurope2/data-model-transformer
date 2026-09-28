@@ -59,7 +59,7 @@ def appendGeometryFieldToSelect(selectString, geometryfield, sourceSRID, targetS
     selectPart = geometryField
 
     #patch au cas ou la geometrie n'est pas renvoyée en WKB
-    selectPart = "ST_AsEWKB("+selectPart+")"
+    selectPart = "ST_AsHEXEWKB("+selectPart+")"
 
     if fieldName : selectPart += " AS " + fieldName
         
