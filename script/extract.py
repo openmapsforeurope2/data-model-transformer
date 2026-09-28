@@ -118,8 +118,11 @@ def run(
 
             select = "SELECT " + select + " FROM " + full_table_name + where_statement
             query = "SELECT row_to_json(t) FROM ("+ select +") AS t"
-            query = "\COPY ("+ query +") TO '"+ pathOut + "/" + utils.getTempFileNameConf(conf['country_code'], target_table, table_name) + ".json'"
-
+            # query = "\COPY ("+ query +") TO '"+ pathOut + "/" + utils.getTempFileNameConf(conf['country_code'], target_table, table_name) + ".json'"
+            query = "\\COPY (" + query + ") TO '" + \
+                pathOut + "/" + utils.getTempFileNameConf(conf['country_code'], target_table, table_name) + \
+                ".json' WITH (FORMAT csv)"
+            
             command = commandBase +' -c "'+ query +'"'
 
             print(u'command: {}'.format(command), flush=True)

@@ -1,6 +1,7 @@
 import json
 import traceback
 import utils
+import csv
 
 
 def run(
@@ -30,17 +31,31 @@ def run(
                     importPath = pathIn+'/'+utils.getTempFileNameConf(prefix, target_table, table_name)+'.json'
                     table_conf['target_table'] = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table + "_up" if extractToUp else ""
 
-                    
-                    with open(importPath, 'r') as inFile:
-                        for ligne in inFile:
-                            count += 1
+                    with open(importPath, 'r', newline='') as inFile:
+                        reader = csv.reader(inFile)
 
-                            # ligne = ligne.replace("\\\\","\\")
-                            data = json.loads(ligne)
+                        for row in reader:
+                            count += 1
+                            data = json.loads(row[0])
+
                             data['country'] = conf['country_code']
 
-                            insertStatement = getInsertStatement( data, table_conf, count, importPath, functions, nohistory)
-                            outFile.write(insertStatement.encode('utf8').decode()+"\n")
+                            insertStatement = getInsertStatement(
+                                data, table_conf, count, importPath, functions, nohistory
+                            )
+
+                            outFile.write(insertStatement.encode('utf8').decode() + "\n")
+                                        
+                    # with open(importPath, 'r') as inFile:
+                    #     for ligne in inFile:
+                    #         count += 1
+
+                    #         # ligne = ligne.replace("\\\\","\\")
+                    #         data = json.loads(ligne)
+                    #         data['country'] = conf['country_code']
+
+                    #         insertStatement = getInsertStatement( data, table_conf, count, importPath, functions, nohistory)
+                    #         outFile.write(insertStatement.encode('utf8').decode()+"\n")
 
                 # pour historisation
                 if not nohistory:
