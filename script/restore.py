@@ -20,7 +20,7 @@ def run(
 
             if reset:
                 targetTableCompleteName = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
-                resetCommand = commandBase + ' -q -c "'
+                resetCommand = commandBase + ' -q -v ON_ERROR_STOP=1 -c "'
                 resetCommand += "BEGIN;"
                 if not nohistory:
                     resetCommand += "SELECT nextval('seqnumrec');"
