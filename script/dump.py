@@ -35,7 +35,7 @@ def run(
                         for ligne in inFile:
                             count += 1
 
-                            ligne = ligne.replace("\\\\","\\")
+                            # ligne = ligne.replace("\\\\","\\")
                             data = json.loads(ligne)
                             data['country'] = conf['country_code']
 
