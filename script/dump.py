@@ -16,9 +16,6 @@ def run(
 
             exportPath = '{}/{}_{}.sql'.format(pathOut, prefix, target_table)
 
-            if extractToUp :
-                target_table += "_up"
-
             with open(exportPath, 'w') as outFile:
                 count = 0
 
@@ -31,7 +28,7 @@ def run(
                     if 'mock' in table_conf and table_conf['mock'] : continue
 
                     importPath = pathIn+'/'+utils.getTempFileNameConf(prefix, target_table, table_name)+'.json'
-                    table_conf['target_table'] = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
+                    table_conf['target_table'] = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table + "_up" if extractToUp else ""
 
                     
                     with open(importPath, 'r') as inFile:

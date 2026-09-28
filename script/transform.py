@@ -138,7 +138,7 @@ def run(argv):
 
     #--
     try:
-        extract.run(conf, tempDir, arg_test)
+        extract.run(conf, tempDir, arg_test, arg_extractToUp)
     except Exception as e:
         print("EXTRACT ERROR:")
         print(e)
