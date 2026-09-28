@@ -132,7 +132,10 @@ def getInsertStatement(data, tableConf, line, file, functions, nohistory):
                     value = '\'{}\'::json'
                 # Cas des champs jsonb
                 elif isinstance(value[0], dict):
+                    print("DEBUG toJsonArray - field:", field)
+                    print("DEBUG input:", repr(value))
                     value = toJsonArray(value)
+                    print("DEBUG output:", repr(value))
                 else:
                     value = toSqlArray(value)
             elif isinstance(value, dict) :
