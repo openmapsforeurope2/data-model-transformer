@@ -11,7 +11,7 @@
         "name":"be_national",
         "user":"postgres",
         "pwd":"s@m!Ch0n_2479",
-        "schema": "public"
+        "schema": "tn"
     },
     "target_db":{
         "host":"SMLPOPENMAPS2",
