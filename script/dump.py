@@ -12,8 +12,16 @@ def run(
     if conf is not None:
         prefix = conf['country_code']
 
-        for target_table, target_table_conf in conf['target_tables'].items():
+        for target_feature_table, target_table_conf in conf['target_tables'].items():
             if 'mock' in target_table_conf and target_table_conf['mock'] : continue
+
+            target_schema = conf['target_db']['schema'] if conf['target_db']['schema'] else "public"
+            
+            if extractToUp:
+                target_table = target_feature_table + conf['update_suffix']
+                target_schema = conf['target_db']['update_schema'] if conf['target_db']['update_schema'] else "public"
+
+            table_conf['target_table'] = target_schema + "." + target_table
 
             exportPath = '{}/{}_{}.sql'.format(pathOut, prefix, target_table)
 
@@ -28,15 +36,7 @@ def run(
                 for table_name, table_conf in target_table_conf['source_tables'].items():
                     if 'mock' in table_conf and table_conf['mock'] : continue
 
-                    importPath = pathIn+'/'+utils.getTempFileNameConf(prefix, target_table, table_name)+'.json'
-                    
-                    target_schema = conf['target_db']['schema'] if conf['target_db']['schema'] else "public"
-
-                    if extractToUp:
-                        target_table += conf['update_suffix']
-                        target_schema = conf['target_db']['update_schema'] if conf['target_db']['update_schema'] else "public"
-
-                    table_conf['target_table'] = target_schema + "." + target_table
+                    importPath = pathIn+'/'+utils.getTempFileNameConf(prefix, target_feature_table, table_name)+'.json'
 
                     with open(importPath, 'r', newline='') as inFile:
                         reader = csv.reader(inFile)
