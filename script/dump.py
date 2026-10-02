@@ -29,7 +29,14 @@ def run(
                     if 'mock' in table_conf and table_conf['mock'] : continue
 
                     importPath = pathIn+'/'+utils.getTempFileNameConf(prefix, target_table, table_name)+'.json'
-                    table_conf['target_table'] = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table + "_up" if extractToUp else ""
+                    
+                    target_schema = conf['target_db']['schema'] if conf['target_db']['schema'] else "public"
+
+                    if extractToUp:
+                        target_table += conf['update_suffix']
+                        target_schema = conf['target_db']['update_schema'] if conf['target_db']['update_schema'] else "public"
+
+                    table_conf['target_table'] = target_schema + "." + target_table
 
                     with open(importPath, 'r', newline='') as inFile:
                         reader = csv.reader(inFile)

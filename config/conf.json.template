@@ -4,6 +4,7 @@
     "theme":"",
     "output_dir":"",
     "functions_dir":"",
+    "update_suffix":"",
     "source_db":{
         "host":"",
         "port":"",
@@ -18,6 +19,7 @@
         "name":"",
         "user":"",
         "pwd":"",
-        "schema": ""
+        "schema":"",
+        "update_schema":""
     }
 }

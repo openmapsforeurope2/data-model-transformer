@@ -5,7 +5,7 @@ import utils
 
 
 def run(
-    conf, pathIn, reset, nohistory
+    conf, pathIn, reset, nohistory, extractToUp
 ):
     print("RESTORE...", flush=True)
 
@@ -18,8 +18,14 @@ def run(
         for target_table, target_table_conf in conf['target_tables'].items():
             if 'mock' in target_table_conf and target_table_conf['mock'] : continue
 
+            target_schema = conf['target_db']['schema'] if conf['target_db']['schema'] else "public"
+            
+            if extractToUp:
+                target_table += conf['update_suffix']
+                target_schema = conf['target_db']['update_schema'] if conf['target_db']['update_schema'] else "public"
+
             if reset:
-                targetTableCompleteName = ( conf['target_db']['schema']+"." if conf['target_db']['schema'] else "") + target_table
+                targetTableCompleteName = target_schema + "." + target_table
                 resetCommand = commandBase + ' -q -v ON_ERROR_STOP=1 -c "'
                 resetCommand += "BEGIN;"
                 if not nohistory:

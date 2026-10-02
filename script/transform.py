@@ -154,7 +154,7 @@ def run(argv):
 
     #--
     try:
-        restore.run(conf, conf["output_dir"], not arg_noreset, arg_nohistory)
+        restore.run(conf, conf["output_dir"], not arg_noreset, arg_nohistory, arg_extractToUp)
     except Exception as e:
         print("RESTORE ERROR:")
         print(e)

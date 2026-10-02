@@ -4,6 +4,7 @@
     "theme":"tn",
     "output_dir":"data",
     "functions_dir":"functions",
+    "update_suffix":"_up",
     "source_db":{
         "host":"SMLPOPENMAPS2",
         "port":"5432",
@@ -18,6 +19,7 @@
         "name":"ome2_hvlsp_v6_20260928",
         "user":"postgres",
         "pwd":"s@m!Ch0n_2479",
-        "schema": "tn"
+        "schema":"tn",
+        "update_schema":"tn"
     }
 }

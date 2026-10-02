@@ -1,5 +1,6 @@
 {
     "mapping_conf_file":"/usr/local/src/data-model-transformer/config/mapping_conf.json",
     "output_dir":"/data",
-    "functions_dir":"functions"
+    "functions_dir":"functions",
+    "update_suffix": "_up"
 }
