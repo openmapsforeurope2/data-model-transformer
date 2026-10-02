@@ -21,8 +21,6 @@ def run(
                 target_table = target_feature_table + conf['update_suffix']
                 target_schema = conf['target_db']['update_schema'] if conf['target_db']['update_schema'] else "public"
 
-            table_conf['target_table'] = target_schema + "." + target_table
-
             exportPath = '{}/{}_{}.sql'.format(pathOut, prefix, target_table)
 
             with open(exportPath, 'w') as outFile:
@@ -35,6 +33,8 @@ def run(
 
                 for table_name, table_conf in target_table_conf['source_tables'].items():
                     if 'mock' in table_conf and table_conf['mock'] : continue
+
+                    table_conf['target_table'] = target_schema + "." + target_table
 
                     importPath = pathIn+'/'+utils.getTempFileNameConf(prefix, target_feature_table, table_name)+'.json'
 
