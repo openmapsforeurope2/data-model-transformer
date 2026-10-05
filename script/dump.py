@@ -15,11 +15,14 @@ def run(
         for target_feature_table, target_table_conf in conf['target_tables'].items():
             if 'mock' in target_table_conf and target_table_conf['mock'] : continue
 
-            target_schema = conf['target_db']['schema'] if conf['target_db']['schema'] else "public"
-            
+            target_table = ""
+            target_schema = ""
             if extractToUp:
                 target_table = target_feature_table + conf['update_suffix']
                 target_schema = conf['target_db']['update_schema'] if conf['target_db']['update_schema'] else "public"
+            else :
+                target_table = target_feature_table
+                target_schema = conf['target_db']['schema'] if conf['target_db']['schema'] else "public"
 
             exportPath = '{}/{}_{}.sql'.format(pathOut, prefix, target_table)
 
