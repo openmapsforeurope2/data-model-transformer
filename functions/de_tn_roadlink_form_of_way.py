@@ -5,6 +5,8 @@
     if objart == 42003:
         wdm = context['data'].get('wdm')
         fkt = context['data'].get('fkt')
+        ftr = context['data'].get('ftr')
+
         if wdm == 1301:
             return "motorway"
         elif ftr == 2000:
