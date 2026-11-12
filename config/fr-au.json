@@ -1,25 +1,22 @@
 {
     "country_code": "fr",
     "country_code_list": ["fr","gf","gu","gp","mq","re","yt","bl","mf","pm"],
-    "source_srid": "CASE gcms_territoire WHEN 'FXX' THEN 2154 WHEN 'GLP' THEN 4559 WHEN 'GUF' THEN 2972 WHEN 'H_T' THEN 4326 WHEN 'MTQ' THEN 4559 WHEN 'MYT' THEN 4471 WHEN 'REU' THEN 2975 WHEN 'SPM' THEN 4467 END",
+    "source_srid": "3035",
     "target_srid": "3035",
     "target_country_field": "country",
     "target_tables": {
-        "administrative_unit_area_1":{
+        "basic_administrative_geometry":{
             "mock": false,
             "source_tables":{
-                "etat_ome2_multi_v3": {
+                "ecrm_a": {
                     "mock": false,
-                    "where": "code_insee = 'XXXXX'",
+                    "where": "icc = 'fr'",
                     "mapping": {
-                        "country": { "eval": "'fr'" },
-                        "national_code": { "eval": "''" },
-                        "shn": { "eval": "'FR00000000000'"},
-                        "name": { "function": "fr_au_name"},
-                        "label": { "eval": "data['nom_officiel'] if data['nom_officiel'] != '' and data['nom_officiel'] is not None else 'void_unk'"},
-                        "national_level_code": { "eval": "'1001'"},
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "cleabs",
+                        "country": { "eval": "data['icc'] if data['icc'] != '' and data['icc'] is not None else 'void_unk'"  },
+                        "national_code": { "eval": "data['national_code'] if data['national_code'] != '' and data['national_code'] is not None else 'void_unk'"  },
+                        "shn": { "eval": "data['shn'] if data['shn'] != '' and data['shn'] is not None else 'void_unk'" },
+                        "land_cover_type": { "eval": "'land_area' if data['taa'] in [1,3,4] else 'coastal_water' if data['taa'] == 5 else 'inland_water' if data['taa'] == 7 else 'in_dispute_area' if data['taa'] == 8 else 'void_unk'" },
+                        "w_national_identifier": "inspireid",
                         "xy_source": { "eval": "'nmca'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
@@ -33,365 +30,79 @@
                         }
                     },
                     "fetched_fields":[
-                        "code_insee",
-                        "nom_officiel",
-                        "gcms_territoire"
-                    ]
-                },
-                "berre_leman_polygons": {
-                    "mock": false,
-                    "where": "cleabs = 'BERRLEMA000002'",
-                    "mapping": {
-                        "country": { "eval": "'fr'" },
-                        "national_code": { "eval": "''" },
-                        "shn": { "eval": "'FR00000000000'" },
-                        "name": { "eval": "'{\"spelling\": \"France\", \"language\": \"fre\", \"script\": \"latin\", \"name_status\": \"official\", \"nativeness\": \"endonym\", \"spelling_latn\": \"France\", \"display\": 1}'"},
-                        "label": { "eval": "'France'"},
-                        "national_level_code": { "eval": "'1001'"},
-                        "land_cover_type": { "eval": "'inland_water'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                               
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": {
-                                "transform": "ST_Force2D(ST_Multi(${}))"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "gcms_territoire",
-                        "nom_officiel"
+                        "icc",
+                        "national_code",
+                        "shn",
+                        "inspireid",
+                        "taa"
                     ]
                 }
             }
         },
-        "administrative_unit_area_2":{
+        "administrative_name":{
             "mock": false,
             "source_tables":{
-                "region": {
+                "ebm_nam": {
                     "mock": false,
-                    "where": "gcms_territoire IN ('FXX', 'GLP', 'GUF', 'MTQ', 'MYT', 'REU')",
+                    "where": "icc = 'fr'",
                     "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "national_code": "code_insee",
-                        "shn": { "function": "fr_au_shn_code_region"},
-                        "name": { "function": "fr_au_name"},
-                        "label": { "eval": "data['nom_officiel'] if data['nom_officiel'] != '' and data['nom_officiel'] is not None else 'void_unk'"},
-                        "national_level_code": { "eval": "'1002'"},
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
+                        "country": { "eval": "data['icc'] if data['icc'] != '' and data['icc'] is not None else 'void_unk'"  },
+                        "national_code": { "eval": "'void_unk'" },
+                        "shn": { "eval": "data['shn'] if data['shn'] != '' and data['shn'] is not None else 'void_unk'" },
+                        "shn_upper": { "eval": "data['shnupper'] if data['shnupper'] != '' and data['shnupper'] is not None else 'void_unk'" },
+                        "national_level": { "eval": "'first_order' if data['use'] == 1 else 'second_order' if data['use'] == 2 else 'third_order' if data['use'] == 3 else 'fourth_order' if data['use'] == 4 else 'fifth_order' if data['use'] == 5 else 'sixth_order' if data['use'] == 6 else 'void_unk'" },
+                        "national_level_code": { "eval": "data['isn'] if data['isn'] != '' and data['isn'] is not None else 'void_unk'" },
+                        "link_to_residence_of_authority": { "eval": "data['roa'] if data['roa'] != '' and data['roa'] is not None else 'void_unk'" },
+                        "name": { "eval": "{}" },
+                        "label": { "eval": "data['namn'] if data['namn'] != '' and data['namn'] is not None else 'void_unk'" },
+                        "w_national_identifier": "shn",
+                        "xy_source": { "eval": "'void_unk'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                               
+                        "w_scale": { "eval": "'10000'"}                        
                     },
                     "geomapping":{
-                        "geom": {
-                            "geometrie_ge": {
-                                "transform": "ST_Force2D(${})"
-                            }
-                        }
                     },
                     "fetched_fields":[
-                        "gcms_territoire",
-                        "code_insee",
-                        "nom_officiel"
-                    ]
-                },
-                "commune": {
-                    "mock": false,
-                    "where": "gcms_territoire = 'GLP' AND (nom_officiel = 'Saint-Barthélemy' OR nom_officiel = 'Saint-Martin') OR gcms_territoire = 'SPM'",
-                    "mapping": {
-                        "country": { "eval": "'pm' if data['gcms_territoire'] == 'SPM' else 'mf' if data['nom_officiel'] == 'Saint-Martin' else 'bl'" },
-                        "national_code": { "eval": "data['code_insee'][0:4] + '0'"},
-                        "shn": { "eval": "'PM97500' if data['gcms_territoire'] == 'SPM' else 'MF97800' if data['nom_officiel'] == 'Saint-Martin' else 'BL97700'" },
-                        "name": { "function": "fr_au_name"},
-                        "label": { "eval": "data['nom_officiel'] if data['nom_officiel'] != '' and data['nom_officiel'] is not None else 'void_unk'"},
-                        "national_level_code": { "eval": "'1010'"},
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                               
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geometrie_ge": {
-                                "transform": "ST_Force2D(${})"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "gcms_territoire",
-                        "code_insee",
-                        "nom_officiel"
-                    ]
-                },
-                "berre_leman_polygons": {
-                    "mock": false,
-                    "where": "cleabs = 'BERRLEMA000002'",
-                    "mapping": {
-                        "country": { "eval": "'fr'" },
-                        "national_code": { "eval": "'84'" },
-                        "shn": { "eval": "'FR84000000000'" },
-                        "name": { "eval": "'{\"spelling\": \"Auvergne-Rhône-Alpes\", \"language\": \"fre\", \"script\": \"latin\", \"name_status\": \"official\", \"nativeness\": \"endonym\", \"spelling_latn\": \"Auvergne-Rhône-Alpes\", \"display\": 1}'"},
-                        "label": { "eval": "'Auvergne-Rhône-Alpes'"},
-                        "national_level_code": { "eval": "'1002'"},
-                        "land_cover_type": { "eval": "'inland_water'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                               
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": {
-                                "transform": "ST_Force2D(ST_Multi(${}))"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "gcms_territoire",
-                        "nom_officiel"
-                    ]
-                }
-
-            }
-        },
-        "administrative_unit_area_3":{
-            "mock": false,
-            "source_tables":{
-                "departement": {
-                    "mock": false,
-                    "where": "gcms_territoire IN ('FXX', 'GLP', 'GUF', 'MTQ', 'MYT', 'REU')",
-                    "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "national_code": "code_insee",
-                        "shn": { "function": "fr_au_shn_code_departement"},
-                        "name": { "function": "fr_au_name"},
-                        "label": { "eval": "data['nom_officiel'] if data['nom_officiel'] != '' and data['nom_officiel'] is not None else 'void_unk'"},
-                        "national_level_code": { "eval": "'1003'"},
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                               
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geometrie_ge": {
-                                "transform": "ST_Force2D(${})"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "gcms_territoire",
-                        "code_insee",
-                        "code_insee_de_la_region",
-                        "nom_officiel"
-                    ]
-                },
-                "commune": {
-                    "mock": false,
-                    "where": "gcms_territoire = 'GLP' AND (nom_officiel = 'Saint-Barthélemy' OR nom_officiel = 'Saint-Martin') OR gcms_territoire = 'SPM'",
-                    "mapping": {
-                        "country": { "eval": "'pm' if data['gcms_territoire'] == 'SPM' else 'mf' if data['nom_officiel'] == 'Saint-Martin' else 'bl'" },
-                        "national_code": "code_insee",
-                        "shn": { "eval": "'PM' + data['code_insee'] if data['gcms_territoire'] == 'SPM' else 'MF' + data['code_insee'] if data['nom_officiel'] == 'Saint-Martin' else 'BL'+ data['code_insee']" },
-                        "name": { "function": "fr_au_name"},
-                        "label": { "eval": "data['nom_officiel'] if data['nom_officiel'] != '' and data['nom_officiel'] is not None else 'void_unk'"},
-                        "national_level_code": { "eval": "'1023'"},
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                               
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geometrie_ge": {
-                                "transform": "ST_Force2D(${})"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "gcms_territoire",
-                        "code_insee",
-                        "nom_officiel"
-                    ]
-                },
-                "berre_leman_polygons": {
-                    "mock": false,
-                    "where": "cleabs = 'BERRLEMA000002'",
-                    "mapping": {
-                        "country": { "eval": "'fr'" },
-                        "national_code": { "eval": "'74000'" },
-                        "shn": { "eval": "'FR84740000000'" },
-                        "name": { "eval": "'{\"spelling\": \"Haute-Savoie\", \"language\": \"fre\", \"script\": \"latin\", \"name_status\": \"official\", \"nativeness\": \"endonym\", \"spelling_latn\": \"Haute-Savoie\", \"display\": 1}'"},
-                        "label": { "eval": "'Haute-Savoie'"},
-                        "national_level_code": { "eval": "'1003'"},
-                        "land_cover_type": { "eval": "'inland_water'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                               
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": {
-                                "transform": "ST_Force2D(ST_Multi(${}))"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "gcms_territoire",
-                        "nom_officiel"
+                        "icc",
+                        "use",
+                        "shn",
+                        "shnupper",
+                        "isn",
+                        "roa",
+                        "namn"
                     ]
                 }
             }
         },
-        "administrative_unit_area_4":{
+        "administrative_hierarchy":{
             "mock": false,
             "source_tables":{
-                "arrondissement": {
+                "ebm_isn": {
                     "mock": false,
-                    "where": "gcms_territoire IN ('FXX', 'GLP', 'GUF', 'MTQ', 'REU')",
+                    "where": "icc = 'fr'",
                     "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "national_code": "code_insee_de_l_arrondissement",
-                        "shn": { "function": "fr_au_shn_code_arrondissement"},
-                        "name": { "function": "fr_au_name"},
-                        "label": { "eval": "data['nom_officiel'] if data['nom_officiel'] != '' and data['nom_officiel'] is not None else 'void_unk'"},
-                        "national_level_code": { "eval": "'1004'"},
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
+                        "country": { "eval": "data['icc'] if data['icc'] != '' and data['icc'] is not None else 'void_unk'"  },
+                        "national_level": { "eval": "'first_order' if data['use'] == 1 else 'second_order' if data['use'] == 2 else 'third_order' if data['use'] == 3 else 'fourth_order' if data['use'] == 4 else 'fifth_order' if data['use'] == 5 else 'sixth_order' if data['use'] == 6 else 'void_unk'" },
+                        "national_level_name": { "eval": "{}" },
+                        "national_level_label": { "eval": "data['desn'] if data['desn'] != '' and data['desn'] is not None else 'void_unk'" },
+                        "national_level_code": { "eval": "'void_unk'" },
+                        "shn_digit": { "eval": "data['shndigit'] if data['shndigit'] != '' and data['shndigit'] is not None else '-32768'" },
+                        "statistical_unit": { "eval": "data['su'] if data['su'] != '' and data['su'] is not None else 'void_unk'" },
+                        "w_national_identifier": "isn",
+                        "xy_source": { "eval": "'void_unk'"},
                         "z_source": { "eval": "'void_unk'"},
                         "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                               
+                        "w_scale": { "eval": "'10000'"}                        
                     },
                     "geomapping":{
-                        "geom": {
-                            "geometrie_ge": {
-                                "transform": "ST_Force2D(${})"
-                            }
-                        }
                     },
                     "fetched_fields":[
-                        "gcms_territoire",
-                        "code_insee_de_l_arrondissement",
-                        "code_insee_du_departement",
-                        "code_insee_de_la_region",
-                        "nom_officiel"
-                    ]
-                }
-            }
-        },
-        "administrative_unit_area_5":{
-            "mock": false,
-            "source_tables":{
-                "epci": {
-                    "mock": false,
-                    "where": "gcms_territoire IN ('FXX', 'GLP', 'GUF', 'MTQ', 'MYT', 'REU') and nature IN ('Métropole', 'Communauté urbaine', 'Communauté d''agglomération', 'Communauté de communes')",
-                    "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "national_code": "code_epci_ebm",
-                        "shn": { "function": "fr_au_shn_code_epci"},
-                        "name": { "function": "fr_au_name"},
-                        "label": { "eval": "data['nom_officiel'] if data['nom_officiel'] != '' and data['nom_officiel'] is not None else 'void_unk'"},
-                        "national_level_code": { "function": "fr_au_epci_national_level_code"},
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                               
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geometrie_ge": {
-                                "transform": "ST_Force2D(${})"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "gcms_territoire",
-                        "code_epci_ebm",
-                        "nature",
-                        "nom_officiel"
-                    ]
-                }
-            }
-        },
-        "administrative_unit_area_6":{
-            "mock": false,
-            "source_tables":{
-                "commune": {
-                    "mock": false,
-                    "where": "NOT (gcms_territoire = 'GLP' AND (nom_officiel = 'Saint-Barthélemy' OR nom_officiel = 'Saint-Martin') OR gcms_territoire = 'SPM')",
-                    "mapping": {
-                        "country": { "function": "fr_country_code" },
-                        "national_code": "code_insee",
-                        "shn": { "function": "fr_au_shn_code"},
-                        "name": { "function": "fr_au_name"},
-                        "label": { "eval": "data['nom_officiel'] if data['nom_officiel'] != '' and data['nom_officiel'] is not None else 'void_unk'"},
-                        "national_level_code": { "eval": "'1006'"},
-                        "land_cover_type": { "eval": "'land_area'" },
-                        "w_national_identifier": "cleabs",
-                        "xy_source": { "eval": "'nmca'"},
-                        "z_source": { "eval": "'void_unk'"},
-                        "w_release": { "eval": "1"},
-                        "w_scale": { "eval": "'10000'"}                               
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geometrie_ge": {
-                                "transform": "ST_Force2D(${})"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "gcms_territoire",
-                        "code_insee_de_l_arrondissement",
-                        "code_insee_du_departement",
-                        "code_insee_de_la_region",
-                        "code_insee",
-                        "code_epci_ebm",
-                        "nom_officiel"
-                    ]
-                },
-                "berre_leman_polygons": {
-                    "mock": false,
-                    "where": "",
-                    "mapping": {
-                        "country": { "eval": "'fr'" },
-                        "national_code": { "eval": "''" },
-                        "shn": "shn",
-                        "name": { "function": "fr_au_name"},
-                        "label": { "eval": "data['nom_officiel'] if data['nom_officiel'] != '' and data['nom_officiel'] is not None else 'void_unk'"},
-                        "national_level_code": { "eval": "'1007'"},
-                        "land_cover_type": { "eval": "'inland_water'" },
-                        "w_national_identifier": "cleabs"                        
-                    },
-                    "geomapping":{
-                        "geom": {
-                            "geom": {
-                                "transform": "ST_Force2D(ST_Multi(${}))"
-                            }
-                        }
-                    },
-                    "fetched_fields":[
-                        "gcms_territoire",
-                        "nom_officiel"
+                        "icc",
+                        "use",
+                        "desn",
+                        "shndigit",
+                        "su"
                     ]
                 }
             }
