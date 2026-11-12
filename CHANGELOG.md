@@ -1,3 +1,14 @@
+## [1.1.1] - 2026-11-12
+### Added
+- NTR
+
+### Changed
+- Updated de tn configuration
+
+### Fixed
+- NTR
+
+
 ## [1.1.0] - 2026-09-25
 ### Added
 - Added model transformation configurations for Germany, Denmark, Finland, Spain and Luxembourg.
