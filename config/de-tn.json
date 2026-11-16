@@ -9,7 +9,7 @@
             "source_tables":{
                 "ver01_l": {
                     "mock": false,
-                    "where": "objart = '42003' LIMIT 1",
+                    "where": "objart = '42003'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "de_tn_roadlink_form_of_way" },
@@ -22,17 +22,11 @@
                         "road_surface_category": { "function": "de_tn_roadlink_road_surface_category" },
                         "traffic_flow_direction": { "eval": "'void_unk'" },
                         "access_restriction": { "eval": "'void_unk'" },
-                        "maximum_height": { "eval": "'-32768'" },
-                        "maximum_length": { "eval": "'-32768'" },
-                        "maximum_width": { "eval": "'-32768'" },
-                        "maximum_total_weight": { "eval": "'-32768'" },
-                        "maximum_single_axle_weight": { "eval": "'-32768'" },
-                        "maximum_double_axle_weight": { "eval": "'-32768'" },
-                        "maximum_triple_axle_weight": { "eval": "'-32768'" },
+                        "restriction_for_vehicles": { "eval": "{}"},
                         "condition_of_facility": { "function": "de_tn_xx_condition_of_facility" },
                         "w_national_identifier": { "eval": "data['objid']" },
-                        "national_road_code": { "function": "de_tn_road_national_rode_code" },
-                        "european_route_number":{ "function": "de_tn_road_european_route_number" },
+                        "road_national_road_code": { "function": "de_tn_road_national_rode_code" },
+                        "road_european_route_number":{ "function": "de_tn_road_european_route_number" },
                         "road_name":{ "function": "de_xx_name" },
                         "road_label": { "function" : "de_xx_label"},
                         "xy_source": { "eval": "'nmca'"},
@@ -65,7 +59,7 @@
                 },
                 "ver02_l": {
                     "mock": false,
-                    "where": "objart IN ('42008', '53003')  LIMIT 1",
+                    "where": "objart IN ('42008', '53003')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "form_of_way": { "function": "de_tn_roadlink_form_of_way" },
@@ -116,10 +110,11 @@
             "source_tables":{
                 "ver06_p": {
                     "mock": false,
-                    "where": "objart = '53002' AND art IN ('3001','3002','3003','4000')  LIMIT 1",
+                    "where": "objart = '53002' AND art IN ('3001','3002','3003','4000')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "local_name": { "eval": "data['znm'] if data['znm'] is not None and data['znm'] != '' else 'void_unk'" },
+                        "label": { "function": "de_xx_label" },
                         "form_of_road_node": { "eval": "'interchange' if data['art'] in ('3001','3002','3003') else 'traffic_square' if data['art'] == '4000' else 'void_unk'" },
                         "w_national_identifier": { "eval": "data['objid']" },
                         "xy_source": { "eval": "'nmca'"},
@@ -149,7 +144,7 @@
             "source_tables":{
                 "ver01_f": {
                     "mock": false,
-                    "where": "objart = '42009' AND fkt IN ('5360','5310','5320','5330','5370')  LIMIT 1",
+                    "where": "objart = '42009' AND fkt IN ('5360','5310','5320','5330','5370')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "type": { "eval": "'bus_station' if data['fkt'] == '5360' else 'parking' if data['fkt'] == '5310' else 'rest_area' if data['fkt'] in ('5320','5330') else 'void_motorhome_parking' if data['fkt'] == '5370' else 'void_unk'" },
@@ -183,7 +178,7 @@
             "source_tables":{
                 "ver03_l": {
                     "mock": false,
-                    "where": "objart IN ('42014', '53005')  LIMIT 1",
+                    "where": "objart IN ('42014', '53005')",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "type": { "function": "de_tn_railwaylink_type" },
@@ -237,7 +232,7 @@
             "source_tables":{
                 "ver06_f": {
                     "mock": false,
-                    "where": "objart = '53004' LIMIT 1",
+                    "where": "objart = '53004'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "station_code": { "eval": "'void_unk'" },
@@ -273,7 +268,7 @@
             "source_tables":{
                 "ver06_p": {
                     "mock": false,
-                    "where": "objart = '53004' LIMIT 1",
+                    "where": "objart = '53004'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "station_code": { "eval": "'void_unk'" },
@@ -310,7 +305,7 @@
             "source_tables":{
                 "ver04_f": {
                     "mock": false,
-                    "where": "objart = '42015' LIMIT 1",
+                    "where": "objart = '42015'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "designator_iata": { "eval": "'void_unk'" },
@@ -318,7 +313,7 @@
                         "un_locode": { "eval": "'void_unk'" },
                         "aerodrome_category": { "eval": "'domestic_regional' if data['art'] == '5512' else 'international' if data['art'] == '5511' else 'recreational' if data['art'] == '5550' else 'void_unk'" },
                         "aerodrome_type": { "eval": "'heliport_only' if data['art'] == '5530' else 'void_unk'" },
-                        "use_restriction": { "eval": "'military' if data['ntz'] == '2000' else 'civilian' if data['ntz'] == '1000' else 'mixed' if data['ntz'] == '3000' else 'void_unk'" },
+                        "use_restriction": { "eval": "'reserved_for_military' if data['ntz'] == '2000' else 'civilian' if data['ntz'] == '1000' else 'mixed' if data['ntz'] == '3000' else 'void_unk'" },
                         "condition_of_facility": { "function": "de_tn_xx_condition_of_facility" },
                         "name": { "function": "de_xx_name" },
                         "label": { "function": "de_xx_label" },
@@ -352,7 +347,7 @@
             "source_tables":{
                 "ver06_p": {
                     "mock": false,
-                    "where": "objart = '53007' LIMIT 1",
+                    "where": "objart = '53007'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "designator_iata": { "eval": "'void_unk'" },
@@ -393,7 +388,7 @@
             "source_tables":{
                 "ver06_f": {
                     "mock": false,
-                    "where": "objart = '53007' AND art = '1310' LIMIT 1",
+                    "where": "objart = '53007' AND art = '1310'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "surface_composition": { "eval": "'asphalt' if data['ofm'] == '1230' else 'concrete' if data['ofm'] == '1220' else 'grass' if data['ofm'] == '1210' else 'void_unk'" },
@@ -424,7 +419,7 @@
             "source_tables":{
                 "ver05_l": {
                     "mock": false,
-                    "where": "objart = '57002' LIMIT 1",
+                    "where": "objart = '57002'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "ferry_use": { "eval": "'cars' if data['art'] == '1710' else 'passengers' if data['art'] == '1730' else 'train' if data['art'] == '1720' else 'void_unk'" },
@@ -459,7 +454,7 @@
             "source_tables":{
                 "ver05_f": {
                     "mock": false,
-                    "where": "objart = '42016' LIMIT 1",
+                    "where": "objart = '42016'",
                     "mapping": {
                         "country": { "eval": "'${country_code}'" },
                         "un_locode": { "eval": "'void_unk'" },
